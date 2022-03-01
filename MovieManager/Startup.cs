@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieManagerMVC.Data.DBConfig;
 using static MovieManagerMVC.Data.DataConstants;
-
 
 namespace MovieManagerMVC
 {
@@ -42,8 +40,6 @@ namespace MovieManagerMVC
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
-
-            //ADD SERVICES HERE IDIOT
             
             //services.AddTransient<IService, Service>();
             //services.AddTransient<IStatisticsService, StatisticsService>();
@@ -51,12 +47,9 @@ namespace MovieManagerMVC
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.PrepareDatabase(); add this from infrastructure?
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseMigrationsEndPoint(); overwrite IApplicationbuilder?
             }
             else
             {
