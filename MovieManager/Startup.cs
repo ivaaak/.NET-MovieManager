@@ -27,7 +27,7 @@ namespace MovieManagerMVC
                 .AddRoles<IdentityRole>()
                 .AddUserStore<MovieContext>();
 
-
+            //reigster context
             services.AddDbContext<MovieContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString(Data.DBConfig.Configuration.ConnectionString));
@@ -45,6 +45,7 @@ namespace MovieManagerMVC
             //services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
+        //builder and endpoints
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

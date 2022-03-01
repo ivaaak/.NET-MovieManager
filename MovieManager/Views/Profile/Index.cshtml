@@ -3,11 +3,10 @@
 
 	//var movieListWatched = MovieManagerMVC.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
 	var watched = MovieManagerMVC.Services.GetFromDB
-		.GetUserMovieList("417f4178-5150-4c71-906f-7869a4ef347d", "78d912ef-ee0e-4129-b898-c9dbfc59489d");
+		.GetUserMovieList("", "");
 	
 	var current = MovieManagerMVC.Services.GetFromDB
-		.GetUserMovieList("417f4178-5150-4c71-906f-7869a4ef347d", "08b11345-8f16-459c-ba97-aac8c630731f");
-	//417f4178-5150-4c71-906f-7869a4ef347d
+		.GetUserMovieList("", "");
 
 	var movieListWatched = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
 	var movieListCurrent = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
