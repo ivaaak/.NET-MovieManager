@@ -1,0 +1,123 @@
+﻿@{
+	ViewData["Title"] = "Profile Page";
+
+	//var movieListWatched = MovieManagerMVC.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
+	var watched = MovieManagerMVC.Services.GetFromDB
+		.GetUserMovieList("417f4178-5150-4c71-906f-7869a4ef347d", "78d912ef-ee0e-4129-b898-c9dbfc59489d");
+	
+	var current = MovieManagerMVC.Services.GetFromDB
+		.GetUserMovieList("417f4178-5150-4c71-906f-7869a4ef347d", "08b11345-8f16-459c-ba97-aac8c630731f");
+	//417f4178-5150-4c71-906f-7869a4ef347d
+
+	var movieListWatched = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieListCurrent = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieListFuture = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
+}
+
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleMovies.css" rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" rel="stylesheet">
+
+	<script src="~/js/home.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+
+
+<section class="skewedBoxIndex"></section>
+<section class="skewedBoxIndex2"></section>
+<div class="bgIndex"></div>  
+
+<!--=====LOAD MOVIE COLUMNS=====-->
+<h1 class="info1"> 
+	<img src="~/img/watched icon2 dark.png" width="60" height="40">WATCHED
+	<div class="hidden-info1">PAST</div>
+</h1>
+<main class="app" id="scrollBlackThin">
+	@foreach (var movie in watched)
+	{
+	<div class="movieContainer">
+		<div class="flex-container">
+		<div class="flex-items">	
+			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+		</div>
+		<div class="flex-items">
+			<h2 class="movieTitle"> @movie.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+			<p class="movieDesc"> @movie.Overview </p>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Write a Review" onclick=""><br/>
+			</div>
+		</div>
+		</div>
+	</div>
+	}
+	<div class="movieContainer">			
+	  <img class="addMovie1" src="~/img/movieAdd.png">
+	</div>
+</main>
+
+
+
+<h1 class="info2"> 
+	<img src="~/img/current icon dark.png" width="40" height="40">CURRENT
+	<div class="hidden-info2">PRESENT</div>
+</h1>
+<main class="app2" id="scrollBlackThin">
+	@foreach (var movie in current)
+	{
+	<div class="movieContainer">
+		<div class="flex-container">
+		<div class="flex-items">	
+			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+		</div>
+		<div class="flex-items">
+			<h2 class="movieTitle"> @movie.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+			<p class="movieDesc"> @movie.Overview </p>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>
+				
+				<progress max="100" value="50" data-label="Watched: 50%"></progress>
+			</div>
+		</div>
+		</div>
+	</div>
+	}
+	<div class="movieContainer"> 
+		<img class="addMovie" src="~/img/movieAddOrange.png">
+	</div>
+</main>
+
+
+
+<h1 class="info3"> 
+	<img src="~/img/watchlist1 dark.png" width="40" height="40">WATCHLIST
+	<div class="hidden-info3">FUTURE</div>
+</h1>	
+<main class="app3" id="scrollBlackThin">
+	@foreach (var movie in movieListFuture)
+	{
+	<div class="movieContainer">
+		<div class="flex-container">
+		<div class="flex-items">	
+			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+		</div>
+		<div class="flex-items">
+			<h2 class="movieTitle"> @movie.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+			<p class="movieDesc"> @movie.Overview </p>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Current Movies" onclick=""><br/>
+			</div>
+		</div>
+		</div>
+	</div>
+	}
+	<div class="movieContainer">
+		<img class="addMovie" src="~/img/movieAdd.png">
+	</div>
+</main>

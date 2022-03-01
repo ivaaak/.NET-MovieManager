@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+
+
+body, html {
+  background-color:var(--main-bg-gray) ;
+}
+
+.MovieCard{
+  position: fixed;
+  top:25%;
+  left: 25%;
+  width: 50vw;
+  background-color: var(--main-bg-dark-gray);
+
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+}
+
+.flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    margin-left: 10%;
+    margin-right: 5%;
+    order: 0;
+}
+
+
+.moviePoster{
+  width: 18vw !important;
+  margin-left: 15%;
+  margin-right: 5%;
+}
+
+
+/*MOVE TO STYLE MOVIES*/
+.movieTitle{
+  font-size: 40px;
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom:0px;
+  line-height: 1em;
+  color:var(--main-bg-orange)
+}
+.movieDesc {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    left: 20%;
+    color: #dcdcff;
+    font-weight: lighter;
+    margin: 0px;
+    width: 60%;
+}
+
+.movieRating {
+    font-size: 22px;
+    text-align: center;
+    margin: 10px;
+}
+.IMDBStar{
+  width:16px;
+  height:16px;
+  padding-bottom: 4px;
+}
+
+.buttonsList{
+  text-align: center;
+}
+
+.TrailerButton {
+  appearance: none;
+  background-color: rgb(30, 70, 109);
+  border: 1px solid #000000;
+  height: 40px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-align: center;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  width: 80%;
+}
+
+.TrailerButton:hover {
+  color: #fff;
+  background-color: rgb(3, 60, 114);
+  transform: translateY(-2px);
+}

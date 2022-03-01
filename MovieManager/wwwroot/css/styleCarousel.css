@@ -1,0 +1,287 @@
+:root {
+    font-size: calc(10px + 1vmin);
+    --primary: #13171d;
+    --softGrey: #262a39;
+    --softTint: rgba(0, 0, 0, 0.2);
+    --bounce: 0.3s cubic-bezier(0.3, -0.1, 0.1, 1.1);
+    --ease: 0.8s cubic-bezier(0.5, -0.1, 0.1, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    list-style-type: none;
+    font-family: sans-serif;
+}
+
+body {
+    overflow: hidden;
+    --size: 28vmax;
+    background: #3E5C76 !important;
+}
+
+h1{
+    font-size: 80px !important;
+    text-align: center;
+}
+
+.container{
+    position: fixed;
+    top: 10%;
+    left: 15%;
+    width: 100vw;
+}
+.carousel {
+    box-sizing: content-box;
+    position: fixed;
+    top: 20%;
+    display: flex;
+    justify-content: space-between;
+    max-width: calc(var(--size) * 7);
+    padding-left: calc(50% - (var(--size) / 2));
+    transition: var(--ease);
+}
+
+    .carousel label {
+        background: var(--softGrey);
+        height: var(--size);
+        min-width: var(--size);
+        transform: scale(0.85);
+        position: relative;
+        border-radius: 0px;
+        transition: var(--ease);
+    }
+
+input {
+    position: fixed;
+    top: -999vw;
+    left: -999vw;
+    opacity: 0.01;
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2rem;
+    width: 18rem;
+    padding: 1rem;
+    z-index: 9;
+}
+
+    .carousel-nav label {
+        cursor: pointer;
+        height: 2rem;
+        width: 2rem;
+        background: var(--softGrey);
+        border-radius: 50%;
+        transform: scale(0.85);
+        transition: var(--bounce);
+    }
+
+[id="1"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-1 + 1)));
+}
+
+    [id="1"]:checked ~ .carousel [for="1"], [id="1"]:checked ~ .carousel-nav [for="1"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="2"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-2 + 1)));
+}
+
+    [id="2"]:checked ~ .carousel [for="2"], [id="2"]:checked ~ .carousel-nav [for="2"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="3"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-3 + 1)));
+}
+
+    [id="3"]:checked ~ .carousel [for="3"], [id="3"]:checked ~ .carousel-nav [for="3"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="4"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-4 + 1)));
+}
+
+    [id="4"]:checked ~ .carousel [for="4"], [id="4"]:checked ~ .carousel-nav [for="4"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="5"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-5 + 1)));
+}
+
+    [id="5"]:checked ~ .carousel [for="5"], [id="5"]:checked ~ .carousel-nav [for="5"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="6"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-6 + 1)));
+}
+
+    [id="6"]:checked ~ .carousel [for="6"], [id="6"]:checked ~ .carousel-nav [for="6"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+[id="7"]:checked ~ .carousel {
+    transform: translateX(calc(var(--size) * (-7 + 1)));
+}
+
+    [id="7"]:checked ~ .carousel [for="7"], [id="7"]:checked ~ .carousel-nav [for="7"] {
+        box-shadow: 1em 1em 2em 0 var(--softTint);
+        background: var(--primary);
+        transform: scale(1);
+    }
+
+/*MOVIE CARD CSS*/
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+}
+
+.flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    margin-left: 2%;
+    order: 0;
+}
+
+
+/* MOVIE CARD STYLE */
+.moviePoster {
+    width: 380px !important;
+    margin-right: 15%;
+    height: 94%;
+    overflow: hidden;
+}
+
+.movieTitle {
+    font-size: 30px;
+    padding-top: 16px;
+    color: var(--main-bg-orange)
+}
+
+.movieDesc {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    left: 0%;
+    color: #dcdcff;
+    font-weight: lighter;
+    width: 100%;
+    height: 196px;
+    overflow: hidden;
+}
+
+.movieRating {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.IMDBStar {
+    width: 16px;
+    height: 20px;
+    padding-bottom: 4px;
+}
+
+
+.buttonsList {
+    text-align: center;
+}
+
+.TrailerButton {
+    appearance: none;
+    background-color: rgb(30, 70, 109);
+    border: 1px solid #000000;
+    height: 30px;
+    color: #ffffff;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 0px;
+    text-align: center;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    width: 80%;
+}
+
+    .TrailerButton:hover {
+        color: #fff;
+        background-color: rgb(3, 60, 114);
+        transform: translateY(-2px);
+    }
+
+
+progress {
+    text-align: center;
+    height: 1.5em;
+    margin-top: 4px;
+    width: 90%;
+    -webkit-appearance: none;
+    border: none;
+    position: relative;
+}
+
+    progress:before {
+        content: attr(data-label);
+        color: #ffffff;
+        font-size: 1.2em;
+        font-weight: bold;
+        vertical-align: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #808080;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: var(--main-bg-gray);
+    }
+
+    progress::-moz-progress-bar {
+        background-color: var(--main-bg-gray);
+    }

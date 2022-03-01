@@ -1,0 +1,173 @@
+@import url(https://allfont.net/allfont.css?fonts=roboto-bold);
+
+body{
+  background-color: var(--dark-peach) !important;
+  font-family: Roboto;
+  width: 0px !important;
+  margin: 0px !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+h1, h2{
+    z-index: 1100;
+}
+.container{
+    width: 0px !important;
+    margin-left:0px;
+}
+
+.skewedBoxAbout {
+    position:fixed;
+    top:0%;
+    left: 0%;
+    background: var(--main-bg-gray);
+    clip-path: polygon(0% 10%, 50% 90%, 100% 10%, 100% 100%, 0% 100%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease-out infinite;
+    height: 100vw;
+    width: 100vw;
+    z-index: 100 !important;
+    padding-left: 0px !important;
+    margin-left: 0px !important; 
+    overflow: visible;
+}
+
+.skewedBoxAbout2 {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background: var(--main-bg-gray);
+    clip-path: polygon(5% 0%, 95% 0%, 50% 210%);
+    background-size: 400% 400%;
+    animation: gradient 15s ease-out infinite;
+    top: 0%;
+    height: 50vw;
+    width: 100vw;
+    position: fixed;
+    z-index: -10;
+    padding-left: 0px !important;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+html { overflow-y: scroll; }
+body { position: absolute; }
+
+h1{
+  font-family: monospace, sans-serif;
+}
+
+.headAbout{
+  position: fixed;
+  top:12%;
+  right:-1%;
+  z-index: 160;
+}
+
+.aboutTitle{
+  font-family: 'Roboto Bold', arial;
+  font-weight: 900;  
+  font-size: 4.2em;
+  width: 55vw;
+  background: linear-gradient(150deg, #ffffff 0%, var(--dark-peach) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-align: center;
+  -webkit-text-fill-color: transparent;
+  position: fixed;
+  top:8%;
+  left:11%;
+  z-index: 0;
+}
+.aboutDesc{
+  color: white;
+  font-family: roboto, serif;
+  font-weight: bold;  
+  padding-left: 50px;
+  width: 700px;
+  text-align: right;
+  position: fixed;
+  top:35%;
+  left:16%;
+}
+
+
+/*******************************
+* ACCORDION WITH TOGGLE ICONS
+* Does not work properly if "in" is added after "collapse".
+*******************************/
+.panel-group{
+  position: fixed;
+  top:50%;
+  left:4%;
+}
+
+.panel-group .panel {
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #1b1b1b;
+  width: 50vw;  /*AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
+}
+
+.panel-default > .panel-heading {
+  padding: 0;
+  border-radius: 0;
+  color: #ffffff;
+  background-color: #ffffff;
+  border-color: #000000;
+  text-decoration: none !important;
+
+}
+
+.panel-title {
+  font-size: 24px;
+  text-align: right;
+  padding-right: 10%;
+  text-decoration: none !important;
+}
+
+.panel-title > a {
+  font-size: 24px;
+  display: block;
+  padding: 15px;
+  text-decoration: none !important;
+}
+.panel-body {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    position: relative;
+    width: 55%;
+    left: 36%;
+    padding-bottom: 0px;
+    /*  padding-bottom:10px;*/ 
+    color: white;
+    text-decoration: none !important;
+}
+
+.collapsed{
+  color:rgb(0, 0, 0);
+  font-weight: bold;
+  text-decoration: none !important;
+  left:80%;
+}
+
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #EEEEEE;
+}
+
+

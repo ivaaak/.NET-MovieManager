@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleMovies.css" rel="stylesheet">
+
+	<script src="~/js/bootstrap.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+
+<!--3 SCROLLABLE COLUMNS-->
+<section class="ScrollableContainters">
+	<div class="row">
+	<!-- START OF FIRST CONTAINER -->
+	<div class="col-md-4 LeftColumn" style="padding-left:0px; padding-right: 0px;">
+		<h1 class="info"> 
+			<img src="~/img/watched icon2 dark.png" width="60" height="40">WATCHED</img>
+			<div class="hidden-info">PAST</div>
+		</h1>
+		<div class ="MovieListLeftScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+		<div class="LeftMovie1" id="LeftMovie1">
+				<div class="row" style="border-bottom: 16px solid rgba(38,42,57,0);">
+					<div class="col-md-6" style="padding-right: 0px;">
+						<img class="mx-auto rounded float-center img-fluid" style="width: 300px;" alt="Image" src="https://m.media-amazon.com/images/M/MV5BMjA5Njk3MjM4OV5BMl5BanBnXkFtZTcwMTc5MTE1MQ@@@@._V1_QL75_UY562_CR1,0,380,562_.jpg"> 	
+					</div>
+					<div class="col-md-6">
+						<h2 class="movieTitle">
+							No Country for Old Men
+						</h2>
+						<!--RATING-->
+						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png" width="20" height="20"></img>  7.9/10 - Rating</p>
+						<p class="movieDesc">
+							Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande.
+							<div class="text-center">
+
+							<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+							<input class="LeftMovieRemove" id="LeftMovieRemove" type="button" value="Remove" onclick="removeMovieLeft1(this)"><br/>
+
+							</div>
+						</p>
+					</div>
+				</div>
+			</div>	
+			<!--Movie add button under column - ADD ONCLICK TO SEARCH PAGE-->
+			<img class="addMovie1" src="~/img/movieAddOrange.png">
+			</div>
+		</div> 
+
+
+		<!-- START OF SECOND CONTAINER -->
+		<div class="col-md-4 MiddleColumn" style="padding-left: 0px; padding-right: 0px;">
+			<h1 class="info"> 
+				<img src="~/img/current icon dark.png" width="40" height="40">CURRENT</img>
+				<div class="hidden-info">PRESENT</div>
+			</h1>
+			<!--MOVIE CONTAINER MIDDLE-->
+			<div class = "MovieListMiddleScroll scrollbar scrollbar-black bordered-black square thin" style="height: 750px;">
+			<div class="MiddleMovie1" id="MiddleMovie1">
+				<div class="row" style="border-bottom: 16px solid rgba(38,42,57,0);">
+					<div class="col-md-6" style="padding-right: 0px;">
+						<img class="MovieContainerMiddleImage mx-auto rounded float-center img-fluid" style="width: 300px;" alt="Image" src="https://m.media-amazon.com/images/M/MV5BODk4ZjU0NDUtYjdlOS00OTljLTgwZTUtYjkyZjk1NzExZGIzXkEyXkFqcGdeQXVyMDM2NDM2MQ@@@@._V1_QL75_UX380_CR0,4,380,562_.jpg"/>
+					</div>
+					<div class="col-md-6">
+						<h2 class="movieTitle">
+							Vikings
+						</h2>
+						<!--RATING-->
+						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png" width="20" height="20"></img>  6.7/10 - Rating</p>
+						<p class="movieDesc">
+							Vikings transports us to the brutal and mysterious world of Ragnar Lothbrok, a Viking warrior and farmer who yearns to explore - and raid - the distant shores across the ocean.
+							<div class="text-center">
+
+								<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+								<input class="MiddleMovieRemove" id="MiddleMovieRemove" type="button" value="Remove" onclick="removeMovieMiddle1(this)"><br/>
+							
+							</div>
+						</p>
+					</div>
+					<div class="progress">
+						<div class="progress-bar w-75 progress-bar-animated text-center" style="width: 300px; border-radius: 0px"> 75 % watched</div>
+					</div>
+				</div>
+			</div>
+			
+			<img class="addMovie1" src="~/img/movieAdd.png">
+			</div>
+		</div>
+
+		
+		<!-- START OF THIRD CONTAINER -->
+		<div class="col-md-4 RightColumn" style="padding-left: 0px; padding-right: 0px;">
+			<h1 class="info"> 
+				<img src="~/img/watchlist1 dark.png" width="40" height="40">WATCHLIST</img>
+				<div class="hidden-info">FUTURE</div>
+			</h1>			
+			<!--MOVIE CONTAINER RIGHT-->
+			<div class = "MovieListRightScroll scrollbar scrollbar-black bordered-black square thin" style="height: 750px;">
+			<div class="RightMovie1" id="RightMovie1">	
+				<div class="row" style="border-bottom: 16px solid rgba(38,42,57,0);">
+					<div class="col-md-6" style="padding-right: 0px;">
+						<img class="MovieContainerMiddleImage mx-auto rounded float-center img-fluid" style="width: 300px;" alt="Image" src="https://m.media-amazon.com/images/M/MV5BMDkwOTE0ZjMtZmRiYS00M2M3LWE3MzUtNzNmNmExNTNmNjg5XkEyXkFqcGdeQXVyODE1MjMyNzI@@._V1_QL75_UX380_CR0,0,380,562_.jpg" class="rounded float-center"> 	
+					</div>
+					<div class="col-md-6">	
+					<h2 class="movieTitle">You Were Never Really Here</h2>
+					<!--RATING-->
+					<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png" width="20" height="20"></img>  7.9/10 - Rating</p>
+					<p class="movieDesc">
+						A traumatized veteran, unafraid of violence, tracks down missing girls for a living. When a job spins out of control, Joe's nightmares overtake him as a conspiracy is uncovered leading to what may be his death trip or his awakening.
+						<div class="text-center">
+							<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+							<input class="RightMovieRemove" id="RightMovieRemove" type="button" value="Add to current" onclick=""><br/>
+						</div>
+					</p>
+					</div>
+				</div>	
+			</div>
+			
+			<img class="addMovie1" src="~/img/movieAddOrange.png">
+			</div>
+		</div>
+	</div>
+</section>

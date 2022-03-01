@@ -1,0 +1,34 @@
+﻿@using MovieManagerMVC.Services
+@using MovieManagerMVC.Models.DataModels
+@{
+	ViewData["Title"] = "A Page";
+	//call this page using [HttpPost] with the Movie ID and User ID
+	var movieObj = GetFromDB.GetMovieFromDBbyID(335984);
+
+}
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleReview.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+
+<div class="MovieCard" >
+	<div class="flex-container">
+	   <div class="flex-items">	
+		   <img class="moviePoster" alt="Image" src="@movieObj.PosterUrl"> 	
+		</div>
+	   <div class="flex-items">
+		<h2 class="movieTitle">	Write a review of: @movieObj.Title </h2>
+		<!--RATING-->
+		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.Rating/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
+		
+		<textarea name="Text1" cols="60" rows="15"></textarea>
+
+		<div class="buttonsList">
+			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Rating" onclick=""><br/>
+			<input class="TrailerButton" id="TrailerButton" type="button" value="Post Review" onclick=""><br/>
+		</div>
+		</div>
+	</div>
+</div>

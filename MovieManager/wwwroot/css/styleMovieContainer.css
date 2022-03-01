@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+
+
+body, html {
+}
+
+
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+}
+
+.flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    margin-left: 2%;
+    order: 0;
+}
+
+
+/* MOVIE CARD STYLE */
+.moviePoster{
+  width: 256px;
+  margin-right: 15%;
+  height: 94%;
+  overflow:hidden;
+}
+.movieTitle{
+  font-size: 30px;
+  padding-top: 16px;
+  color:var(--main-bg-orange)
+}
+.movieDesc {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    left: 0%;
+    color: #dcdcff;
+    font-weight: lighter;
+    width: 100%;
+    height:196px;
+    overflow: hidden;
+}
+.movieRating{
+  font-size: 22px;
+  text-align: center;
+  padding-top: 2px;
+}
+.IMDBStar{
+  width:16px;
+  height:20px;
+  padding-bottom: 4px;
+}
+
+
+.buttonsList{
+  text-align: center;
+}
+.TrailerButton {
+  appearance: none;
+  background-color: rgb(30, 70, 109);
+  border: 1px solid #000000;
+  height: 30px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 0px;
+  text-align: center;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  width: 80%;
+}
+.TrailerButton:hover {
+  color: #fff;
+  background-color: rgb(3, 60, 114);
+  transform: translateY(-2px);
+}
+
+
+progress {
+  text-align: center;
+  height: 1.5em;
+  margin-top: 4px;
+  width: 90%;
+  -webkit-appearance: none;
+  border: none;
+  position:relative;
+}
+progress:before {
+  content: attr(data-label);
+  color: #ffffff;
+  font-size: 1.2em;
+  font-weight: bold;
+  vertical-align: 0;
+  position:absolute;
+  left:0;
+  right:0;
+}
+progress::-webkit-progress-bar {
+  background-color: #808080;
+}
+progress::-webkit-progress-value {
+   background-color: var(--main-bg-gray);
+}
+progress::-moz-progress-bar {
+    background-color: var(--main-bg-gray);
+}

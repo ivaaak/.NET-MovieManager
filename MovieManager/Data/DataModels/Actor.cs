@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MovieManagerMVC.Models.DataModels
+{
+    public class Actor
+    {
+        [Key]
+        public int ActorId { get; init; }
+
+        [Required]
+        [StringLength(50)]
+        public string FullName { get; set; }
+
+        public string? CountryCode { get; set; }
+
+        public int LanguageId { get; set; }
+
+        //public IEnumerable<Movie> Movies { get; init; } = new List<Movie>();
+        //many to many
+    }
+}

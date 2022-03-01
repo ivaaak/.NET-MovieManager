@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleHome.css" rel="stylesheet">
+
+	<script src="~/js/home.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+
+
+<div class="main">
+	<div class="menu"></div>
+	<div class="menu-button"></div>
+
+	<!--aulus verus-->
+	<div class="header"> vento </div>
+	<h1 class="desc"> Log in and start your journey</h1>
+</div>
+
+
+<!--3 Cards - Login Register Discover-->
+<div class="containerCards">
+    <div class="card">
+        <div class="face face1">
+            <div class="content">
+                <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/design_128.png?raw=true">
+                <h3>Login</h3>
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="content">
+                <p>Log into your existing account to view movies.</p>
+                    <a href="#">Login</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="face face1">
+            <div class="content">
+                <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/code_128.png?raw=true">
+                <h3>Register</h3>
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="content">
+                <p>Create an account to start logging.</p>
+                <a onclick="location.href = 'Register'">Register</a>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="face face1">
+            <div class="content">
+                <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">
+                <h3>Discover</h3>
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="content">
+                <p>Look at popular and new releases as a guest.</p>
+                <a onclick="location.href = '/Movie/Discover'">Discover</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Login Form-->
+<div class="login">
+	<h1>Login</h1>
+	<form method="post">
+		<input class="userInput" type="text" name="u" placeholder="Username" required="required" />
+		<input class="pwInput" type="password" name="p" placeholder="Password" required="required" />
+		<button type="submit" class="loginButton">Let me in.</button>
+	</form>
+	<a onclick="location.href = 'Register'" class="register">No account? Register now</a>
+</div>
+
+

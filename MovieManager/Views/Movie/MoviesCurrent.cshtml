@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var movieListWatched = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("Superman");
+
+}
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleDiscover.css" rel="stylesheet">
+
+	<script src="~/js/home.js"></script>
+	<script src="~/js/discoverGrid.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+}
+
+<div class="container mb-3 mt-3"">
+	<div class="btn-holder">
+		<button class="btn btn-2 hover-slide-down">
+			<span>Grid</span>
+		  </button>
+		  <button class="btn btn-2 hover-slide-up">
+			<span>List</span>
+		</button>
+	</div>
+</div>
+
+<div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+	<div class="row">
+	  <div class="col-12 col-md-6 col-lg-4">
+		<div class="card">
+		  <img class="card-img-top" src="https://picsum.photos/362/180" alt="Card image cap">
+		  <div class="card-body">
+			<h3 class="card-title">Card title</h3>
+			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<!--DOTS ANIMATION-
+<div class="dots dots3" style="z-index: -1000000;"></div>
+<div class="dots dots2"></div> -->
+
+<div class="skewedBoxDiscover2"></div> 

@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+	var movieListWatched = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
+}
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" rel="stylesheet">
+	<link href="~/css/styleDiscover.css" rel="stylesheet">
+
+	<script src="~/js/home.js"></script>
+	<script src="~/js/discoverGrid.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+}
+
+
+
+<div class="container mb-3 mt-3"">
+	<div class="btn-holder">
+		<button class="btn btn-2 hover-slide-down">
+			<span>Grid</span>
+		  </button>
+		  <button class="btn btn-2 hover-slide-up">
+			<span>List</span>
+		</button>
+	</div>
+</div>
+
+<div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+	<div class="row">
+		@foreach (var movie in movieListWatched)
+		{
+		<div class="col-12 col-md-6 col-lg-4">
+		<div class="card">
+		<div class="movieContainer">
+		<div class="flex-container">
+			<div class="flex-items">	
+				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+			</div>
+			<div class="flex-items">
+				<h2 class="movieTitle"> @movie.Title </h2>
+				<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+				<p class="movieDesc"> @movie.Overview </p>
+				<div class="buttonsList">
+					<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+					<input class="TrailerButton" id="TrailerButton" type="button" value="Write a Review" onclick=""><br/>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
+		</div>
+		}	  
+	</div>
+</div>
+
+<div class="skewedBoxDiscover2"></div> 
+<div class="bgReleases"></div> 

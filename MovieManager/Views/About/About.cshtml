@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section styles{
+	<script src="~/js/scripts.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/js/bootstrap.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	
+	<link href="~/css/styleAbout.css" rel="stylesheet">
+}
+
+
+
+
+<!--=====3 EXPANDING CONTAINERS=====-->
+<h1 class="aboutTitle"> The Verus Movie Manager lets you keep track of visual entertainment mediums</h1>
+<h2 class="aboutDesc"> By using this website you can keep track of favorite shows and movies across different platforms. Technology Stack used:</h2>
+<!--3 COLLAPSABLE CONTAINERS WITH INFO-->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	<div class="panel panel-default no-gutters">
+		<div class="panel-heading" role="tab" id="headingOne">
+			<h4 class="panel-title">
+				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						HTML + Bootstrap + JS for the Frontend
+				</a>
+				</h4>
+			</div>
+		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<div class="panel-body">
+				Placeholder Text:Bootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front End .
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">				
+		<div class="panel-heading" role="tab" id="headingTwo">
+			<h4 class="panel-title">
+				<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					C# Entity Framework + ASP.NET Core for the Backend
+				</a>
+			</h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			<div class="panel-body">
+				Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus ad squid. 3 wolf moon officia aute, non cupidatat dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="headingThree">
+			<h4 class="panel-title">
+				<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					SQL DB + TMDB API for the Data and storage
+				</a>
+			</h4>
+		</div>					
+		<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+			<div class="panel-body">
+				Anim pariatur cliche reprehenderit,wolf moon aute. Food truck quinoa nesciunt laborum eiusmod.
+			</div>
+		</div>
+	</div>
+</div><!-- panel-group -->
+<!--GLAVA-->
+<div class="headAbout"><img src="~/img/glava.png" style="width: 900px;"> </img></div>
+<div class="skewedBoxAbout"></div>
+<div class="skewedBoxAbout2"></div>

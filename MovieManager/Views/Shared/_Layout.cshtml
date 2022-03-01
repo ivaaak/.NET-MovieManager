@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - MovieManagerMVC</title>
+
+	<link href="~/css/styleNavbar.css" rel="stylesheet">	
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+
+
+<body>
+    <header>
+        <nav>
+		<ol class="main-menu">
+		  <li onclick="location.href = '/Home/Home'" class="main-item" ><span class="home"></span></li>
+
+		@if(User.Identity.IsAuthenticated)
+		{
+			<li onclick="location.href = '/Profile/Index'" class="main-item"><span class="myprofile"></span></li>
+			<li class="main-item"><span class="watchlist"></span>
+				<ol class="sub-menu">
+				  <li onclick="location.href = '/Movie/MoviesWatched'" class="sub-item item-left"><span class="WLWatched"></span></li>
+				  <li onclick="location.href = '/Movie/MoviesCurrent'" class="sub-item item-left"><span class="WLCurrent"></span></li>
+				  <li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
+				</ol>
+			</li>
+		}
+		else
+		{
+			<li onclick="location.href = '/Login'" class="main-item"><span class="myprofile"></span></li>
+			<li onclick="location.href = '/Register'" class="main-item"><span class="myprofile"></span></li>
+		}
+
+		  <li class="main-item"><span class="discover"></span>
+			<ol class="sub-menu">
+			  <li onclick="location.href = '/Movie/Search'" class="sub-item item-right"><span class="DiscShows"></span></li>
+			  <li onclick="location.href = '/Movie/Releases'" class="sub-item item-right"><span class="DiscMovies"></span></li>
+			  <li onclick="location.href = '/Movie/Discover'" class="sub-item item-right"><span class="DiscMisc"></span></li>
+			</ol>
+		  </li>
+		  <li onclick="location.href = '/About/About'" class="main-item"><span class="about"></span></li>
+		</ol>
+	</nav>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    @await RenderSectionAsync("scripts", required: false)
+	@await RenderSectionAsync("styles", required: false)
+
+</body>
+</html>

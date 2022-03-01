@@ -1,0 +1,278 @@
+@import url(https://allfont.net/allfont.css?fonts=roboto-bold);
+@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+
+:root {
+    --main-bg-gray: #262a39;
+    --main-bg-dark-gray: #090d13;
+    --titleCyan: #61c7b3;
+    --dark-peach: #e26961;
+    --cyan: #61c7b3;
+    /*orange black white theme*/
+    --main-bg-orange: #f5624f;
+    --text-black: #000000;
+    --bg-white: #ffffff;
+    --z24: translateZ(24.5px);
+    --z80: translateZ(80px);
+    --ts: all .5s ease;
+    --x90: rotateX(90deg);
+    --xm90: rotateX(-90deg);
+    --y90: rotateY(90deg);
+    --ym90: rotateY(-90deg);
+    position: fixed;
+    z-index: 1030;
+    top: 0;
+}
+
+nav {
+    width: 100%;
+    padding: 0px 0px 0 16px;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    height: 6%;
+}
+
+ol {
+    width: 100%;
+    margin: 0px !important;
+    padding: 0px !important;
+    list-style-type: none;
+}
+
+.main-menu {
+    display: flex;
+    position: relative;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+li {
+    width: 160px;
+    position: relative;
+    cursor: pointer;
+    margin-top: 0px !important;
+    padding: 0 !important;
+}
+
+    li span {
+        width: 100%;
+        height: 49px !important;
+        display: block;
+        position: relative;
+        transition: var(--ts);
+        transform-style: preserve-3d;
+    }
+
+        li span::before, li span::after {
+            width: 100%;
+            padding: 16px 0;
+            display: block;
+            position: absolute;
+            border-radius: 2px;
+            font-family: Rajhani, arial;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+.main-item:nth-of-type(2),
+.main-item:nth-of-type(4) {
+    margin: 0 2px;
+}
+
+    .main-item:nth-of-type(3)::before,
+    .main-item:nth-of-type(4)::before {
+        width: 100%;
+        top: 35px;
+        display: block;
+        position: absolute;
+        color: rgb(5, 0, 0);
+        font-family: Roboto;
+        font-weight: bolder;
+        font-size: 24px;
+        text-align: center;
+        transition: var(--ts);
+        z-index: 100;
+        content: "▾";
+    }
+
+.main-item:hover > span {
+    transform: var(--x90);
+}
+
+.main-item > span::before {
+    background: var(--bg-white);
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    transform: var(--z24);
+    box-shadow: 0 8px 6px -6px rgb(0, 0, 0);
+}
+
+.main-item > span::after {
+    background: var(--main-bg-gray);
+    /* was #008080 */
+    color: #fff;
+    transform: var(--xm90) var(--z24);
+}
+
+.home::before, .home::after {
+    content: 'home';
+}
+
+.myprofile::before, .myprofile::after {
+    content: "my profile";
+}
+
+.watchlist::before, .watchlist::after {
+    content: "watchlist";
+}
+
+.discover::before, .discover::after {
+    content: "discover";
+}
+
+.about::before, .about::after {
+    content: "about";
+}
+
+.sub-menu {
+    top: 55px;
+    display: none;
+    position: absolute;
+}
+
+    .sub-menu li {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+        .sub-menu li:nth-of-type(2) {
+            margin: 2px 0;
+        }
+
+.sub-item:nth-of-type(1) {
+    -webkit-animation: fade 0.5s ease 0.2s both;
+    animation: fade 0.5s ease 0.2s both;
+}
+
+.sub-item:nth-of-type(2) {
+    -webkit-animation: fade 0.5s ease 0.4s both;
+    animation: fade 0.5s ease 0.4s both;
+}
+
+.sub-item:nth-of-type(3) {
+    -webkit-animation: fade 0.5s ease 0.6s both;
+    animation: fade 0.5s ease 0.6s both;
+}
+
+@-webkit-keyframes fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sub-item span::before {
+    background: var(--bg-white);
+    color: #000000;
+    transform: var(--z80);
+}
+
+.sub-item span::after {
+    background: var(--main-bg-orange);
+    color: #fff;
+}
+
+.item-left:hover span {
+    transform: var(--y90);
+}
+
+.item-left span::after {
+    transform: var(--ym90) var(--z80);
+}
+
+.item-right:hover span {
+    transform: var(--ym90);
+}
+
+.item-right span::after {
+    transform: var(--y90) var(--z80);
+}
+
+/*WATCHLIST DROPDOWN ITEMS*/
+.WLWatched::before, .WLWatched::after {
+    content: "Watched";
+}
+
+.WLCurrent::before, .WLCurrent::after {
+    content: "Current";
+}
+
+.WLToWatch::before, .WLToWatch::after {
+    content: "To Watch";
+}
+
+/*DISCOVER DROPDOWN ITEMS*/
+.DiscShows::before, .DiscShows::after {
+    content: "Search";
+}
+
+.DiscMovies::before, .DiscMovies::after {
+    content: "Releases";
+}
+
+.DiscMisc::before, .DiscMisc::after {
+    content: "Popular";
+}
+
+.main-item:nth-of-type(3):hover::before,
+.main-item:nth-of-type(4):hover::before {
+    color: #000;
+    content: "▴";
+}
+
+.main-item:nth-of-type(3):hover .sub-menu,
+.main-item:nth-of-type(4):hover .sub-menu {
+    display: block;
+}
+
+@media screen and (min-width: 321px) and (max-width: 839px) {
+    nav {
+        width: 320px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 839px) {
+    .main-item:nth-of-type(2),
+    .main-item:nth-of-type(4) {
+        margin: 3px 0;
+    }
+
+    .sub-menu {
+        position: relative;
+        top: 1px;
+        padding: 2px 0 1px 0;
+    }
+
+        .sub-menu li span::before {
+            transform: var(--z24);
+        }
+
+        .sub-menu li span::after {
+            transform: rotateY(0deg) var(--x90) var(--z24);
+        }
+
+        .sub-menu li:hover span {
+            transform: var(--xm90);
+        }
+}
+

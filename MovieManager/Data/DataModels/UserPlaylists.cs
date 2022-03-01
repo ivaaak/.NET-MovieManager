@@ -1,0 +1,36 @@
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
+using MovieManagerMVC.Models.DataModels;
+
+namespace MovieManagerMVC.Data.DataModels
+{
+    public class UserPlaylist
+    {
+        public UserPlaylist()
+        {
+            Playlists = new List<Playlist>();
+            this.Playlists.Add(new Playlist
+            {
+                PlaylistName = "watched"
+            });
+            this.Playlists.Add(new Playlist
+            {
+                PlaylistName = "current"
+            });
+            this.Playlists.Add(new Playlist
+            {
+                PlaylistName = "future"
+            });
+            //generate the 3 default playlists when creating an user playlist
+        }
+
+        [Key]
+        public string UserId { get; set; } 
+        //==IdentityUser.Id==this.User.Id
+
+        public List<Playlist> Playlists { get; init; }
+
+        [Required]
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+    }
+}

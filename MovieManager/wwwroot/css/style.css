@@ -1,0 +1,144 @@
+/*div.col-md-4 {*//*col-md-6 IS EACH A CONTAINER */
+  /* LIGHT ROBOTO FINALLY */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+  :root {
+    --main-bg-gray: #262a39;
+    --main-bg-dark-gray: #090d13;
+    --titleCyan:#61c7b3;
+    --titleCyanDark: #008080;
+    --movie-container-bg: #13171d;
+    --p-text-whiteblue: #dcdcff;
+
+    /*orange black white theme*/
+    --main-bg-orange: #f5624f;
+    --text-black: #000000;
+    --bg-white: #ffffff;
+
+    --purple-brown: #231f20;
+    --egg-shell: #e8e4d2;
+    --white-dots: #ffffff;
+    --dark-peach: #e26961;
+    --cyan: #61c7b3;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    background: transparent;   
+    font-family: Roboto, sans-serif;
+    font-weight: 100;
+    line-height: 1.5em;
+    color: #888;
+    z-index: 0;
+  }
+
+
+  .container-fluid{
+    width: 100vw !important;
+    padding: 0px !important;
+  }
+
+  
+  /* Fonts */
+
+  h1 {   /* */
+    font-family: 'Roboto', arial;
+    font-weight:bold;
+		font-size: 46px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    color:var(--p-text-whiteblue)
+    /*color: var(--titleCyand);*/
+  }
+  h2 {
+    padding-top: 16px;
+    text-align:center;
+    font-size: x-large;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: var(--titleCyanDark)
+
+  }
+  p {
+    font-family: 'Roboto', sans-serif;
+    /*background: linear-gradient(to right bottom, rgb(244, 255, 255) 0%, rgb(174,173,201) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    */
+    padding-right: 10px;
+    padding-top: 0px;
+    color: rgb(220,220,255);
+    /*(97,199,179)*/
+    font-weight: lighter;
+  }
+  
+
+
+
+
+
+
+  
+/*SCROLLBARS */
+  .scrollbar-black::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+  border-radius: 10px; }
+  
+  .scrollbar-black::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5; }
+  
+  .scrollbar-black::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #000; }
+  
+  .scrollbar-black {
+  scrollbar-color: #000 #F5F5F5;
+  }
+
+  .bordered-black::-webkit-scrollbar-track {
+  border: 1px solid #000; }
+  
+  .square::-webkit-scrollbar-thumb {
+  border-radius: 0 !important; }
+  
+  .thin::-webkit-scrollbar {
+  width: 6px; }
+
+
+
+
+/*=====================COLORS AND GRADIENTS=============================*/
+  .gradient__bg {
+    /*background:-moz-radial-gradient(rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%); */
+    background: radial-gradient(rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 80%);    
+  }
+  
+  .gradient__text {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  :root {
+    --font-family: 'Manrope', sans-serif;
+  
+    --gradient-text: linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
+    --gradient-bar: linear-gradient(103.22deg, #AE67FA -13.86%, #F49867 99.55%);
+    
+    --color-bg: #040C18;
+    --color-footer : #031B34;
+    --color-blog: #042c54;
+    --color-text: #81AFDD;
+    --color-subtext: #FF8A71;
+  }
+  
+
+  /*MAKE SELECT BACKGROUND ORANGE*/
+  ::selection {
+    background-color: var(--main-bg-orange);
+    color: white;
+  }
+  

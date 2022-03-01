@@ -1,0 +1,86 @@
+@import url(https://allfont.net/allfont.css?fonts=roboto-bold);
+
+
+/* TEST DOTS SIDE ANIMATION*/
+
+.dots:before,
+.dots:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  opacity: 1;
+  z-index: 11;
+  background-image: linear-gradient(var(--text-black) 30%, transparent 0);
+  background-size: 100% var(--dots-gap);
+  background-position: 0 0;
+  -webkit-animation: movebg 3s linear infinite;
+          animation: movebg 3s linear infinite;
+  will-change: transform;
+  width: 4px;
+}
+
+.dots1:before {
+  left: 2%;
+}
+
+.dots1:after {
+  left: 5%;
+}
+
+.dots2:before {
+  right: 2%;
+  background-image: linear-gradient(var(--main-bg-orange) 30%, transparent 0);
+}
+
+.dots2:after {
+  right: 5%;
+  background-image: linear-gradient(var(--main-bg-orange) 30%, transparent 0);
+}
+
+.dots3:before {
+  left: 2%;
+  background-image: linear-gradient(var(--main-bg-orange) 30%, transparent 0);
+}
+
+.dots3:after {
+  left: 5%;
+  background-image: linear-gradient(var(--main-bg-orange) 30%, transparent 0);
+}
+
+.dots:after {
+  animation-direction: reverse;
+}
+
+.projects .dots:before,
+.projects .dots:after {
+  background-image: linear-gradient(var(--purple-brown) 20%, transparent 0);
+}
+
+.find-me .dots:before,
+.find-me .dots:after {
+  background-image: linear-gradient(var(--egg-shell) 20%, transparent 0);
+}
+
+@-webkit-keyframes movebg {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, var(--dots-gap), 0);
+  }
+}
+
+@keyframes movebg {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, var(--dots-gap), 0);
+  }
+}
+
+
+
+
+
