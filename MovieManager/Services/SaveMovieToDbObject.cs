@@ -1,7 +1,7 @@
-﻿using MovieManagerMVC.Models.DataModels;
+﻿using MovieManager.Models.DataModels;
 using TMDbLib.Objects.Search;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class SaveMovieToDbObject
     {

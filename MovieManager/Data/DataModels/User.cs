@@ -1,21 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using MovieManagerMVC.Models.DataModels;
+using MovieManager.Models.DataModels;
 
-namespace MovieManagerMVC.Data.DataModels
+namespace MovieManager.Data.DataModels
 {
-
-    using static DataConstants.User;
-
-    public class UserNotAsp : IdentityUser
+    public class User : IdentityUser
     {
-
-        [MaxLength(FullNameMaxLength)]
-        public string FullName { get; set; }
-
-        public List<Playlist> Playlists { get; init; }
-
-        public UserNotAsp()
+        public User()
         {
             Playlists = new List<Playlist>();
             this.Playlists.Add(new Playlist
@@ -35,6 +26,8 @@ namespace MovieManagerMVC.Data.DataModels
 
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        public List<Playlist> Playlists { get; init; }
 
         //public string? CountryCode { get; set; }
 

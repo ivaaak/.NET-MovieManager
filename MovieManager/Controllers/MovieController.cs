@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManagerMVC.Models;
+using MovieManager.Models;
 using System.Diagnostics;
 
-namespace MovieManagerMVC.Controllers
+namespace MovieManager.Controllers
 {
     public class MovieController : Controller
     {

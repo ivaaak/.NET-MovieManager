@@ -1,10 +1,10 @@
-﻿using MovieManagerMVC.Data.DBConfig;
+﻿using MovieManager.Data.DBConfig;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class SearchMethods
     {

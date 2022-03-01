@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieManagerMVC.Data.DBConfig;
+using MovieManager.Data.DBConfig;
 
-namespace MovieManagerMVC.Data.Common
+namespace MovieManager.Data.Common
 {
     public class Repository : IRepository
     {

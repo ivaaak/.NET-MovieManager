@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Data.DBConfig
+﻿namespace MovieManager.Data.DBConfig
 {
     public static class Configuration
     {

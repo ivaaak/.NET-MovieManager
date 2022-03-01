@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace MovieManagerMVC.Services.UserServices
+namespace MovieManager.Services.UserServices
 {
     public class PasswordHasher : IPasswordHasher
     {

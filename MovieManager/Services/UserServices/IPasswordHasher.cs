@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Services.UserServices
+﻿namespace MovieManager.Services.UserServices
 {
     public interface IPasswordHasher
     {

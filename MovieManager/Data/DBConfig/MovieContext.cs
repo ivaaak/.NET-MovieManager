@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MovieManagerMVC.Data.DataModels;
-using MovieManagerMVC.Models.DataModels;
+using MovieManager.Data.DataModels;
+using MovieManager.Models.DataModels;
 
-namespace MovieManagerMVC.Data.DBConfig
+namespace MovieManager.Data.DBConfig
 {
     public class MovieContext : IdentityDbContext
     {

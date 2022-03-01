@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MovieManagerMVC.Data.DBConfig;
-using static MovieManagerMVC.Data.DataConstants;
+using MovieManager.Data.DBConfig;
+using static MovieManager.Data.DataConstants;
 
-namespace MovieManagerMVC
+namespace MovieManager
 {
     public class Startup
     {

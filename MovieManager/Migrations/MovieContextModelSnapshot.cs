@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MovieManagerMVC.Data.DBConfig;
+using MovieManager.Data.DBConfig;
 
 #nullable disable
 
@@ -220,7 +220,7 @@ namespace MovieManager.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Data.DataModels.UserPlaylist", b =>
+            modelBuilder.Entity("MovieManager.Data.DataModels.UserPlaylist", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -233,7 +233,7 @@ namespace MovieManager.Migrations
                     b.ToTable("UserPlaylist");
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Models.DataModels.Movie", b =>
+            modelBuilder.Entity("MovieManager.Models.DataModels.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -284,7 +284,7 @@ namespace MovieManager.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Models.DataModels.Playlist", b =>
+            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
                 {
                     b.Property<string>("PlaylistId")
                         .HasMaxLength(36)
@@ -366,18 +366,18 @@ namespace MovieManager.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Models.DataModels.Movie", b =>
+            modelBuilder.Entity("MovieManager.Models.DataModels.Movie", b =>
                 {
-                    b.HasOne("MovieManagerMVC.Models.DataModels.Playlist", "Playlist")
+                    b.HasOne("MovieManager.Models.DataModels.Playlist", "Playlist")
                         .WithMany("Movies")
                         .HasForeignKey("PlaylistId");
 
                     b.Navigation("Playlist");
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Models.DataModels.Playlist", b =>
+            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
                 {
-                    b.HasOne("MovieManagerMVC.Data.DataModels.UserPlaylist", "UserPlaylist")
+                    b.HasOne("MovieManager.Data.DataModels.UserPlaylist", "UserPlaylist")
                         .WithMany("Playlists")
                         .HasForeignKey("UserPlaylistUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,12 +386,12 @@ namespace MovieManager.Migrations
                     b.Navigation("UserPlaylist");
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Data.DataModels.UserPlaylist", b =>
+            modelBuilder.Entity("MovieManager.Data.DataModels.UserPlaylist", b =>
                 {
                     b.Navigation("Playlists");
                 });
 
-            modelBuilder.Entity("MovieManagerMVC.Models.DataModels.Playlist", b =>
+            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
                 {
                     b.Navigation("Movies");
                 });

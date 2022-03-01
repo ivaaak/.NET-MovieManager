@@ -1,8 +1,8 @@
-﻿using MovieManagerMVC.Models;
-using static MovieManagerMVC.Data.DataConstants.User;
+﻿using MovieManager.Models;
+using static MovieManager.Data.DataConstants.User;
 using System.Text.RegularExpressions;
 
-namespace MovieManagerMVC.Services.UserServices
+namespace MovieManager.Services.UserServices
 {
     public class Validator : IValidator
     {

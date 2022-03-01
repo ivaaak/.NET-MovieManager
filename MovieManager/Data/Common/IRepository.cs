@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Data.Common
+﻿namespace MovieManager.Data.Common
 {
     public interface IRepository
     {

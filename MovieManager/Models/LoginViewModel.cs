@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Models
+﻿namespace MovieManager.Models
 {
     public class LoginViewModel
     {

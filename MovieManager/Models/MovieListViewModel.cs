@@ -1,6 +1,6 @@
-﻿using static MovieManagerMVC.Data.DataConstants;
+﻿using static MovieManager.Data.DataConstants;
 
-namespace MovieManagerMVC.Models
+namespace MovieManager.Models
 {
     public class MovieListViewModel
     {

@@ -1,6 +1,6 @@
-﻿using MovieManagerMVC.Models;
+﻿using MovieManager.Models;
 
-namespace MovieManagerMVC.Services.UserServices
+namespace MovieManager.Services.UserServices
 {
     public interface IValidator
     {

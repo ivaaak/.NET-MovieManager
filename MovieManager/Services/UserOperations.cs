@@ -1,8 +1,8 @@
-﻿using MovieManagerMVC.Models.DataModels;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Data.DataModels;
+﻿using MovieManager.Models.DataModels;
+using MovieManager.Data.DBConfig;
+using MovieManager.Data.DataModels;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class UserOperations
     {
@@ -16,7 +16,7 @@ namespace MovieManagerMVC.Services
             }
             else
             {
-                UserNotAsp u = new UserNotAsp
+                User u = new User
                 {
                     //UserName = username,
                     //CountryCode = countryCode,

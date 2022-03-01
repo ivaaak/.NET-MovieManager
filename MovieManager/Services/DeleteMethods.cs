@@ -1,8 +1,8 @@
 ﻿using MovieManager.Services.Contracts;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Models.DataModels;
+using MovieManager.Data.DBConfig;
+using MovieManager.Models.DataModels;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class DeleteMethods : IDeleteMethods
     {

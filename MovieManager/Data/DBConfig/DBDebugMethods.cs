@@ -1,7 +1,6 @@
-﻿
-using MovieManagerMVC.Services;
+﻿using MovieManager.Services;
 
-namespace MovieManagerMVC.Data.DBConfig
+namespace MovieManager.Data.DBConfig
 {
     public class DbDebugMethods
     {
@@ -25,10 +24,6 @@ namespace MovieManagerMVC.Data.DBConfig
         }
 
        
-
-
-
-
         //fill tables for debug
         public static void FillMovies()
         {
@@ -59,6 +54,7 @@ namespace MovieManagerMVC.Data.DBConfig
             File.WriteAllText(outputPath, entityOutput.TrimEnd());
         }
 
+
         private static string GetProjectDirectory()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
@@ -67,6 +63,7 @@ namespace MovieManagerMVC.Data.DBConfig
 
             return relativePath;
         }
+
 
         public static void PrintJsonTxt()
         {

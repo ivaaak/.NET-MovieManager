@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Models;
-using MovieManagerMVC.Models.DataModels;
-using MovieManagerMVC.Services.UserServices;
+using MovieManager.Data.DBConfig;
+using MovieManager.Models;
+using MovieManager.Models.DataModels;
+using MovieManager.Services.UserServices;
 using System.Diagnostics;
 
-namespace MovieManagerMVC.Controllers
+namespace MovieManager.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Register() => View();
+        public IActionResult Register() => View("Areas/Identity/Pages/Account/Register");
         public IActionResult Home() => View();
 
         private readonly IMemoryCache cache;

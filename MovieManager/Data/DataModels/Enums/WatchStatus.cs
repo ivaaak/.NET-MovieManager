@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Models.DataModels.Enums
+﻿namespace MovieManager.Models.DataModels.Enums
 {
     public enum WatchStatus
     {

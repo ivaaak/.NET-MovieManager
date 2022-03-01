@@ -1,4 +1,4 @@
-﻿namespace MovieManagerMVC.Data
+﻿namespace MovieManager.Data
 {
     public class DataConstants
     {

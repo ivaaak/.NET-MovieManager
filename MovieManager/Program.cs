@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MovieManagerMVC;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Services;
+using MovieManager;
+using MovieManager.Data.DBConfig;
+using MovieManager.Services;
 
 //AddTestManyToOne.AddMovieToPlaylist(398181, "08b11345-8f16-459c-ba97-aac8c630731f"); //current
 

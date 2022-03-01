@@ -1,11 +1,11 @@
 ﻿using MovieManager.Services.Contracts;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Models.DataModels;
+using MovieManager.Data.DBConfig;
+using MovieManager.Models.DataModels;
 using System.Text;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class AddToDb
     {

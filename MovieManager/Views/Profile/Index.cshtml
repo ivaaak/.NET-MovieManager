@@ -1,16 +1,16 @@
 ﻿@{
 	ViewData["Title"] = "Profile Page";
 
-	//var movieListWatched = MovieManagerMVC.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
-	var watched = MovieManagerMVC.Services.GetFromDB
+	//var movieListWatched = MovieManager.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
+	var watched = MovieManager.Services.GetFromDB
 		.GetUserMovieList("", "");
 	
-	var current = MovieManagerMVC.Services.GetFromDB
+	var current = MovieManager.Services.GetFromDB
 		.GetUserMovieList("", "");
 
-	var movieListWatched = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
-	var movieListCurrent = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
-	var movieListFuture = MovieManagerMVC.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieListWatched = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieListCurrent = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieListFuture = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
 }
 
 @section styles{

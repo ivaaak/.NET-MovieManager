@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MovieManagerMVC.Data.DataModels;
-using MovieManagerMVC.Data.DBConfig;
-using MovieManagerMVC.Models.DataModels;
+using MovieManager.Data.DataModels;
+using MovieManager.Data.DBConfig;
+using MovieManager.Models.DataModels;
 
-namespace MovieManagerMVC.Services
+namespace MovieManager.Services
 {
     public class AddTestManyToOne
     {
