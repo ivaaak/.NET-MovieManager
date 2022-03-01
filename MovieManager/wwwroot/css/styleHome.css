@@ -14,22 +14,22 @@ body {
     background: var(--main-bg-dark-gray) !important;
     top: 0%;
     position: absolute;
-    overflow: scroll !important;
+    overflow-y: scroll !important;
     z-index: 0;
 }
 
 /* TITLE FIRST PART */
 .header {
-    font-size: calc(32vw + 1rem);
+    font-size: 20vw;
     font-weight: 500;
     line-height: 1;
     text-transform: uppercase;
     position: absolute;
     font-family: "Anton", sans-serif !important;
     padding-top: 0px;
-    top: 10%;
-    left: 13%;
-    height: 60vw;
+    top: 12%;
+    left: 28%;
+    height: 30vw !important;
     width: 100vw;
     color: #fff;
     background-clip: text;
@@ -37,23 +37,40 @@ body {
     -webkit-text-fill-color: transparent;
     background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw-o.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw6-o.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw5-o.png");
     background-color: var(--dark-peach);
-    background-size: 45vw auto, 45vw auto, 30vw auto;
+    background-size: 25vw auto, 25vw auto, 20vw auto;
     background-repeat: repeat-x;
     background-position: 0px 15%, 200px 25%, -50px 2vw;
     z-index: 10;
 }
-.desc {
-  position: absolute;
+.desc1 {
+  position:absolute;
   z-index: 120;
   font: Roboto-bold;
-  font-size: 80px;
+  font-size: 60px;
   font-weight: bold;
   text-transform: uppercase;
-  top:45%;
-  width: 100vw;
-  height: 200px;
+  top: 50% !important;
+  left: 10%;
+  width: 20vw;
+  height: 50px !important;
+  color: white;
   text-align: center;
   align-content: center;
+}
+.desc2 {
+    position: absolute;
+    z-index: 120;
+    font: Roboto-bold;
+    font-size: 60px;
+    font-weight: bold;
+    text-transform: uppercase;
+    top: 50% !important;
+    right: 10%;
+    width: 33vw;
+    height: 50px !important;
+    color: white;
+    text-align: center;
+    align-content: center;
 }
 
 .menu {
@@ -62,8 +79,8 @@ body {
   height: 100vh;
   left: 0%;
   background-color: var(--main-bg-gray);
-  -webkit-clip-path: circle(3px at 50px 50px);
-  clip-path: circle(3px at 50% 50%);
+  -webkit-clip-path: circle(0px at 50px 50px);
+  clip-path: circle(0px at 50% 50%);
   transition: 1.5s;
   z-index: 2000;
 }
@@ -72,7 +89,7 @@ body {
   top: 10%;
   left: 0%;
   width: 80vw;
-  height: 80vh;
+  height: 45vh !important;
   background-color: transparent;
   border-radius: 0%;
   z-index: 100; /*navbar z is 100*/
@@ -103,16 +120,18 @@ body {
 /* 3 CARDS LOGIN REGISTER DISCOVER */
 
 .containerCards {
-    margin-top: 15% !important;
-    margin-left: 20%;
+    position: absolute;
+    top: 120%;
+    left: 20%;
+    z-index: 100;
     width: 60vw;
-    height: 60vh;
+    height: 80vh;
     display: flex;
     justify-content: space-between;
     align-content: center;
 }
 .containerCards .card{
-    position: relative;
+    position:center;
     cursor: pointer;
 }
 .containerCards .card .face{
@@ -186,67 +205,4 @@ p{
     color: black;
     font-size: 20px;
     font-weight: bold;
-}
-
-
-/* LOGIN FORM ALIGN */
-* {
-   -webkit-box-sizing:border-box; 
-   -moz-box-sizing:border-box; 
-   -ms-box-sizing:border-box; 
-   -o-box-sizing:border-box; 
-   box-sizing:border-box; 
-  }
-.login { 
-    position: absolute;
-    margin-top: 10%;
-    margin-bottom: 40px;
-    top: 100%;
-    left: 30%;
-    align-content: center;
-    text-align: center;
-    width:40vw;
-    height:150vh;
-    z-index: 100;
-}
-input {
-    width: 100%;
-    margin-bottom: 10px;
-    background: rgba(0,0,0,0.3);
-    font-family: Roboto !important;
-    font: Roboto-bold !important;
-    font-weight: bold;
-    border: none !important;
-    outline: none !important;
-    padding: 10px;
-    border-radius: 0px;
-    font-size: 13px;
-    color: #fff;
-}
-.loginButton {
-    position: relative;
-    background-color: #e26961 !important;
-    width: 40vw !important;
-    height: 40px !important;
-    color: white !important;
-    font-family: Roboto !important;
-    font-weight: bold;
-    border: none;
-}
-.userInput {
-    margin-bottom: 20px !important;
-    font-family: Roboto !important;
-    font: Roboto !important;
-    font-weight: bold;
-    border: none !important;
-    outline: none !important;
-}
-.pwInput {
-    margin-bottom: 20px !important;
-    font-family: Roboto !important;
-    font: Roboto !important;
-    font-weight: 300;
-    width: 40vw;
-    border: none !important;
-    outline: none !important;
 }
