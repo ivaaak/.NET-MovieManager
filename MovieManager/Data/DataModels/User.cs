@@ -9,6 +9,7 @@ namespace MovieManager.Data.DataModels
         public User()
         {
             Playlists = new List<Playlist>();
+
             this.Playlists.Add(new Playlist
             {
                 PlaylistName = "watched"
