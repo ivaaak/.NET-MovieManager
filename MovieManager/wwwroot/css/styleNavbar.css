@@ -25,7 +25,7 @@
 
 nav {
     width: 100%;
-    padding: 0px 0px 0 16px;
+    padding: 0px 0px 0 0px;
     position: fixed;
     z-index: 200;
     top: 0;
@@ -44,6 +44,8 @@ ol {
     position: relative;
     flex-flow: row wrap;
     justify-content: center;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 li {
