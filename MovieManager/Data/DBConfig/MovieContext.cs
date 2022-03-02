@@ -46,7 +46,7 @@ namespace MovieManager.Data.DBConfig
                 .HasMany(c => c.Movies)
                 .WithOne(e => e.Playlist);
 
-            //userPlaylist has many playlists
+            //user has many playlists
             modelBuilder.Entity<User>()
                 .HasMany(c => c.Playlists)
                 .WithOne(e => e.User);

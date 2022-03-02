@@ -1,29 +1,36 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using MovieManager.Data.DataModels
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager 
-<!--changed from <IdentityUser> -->
+<!--
+AT inject SignInManager<User> SignInManager
+AT inject UserManager<User> UserManager  
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
+if (SignInManager.IsSignedIn(User))
+-->
+<!--ADD ADMIN PANEL AND CHECKS -->
+
+<!--No service for type 'Microsoft.AspNetCore.Identity.UserManager`1[Microsoft.AspNetCore.Identity.IdentityUser]' has been registered-->
+	
+@if(true)
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+	<li onclick="location.href = '/Profile/Index'" class="main-item"><span class="myprofile"></span></li>
+	<li class="main-item"><span class="watchlist"></span>
+		<ol class="sub-menu">
+			<li onclick="location.href = '/Movie/MoviesWatched'" class="sub-item item-left"><span class="WLWatched"></span></li>
+			<li onclick="location.href = '/Movie/MoviesCurrent'" class="sub-item item-left"><span class="WLCurrent"></span></li>
+			<li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
+		</ol>
+	</li>
 }
 else
 {
-    <li class="nav-item">
+	<li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
+
+	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="myprofile"></span></li>
+	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="myprofile"></span></li>
 }
-</ul>

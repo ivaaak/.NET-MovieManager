@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MovieManager.Controllers;
 using MovieManager.Data.DBConfig;
+using MovieManager.Infrastructure.Extensions;
 using static MovieManager.Data.DataConstants;
 
 namespace MovieManager
@@ -16,23 +18,23 @@ namespace MovieManager
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddDbContext<MovieContext>(options => options
+                    .UseSqlServer(Configuration.GetConnectionString(Data.DBConfig.Configuration.ConnectionString)));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services
                 .AddDefaultIdentity<User>(options =>
                 {
-                    options.User.RequireUniqueEmail = true;
                     options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false; 
+                    options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
                 .AddRoles<IdentityRole>()
-                .AddUserStore<MovieContext>(); //this used to be .AddEntityFrameworkStores???
+                .AddEntityFrameworkStores<MovieContext>();
 
-            //reigster context
-            services.AddDbContext<MovieContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString(Data.DBConfig.Configuration.ConnectionString));
-            });
-
+            //services.AddAutoMapper(typeof(Startup));
 
             services.AddMemoryCache();
 
@@ -40,17 +42,20 @@ namespace MovieManager
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
-            
-            //services.AddTransient<IService, Service>();
+
+            //services.AddTransient<ICarService, CarService>();
+            //services.AddTransient<IDealerService, DealerService>();
             //services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
-        //builder and endpoints
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
@@ -58,21 +63,22 @@ namespace MovieManager
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection()
+            app
+                .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    //endpoints.MapDefaultAreaRoute();
+                    endpoints.MapDefaultAreaRoute();
 
                     endpoints.MapControllerRoute(
-                        name: "Movie Details",
-                        pattern: "/Movie/Details/{id}/{information}",
+                        name: "Car Details",
+                        pattern: "/Cars/Details/{id}/{information}",
                         defaults: new
                         {
-                            //controller = typeof(MovieController).GetControllerName(), //add GetControllerName() method
+                            //controller = typeof(MovieController).GetControllerName(),
                             //action = nameof(MovieController.Details)
                         });
 
