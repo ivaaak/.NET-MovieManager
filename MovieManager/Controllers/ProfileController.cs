@@ -14,21 +14,10 @@ namespace MovieManager.Controllers
         }
 
 
-        public IActionResult Index() => View();
+        //Review ?
 
-        public IActionResult IndexMovies() => View();
+        //edit lists?
 
-        public IActionResult IndexMoviesNoBS() => View();
-
-        public IActionResult Review() => View();
-
-            
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //Account settings/statistics?
     }
 }

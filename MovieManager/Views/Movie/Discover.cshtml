@@ -2,8 +2,8 @@
 	//Add DiscoverListViewModel
 	ViewData["Title"] = "Home Page";
 
-	var watched = MovieManager.Services.GetFromDB
-		.GetUserMovieList("417f4178-5150-4c71-906f-7869a4ef347d", "78d912ef-ee0e-4129-b898-c9dbfc59489d");
+	var discoverMovieList = MovieManager.Services.GetFromDB
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
 	int counter = 1;
 }
 @section styles{
@@ -28,7 +28,7 @@
 <h1>DISCOVER MOVIES: </h1>
 
 <ul class="carousel">
-	@foreach(var movie in watched)
+	@foreach(var movie in discoverMovieList)
 	{
 		<label for="@counter">
 			<div class="movieContainer">

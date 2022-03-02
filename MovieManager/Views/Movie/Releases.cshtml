@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 
-	var movieListWatched = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
+	var releasedMovieList = MovieManager.Services.GetFromDB
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
 }
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
@@ -31,7 +32,7 @@
 
 <div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
 	<div class="row">
-		@foreach (var movie in movieListWatched)
+		@foreach (var movie in releasedMovieList)
 		{
 		<div class="col-12 col-md-6 col-lg-4">
 		<div class="card">
