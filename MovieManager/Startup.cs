@@ -25,7 +25,7 @@ namespace MovieManager
                     options.Password.RequireUppercase = false;
                 })
                 .AddRoles<IdentityRole>()
-                .AddUserStore<MovieContext>();
+                .AddUserStore<MovieContext>(); //this used to be .AddEntityFrameworkStores???
 
             //reigster context
             services.AddDbContext<MovieContext>(options =>
