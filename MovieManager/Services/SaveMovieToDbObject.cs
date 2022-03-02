@@ -1,4 +1,4 @@
-﻿using MovieManager.Models.DataModels;
+﻿using MovieManager.Data.DataModels;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services

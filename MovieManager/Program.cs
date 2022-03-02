@@ -21,7 +21,7 @@ Host.CreateDefaultBuilder(args)
 //Build Web App
 WebApplication app = builder.Build();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Home}"); 
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}"); 
 
 app.UseHttpsRedirection()
     .UseStaticFiles()

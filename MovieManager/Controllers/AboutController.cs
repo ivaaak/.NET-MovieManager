@@ -14,17 +14,17 @@ namespace MovieManager.Controllers
         }
 
 
-        public IActionResult About() => View();
-
-        public IActionResult Privacy() => View();
-
-
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult About() 
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            Console.WriteLine("Controller hit: About, view hit: About");
+            return View();
+        } 
+
+        public IActionResult Privacy()
+        {
+            Console.WriteLine("Controller hit: About, view hit: Privacy");
+            return View();
         }
+        //all works
     }
 }

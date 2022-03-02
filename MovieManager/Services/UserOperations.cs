@@ -10,12 +10,14 @@ namespace MovieManager.Services
         {
             MovieContext context = new MovieContext();
 
-            //if (context.Users.Any(u => u.UserName == username))
-            //{
-            //    Console.WriteLine("User already exists");
-            //}
-            //else
-            //{
+            /*
+            if (context.Users.Any(u => u.UserName == username))
+            {
+                Console.WriteLine("User already exists");
+            }
+            else
+            {
+            */
                 User u = new User()
                 {
                     Email = "abc@abc.com",

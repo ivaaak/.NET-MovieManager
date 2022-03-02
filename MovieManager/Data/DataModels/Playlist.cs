@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MovieManager.Data.DataModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieManager.Models.DataModels
+namespace MovieManager.Data.DataModels
 {
     public class Playlist
     {

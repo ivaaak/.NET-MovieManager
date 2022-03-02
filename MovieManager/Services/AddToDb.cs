@@ -1,6 +1,5 @@
-﻿using MovieManager.Services.Contracts;
+﻿using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
-using MovieManager.Models.DataModels;
 using System.Text;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;

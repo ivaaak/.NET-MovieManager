@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MovieManager.Infrastructure.Extensions;
 using MovieManager.Models;
+using MovieManager.Services;
 using System.Diagnostics;
 
 namespace MovieManager.Controllers
@@ -13,17 +16,62 @@ namespace MovieManager.Controllers
             _logger = logger;
         }
 
-        public IActionResult MovieCard() => View();
+        //[Authorize]
+        public IActionResult Main()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: Main");
+            //add logic for getting movie for each column for each user
 
-        public IActionResult MoviesCurrent() => View();
+            return View();
+        }
 
-        public IActionResult MoviesWatched() => View();
+        //[Authorize]
+        public IActionResult MovieList()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: MovieList");
+            //takes a PlaylistId and returns a PlaylistViewModel (List<Movie>) with all movies in it to be displayed
+            //can edit the playlist?
 
-        public IActionResult MoviesFuture() => View();
+            return View();
+        }
 
 
+        public IActionResult MovieCard(int id)
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: MovieCard");
+            //takes a movie ID and returns a MovieViewModel
+            var movieObj = GetFromDB.GetMovieFromDBbyID(id);
 
-        public IActionResult Search() => View();
+            return View();
+        }
+
+
+        public IActionResult Search()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: Search");
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchTitle(string Title)
+        {
+            var userId = this.User.Id();
+
+            Console.WriteLine("Hit controller: Movie , hit view: Search");
+
+            var movieResults = SearchMethods.SearchMovieTitleToList(Title);
+            var showResults = SearchMethods.SearchShowTitleToList(Title);
+
+            return View(movieResults);
+        }
+
+
+        public IActionResult SearchResult()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: SearchResult");
+            return View();
+        }
 
         public IActionResult Discover() => View();
 

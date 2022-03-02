@@ -64,7 +64,7 @@ body {
     right: 2%;
     background: transparent;
     overflow-y: scroll;
-    overflow-x: visible;
+    overflow-x: hidden;
     width: 33%;
     height: 86%;
     padding-right: 30px;
@@ -78,7 +78,7 @@ body {
     display: grid;
     grid-gap: calc(20px / 2);
     grid-template-columns: repeat(5, 40%);
-    overflow-x: scroll;
+    overflow-x: hidden;
     height: 15vh; 
     z-index:-1;
 

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MovieManager.Models.DataModels
+namespace MovieManager.Data.DataModels
 {
     public class UserNoIden
     {

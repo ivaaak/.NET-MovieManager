@@ -1,4 +1,4 @@
-﻿using static MovieManager.Data.DataConstants;
+﻿using MovieManager.Data.DataModels;
 
 namespace MovieManager.Models
 {

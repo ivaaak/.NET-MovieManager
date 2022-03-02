@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using MovieManager.Models.DataModels;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace MovieManager.Data.DataModels
 {

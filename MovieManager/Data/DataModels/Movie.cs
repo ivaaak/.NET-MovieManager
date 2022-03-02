@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MovieManager.Models.DataModels
+namespace MovieManager.Data.DataModels
 {
     public class Movie
 	{

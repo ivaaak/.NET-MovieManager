@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using MovieManager.Data.DataModels
+@using MovieManager.Infrastructure.Extensions;
 
 <!--
 AT inject SignInManager<User> SignInManager
@@ -11,19 +12,18 @@ if (SignInManager.IsSignedIn(User))
 
 <!--No service for type 'Microsoft.AspNetCore.Identity.UserManager`1[Microsoft.AspNetCore.Identity.IdentityUser]' has been registered-->
 	
-@if(true)
-{
-	<li onclick="location.href = '/Profile/Index'" class="main-item"><span class="myprofile"></span></li>
+
+	<li onclick="location.href = '/Movie/Main'" class="main-item"><span class="myprofile"></span></li>
 	<li class="main-item"><span class="watchlist"></span>
 		<ol class="sub-menu">
-			<li onclick="location.href = '/Movie/MoviesWatched'" class="sub-item item-left"><span class="WLWatched"></span></li>
-			<li onclick="location.href = '/Movie/MoviesCurrent'" class="sub-item item-left"><span class="WLCurrent"></span></li>
+			<li onclick="location.href = '/Movie/MovieList'" class="sub-item item-left"><span class="WLWatched"></span></li>
+			<li onclick="location.href = '/Movie/MovieList&name="watched"'" class="sub-item item-left"><span class="WLCurrent"></span></li>
 			<li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
 		</ol>
 	</li>
-}
+
+<!--
 else
-{
 	<li class="nav-item">
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
     </li>
@@ -33,4 +33,4 @@ else
 
 	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="myprofile"></span></li>
 	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="myprofile"></span></li>
-}
+-->

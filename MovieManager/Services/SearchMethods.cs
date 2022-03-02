@@ -1,4 +1,5 @@
 ﻿using MovieManager.Data.DBConfig;
+using MovieManager.Data.DataModels;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
@@ -9,6 +10,7 @@ namespace MovieManager.Services
     public class SearchMethods
     {
         public static void SearchMovieTitle(string SEARCH_NAME)
+            //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
@@ -22,7 +24,8 @@ namespace MovieManager.Services
         }
 
 
-        public static void SearchShowTitle(string SEARCH_NAME)
+        public static void SearchShowTitle(string SEARCH_NAME) 
+            //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
@@ -36,6 +39,48 @@ namespace MovieManager.Services
         }
 
 
+
+        public static List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
+            //search and return a Movie list
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            SearchContainer<SearchMovie> results = client.SearchMovieAsync(SEARCH_NAME).Result;
+
+            List<Data.DataModels.Movie> dbMovies = new List<Data.DataModels.Movie>();
+
+            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
+            
+            foreach (var movie in results.Results)
+            {
+                dbMovies.Add(SaveMovieToDbObject.MovieApiToObject(movie));
+            }
+
+            client.Dispose();
+
+            return dbMovies;
+        }
+
+        public static List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME)
+            //search and return a Show list
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            SearchContainer<SearchTv> results = client.SearchTvShowAsync(SEARCH_NAME).Result;
+
+            List<Data.DataModels.Movie> dbShows = new List<Data.DataModels.Movie>();
+
+            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
+
+            foreach (var movie in results.Results)
+            {
+                dbShows.Add(SaveMovieToDbObject.ShowApiToObject(movie));
+            }
+
+            client.Dispose();
+
+            return dbShows;
+        }
 
 
         //TODO
