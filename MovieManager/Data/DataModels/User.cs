@@ -25,10 +25,10 @@ namespace MovieManager.Data.DataModels
             //generate the 3 default playlists when creating an user
         }
 
-        [Required]
-        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+        public string? THISWILLSHOW { get; set; }
 
-        public string THISWILLSHOW { get; set; }
+        //[Required]
+        //public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public List<Playlist> Playlists { get; init; }
 

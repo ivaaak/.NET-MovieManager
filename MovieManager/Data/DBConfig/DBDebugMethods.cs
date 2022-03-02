@@ -38,9 +38,16 @@ namespace MovieManager.Data.DBConfig
             SearchMethods.SearchMovieTitle("from russia with");
             SearchMethods.SearchMovieTitle("you were never really here");
             SearchMethods.SearchMovieTitle("le samourai");
+            SearchMethods.SearchShowTitle("ozark");
+            SearchMethods.SearchShowTitle("primal");
+            SearchMethods.SearchShowTitle("fargo");
+            SearchMethods.SearchShowTitle("vikings");
+            SearchMethods.SearchMovieTitle("primal");
+            SearchMethods.SearchMovieTitle("deer");
+            SearchMethods.SearchMovieTitle("batman");
 
             t.Stop();
-            Console.WriteLine($"Filled the table ToWatchMovies with example data. Time elapsed: {t.Interval}");
+            Console.WriteLine($"Filled the table Movies with example data. Time elapsed: {t.Interval}");
 
             context.SaveChanges();
             context.Dispose();

@@ -22,6 +22,24 @@ namespace MovieManager.Services
         }
 
 
+        public static Movie ShowApiToObject(SearchTv result)
+        {
+            if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
+
+            Movie m = new Movie()
+            {
+                MovieId = result.Id,
+                Title = result.Name,
+                Overview = result.Overview,
+                PosterUrl = BuildImageURL(result.PosterPath),
+                Rating = (decimal)result.VoteAverage,
+                ReleaseDate = result.FirstAirDate,
+            };
+            return m;
+        }
+
+
+
         public static string BuildImageURL(string resImageURL)
         {
             //url part returned from API example

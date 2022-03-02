@@ -6,30 +6,27 @@ namespace MovieManager.Services
 {
     public class UserOperations
     {
-        public static void CreateUser(
-            string username)
+        public static void CreateUser()
         {
             MovieContext context = new MovieContext();
-            if (context.Users.Any(u => u.UserName == username))
-            {
-                Console.WriteLine("User already exists");
-            }
-            else
-            {
-                User u = new User
+
+            //if (context.Users.Any(u => u.UserName == username))
+            //{
+            //    Console.WriteLine("User already exists");
+            //}
+            //else
+            //{
+                User u = new User()
                 {
-                    //UserName = username,
-                    //CountryCode = countryCode,
-                    //LanguageId = languageId,
-                    //Email = "testc@test.com",
-                    //PasswordHash = "1234",
+                    Email = "abc@abc.com",
+                    UserName = "testUser",
                 };
 
                 context.Users.Add(u);
                 context.SaveChanges();
                 context.Dispose();
-                Console.WriteLine($"Created user {username}");
-            }
+                Console.WriteLine($"Created user {u.UserName} with ID {u.Id}");
+            //}
         }
         // TRANSFERRED TO ASP.NET IDENTITY 
     }

@@ -2,15 +2,14 @@
 	ViewData["Title"] = "Profile Page";
 
 	//var movieListWatched = MovieManager.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
+	//d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1 - id
 	var watched = MovieManager.Services.GetFromDB
-		.GetUserMovieList("", "");
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
 	
 	var current = MovieManager.Services.GetFromDB
-		.GetUserMovieList("", "");
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "watched");
 
-	var movieListWatched = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
-	var movieListCurrent = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
-	var movieListFuture = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
+	var allMovies = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
 }
 
 @section styles{
@@ -97,7 +96,7 @@
 	<div class="hidden-info3">FUTURE</div>
 </h1>	
 <main class="app3" id="scrollBlackThin">
-	@foreach (var movie in movieListFuture)
+	@foreach (var movie in allMovies)
 	{
 	<div class="movieContainer">
 		<div class="flex-container">

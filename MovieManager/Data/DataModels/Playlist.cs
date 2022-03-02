@@ -30,6 +30,5 @@ namespace MovieManager.Models.DataModels
 
         public User User { get; set; } 
         //need for the one to many?
-        public UserPlaylist UserPlaylist { get; set; }
     }
 }

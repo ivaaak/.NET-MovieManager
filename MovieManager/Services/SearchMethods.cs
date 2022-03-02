@@ -22,7 +22,7 @@ namespace MovieManager.Services
         }
 
 
-        public static void SearchShowTitle(string SEARCH_NAME, string WhichDbToAddTo)
+        public static void SearchShowTitle(string SEARCH_NAME)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 

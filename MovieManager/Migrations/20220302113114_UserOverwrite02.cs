@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MovieManager.Migrations
 {
-    public partial class WithAuth0301 : Migration
+    public partial class UserOverwrite02 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,7 @@ namespace MovieManager.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    THISWILLSHOW = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -49,7 +50,7 @@ namespace MovieManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPlaylist",
+                name: "UserPlaylists",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -57,7 +58,7 @@ namespace MovieManager.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserPlaylist", x => x.UserId);
+                    table.PrimaryKey("PK_UserPlaylists", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,18 +175,23 @@ namespace MovieManager.Migrations
                     PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserPlaylistUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserPlaylistUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Playlists", x => x.PlaylistId);
                     table.ForeignKey(
-                        name: "FK_Playlists_UserPlaylist_UserPlaylistUserId",
-                        column: x => x.UserPlaylistUserId,
-                        principalTable: "UserPlaylist",
-                        principalColumn: "UserId",
+                        name: "FK_Playlists_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Playlists_UserPlaylists_UserPlaylistUserId",
+                        column: x => x.UserPlaylistUserId,
+                        principalTable: "UserPlaylists",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -261,6 +267,11 @@ namespace MovieManager.Migrations
                 column: "PlaylistId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Playlists_UserId",
+                table: "Playlists",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Playlists_UserPlaylistUserId",
                 table: "Playlists",
                 column: "UserPlaylistUserId");
@@ -290,13 +301,13 @@ namespace MovieManager.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Playlists");
 
             migrationBuilder.DropTable(
-                name: "UserPlaylist");
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "UserPlaylists");
         }
     }
 }

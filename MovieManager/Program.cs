@@ -2,8 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieManager;
 using MovieManager.Data.DBConfig;
 using MovieManager.Services;
-
-//AddTestManyToOne.AddMovieToPlaylist(398181, "08b11345-8f16-459c-ba97-aac8c630731f"); //current
+using System.Collections.Generic;
 
 
 //Builder
@@ -32,3 +31,10 @@ app.UseHttpsRedirection()
 
 //Run the App
 app.Run();
+
+
+
+
+//TestDbPlaylist.FillPlaylist();
+//UserOperations.CreateUser();
+//DbDebugMethods.FillMovies();

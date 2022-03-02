@@ -6,19 +6,35 @@ using MovieManager.Models.DataModels;
 
 namespace MovieManager.Services
 {
-    public class AddTestManyToOne
+    public class TestDbPlaylist
     {
         private readonly MovieContext data;
 
-        public AddTestManyToOne(MovieContext data)
+        public TestDbPlaylist(MovieContext data)
         {
             this.data = data; //access db without new contexts
         }
 
 
-        public void AddMovieToPlaylist(int movieId, string PlaylistId)
+        public static void FillPlaylist()
         {
-            
+            //Debug methods
+            var collection = new List<int>
+            {
+                44217, 69740, 414906, 171274, 335984, 5511, 1592
+            };
+
+            foreach (var item in collection)
+            {
+                //AddMovieToPlaylist(item, "bb01f542-8cb6-4ac5-9d75-f87fd89d75d9"); //watched
+                AddMovieToPlaylist(item, "b8534caa-bcba-4f60-89e3-7c48b4894269"); //current
+            }
+        }
+
+
+        public static void AddMovieToPlaylist(int movieId, string PlaylistId)
+        {
+            var data = new MovieContext();
             var m = data.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
             if(m != null)
             {

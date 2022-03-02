@@ -58,25 +58,18 @@ namespace MovieManager.Services
             foreach (SearchTv result in results.Results)
             {
                 if(data.Movies.Where(i => i.MovieId == result.Id).Any()) 
-                //(data.Playlists.Any(i => i.Movies.Where(m => m.MovieId == result.Id).ToList()))
                 {
-                    Console.WriteLine($"{result.Name} is already added to watchlist.");
+                    Console.WriteLine($"{result.Name} is already added to movies.");
                     continue;
                 }
 
-                Movie m = new Movie()
-                {
-                    MovieId = result.Id,
-                    Title = result.Name,
-                    Overview = result.Overview,
-                    PosterUrl = result.PosterPath,
-                    Rating = (decimal)result.VoteAverage,
-                    //Add episode count and sh
-                    //needs to be added as DB Column first
-                };
-                validShows.Add(m);
+                var m = SaveMovieToDbObject.ShowApiToObject(result);
+
+                if(m != null) { validShows.Add(m); }
+
                 sb.AppendLine($"Successfully added : {result.Name} to show watchlist.");
             }
+
             data.Movies.AddRange(validShows);
             data.SaveChanges();
             data.Dispose();

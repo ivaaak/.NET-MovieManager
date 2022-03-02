@@ -46,7 +46,7 @@ namespace MovieManager.Services
 
             var result = context.Playlists
                 .Include(a => a.Movies)
-                .Where(u => u.User.Id == UserId && u.PlaylistId == listName)
+                .Where(u => u.User.Id == UserId && u.PlaylistName == listName) //playlistid = listname
                 .FirstOrDefault();
 
 

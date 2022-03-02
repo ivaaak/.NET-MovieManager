@@ -167,9 +167,6 @@ namespace MovieManager.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -204,7 +201,6 @@ namespace MovieManager.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("THISWILLSHOW")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -312,7 +308,6 @@ namespace MovieManager.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserPlaylistUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PlaylistId");
@@ -392,15 +387,11 @@ namespace MovieManager.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MovieManager.Data.DataModels.UserPlaylist", "UserPlaylist")
+                    b.HasOne("MovieManager.Data.DataModels.UserPlaylist", null)
                         .WithMany("Playlists")
-                        .HasForeignKey("UserPlaylistUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserPlaylistUserId");
 
                     b.Navigation("User");
-
-                    b.Navigation("UserPlaylist");
                 });
 
             modelBuilder.Entity("MovieManager.Data.DataModels.User", b =>
