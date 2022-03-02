@@ -28,6 +28,8 @@ namespace MovieManager.Data.DataModels
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
+        public string THISWILLSHOW { get; set; }
+
         public List<Playlist> Playlists { get; init; }
 
         //public string? CountryCode { get; set; }

@@ -6,7 +6,8 @@ using MovieManager.Models.DataModels;
 
 namespace MovieManager.Data.DBConfig
 {
-    public class MovieContext : IdentityDbContext
+    public class MovieContext : IdentityDbContext<User> 
+        //this overwrites the default Asp.Net Identity model
     {
         public MovieContext()
         {
@@ -46,9 +47,9 @@ namespace MovieManager.Data.DBConfig
                 .WithOne(e => e.Playlist);
 
             //userPlaylist has many playlists
-            modelBuilder.Entity<UserPlaylist>()
+            modelBuilder.Entity<User>()
                 .HasMany(c => c.Playlists)
-                .WithOne(e => e.UserPlaylist);
+                .WithOne(e => e.User);
 
             base.OnModelCreating(modelBuilder);
             //initializes Identity?

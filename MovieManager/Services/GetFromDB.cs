@@ -46,7 +46,7 @@ namespace MovieManager.Services
 
             var result = context.Playlists
                 .Include(a => a.Movies)
-                .Where(u => u.UserId == UserId && u.PlaylistId == listName)
+                .Where(u => u.User.Id == UserId && u.PlaylistId == listName)
                 .FirstOrDefault();
 
 
@@ -68,7 +68,7 @@ namespace MovieManager.Services
 
             if (ListType.ToLower() == "watched")
             {
-                var result = context.Playlists.Where(u => u.UserId == UserId);
+                var result = context.Playlists.Where(u => u.User.Id == UserId);
                 foreach (var item in result)
                 {
                     Movie m = new Movie()

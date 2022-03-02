@@ -55,7 +55,7 @@ namespace MovieManager.Services
             Playlist playlist = new Playlist
             {
                 PlaylistName = playlistName,
-                UserId = userId,
+                //UserId = userId,
                 Movies = new List<Movie>(),
                 QrCode = "qr-code-bytes here",
             };
