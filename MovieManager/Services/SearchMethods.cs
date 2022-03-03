@@ -9,36 +9,19 @@ namespace MovieManager.Services
 {
     public class SearchMethods
     {
-        public static void SearchMovieTitle(string SEARCH_NAME)
-            //search and add to DB
+        
+        public static List<Data.DataModels.Movie> SearchResultCombined(string SEARCH_NAME)
         {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
+            var CombinedResultsList = new List<Data.DataModels.Movie>();
+            var MovieResultsList = SearchMovieTitleToList(SEARCH_NAME);
+            var ShowResultsList = SearchShowTitleToList(SEARCH_NAME);
 
-            SearchContainer<SearchMovie> results = client.SearchMovieAsync(SEARCH_NAME).Result;
+            CombinedResultsList.AddRange(MovieResultsList);
+            CombinedResultsList.AddRange(ShowResultsList);
 
-            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
-
-            AddToDb.AddMovies(results);
-
-            client.Dispose();
+            return CombinedResultsList;
+            //return show and movie results in a single list
         }
-
-
-        public static void SearchShowTitle(string SEARCH_NAME) 
-            //search and add to DB
-        {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
-
-            SearchContainer<SearchTv> results = client.SearchTvShowAsync(SEARCH_NAME).Result;
-
-            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
-
-            AddToDb.AddShows(results);
-
-            client.Dispose();
-        }
-
-
 
         public static List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
             //search and return a Movie list
@@ -80,6 +63,36 @@ namespace MovieManager.Services
             client.Dispose();
 
             return dbShows;
+        }
+
+
+        public static void SearchMovieTitle(string SEARCH_NAME)
+        //search and add to DB
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            SearchContainer<SearchMovie> results = client.SearchMovieAsync(SEARCH_NAME).Result;
+
+            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
+
+            AddToDb.AddMovies(results);
+
+            client.Dispose();
+        }
+
+
+        public static void SearchShowTitle(string SEARCH_NAME)
+        //search and add to DB
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            SearchContainer<SearchTv> results = client.SearchTvShowAsync(SEARCH_NAME).Result;
+
+            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
+
+            AddToDb.AddShows(results);
+
+            client.Dispose();
         }
 
 
