@@ -1,12 +1,13 @@
-﻿@{
+﻿@model SearchResultViewModel
+
+@{
 	ViewData["Title"] = "Search Results";
 
-	//var movieListWatched = MovieManager.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
-	//d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1 - id
-	var watched = MovieManager.Services.GetFromDB
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	//var watched = MovieManager.Services.GetFromDB.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	//var allMovies = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
 
-	var allMovies = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
+	var movieResults = Model.ResultMovieList;
+	var showResults = Model.ResultShowList;
 }
 
 @section styles{
@@ -22,8 +23,8 @@
 <div class="bgIndex"></div>  
 
 <h1 class="resultsLabel"> Results for:</h1>
-<h1 class="resultsTerm"> @@SearchTerm </h1>
-<h1 class="resultsTerm2"> @@SearchTerm</h1>
+<h1 class="resultsTerm"> @Model.SearchTerm </h1>
+<h1 class="resultsTerm2"> @Model.SearchTerm </h1>
 
 <!--=====LOAD MOVIE COLUMNS=====-->
 <main class="resultsLeft" id="scrollBlackThin">
@@ -31,25 +32,28 @@
 		<img src="~/img/watched icon2 dark.png" width="60" height="40">Movies
 		<div class="hidden-infoLeft">Results</div>
 	</h1>
-	@foreach (var movie in watched)
+	@foreach (var movie in movieResults)
 	{
-	<div class="movieContainer">
-		<div class="flex-container">
-		<div class="flex-items">	
-			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
-		</div>
-		<div class="flex-items">
-			<h2 class="movieTitle"> @movie.Title </h2>
-			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-			<p class="movieDesc"> @movie.Overview </p>
-			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+		if (movie != null)
+		{
+			<div class="movieContainer">
+				<div class="flex-container">
+					<div class="flex-items">	
+						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+					</div>
+					<div class="flex-items">
+						<h2 class="movieTitle"> @movie.Title </h2>
+						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+						<p class="movieDesc"> @movie.Overview </p>
+						<div class="buttonsList">
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-	</div>
+		}
 	}
 	<div class="movieContainer">			
 	  <img class="addMovie1" src="~/img/movieAdd.png" onclick="">
@@ -62,25 +66,28 @@
 		<img src="~/img/watchlist1 dark.png" width="40" height="40">Shows
 		<div class="hidden-infoRight">Results</div>
 	</h1>	
-	@foreach (var movie in allMovies)
-	{
-	<div class="movieContainer">
-		<div class="flex-container">
-		<div class="flex-items">	
-			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
-		</div>
-		<div class="flex-items">
-			<h2 class="movieTitle"> @movie.Title </h2>
-			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-			<p class="movieDesc"> @movie.Overview </p>
-			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+	@foreach (var movie in showResults)
+	{ 
+		if (movie != null)
+		{
+			<div class="movieContainer">
+				<div class="flex-container">
+					<div class="flex-items">	
+						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+					</div>
+					<div class="flex-items">
+						<h2 class="movieTitle"> @movie.Title </h2>
+						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+						<p class="movieDesc"> @movie.Overview </p>
+						<div class="buttonsList">
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
+							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		</div>
-	</div>
+		}
 	}
 	<div class="movieContainer">
 		<img class="addMovie" src="~/img/movieAdd.png">

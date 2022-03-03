@@ -36,7 +36,10 @@ namespace MovieManager.Services
             
             foreach (var movie in results.Results)
             {
-                dbMovies.Add(SaveMovieToDbObject.MovieApiToObject(movie));
+                if(movie != null) 
+                {
+                    dbMovies.Add(SaveMovieToDbObject.MovieApiToObject(movie));
+                }
             }
 
             client.Dispose();
@@ -57,7 +60,10 @@ namespace MovieManager.Services
 
             foreach (var movie in results.Results)
             {
-                dbShows.Add(SaveMovieToDbObject.ShowApiToObject(movie));
+                if (movie != null)
+                {
+                    dbShows.Add(SaveMovieToDbObject.ShowApiToObject(movie));
+                }
             }
 
             client.Dispose();

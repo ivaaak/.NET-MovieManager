@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MovieManager.Infrastructure.Extensions;
+﻿using Microsoft.AspNetCore.Mvc;
 using MovieManager.Models;
 using MovieManager.Services;
 using System.Diagnostics;
@@ -46,30 +44,45 @@ namespace MovieManager.Controllers
         }
 
 
+
+
         public IActionResult Search()
         {
-            Console.WriteLine("Hit controller: Movie , hit view: Search");
+            Console.WriteLine("Hit controller: Movie , hit view: Search WITHOUT PARAM");
 
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult SearchTitle(string Title)
+        public IActionResult Search(SearchResultViewModel model)
         {
-            var userId = this.User.Id();
+            Console.WriteLine("Hit controller: Movie , hit view: Search WITH TITLE PARAM");
 
-            Console.WriteLine("Hit controller: Movie , hit view: Search");
+            var movieResults = SearchMethods.SearchMovieTitleToList(model.SearchTerm);
+            var showResults = SearchMethods.SearchShowTitleToList(model.SearchTerm);
 
-            var movieResults = SearchMethods.SearchMovieTitleToList(Title);
-            var showResults = SearchMethods.SearchShowTitleToList(Title);
+            var results = new SearchResultViewModel()
+            {
+                ResultMovieList = movieResults,
+                ResultShowList = showResults,
+                SearchTerm = model.SearchTerm
+            };
 
-            return View(movieResults);
+            Console.WriteLine($"Searching for {model.SearchTerm}");
+
+            var viewWithViewModel = SearchResult(results);
+
+            return View("SearchResult", results);
         }
 
 
-        public IActionResult SearchResult()
+        public IActionResult SearchResult(SearchResultViewModel results)
         {
             Console.WriteLine("Hit controller: Movie , hit view: SearchResult");
+
+            Console.WriteLine($"search term - {results.SearchTerm}");
+
             return View();
         }
 
