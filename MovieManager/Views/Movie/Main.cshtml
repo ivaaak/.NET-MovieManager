@@ -20,17 +20,14 @@
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
-
-
-<div class="bgIndex"></div>  
-
+ 
 
 <!--=====LOAD MOVIE COLUMNS=====-->
-<h1 class="info1"> 
-	<img src="~/img/watched icon2 dark.png" width="60" height="40">WATCHED
-	<div class="hidden-info1">PAST</div>
-</h1>
 <main class="app" id="scrollBlackThin">
+	<h1 class="info1"> 
+		<img src="~/img/watched icon2 dark.png" width="60" height="40">Watched
+		<div class="hidden-info1">Past</div>
+	</h1>
 	@foreach (var movie in watched)
 	{
 	<div class="movieContainer">
@@ -57,11 +54,11 @@
 
 
 
-<h1 class="info2"> 
-	<img src="~/img/current icon dark.png" width="40" height="40">CURRENT
-	<div class="hidden-info2">PRESENT</div>
-</h1>
 <main class="app2" id="scrollBlackThin">
+	<h1 class="info2"> 
+		<img src="~/img/current icon dark.png" width="40" height="40">Current
+		<div class="hidden-info2">Present</div>
+	</h1>
 	@foreach (var movie in current)
 	{
 	<div class="movieContainer">
@@ -90,11 +87,11 @@
 
 
 
-<h1 class="info3"> 
-	<img src="~/img/watchlist1 dark.png" width="40" height="40">WATCHLIST
-	<div class="hidden-info3">FUTURE</div>
-</h1>	
 <main class="app3" id="scrollBlackThin">
+	<h1 class="info3"> 
+		<img src="~/img/watchlist1 dark.png" width="40" height="40">Watchlist
+		<div class="hidden-info3">Future</div>
+	</h1>	
 	@foreach (var movie in allMovies)
 	{
 	<div class="movieContainer">
@@ -118,3 +115,5 @@
 		<img class="addMovie" src="~/img/movieAdd.png">
 	</div>
 </main>
+
+<div class="bgIndex"></div> 

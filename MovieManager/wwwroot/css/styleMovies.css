@@ -10,6 +10,7 @@ body {
     background: var(--main-bg-gray);
 }
 
+
 .app {
     position: fixed;
     top: 14%;
@@ -81,7 +82,6 @@ body {
     overflow-x: hidden;
     height: 15vh; 
     z-index:-1;
-
 }
 
 
@@ -101,50 +101,54 @@ body {
     backface-visibility: hidden;
 }
 
-/*
-.bgIndex {
-    background: linear-gradient(-45deg, #e26961,#e26961,#ffffff,#ffffff);
-    background-size: 400% 400%;
-    animation: gradient 15s ease-out infinite;
-    height: 100vw;
-    width: 100vw;
-    z-index: -11;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-      .skewedBoxIndex{
-    background: var(--main-bg-gray);
-    clip-path: polygon(0% 10%, 50% 180%, 100% 10%, 100% 100%, 0% 100%);
-    padding: 0%;
-    top:0%;
-    height: 100vh;
-    width: 100vw;
+/* Search Result Containers */
+.resultsLeft {
     position: fixed;
-    z-index: 0;
-  }
-.skewedBoxIndex2 {
-    background: var(--main-bg-gray);
-    clip-path: polygon(5% 0%, 95% 0%, 50% 160%);
-    padding: 0%;
-    top: 0%;
-    height: 50vw;
-    width: 100vw;
-    position: fixed;
-    z-index: 0;
+    top: 14%;
+    left: 10%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: visible;
+    width: 33%;
+    height: 86%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 20px;
+    display: grid;
+    grid-row-gap: 40px;
 }
-*/
+.resultsLeft > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(5, 40%);
+    overflow-x: scroll;
+    height: 15vh;
+}
+
+.resultsRight {
+    position: fixed;
+    top: 14%;
+    right: 12%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 33%;
+    height: 86%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 20px;
+    display: grid;
+    grid-row-gap: 40px;
+    z-index: -1;
+}
+.resultsRight > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(5, 40%);
+    overflow-x: hidden;
+    height: 15vh; 
+    z-index:-1;
+}
 
 /* CONTAINER SCROLL BARS*/
 #scrollBlackThin::-webkit-scrollbar-track {
@@ -271,4 +275,114 @@ body {
     left: 0%;
     margin: auto;
     transition: all ease 1s;
+}
+
+
+
+/*Search Result Column names*/
+.infoLeft {
+    position: fixed;
+    top: 8%;
+    left: 12%;
+    width: 31%;
+    height: 5%;
+    text-align: center;
+    justify-content: last baseline;
+    padding: 0px;
+    border-radius: 2px;
+    overflow: hidden;
+    color: var(--main-bg-dark-gray);
+    background-color: hsl(0, 0%, 96%);
+    box-shadow: 0 0px 6px 3px rgb(0,0,0);
+    z-index: 10;
+}
+.hidden-infoLeft {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: -150%;
+    top: 0;
+    padding-top: 10px;
+    border: 2px solid white;
+    color: #fff;
+    background-color: var(--main-bg-dark-gray);
+    transition: all ease 1s;
+}
+.infoLeft:hover .hidden-infoLeft {
+    left: 0%;
+    margin: auto;
+    transition: all ease 1s;
+}
+
+
+.infoRight {
+    position: fixed;
+    top: 8%;
+    right: 12%;
+    width: 31%;
+    height: 5%;
+    text-align: center;
+    justify-content: last baseline;
+    padding: 0px;
+    border-radius: 2px;
+    overflow: hidden;
+    color: var(--main-bg-dark-gray);
+    background-color: hsl(0, 0%, 96%);
+    box-shadow: 0 0px 6px 3px rgb(0,0,0);
+    z-index: 10;
+}
+.hidden-infoRight {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: -150%;
+    top: 0;
+    padding-top: 10px;
+    border: 2px solid white;
+    color: #fff;
+    background-color: var(--main-bg-dark-gray);
+    transition: all ease 1s;
+}
+.infoRight:hover .hidden-infoRight {
+    left: 0%;
+    margin: auto;
+    transition: all ease 1s;
+}
+
+/* Search Results Label*/
+.resultsLabel{
+    position:fixed;
+    width: 10vw;
+    left: 45vw;
+    top: 20vh;
+    text-align:center;
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1em;
+}
+.resultsTerm {
+    position: fixed;
+    width: 20vw;
+    left: 38vw;
+    top: 52vh;
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    transform: rotate(90deg);
+    background-color: aliceblue;
+    color: black;
+}
+.resultsTerm2 {
+    position: fixed;
+    width: 20vw;
+    left: 42vw;
+    top: 52vh;
+    text-align: center;
+    padding: 20px;
+    text-transform: uppercase;
+    transform: rotate(-90deg);
+    background-color: aliceblue;
+    color: black;
 }

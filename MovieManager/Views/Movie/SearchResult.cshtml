@@ -1,41 +1,88 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
-    var movieListWatched = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("Superman");
+	ViewData["Title"] = "Search Results";
 
+	//var movieListWatched = MovieManager.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
+	//d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1 - id
+	var watched = MovieManager.Services.GetFromDB
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+
+	var allMovies = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
 }
+
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
-	<link href="~/css/styleDiscover.css" rel="stylesheet">
+	<link href="~/css/styleMovies.css" rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" rel="stylesheet">
 
 	<script src="~/js/home.js"></script>
-	<script src="~/js/discoverGrid.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 }
 
-<div class="container mb-3 mt-3"">
-	<div class="btn-holder">
-		<button class="btn btn-2 hover-slide-down">
-			<span>Grid</span>
-		  </button>
-		  <button class="btn btn-2 hover-slide-up">
-			<span>List</span>
-		</button>
-	</div>
-</div>
 
-<div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
-	<div class="row">
-	  <div class="col-12 col-md-6 col-lg-4">
-		<div class="card">
-		  <img class="card-img-top" src="https://picsum.photos/362/180" alt="Card image cap">
-		  <div class="card-body">
-			<h3 class="card-title">Card title</h3>
-			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-		  </div>
+<div class="bgIndex"></div>  
+
+<h1 class="resultsLabel"> Results for:</h1>
+<h1 class="resultsTerm"> @@SearchTerm </h1>
+<h1 class="resultsTerm2"> @@SearchTerm</h1>
+
+<!--=====LOAD MOVIE COLUMNS=====-->
+<main class="resultsLeft" id="scrollBlackThin">
+	<h1 class="infoLeft"> 
+		<img src="~/img/watched icon2 dark.png" width="60" height="40">Movies
+		<div class="hidden-infoLeft">Results</div>
+	</h1>
+	@foreach (var movie in watched)
+	{
+	<div class="movieContainer">
+		<div class="flex-container">
+		<div class="flex-items">	
+			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 		</div>
-	  </div>
+		<div class="flex-items">
+			<h2 class="movieTitle"> @movie.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+			<p class="movieDesc"> @movie.Overview </p>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+			</div>
+		</div>
+		</div>
 	</div>
-</div>
+	}
+	<div class="movieContainer">			
+	  <img class="addMovie1" src="~/img/movieAdd.png" onclick="">
+	</div>
+</main>
+
+
+<main class="resultsRight" id="scrollBlackThin">
+	<h1 class="infoRight"> 
+		<img src="~/img/watchlist1 dark.png" width="40" height="40">Shows
+		<div class="hidden-infoRight">Results</div>
+	</h1>	
+	@foreach (var movie in allMovies)
+	{
+	<div class="movieContainer">
+		<div class="flex-container">
+		<div class="flex-items">	
+			<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+		</div>
+		<div class="flex-items">
+			<h2 class="movieTitle"> @movie.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+			<p class="movieDesc"> @movie.Overview </p>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+			</div>
+		</div>
+		</div>
+	</div>
+	}
+	<div class="movieContainer">
+		<img class="addMovie" src="~/img/movieAdd.png">
+	</div>
+</main>
