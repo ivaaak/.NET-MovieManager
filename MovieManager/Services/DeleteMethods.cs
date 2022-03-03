@@ -1,4 +1,4 @@
-﻿using MovieManager.Services.Contracts;
+﻿using MovieManager.Services.ServicesContracts;
 using MovieManager.Data.DBConfig;
 using MovieManager.Data.DataModels;
 

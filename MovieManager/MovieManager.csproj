@@ -55,6 +55,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Services\ApiServices\" />
+    <Folder Include="Services\MovieServices\" />
+    <Folder Include="Services\DbServices\" />
   </ItemGroup>
 
 </Project>
