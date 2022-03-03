@@ -1,5 +1,4 @@
 ﻿using MovieManager.Data.DataModels;
-using MovieManager.Models.DataModels;
 
 namespace MovieManager.Models
 {

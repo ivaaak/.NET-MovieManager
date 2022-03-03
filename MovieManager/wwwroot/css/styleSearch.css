@@ -24,100 +24,56 @@ h1{
 }
 
 .discoverTitle1{
+  position: fixed;
   font-family: 'Rajdhani', sans-serif;
   font-weight: bold; 
-  padding-left: 20px;
-  width: 80vw;
-  height: 5vw;
+  font-size: 60px;
+  top: 20%;
+  left: 10%;
+  padding-top: 50px;
+  padding-left: 20px !important;
+  width:40vw;
+  height: 7vh;
+  text-align: left;
   color: #ffffff;
-  background-color: rgb(255, 102, 0);
-  clip-path: polygon(0% 0%, 50% 0%, 25% 100%, 0% 100%);
+  background-color: var(--dark-peach);
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%, 0% 100%);
   z-index: 100;
+  align-content: center;
+
 }
 .discoverTitle2{
   position: fixed;
   font-family: 'Rajdhani', sans-serif;
   font-weight: bold; 
-  top: 60%;
+  font-size: 60px;
+  top: 50%;
   right: 10%;
-  padding-top: 25px;
-  padding-right:40px;
-  padding-bottom: 0px;
-  width:80vw;
-  height: 5vw;
+  padding-top: 50px;
+  padding-right: 20px !important;
+  width:40vw;
+  height: 7vh;
   text-align: right;
   color: #ffffff;
-  background-color: rgb(255, 102, 0);
-  clip-path: polygon(100% 100%, 100% 0%, 75% 0%, 50% 100%);
+  background-color: var(--dark-peach);
+  clip-path: polygon(100% 100%, 100% 0%, 50% 0%, 0% 100%);
   z-index: 100;
-
-}
-.discoverDesc{
-  color:rgb(82, 194, 231);
-  font-family: roboto, serif;
-  font-weight: 900;  
-  padding-left: 50px;
-  width: 900px;
-  text-align: left;
-}
-
-.bgContainer1{
-  background-color: #090d13;
-  width: 80vw;
-  height: 15vw;
-  margin-left: 200px;
-  padding-top: 100px;
-  margin-top: 120px;
-  background-position: center;
-  z-index: 100;
-
 }
 
 .skewedBoxDiscover{
+  position:fixed;
+  top: 20%;
+  left: -5%;
   background: transparent;
-  padding: 80px 52%;
+  padding: 20px 55%;
   height: 40vw;
   width: 0vw;
-  position:absolute;
-  transform: skew(0deg, -20deg) translateY(150px) translateX(-20px);
+  transform: skew(0deg, -20deg);
   z-index: 10;
 }
 
 
 /*SEARCH BAR WITH EXPAND ANIMATION*/
-.SearchShow {
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: fixed;
-  left:20px;
-  top:40px;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 10;
-}
-.SearchShow input {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  font-size: 18px;
-  height: 50px;
-  width: 40%;
-  background: transparent;
-  color: rgba(255, 255, 255, 1);
-  border: 0;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  outline: none;
-  border-radius: 37px;
-  padding: 0 10px;
-  pointer-events: all;
-  transition: border 0.25s ease, width 0.125s ease 0.125s;
-}
-.SearchShow input:focus {
-  border: 3px solid rgb(255, 102, 0);
-  width: 60%;
-}
-
 .SearchMovie {
   align-items: center;
   width: 100%;
@@ -147,7 +103,7 @@ h1{
   transition: border 0.25s ease, width 0.125s ease 0.125s;
 }
 .SearchMovie input:focus {
-  border: 3px solid rgb(255, 102, 0);
+  border: 3px solid var(--dark-peach);
   width: 60%;
 }
 
