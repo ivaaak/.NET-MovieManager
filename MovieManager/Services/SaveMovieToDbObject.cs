@@ -17,6 +17,7 @@ namespace MovieManager.Services
                 PosterUrl = BuildImageURL(result.PosterPath),
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.ReleaseDate,
+                MediaType = "movie",
             };
             return m;
         }
@@ -34,6 +35,7 @@ namespace MovieManager.Services
                 PosterUrl = BuildImageURL(result.PosterPath),
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.FirstAirDate,
+                MediaType = "show",
             };
             return m;
         }

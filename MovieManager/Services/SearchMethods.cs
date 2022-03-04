@@ -105,7 +105,9 @@ namespace MovieManager.Services
 
 
         public static Data.DataModels.Movie SearchApiWithID(int id)
-        //search and add to DB
+            //should also take a string MediaType to differentiate between show and movie
+            //search based on Id and Media type
+            //(id 500 can be a show or movie)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
             TMDbLib.Objects.TvShows.TvShow show = null;
@@ -125,7 +127,7 @@ namespace MovieManager.Services
                     ReleaseDate = movie.ReleaseDate,
                     Popularity = (decimal)movie.Popularity,
                     Rating = (decimal)movie.VoteAverage,
-                    //Genre = movie.Genres.ToString().Split(''),
+                    //Genre = movie.Genres.ToString(),
                     //LanguageId = movie.OriginalLanguage, 
 
                 };

@@ -20,6 +20,11 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine("Hit controller: Movie , hit view: Main");
             //add logic for getting movie for each column for each user
+            //this requires Authentication to be fully working, 
+
+            //var watchedMovies = GetUserMovieList(this.User.Id, "watched")
+            //var currentMovies = GetUserMovieList(this.User.Id, "current")
+            //var futureMovies = GetUserMovieList(this.User.Id, "future")
 
             return View();
         }
@@ -98,7 +103,7 @@ namespace MovieManager.Controllers
 
 
 
-        //TODO
+        //TODO, hardcoded basics work
         public IActionResult Discover() => View();
 
         public IActionResult Releases() => View();

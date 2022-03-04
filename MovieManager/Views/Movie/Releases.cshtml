@@ -39,7 +39,9 @@
 			<div class="movieContainer">
 				<div class="flex-container">
 					<div class="flex-items">	
-						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+						<a href="/Movie/MovieCard/@movie.MovieId">
+							<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
+						</a>
 					</div>
 					<div class="flex-items">
 						<h2 class="movieTitle"> @movie.Title </h2>

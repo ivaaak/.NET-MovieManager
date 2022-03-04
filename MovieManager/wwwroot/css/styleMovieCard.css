@@ -8,7 +8,7 @@ body, html {
 
 .MovieCard{
   position: fixed;
-  top:25%;
+  top:20%;
   left: 25%;
   width: 50vw;
   background-color: var(--main-bg-dark-gray);
@@ -45,17 +45,19 @@ body, html {
 
 
 .moviePoster{
-  width: 18vw !important;
+  width: 20vw !important;
   margin-left: 15%;
   margin-right: 15%;
+  height: 100% !important;
 }
 
 
 /*MOVE TO STYLE MOVIES*/
 .movieTitle{
   font-size: 40px;
-  padding-top: 40px;
-  color:var(--main-bg-orange)
+  padding-top: 10px;
+  color:var(--main-bg-orange);
+  margin: 16px;
 }
 .movieDesc {
     position: relative;
@@ -66,22 +68,27 @@ body, html {
     color: #dcdcff;
     font-weight: lighter;
     width: 60%;
+    height: 48% !important;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .movieRating{
   font-size: 22px;
   text-align: center;
+  margin: 0;
+  padding: 0;
 }
 .IMDBStar{
   width:16px;
   height:20px;
-  padding-bottom: 4px;
 }
 
 .buttonsList{
   text-align: center;
+  margin-top: 10px;
 }
-
 .TrailerButton {
   appearance: none;
   background-color: rgb(30, 70, 109);

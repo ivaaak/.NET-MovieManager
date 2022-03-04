@@ -9,7 +9,6 @@
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
 	<link href="~/css/styleCarousel.css" rel="stylesheet">
-	<link href="~/css/styleMovieContainer.css" rel="stylesheet">
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="./style.css">
@@ -33,16 +32,15 @@
 		<label for="@counter">
 			<div class="movieContainer">
 				<div class="flex-container">
-				<div class="flex-items">	
-					<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+				<div class="flex-items">
+					<img class="moviePosterDiscover" alt="Image" src="@movie.PosterUrl"> 	
 				</div>
 				<div class="flex-items">
-					<h2 class="movieTitle"> @movie.Title </h2>
-					<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-					<p class="movieDesc"> @movie.Overview </p>
-					<div class="buttonsList">
-						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-						<input class="TrailerButton" id="TrailerButton" type="button" value="Write a Review" onclick=""><br/>
+					<h2 class="movieTitleDiscover"> @movie.Title </h2>
+					<p class="movieRatingDiscover"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+					<p class="movieDescDiscover"> @movie.Overview </p>
+					<div class="buttonsListDiscover">
+						<a class="TrailerButtonDiscover" href="/Movie/MovieCard/@movie.MovieId"> Movie Details: </a>
 					</div>
 				</div>
 				</div>

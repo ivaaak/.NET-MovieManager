@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var movieListWatched = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("Superman");
+    var movieList = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("Superman");
 
 }
 @section styles{
@@ -27,15 +27,19 @@
 </div>
 
 <div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
-	<div class="row">
-	  <div class="col-12 col-md-6 col-lg-4">
-		<div class="card">
-		  <img class="card-img-top" src="https://picsum.photos/362/180" alt="Card image cap">
-		  <div class="card-body">
-			<h3 class="card-title">Card title</h3>
-			<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+	@foreach(var movie in movieList){
+		<div class="row">
+		  <div class="col-12 col-md-6 col-lg-4">
+			<div class="card">
+				<a href="/Movie/MovieCard/@movie.MovieId">
+					<img class="card-img-top" src="@movie.PosterUrl" alt="Card image cap">
+				</a>
+			  <div class="card-body">
+				<h3 class="card-title">@movie.Title</h3>
+				<p class="card-text">@movie.Overview</p>
+			  </div>
+			</div>
 		  </div>
 		</div>
-	  </div>
-	</div>
+	}
 </div>

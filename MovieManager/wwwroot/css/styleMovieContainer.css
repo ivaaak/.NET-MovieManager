@@ -2,11 +2,6 @@
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
 
 
-body, html {
-}
-
-
-
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -15,7 +10,6 @@ body, html {
     align-items: normal;
     align-content: normal;
 }
-
 .flex-items:nth-child(1) {
     display: block;
     flex-grow: 0;
@@ -24,7 +18,6 @@ body, html {
     align-self: auto;
     order: 0;
 }
-
 .flex-items:nth-child(2) {
     display: block;
     flex-grow: 0;
