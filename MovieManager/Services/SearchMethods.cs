@@ -4,6 +4,7 @@ using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
+using TMDbLib.Objects.People;
 
 namespace MovieManager.Services
 {
@@ -103,7 +104,7 @@ namespace MovieManager.Services
 
 
 
-
+        //CALLED IN MovieCard(int id) in MovieController
         public static Data.DataModels.Movie SearchApiWithID(int id)
             //should also take a string MediaType to differentiate between show and movie
             //search based on Id and Media type
@@ -161,6 +162,22 @@ namespace MovieManager.Services
 
 
 
+        public static Person GetActorWithID(int id)
+        //should also take a string MediaType to differentiate between show and movie
+        //search based on Id and Media type
+        //(id 500 can be a show or movie)
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+            var actor = client.GetPersonAsync(id).Result;
+            if(actor != null)
+            {
+                return actor;
+            }
+            else
+            {
+                throw new InvalidOperationException($"Cant find actor with Id {id}");
+            }
+        }
 
         //TODO
         public static async Task SearchMovieCast(string KEY, string Movie_Id)

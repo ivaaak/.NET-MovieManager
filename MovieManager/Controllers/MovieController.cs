@@ -2,6 +2,7 @@
 using MovieManager.Models;
 using MovieManager.Services;
 using System.Diagnostics;
+using System.Text;
 
 namespace MovieManager.Controllers
 {
@@ -103,12 +104,38 @@ namespace MovieManager.Controllers
 
 
 
+        [Route("Movie/ActorCard/{id}")]
+        public IActionResult ActorCard(int id)
+        {
+            var actor = SearchMethods.GetActorWithID(id);
+            StringBuilder sb = new StringBuilder();
+            //foreach (var item in actor.MovieCredits.Cast)
+            //{
+            //    sb.Append(item.Title);
+            //}
+
+            var model = new ActorViewModel()
+            {
+                ActorId = actor.Id,
+                FullName = actor.Name,
+                Description = actor.Biography,
+                CountryCode = actor.PlaceOfBirth,
+                Images = SaveMovieToDbObject.BuildImageURL(actor.ProfilePath),
+            //    MovieCredits = sb.ToString(),
+            };
+
+            return View(model);
+        }
+
         //TODO, hardcoded basics work
         public IActionResult Discover() => View();
 
         public IActionResult Releases() => View();
 
         public IActionResult Review() => View();
+
+
+       
 
 
 

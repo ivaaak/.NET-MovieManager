@@ -28,7 +28,7 @@ body {
     font-family: "Anton", sans-serif !important;
     padding-top: 0px;
     top: 12%;
-    left: 23%;
+    left: 27% !important;
     height: 30vw !important;
     width: 100vw;
     color: #fff;
@@ -98,7 +98,7 @@ section {
   top: 85% !important;
   background:var(--dark-peach);
   position:absolute;
-  box-shadow:0 0 5px 0px #333;
+  box-shadow:0 0 25px 20px #000;
 }
 
 .desc1 {
