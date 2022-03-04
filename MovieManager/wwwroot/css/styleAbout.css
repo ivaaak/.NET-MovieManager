@@ -1,7 +1,7 @@
 @import url(https://allfont.net/allfont.css?fonts=roboto-bold);
 
 body{
-  background-color: var(--dark-peach) !important;
+  background-color: #489AFF !important;
   font-family: Roboto;
   width: 0px !important;
   margin: 0px !important;
@@ -72,7 +72,7 @@ h1{
 
 .headAbout{
   position: fixed;
-  top:12%;
+  top:16%;
   right:-1%;
   z-index: 160;
 }
@@ -82,7 +82,7 @@ h1{
   font-weight: 900;  
   font-size: 4.2em;
   width: 55vw;
-  background: linear-gradient(150deg, #ffffff 0%, var(--dark-peach) 100%);
+  background: linear-gradient(150deg, #ffffff 0%, #489AFF 100%);
   -webkit-background-clip: text;
   background-clip: text;
   text-align: center;
