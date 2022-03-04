@@ -24,7 +24,7 @@ namespace MovieManager.Data.DataModels
         public decimal? Popularity { get; set; }
 
 
-        public int? LanguageId { get; set; }
+        public int? LanguageId { get; set; } //change to string?
         public int? PlatformId { get; set; }
 
         public string? Actors { get; set; }

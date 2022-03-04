@@ -14,6 +14,7 @@ namespace MovieManager.Controllers
             _logger = logger;
         }
 
+
         //[Authorize]
         public IActionResult Main()
         {
@@ -22,6 +23,7 @@ namespace MovieManager.Controllers
 
             return View();
         }
+
 
         //[Authorize]
         public IActionResult MovieList()
@@ -34,18 +36,26 @@ namespace MovieManager.Controllers
         }
 
 
-        public IActionResult MovieCard(int id)
-        {
-            Console.WriteLine("Hit controller: Movie , hit view: MovieCard");
-            //takes a movie ID and returns a MovieViewModel
-            var movieObj = GetFromDB.GetMovieFromDBbyID(id);
 
-            return View();
+        [Route("Movie/MovieCard/{id}")]
+        public IActionResult MovieCard(int id) //takes moviecard viewmodel
+        {
+            Console.WriteLine($"Hit controller: Movie , hit view: MovieCard, ID = {id}");
+
+            var movieIdResult = SearchMethods.SearchApiWithID(id);
+            //takes a movie ID and returns a Movie Db Model
+
+            var model = new MovieCardViewModel()
+            {
+                Movie = movieIdResult,
+            };
+
+            return View(model);
         }
 
 
 
-
+        //Initial Search Get Page
         public IActionResult Search()
         {
             Console.WriteLine("Hit controller: Movie , hit view: Search WITHOUT PARAM");
@@ -53,7 +63,7 @@ namespace MovieManager.Controllers
             return View();
         }
 
-
+        //Search Post Request on Search Bar Submit
         [HttpPost]
         public IActionResult Search(SearchResultViewModel model)
         {
@@ -76,7 +86,7 @@ namespace MovieManager.Controllers
             return View("SearchResult", results);
         }
 
-
+        //Search Results Page - gets the View with The SearchResultViewModel (Show and Movie Results Lists)
         public IActionResult SearchResult(SearchResultViewModel results)
         {
             Console.WriteLine("Hit controller: Movie , hit view: SearchResult");
@@ -86,6 +96,9 @@ namespace MovieManager.Controllers
             return View();
         }
 
+
+
+        //TODO
         public IActionResult Discover() => View();
 
         public IActionResult Releases() => View();
@@ -94,7 +107,7 @@ namespace MovieManager.Controllers
 
 
 
-
+        //This is default from ASP.NET, not sure if its needed
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

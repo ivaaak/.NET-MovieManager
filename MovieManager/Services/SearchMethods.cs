@@ -72,7 +72,7 @@ namespace MovieManager.Services
         }
 
 
-        public static void SearchMovieTitle(string SEARCH_NAME)
+        public static void SearchMovieTitleAndSaveToDb(string SEARCH_NAME)
         //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
@@ -87,7 +87,7 @@ namespace MovieManager.Services
         }
 
 
-        public static void SearchShowTitle(string SEARCH_NAME)
+        public static void SearchShowTitleAndSaveToDb(string SEARCH_NAME)
         //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
@@ -100,6 +100,64 @@ namespace MovieManager.Services
 
             client.Dispose();
         }
+
+
+
+
+        public static Data.DataModels.Movie SearchApiWithID(int id)
+        //search and add to DB
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+            TMDbLib.Objects.TvShows.TvShow show = null;
+            TMDbLib.Objects.Movies.Movie movie = client.GetMovieAsync(id, MovieMethods.Videos).Result;
+
+            if(movie != null) //movie exists
+            {
+                if (movie.Title == null || movie.PosterPath == null || movie.Overview == null) { return null; }
+                Console.WriteLine($"Found: {movie.Title}");
+
+                var movieDbObj = new Data.DataModels.Movie //movie obj from DB
+                {
+                    MovieId = movie.Id,
+                    Title = movie.Title,
+                    PosterUrl = SaveMovieToDbObject.BuildImageURL(movie.PosterPath),
+                    Overview = movie.Overview,
+                    ReleaseDate = movie.ReleaseDate,
+                    Popularity = (decimal)movie.Popularity,
+                    Rating = (decimal)movie.VoteAverage,
+                    //Genre = movie.Genres.ToString().Split(''),
+                    //LanguageId = movie.OriginalLanguage, 
+
+                };
+                return movieDbObj;
+            }
+            else 
+            {
+                show = client.GetTvShowAsync(id, TMDbLib.Objects.TvShows.TvShowMethods.Videos).Result;
+
+                if (show == null) // both movie and show are null
+                {
+                    throw new InvalidOperationException($"Cant find a movie or show with ID = {id}");
+                }
+
+                var movieDbObj = new Data.DataModels.Movie //movie obj from DB
+                {
+                    MovieId = show.Id,
+                    Title = show.Name,
+                    PosterUrl = SaveMovieToDbObject.BuildImageURL(show.PosterPath),
+                    Overview = show.Overview,
+                    ReleaseDate = show.FirstAirDate,
+                    Popularity = (decimal)show.Popularity,
+                    Rating = (decimal)show.VoteAverage,
+                };
+                return movieDbObj;
+            }
+        }
+
+
+
+
+
 
 
         //TODO

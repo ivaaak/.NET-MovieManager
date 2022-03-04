@@ -1,13 +1,20 @@
-﻿@using MovieManager.Services
+﻿@model MovieCardViewModel
+
+@using MovieManager.Services
 @using MovieManager.Models.DataModels
 @{
-	ViewData["Title"] = "A Page";
-	//Add MovieViewModel
-	//fix Route: Movies/MovieCard&id=78
+	ViewData["Title"] = "MovieCard";
+
 	//ADD ACTOR, RELEASE DATE, TRAILER, TMDB LINK
 	// maybe? REVIEWS
-	var movieObj = GetFromDB.GetMovieFromDBbyID(78);
 
+	var movie = Model.Movie;
+	Console.WriteLine($"Movie model: Id = {movie.MovieId}");
+	Console.WriteLine($"Movie model: Title = {movie.Title}");
+	Console.WriteLine($"Movie model: overview = {movie.Overview}");
+	Console.WriteLine($"Movie model: Poster url = {movie.PosterUrl}");
+
+	//var movieObjDB = GetFromDB.GetMovieFromDBbyID(78);
 }
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
@@ -19,13 +26,13 @@
 <div class="MovieCard" >
 	<div class="flex-container">
 	   <div class="flex-items">	
-		   <img class="moviePoster" alt="Image" src="@movieObj.PosterUrl"> 	
+		   <img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 		</div>
 	   <div class="flex-items">
-		<h2 class="movieTitle">	@movieObj.Title </h2>
+		<h2 class="movieTitle">	@movie.Title </h2>
 		<!--RATING-->
-		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.Rating/10 - Rating</p>
-		<p class="movieDesc"> @movieObj.Overview </p>
+		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+		<p class="movieDesc"> @movie.Overview </p>
 		<div class="buttonsList">
 			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
 			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>

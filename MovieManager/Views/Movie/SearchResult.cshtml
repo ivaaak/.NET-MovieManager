@@ -2,12 +2,6 @@
 
 @{
 	ViewData["Title"] = "Search Results";
-
-	//var watched = MovieManager.Services.GetFromDB.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
-	//var allMovies = MovieManager.Services.GetFromDB.GetListFromDBbyTitle("");
-
-	var movieResults = Model.ResultMovieList;
-	var showResults = Model.ResultShowList;
 }
 
 @section styles{
@@ -26,13 +20,14 @@
 <h1 class="resultsTerm"> @Model.SearchTerm </h1>
 <h1 class="resultsTerm2"> @Model.SearchTerm </h1>
 
+
 <!--=====LOAD MOVIE COLUMNS=====-->
 <main class="resultsLeft" id="scrollBlackThin">
 	<h1 class="infoLeft"> 
 		<img src="~/img/watched icon2 dark.png" width="60" height="40">Movies
 		<div class="hidden-infoLeft">Results</div>
 	</h1>
-	@foreach (var movie in movieResults)
+	@foreach (var movie in Model.ResultMovieList)
 	{
 		if (movie != null)
 		{
@@ -63,7 +58,7 @@
 		<img src="~/img/watchlist1 dark.png" width="40" height="40">Shows
 		<div class="hidden-infoRight">Results</div>
 	</h1>	
-	@foreach (var movie in showResults)
+	@foreach (var movie in Model.ResultShowList)
 	{ 
 		if (movie != null)
 		{
