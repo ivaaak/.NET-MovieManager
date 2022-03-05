@@ -107,22 +107,17 @@ namespace MovieManager.Controllers
         [Route("Movie/ActorCard/{id}")]
         public IActionResult ActorCard(int id)
         {
-            var actor = SearchMethods.GetActorWithID(id);
-            StringBuilder sb = new StringBuilder();
-            //foreach (var item in actor.MovieCredits.Cast)
-            //{
-            //    sb.Append(item.Title);
-            //}
+            var model = SearchMethods.GetActorWithID(id);
+            //.People.Person.MovieCredits
+            //Try People.MovieCredits
 
-            var model = new ActorViewModel()
+            
+
+            foreach (var item in model.MovieCredits.Cast)
             {
-                ActorId = actor.Id,
-                FullName = actor.Name,
-                Description = actor.Biography,
-                CountryCode = actor.PlaceOfBirth,
-                Images = SaveMovieToDbObject.BuildImageURL(actor.ProfilePath),
-            //    MovieCredits = sb.ToString(),
-            };
+                Console.WriteLine($" Title: {item.Title}");
+                Console.WriteLine($" Title: {item.Character}");
+            }
 
             return View(model);
         }

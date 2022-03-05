@@ -1,19 +1,13 @@
+using TMDbLib.Objects.People;
+
 namespace MovieManager.Models
 {
     public class ActorViewModel
     {
-        public int ActorId { get; init; }
+        public Person Person { get; set; }
 
-        public string FullName { get; set; }
+        public MovieCredits MovieCredits { get; set; }
 
-        public string Description { get; set; }
-
-        public string? CountryCode { get; set; }
-
-        public string Images { get; set; }
-
-        public string MovieCredits { get; set; }
-
-        //List<Movie> Movies { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

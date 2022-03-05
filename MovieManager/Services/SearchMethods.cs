@@ -5,6 +5,7 @@ using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.People;
+using MovieManager.Models;
 
 namespace MovieManager.Services
 {
@@ -162,19 +163,28 @@ namespace MovieManager.Services
 
 
 
-        public static Person GetActorWithID(int id)
+        public static ActorViewModel GetActorWithID(int id)
         //should also take a string MediaType to differentiate between show and movie
         //search based on Id and Media type
         //(id 500 can be a show or movie)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
             var actor = client.GetPersonAsync(id).Result;
-            if(actor != null)
+            var credits = client.GetPersonMovieCreditsAsync(id).Result;
+            if(actor != null && credits != null)
             {
-                return actor;
+                var model = new ActorViewModel()
+                {
+                    Person = actor,
+                    MovieCredits = credits,
+                    PhotoUrl = SaveMovieToDbObject.BuildImageURL(actor.ProfilePath),
+                };
+
+                return model;
             }
             else
             {
+                Console.WriteLine("Actor or creits is null");
                 throw new InvalidOperationException($"Cant find actor with Id {id}");
             }
         }
