@@ -8,32 +8,46 @@
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
 	<link href="~/css/styleMovieCard.css" rel="stylesheet">
+	<link href="~/css/styleActor.css" rel="stylesheet">
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
 
-<div class="MovieCard" >
+<div class="ActorCard" >
 	<div class="flex-container">
 	   <div class="flex-items">	
 		    <a href="https://www.themoviedb.org/person/@Model.Person.Id">
-				<img class="moviePoster" style="height:600px !important" alt="Image" src="@Model.PhotoUrl"> 
+				<img class="actorPoster" style="height:600px !important" alt="Image" src="@Model.PhotoUrl"> 
 			</a>
 		</div>
 	   <div class="flex-items">
-		<h2 class="movieTitle">	@Model.Person.Name </h2>
-
-		<!--<p class="movieRating">  ATmovie.ReleaseDate </p>-->
-		<p class="movieDesc"> @Model.Person.Biography  </p>
-		<h3 style="color:yellow; position: fixed; top: 20%; right: 0%; width: 20vw"> 
-				Born: <br/>
-				@Model.Person.PlaceOfBirth
-
-				<br/> Roles: <br/>
-				@foreach(var item in @Model.MovieCredits.Cast){
-					@item.Title @:- played @item.Character
-					<br/>
-				}
-		</h3>
+			<h2 class="movieTitle">	@Model.Person.Name </h2> <br/>
+			<p class="actorBio"> @Model.Person.Biography  </p><br/>
+			<p class="actorBirthplace">Born:  @Model.Person.PlaceOfBirth </p>
 		</div>
 	</div>
 </div>
+
+
+<!--Movie Credits Column-->
+<main class="resultsLeft" id="scrollBlackThin">
+	<h1 class="info"> 
+		<img src="~/img/watched icon2 dark.png" width="60" height="40">Roles
+		<div class="hidden-info">Results</div>
+	</h1>
+	@foreach (var movie in Model.MovieCredits.Cast)
+	{
+		string posterUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;
+		<div class="movieContainer">
+			<div class="flex-container">
+				<div class="flex-items">	
+					<a href="/Movie/MovieCard/@movie.Id">
+						<img class="moviePoster" alt="Image" src="@posterUrl">
+					</a>
+				</div>
+					<p class="roleTitle"> @movie.Title <br/><br/>Character: @movie.Character </p>
+			</div>
+		</div>
+		}
+	}
+</main>

@@ -1,0 +1,172 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+}
+.flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    margin-left: 2%;
+    order: 0;
+}
+
+
+/* Actor CARD STYLE */
+.ActorCard {
+    position: fixed;
+    top: 20%;
+    right: 10%;
+    width: 50vw;
+    background-color: var(--main-bg-dark-gray);
+}
+.actorPoster {
+    width: 400px;
+    margin-left: 0% !important;
+    height: 100% ;
+    overflow: hidden;
+}
+.actorBio {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    margin: 20px !important;
+    color: #dcdcff;
+    font-weight: lighter;
+    width: 90%;
+    height: 356px;
+    overflow: hidden;
+}
+.actorBirthplace {
+    font-size: 22px;
+    text-align: center;
+    padding-top: 2px;
+}
+
+
+
+
+/* Search Result Containers */
+.resultsLeft {
+    position: fixed;
+    top: 18%;
+    left: 6%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 22%;
+    height: 84%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 20px;
+    display: grid;
+    grid-row-gap: 40px;
+}
+.resultsLeft > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(5, 40%);
+    overflow-x: scroll;
+    height: 15vh;
+}
+
+.movieContainer {
+    background: var(--main-bg-dark-gray);
+    height: 39vh;
+    width: 21vw;
+    box-shadow: 0.1rem 0.1rem 0.5rem rgb(0 0 0 / 0.6), 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.8), 0.4rem 0.4rem 4rem rgb(0 0 0 / 1);
+    transition: transform .4s;
+    -webkit-font-smoothing: antialiased;
+}
+.movieContainer:hover {
+    transform: perspective(1px) scale(1.15) translateZ(0);
+    overflow: visible;
+    transition-delay: 0.5s;
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+}
+.moviePoster {
+    width: 256px !important;
+    margin-left: 0% !important;
+    height: 94% !important;
+    overflow: hidden;
+}
+
+.roleTitle {
+    position:center;
+    font-size: 24px;
+    height: 240px !important;
+    width: 160px !important;
+    padding-left: 6px !important;
+    padding-top: 20%;
+    text-transform: uppercase;
+    color: white;
+    text-align: center !important;
+    overflow: hidden;
+}
+
+/* COLUMN TITLE ANIMATIONS */
+.info {
+    position: fixed;
+    top: 8%;
+    left: 12%;
+    width: 15%;
+    height: 6%;
+    text-align: center;
+    justify-content: last baseline;
+    padding: 0px;
+    border-radius: 2px;
+    overflow: hidden;
+    color: var(--main-bg-dark-gray);
+    background-color: hsl(0, 0%, 96%);
+    box-shadow: 0 0px 6px 3px rgb(0,0,0);
+    z-index: 10;
+}
+.hidden-info {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: -150%;
+    top: 0;
+    padding-top: 10px;
+    border: 2px solid white;
+    color: #fff;
+    background-color: var(--main-bg-dark-gray);
+    transition: all ease 1s;
+}
+.info:hover .hidden-info {
+    left: 0%;
+    margin: auto;
+    transition: all ease 1s;
+}
+
+/* CONTAINER SCROLL BARS*/
+#scrollBlackThin::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: var(--main-bg-dark-gray);
+}
+
+#scrollBlackThin::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--main-bg-dark-gray);
+}
+
+#scrollBlackThin::-webkit-scrollbar-thumb {
+    background-color: white;
+    z-index: 10;
+}

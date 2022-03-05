@@ -12,7 +12,6 @@ body, html {
   left: 25%;
   width: 50vw;
   background-color: var(--main-bg-dark-gray);
-
 }
 
 .flex-container {
@@ -23,7 +22,6 @@ body, html {
     align-items: normal;
     align-content: normal;
 }
-
 .flex-items:nth-child(1) {
     display: block;
     flex-grow: 0;
@@ -32,7 +30,6 @@ body, html {
     align-self: auto;
     order: 0;
 }
-
 .flex-items:nth-child(2) {
     display: block;
     flex-grow: 0;
@@ -73,7 +70,6 @@ body, html {
     margin: 0;
     padding: 0;
 }
-
 .movieRating{
   font-size: 22px;
   text-align: center;
@@ -84,6 +80,7 @@ body, html {
   width:16px;
   height:20px;
 }
+
 
 .buttonsList{
   text-align: center;
@@ -103,7 +100,6 @@ body, html {
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   width: 80%;
 }
-
 .TrailerButton:hover {
   color: #fff;
   background-color: rgb(3, 60, 114);
