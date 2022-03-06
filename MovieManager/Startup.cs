@@ -17,32 +17,37 @@ namespace MovieManager
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //Db Context
             services
                 .AddDbContext<MovieContext>(options => options
-                    .UseSqlServer(Configuration.GetConnectionString(Data.DBConfig.Configuration.ConnectionString)));
+                    .UseSqlServer(Configuration
+                    .GetConnectionString(Data.DBConfig.Configuration.ConnectionString)));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+            //Identiry and Login options
             services
-                .AddDefaultIdentity<User>(options =>
+                .AddDefaultIdentity<IdentityUser>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
+                    options.SignIn.RequireConfirmedEmail = false;   
+                    options.SignIn.RequireConfirmedAccount = false;   
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<MovieContext>();
 
-            //services.AddAutoMapper(typeof(Startup));
-
             services.AddMemoryCache();
 
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-            });
+            //services.AddControllersWithViews(options =>
+            //{
+            //    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            //});
 
+    //TODO Register Services Here
             //services.AddTransient<ICarService, CarService>();
             //services.AddTransient<IDealerService, DealerService>();
             //services.AddTransient<IStatisticsService, StatisticsService>();
