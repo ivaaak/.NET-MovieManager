@@ -6,13 +6,6 @@ body, html {
   background-color:var(--main-bg-gray) ;
 }
 
-.MovieCard{
-  position: fixed;
-  top:20%;
-  left: 25%;
-  width: 50vw;
-  background-color: var(--main-bg-dark-gray);
-}
 
 .flex-container {
     display: flex;
@@ -41,20 +34,32 @@ body, html {
 }
 
 
-.moviePoster{
-  width: 20vw !important;
-  margin-left: 15%;
-  margin-right: 15%;
-  height: 100% !important;
+
+/*MOVIE CARD STYLES*/
+.MovieCard {
+    position: fixed;
+    top: 20%;
+    right: 12%;
+    width: 50vw;
+    background-color: var(--main-bg-dark-gray);
 }
-
-
-/*MOVE TO STYLE MOVIES*/
-.movieTitle{
-  font-size: 40px;
-  padding-top: 10px;
-  color:var(--main-bg-orange);
-  margin: 16px;
+.moviePoster {
+    width: 20vw !important;
+    margin-left: 15%;
+    margin-right: 15%;
+    height: 100% !important;
+}
+.moviePosterBig {
+    width: 400px !important;
+    margin-left: 10%;
+    margin-right: 20%;
+    height: 100% !important;
+}
+.movieTitle {
+    font-size: 40px;
+    padding-top: 10px;
+    color: var(--main-bg-orange);
+    margin: 16px;
 }
 .movieDesc {
     position: relative;
@@ -76,10 +81,21 @@ body, html {
   margin: 0;
   padding: 0;
 }
+.movieDate {
+    font-size: 22px;
+    text-align: center;
+    width: 100px;
+    height: 22px;
+    overflow: hidden;
+    margin: 0;
+    margin-left: 220px;
+    padding: 0;
+}
 .IMDBStar{
   width:16px;
   height:20px;
 }
+
 
 
 .buttonsList{

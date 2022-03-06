@@ -1,4 +1,4 @@
-﻿using MovieManager.Data.DataModels;
+﻿using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
 
 namespace MovieManager.Models
@@ -7,6 +7,6 @@ namespace MovieManager.Models
     {
         public Movie Movie { get; set; }
 
-        public MovieCredits MovieCredits { get; set; }
+        public List<Cast> MovieActorsList { get; set; }
     }
 }

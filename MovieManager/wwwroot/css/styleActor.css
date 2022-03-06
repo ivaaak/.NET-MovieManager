@@ -29,27 +29,30 @@
 .ActorCard {
     position: fixed;
     top: 20%;
-    right: 10%;
+    right: 12%;
     width: 50vw;
+    height: 64vh;
     background-color: var(--main-bg-dark-gray);
 }
 .actorPoster {
-    width: 400px;
-    margin-left: 0% !important;
-    height: 100% ;
-    overflow: hidden;
+    width: 400px !important;
+    margin-left: 10%;
+    margin-right: 15%;
+    height: 100% !important;
 }
 .actorBio {
     position: relative;
     text-align: center;
     align-content: center;
     justify-content: center;
-    margin: 20px !important;
+    left: 20%;
     color: #dcdcff;
     font-weight: lighter;
-    width: 90%;
-    height: 356px;
+    width: 60%;
+    height: 34% !important;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 .actorBirthplace {
     font-size: 22px;
@@ -63,12 +66,12 @@
 /* Search Result Containers */
 .resultsLeft {
     position: fixed;
-    top: 18%;
-    left: 6%;
+    top: 20%;
+    left: 9%;
     background: transparent;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 22%;
+    width: 17%;
     height: 84%;
     padding-right: 30px;
     padding-left: 50px;
@@ -87,14 +90,14 @@
 .movieContainer {
     background: var(--main-bg-dark-gray);
     height: 39vh;
-    width: 21vw;
+    width: 16vw;
     box-shadow: 0.1rem 0.1rem 0.5rem rgb(0 0 0 / 0.6), 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.8), 0.4rem 0.4rem 4rem rgb(0 0 0 / 1);
     transition: transform .4s;
     -webkit-font-smoothing: antialiased;
+    overflow:hidden;
 }
 .movieContainer:hover {
-    transform: perspective(1px) scale(1.15) translateZ(0);
-    overflow: visible;
+    overflow: hidden;
     transition-delay: 0.5s;
     -webkit-font-smoothing: antialiased;
     backface-visibility: hidden;
@@ -104,19 +107,28 @@
     margin-left: 0% !important;
     height: 94% !important;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+.moviePoster:hover {
+    display: none;
 }
 
 .roleTitle {
-    position:center;
-    font-size: 24px;
+    position: center;
+    font-size: 32px;
     height: 240px !important;
-    width: 160px !important;
-    padding-left: 6px !important;
+    width: 200px !important;
+    padding-left: 70px !important;
     padding-top: 20%;
     text-transform: uppercase;
     color: white;
     text-align: center !important;
     overflow: hidden;
+    text-decoration: none !important;
+}
+.roleTitle:link{
+    text-decoration: none !important;
+
 }
 
 /* COLUMN TITLE ANIMATIONS */

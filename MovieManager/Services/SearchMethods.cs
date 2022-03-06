@@ -22,9 +22,11 @@ namespace MovieManager.Services
             CombinedResultsList.AddRange(ShowResultsList);
 
             return CombinedResultsList;
-            //return show and movie results in a single list
+            //return show and movie results in a single list - not used atm
         }
 
+
+        //User in MovieController for SearchResults
         public static List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
             //search and return a Movie list
         {
@@ -75,7 +77,6 @@ namespace MovieManager.Services
 
 
         public static void SearchMovieTitleAndSaveToDb(string SEARCH_NAME)
-        //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
@@ -88,9 +89,7 @@ namespace MovieManager.Services
             client.Dispose();
         }
 
-
         public static void SearchShowTitleAndSaveToDb(string SEARCH_NAME)
-        //search and add to DB
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
@@ -106,34 +105,36 @@ namespace MovieManager.Services
 
 
         //CALLED IN MovieCard(int id) in MovieController
-        public static Data.DataModels.Movie SearchApiWithID(int id)
+        public static MovieCardViewModel SearchApiWithID(int id)
             //should also take a string MediaType to differentiate between show and movie
-            //search based on Id and Media type
-            //(id 500 can be a show or movie)
+            //search based on Id and Media type - (id 500 can be a show or movie)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
             TMDbLib.Objects.TvShows.TvShow show = null;
             TMDbLib.Objects.Movies.Movie movie = client.GetMovieAsync(id, MovieMethods.Videos).Result;
-
-            if(movie != null) //movie exists
+            
+            if (movie != null) //movie exists
             {
                 if (movie.Title == null || movie.PosterPath == null || movie.Overview == null) { return null; }
                 Console.WriteLine($"Found: {movie.Title}");
 
-                var movieDbObj = new Data.DataModels.Movie //movie obj from DB
+                //Get Credits
+                var credits = client.GetMovieCreditsAsync(id).Result;
+                var people = new List<Cast>();
+                foreach (var person in credits.Cast)
                 {
-                    MovieId = movie.Id,
-                    Title = movie.Title,
-                    PosterUrl = SaveMovieToDbObject.BuildImageURL(movie.PosterPath),
-                    Overview = movie.Overview,
-                    ReleaseDate = movie.ReleaseDate,
-                    Popularity = (decimal)movie.Popularity,
-                    Rating = (decimal)movie.VoteAverage,
-                    //Genre = movie.Genres.ToString(),
-                    //LanguageId = movie.OriginalLanguage, 
+                    if(person != null && person.ProfilePath != null)
+                    {
+                        people.Add(person);
+                    }
+                }
 
+                var movieModel = new MovieCardViewModel()
+                {
+                    Movie = movie,
+                    MovieActorsList = people
                 };
-                return movieDbObj;
+                return movieModel;
             }
             else 
             {
@@ -144,33 +145,49 @@ namespace MovieManager.Services
                     throw new InvalidOperationException($"Cant find a movie or show with ID = {id}");
                 }
 
-                var movieDbObj = new Data.DataModels.Movie //movie obj from DB
+                //Get Credits
+                var credits = client.GetTvShowCreditsAsync(id).Result;
+                var people = new List<Cast>();
+                foreach (var person in credits.Cast)
                 {
-                    MovieId = show.Id,
-                    Title = show.Name,
-                    PosterUrl = SaveMovieToDbObject.BuildImageURL(show.PosterPath),
-                    Overview = show.Overview,
-                    ReleaseDate = show.FirstAirDate,
-                    Popularity = (decimal)show.Popularity,
-                    Rating = (decimal)show.VoteAverage,
+                    if (person != null && person.ProfilePath != null) //dont save null images
+                    {
+                        Cast personMovieCast = new Cast()
+                        {
+                            Id = person.Id,
+                            Name = person.Name,
+                            ProfilePath = person.ProfilePath,
+                        };
+
+                        people.Add(personMovieCast);
+                    }
+                }
+
+                var movieModel = new MovieCardViewModel()
+                {
+                    Movie = movie,
+                    MovieActorsList = people
                 };
-                return movieDbObj;
+                return movieModel;
             }
         }
 
 
 
-
-
-
+        //Used in MovieController for ActorCard
         public static ActorViewModel GetActorWithID(int id)
-        //should also take a string MediaType to differentiate between show and movie
-        //search based on Id and Media type
-        //(id 500 can be a show or movie)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
             var actor = client.GetPersonAsync(id).Result;
             var credits = client.GetPersonMovieCreditsAsync(id).Result;
+            //clear null images from credits
+            foreach (var item in credits.Cast)
+            {
+                if (item.PosterPath == null || item.Title == null)
+                {
+                    credits.Cast.Remove(item);
+                }
+            }
             if(actor != null && credits != null)
             {
                 var model = new ActorViewModel()
@@ -184,41 +201,18 @@ namespace MovieManager.Services
             }
             else
             {
-                Console.WriteLine("Actor or creits is null");
+                Console.WriteLine("Actor or credits is null");
                 throw new InvalidOperationException($"Cant find actor with Id {id}");
             }
         }
 
-        //TODO
-        public static async Task SearchMovieCast(string KEY, string Movie_Id)
-        {
-            TMDbClient client = new TMDbClient(KEY);
 
-            //TODO write result to the json.txt - INIT writer here
-            //var jsonSavePath = "D:\\Softuni\\WEB PROJ IDEA\\MOVI\\Backend C# EF\\MovieManager\\Movies\\JSONstring.txt";
-            //await using StreamWriter jsonWriter = File.AppendText(jsonSavePath);
-
-            TMDbLib.Objects.Movies.Movie movie = await client.GetMovieAsync(Movie_Id, MovieMethods.Credits);
-
-            Console.WriteLine($"Movie title: {movie.Title}");
-            //await jsonWriter.WriteLineAsync($"Movie title: {movie.Title}");
-
-            foreach (Cast cast in movie.Credits.Cast)
-            {
-                Console.WriteLine($"{cast.Name} - {cast.Character}");
-                //await jsonWriter.WriteLineAsync($"    {cast.Name} - {cast.Character}");
-                //Add to Actors DB Table
-            }
-        }
 
 
 
         public static async Task SearchMovieVideos(string KEY, string Movie_Id)
         {
             TMDbClient client = new TMDbClient(KEY);
-
-            var jsonSavePath = "D:\\Softuni\\WEB PROJ IDEA\\MOVI\\Backend C# EF\\MovieManager\\Movies\\JSONstring.txt";
-            await using StreamWriter jsonWriter = File.AppendText(jsonSavePath);
 
             TMDbLib.Objects.Movies.Movie movie = await client.GetMovieAsync(Movie_Id, MovieMethods.Videos);
 
@@ -227,12 +221,8 @@ namespace MovieManager.Services
             foreach (Video video in movie.Videos.Results)
             {
                 Console.WriteLine($"Trailer: {video.Type} ({video.Site}), {video.Name}");
-                await jsonWriter.WriteLineAsync($"Trailer: {video.Type} ({video.Site}), {video.Name}");
             }
         }
-
-
-
         public static bool IsCorrectTableType(string TableTypeInput)
         {
             string[] types = new[] { "watched", "current", "future" };

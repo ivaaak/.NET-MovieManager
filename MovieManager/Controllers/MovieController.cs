@@ -49,14 +49,8 @@ namespace MovieManager.Controllers
             Console.WriteLine($"Hit controller: Movie , hit view: MovieCard, ID = {id}");
 
             var movieIdResult = SearchMethods.SearchApiWithID(id);
-            //takes a movie ID and returns a Movie Db Model
 
-            var model = new MovieCardViewModel()
-            {
-                Movie = movieIdResult,
-            };
-
-            return View(model);
+            return View(movieIdResult);
         }
 
 
@@ -84,10 +78,7 @@ namespace MovieManager.Controllers
                 ResultShowList = showResults,
                 SearchTerm = model.SearchTerm
             };
-
             Console.WriteLine($"Searching for {model.SearchTerm}");
-
-            var viewWithViewModel = SearchResult(results);
 
             return View("SearchResult", results);
         }
@@ -108,10 +99,6 @@ namespace MovieManager.Controllers
         public IActionResult ActorCard(int id)
         {
             var model = SearchMethods.GetActorWithID(id);
-            //.People.Person.MovieCredits
-            //Try People.MovieCredits
-
-            
 
             foreach (var item in model.MovieCredits.Cast)
             {
