@@ -18,9 +18,11 @@
     font-family: 'Archivo';
     src: url("/fonts/ArchivoBlack-Regular.ttf");
 }
+@font-face {
+    font-family: 'Rajdhani';
+    src: url("/fonts/Rajdhani-Regular.ttf");
+}
 
-
-@import url('https://fonts.googleapis.com/css2?family=Alata&family=Archivo+Black&display=swap');
 
   :root {
     --main-bg-gray: #262a39;
