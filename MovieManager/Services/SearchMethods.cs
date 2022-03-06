@@ -105,7 +105,7 @@ namespace MovieManager.Services
 
 
         //CALLED IN MovieCard(int id) in MovieController
-        public static MovieCardViewModel SearchApiWithID(int id)
+        public static MovieCardViewModel SearchApiWithMovieID(int id)
             //should also take a string MediaType to differentiate between show and movie
             //search based on Id and Media type - (id 500 can be a show or movie)
         {
@@ -173,6 +173,44 @@ namespace MovieManager.Services
         }
 
 
+        public static ShowCardViewModel SearchApiWithShowID(int id)
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            var show = client.GetTvShowAsync(id, TMDbLib.Objects.TvShows.TvShowMethods.Videos).Result;
+
+            if (show == null) 
+            {
+                throw new InvalidOperationException($"Cant find a show with ID = {id}");
+            }
+            //Get Credits
+            var credits = client.GetTvShowCreditsAsync(id).Result;
+            var people = new List<TMDbLib.Objects.TvShows.Cast>();
+
+            foreach (var person in credits.Cast)
+            {
+                if (person != null && person.ProfilePath != null) //dont save null images
+                {
+                    TMDbLib.Objects.TvShows.Cast personShowCast = new TMDbLib.Objects.TvShows.Cast()
+                    {
+                        Id = person.Id,
+                        Name = person.Name,
+                        ProfilePath = person.ProfilePath,
+                    };
+
+                    people.Add(personShowCast);
+                }
+            }
+
+            var model = new ShowCardViewModel()
+            {
+                Show = show,
+                ShowActorsList = people,
+            };
+            return model;
+        }
+
+
 
         //Used in MovieController for ActorCard
         public static ActorViewModel GetActorWithID(int id)
@@ -180,15 +218,20 @@ namespace MovieManager.Services
             TMDbClient client = new TMDbClient(Configuration.APIKey);
             var actor = client.GetPersonAsync(id).Result;
             var credits = client.GetPersonMovieCreditsAsync(id).Result;
-            //clear null images from credits
-            foreach (var item in credits.Cast)
+            if(credits == null) //show
             {
-                if (item.PosterPath == null || item.Title == null)
+                var creditsShow = client.GetPersonTvCreditsAsync(id).Result;
+
+                var model = new ActorViewModel()
                 {
-                    credits.Cast.Remove(item);
-                }
+                    Person = actor,
+                    TvCredits = creditsShow,
+                    PhotoUrl = SaveMovieToDbObject.BuildImageURL(actor.ProfilePath),
+                };
+
+                return model;
             }
-            if(actor != null && credits != null)
+            else //movie
             {
                 var model = new ActorViewModel()
                 {
@@ -198,11 +241,6 @@ namespace MovieManager.Services
                 };
 
                 return model;
-            }
-            else
-            {
-                Console.WriteLine("Actor or credits is null");
-                throw new InvalidOperationException($"Cant find actor with Id {id}");
             }
         }
 

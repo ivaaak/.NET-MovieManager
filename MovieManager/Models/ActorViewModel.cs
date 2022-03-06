@@ -8,6 +8,8 @@ namespace MovieManager.Models
 
         public MovieCredits MovieCredits { get; set; }
 
+        public TvCredits TvCredits { get; set; }
+
         public string PhotoUrl { get; set; }
     }
 }

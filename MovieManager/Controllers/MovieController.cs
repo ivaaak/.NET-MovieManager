@@ -48,9 +48,20 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine($"Hit controller: Movie , hit view: MovieCard, ID = {id}");
 
-            var movieIdResult = SearchMethods.SearchApiWithID(id);
+            var movieIdResult = SearchMethods.SearchApiWithMovieID(id);
 
             return View(movieIdResult);
+        }
+
+
+        [Route("Movie/ShowCard/{id}")]
+        public IActionResult ShowCard(int id) //takes moviecard viewmodel
+        {
+            Console.WriteLine($"Hit controller: Show , hit view: ShowCard, ID = {id}");
+
+            var showIdResult = SearchMethods.SearchApiWithShowID(id);
+
+            return View(showIdResult);
         }
 
 

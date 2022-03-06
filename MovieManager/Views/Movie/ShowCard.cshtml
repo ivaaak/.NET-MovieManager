@@ -1,0 +1,68 @@
+﻿@model ShowCardViewModel
+@using MovieManager.Services
+@using MovieManager.Models.DataModels
+@{
+	ViewData["Title"] = @Model.Show.Name;
+	// maybe? REVIEWS
+
+	var show = Model.Show;
+	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+show.PosterPath;	
+}
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleMovieCard.css" rel="stylesheet">
+	<link href="~/css/styleActor.css" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+
+
+<div class="MovieCard" >
+	<div class="flex-container">
+	   <div class="flex-items">	
+		    <a href="https://www.themoviedb.org/tv/@show.Id">
+				<img class="moviePosterBig" alt="Image" src="@posterMovieUrl"> 	
+			</a>
+		   <!--onclick -> tmdb Id-->
+		</div>
+	   <div class="flex-items">
+		<h2 class="movieTitle">	@show.Name </h2>
+
+		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @show.VoteAverage/10 - Rating</p>
+		<p class="movieDate">  @show.FirstAirDate </p>
+		<p class="movieDesc"> @show.Overview </p>
+
+		<div class="buttonsList">
+			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>
+			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Current Movies" onclick=""><br/>
+			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watchlist" onclick=""><br/>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+<!--Movie Credits Column-->
+<main class="resultsLeft" id="scrollBlackThin">
+	<h1 class="info"> 
+		<img src="~/img/watched icon2 dark.png" width="60" height="40">Actors
+		<div class="hidden-info">Results</div>
+	</h1>
+	@foreach (var actor in Model.ShowActorsList)
+	{
+		string posterUrl = "https://image.tmdb.org/t/p/w500"+@actor.ProfilePath;
+		<div class="movieContainer">
+			<div class="flex-container">
+				<div class="flex-items">	
+						<img class="moviePoster" alt="Image" src="@posterUrl">
+				</div>
+				
+				<a href="/Movie/ActorCard/@actor.Id">
+				<p class="roleTitle"> @actor.Name <br/><br/>Character: @actor.Character </p>
+				</a>
+			</div>
+		</div>
+		}
+	}
+</main>
