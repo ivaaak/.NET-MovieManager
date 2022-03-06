@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
 
 //Builder
@@ -12,19 +13,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Add DB and Identity Services
 builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.ConnectionString));
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true);
+
+//builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
+
 builder.Services.AddControllersWithViews();
 
 //Build
 WebApplication app = builder.Build();
 
 //Http request pipeline
-if (app.Environment.IsDevelopment())
-{
+if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage().UseMigrationsEndPoint();
-}
-else 
-{
+} else {
     app.UseExceptionHandler("/Error").UseHsts();
 }
 
