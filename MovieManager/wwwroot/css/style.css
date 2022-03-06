@@ -1,6 +1,26 @@
-/*div.col-md-4 {*//*col-md-6 IS EACH A CONTAINER */
-  /* LIGHT ROBOTO FINALLY */
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@font-face {
+    font-family: 'Roboto Bold';
+    src: url("/fonts/Roboto-Bold.ttf");
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url("/fonts/Roboto-Light.ttf");
+}
+@font-face {
+    font-family: 'Anton';
+    src: url("/fonts/Anton.ttf");
+}
+@font-face {
+    font-family: 'Alata';
+    src: url("/fonts/Alata-Regular.ttf");
+}
+@font-face {
+    font-family: 'Archivo';
+    src: url("/fonts/ArchivoBlack-Regular.ttf");
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Archivo+Black&display=swap');
 
   :root {
     --main-bg-gray: #262a39;

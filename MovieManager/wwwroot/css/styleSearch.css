@@ -1,6 +1,3 @@
-@import url(https://allfont.net/allfont.css?fonts=roboto-bold);
-@import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
-
 body{
   background-color: var(--main-bg-dark-gray) !important;
   z-index: -10;
