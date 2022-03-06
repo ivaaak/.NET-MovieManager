@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MovieManager.Controllers;
 using MovieManager.Data.DBConfig;
 using MovieManager.Infrastructure.Extensions;
-using static MovieManager.Data.DataConstants;
 
 namespace MovieManager
 {
