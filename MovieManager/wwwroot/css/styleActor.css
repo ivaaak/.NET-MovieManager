@@ -108,23 +108,26 @@
     height: 94% !important;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
+    transition: transform .4s;
 }
 .moviePoster:hover {
     display: none;
+    transform: translateX(-200px);
 }
 
 .roleTitle {
     position: center;
     font-size: 32px;
-    height: 240px !important;
-    width: 200px !important;
-    padding-left: 70px !important;
-    padding-top: 20%;
+    height: 300px !important;
+    width: 240px !important;
+    padding-left: 24px !important;
+    padding-top: 10%;
     text-transform: uppercase;
     color: white;
     text-align: center !important;
     overflow: hidden;
     text-decoration: none !important;
+    text-decoration-line: none !important;
 }
 .roleTitle:link{
     text-decoration: none !important;

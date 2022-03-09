@@ -81,7 +81,10 @@
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: var(--titleCyanDark)
-
+  }
+  h3{
+      text-decoration:none;
+      text-decoration-line:none;
   }
   p {
     font-family: 'Roboto', sans-serif;

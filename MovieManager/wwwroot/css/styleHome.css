@@ -308,3 +308,9 @@ p{
     font-size: 20px;
     font-weight: bold;
 }
+
+.noUnderline {
+    overflow: hidden;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}
