@@ -1,11 +1,9 @@
 ﻿using MovieManager.Data.DBConfig;
-using MovieManager.Data.DataModels;
+using MovieManager.Models;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Search;
-using TMDbLib.Objects.People;
-using MovieManager.Models;
 
 namespace MovieManager.Services
 {

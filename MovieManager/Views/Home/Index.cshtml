@@ -1,8 +1,12 @@
 ﻿@model IndexViewModel
+
+@using MovieManager.Services
 @{
     ViewData["Title"] = "Home Page";
     var watched = MovieManager.Services.GetFromDB
 		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+    var popularMovies = ApiGetPopular.GetPopularMovies(15);
+    var popularShows = ApiGetPopular.GetPopularShows(15);
 }
 
 @section styles{
@@ -31,17 +35,48 @@
 @if (watched.Any())
 {
     <main class="resultsLeft" id="scrollBlackThin">
-        @foreach (var movie in watched)
+        @foreach (var movie in popularMovies)
         {
-            string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterUrl;
+            string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
             <div class="movieContainer">
                 <div class="flex-container">
+                    <a href="/Movie/MovieCard/@movie.Id">
                     <div class="flex-items">	
-                        <img class="moviePoster" alt="Image" src="@movie.PosterUrl">
+                        <img class="moviePoster" alt="Image" src="@posterUrl">
                     </div>
-
-                    <a class="roleTitle" href="/Movie/MovieCard/@movie.MovieId">
                     </a>
+
+                    <p class="roleTitle"> Movie: <br><br>
+                         @movie.Title <br><br>
+                         Popularity: <br>
+                         @movie.Popularity 
+                    </p>
+
+                </div>
+            </div>
+        }
+    </main>
+}
+@if (watched.Any())
+{
+    <main class="resultsRight" id="scrollBlackThin">
+         @foreach (var show in popularShows)
+        {
+            string posterUrl = "https://image.tmdb.org/t/p/w500" + @show.PosterPath;
+            <div class="movieContainer">
+                <div class="flex-container">
+                    <a href="/Movie/MovieCard/@show.Id">
+                    <div class="flex-items">	
+                        <img class="moviePoster" alt="Image" src="@posterUrl">
+                    </div>
+                    </a>
+
+                    <p class="roleTitle"> Movie: <br><br>
+                         @show.Name <br><br>
+                         Popularity: <br>
+                         @show.Popularity 
+                    </p>
+
                 </div>
             </div>
         }

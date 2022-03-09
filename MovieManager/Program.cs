@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
+using MovieManager.Services;
+
 
 //Builder
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -33,9 +35,9 @@ app.UseHttpsRedirection().UseStaticFiles().UseRouting()
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
 
-
 //Run the App
 app.Run();
+
 
 
 //TestDbPlaylist.FillPlaylist();
