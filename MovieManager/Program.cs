@@ -37,8 +37,6 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Inde
 //Run the App
 app.Run();
 
-//attempt at pushing again
-
 
 //TestDbPlaylist.FillPlaylist();
 //UserOperations.CreateUser();
