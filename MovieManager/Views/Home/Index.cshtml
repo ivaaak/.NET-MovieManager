@@ -3,10 +3,6 @@
 @using MovieManager.Services
 @{
     ViewData["Title"] = "Home Page";
-    var watched = MovieManager.Services.GetFromDB
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
-    var popularMovies = ApiGetPopular.GetPopularMovies(15);
-    var popularShows = ApiGetPopular.GetPopularShows(15);
 }
 
 @section styles{
@@ -32,10 +28,10 @@
 
 
 <!-- Home/Index popular movie cards-->
-@if (watched.Any())
+@if (Model.DiscoverMovies.Any())
 {
     <main class="resultsLeft" id="scrollBlackThin">
-        @foreach (var movie in popularMovies)
+        @foreach (var movie in Model.DiscoverMovies)
         {
             string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
             <div class="movieContainer">
@@ -57,10 +53,10 @@
         }
     </main>
 }
-@if (watched.Any())
+@if (Model.DiscoverShows.Any())
 {
     <main class="resultsRight" id="scrollBlackThin">
-         @foreach (var show in popularShows)
+         @foreach (var show in Model.DiscoverShows)
         {
             string posterUrl = "https://image.tmdb.org/t/p/w500" + @show.PosterPath;
             <div class="movieContainer">

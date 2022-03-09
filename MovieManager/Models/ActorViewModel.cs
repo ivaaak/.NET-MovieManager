@@ -1,12 +1,15 @@
-using TMDbLib.Objects.Movies;
-using TMDbLib.Objects.TvShows;
+using TMDbLib.Objects.People;
 
 namespace MovieManager.Models
 {
-    public class IndexViewModel
+    public class ActorViewModel
     {
-        public List<Movie> DiscoverMovies { get; set; }
+        public Person Person { get; set; }
 
-        public List<TvShow> DiscoverShows { get; set; }
+        public MovieCredits MovieCredits { get; set; }
+
+        public TvCredits TvCredits { get; set; }
+
+        public string PhotoUrl { get; set; }
     }
 }

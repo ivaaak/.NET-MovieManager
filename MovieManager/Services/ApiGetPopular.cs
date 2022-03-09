@@ -34,7 +34,6 @@ namespace MovieManager.Services
 
 
         public static List<SearchTv> GetPopularShows(int showCount)
-        //search and return a Movie list
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 

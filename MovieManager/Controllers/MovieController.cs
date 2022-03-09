@@ -22,7 +22,7 @@ namespace MovieManager.Controllers
             Console.WriteLine("Hit controller: Movie , hit view: Main");
             //add logic for getting movie for each column for each user
             //this requires Authentication to be fully working, 
-
+            //var watched = MovieManager.Services.GetFromDB.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
             //var watchedMovies = GetUserMovieList(this.User.Id, "watched")
             //var currentMovies = GetUserMovieList(this.User.Id, "current")
             //var futureMovies = GetUserMovieList(this.User.Id, "future")

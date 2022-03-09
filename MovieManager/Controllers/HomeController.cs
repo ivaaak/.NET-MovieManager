@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using MovieManager.Models;
+using MovieManager.Services;
 
 namespace MovieManager.Controllers
 {
@@ -20,7 +22,17 @@ namespace MovieManager.Controllers
         public IActionResult Index()
         {
             Console.WriteLine("Hit controller: Home , hit view: Index");
-            return View();
+
+            var popularMovies = ApiGetPopular.GetPopularMovies(15);
+            var popularShows = ApiGetPopular.GetPopularShows(15);
+
+            var model = new IndexViewModel()
+            {
+                DiscoverMovies = popularMovies,
+                DiscoverShows = popularShows,
+            };
+
+            return View(model);
         }
 
         public IActionResult Error() => View();

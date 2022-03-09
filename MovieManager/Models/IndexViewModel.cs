@@ -1,15 +1,11 @@
-using TMDbLib.Objects.People;
+using TMDbLib.Objects.Search;
 
 namespace MovieManager.Models
 {
-    public class ActorViewModel
+    public class IndexViewModel
     {
-        public Person Person { get; set; }
+        public List<SearchMovie> DiscoverMovies { get; set; }
 
-        public MovieCredits MovieCredits { get; set; }
-
-        public TvCredits TvCredits { get; set; }
-
-        public string PhotoUrl { get; set; }
+        public List<SearchTv> DiscoverShows { get; set; }
     }
 }
