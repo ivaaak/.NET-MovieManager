@@ -1,0 +1,103 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+}
+
+.flex-items:nth-child(2) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    margin-left: 2%;
+    order: 0;
+}
+/* Search Result Containers */
+.resultsLeft {
+    position: fixed;
+    top: 10%;
+    left: 0%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 15%;
+    height: 70%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 20px;
+    display: grid;
+    grid-row-gap: 40px;
+    z-index: 100;
+}
+.resultsLeft > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(5, 40%);
+    overflow-x: scroll;
+     height: 15vh;
+}
+
+
+.movieContainer {
+    background: var(--main-bg-dark-gray);
+    height: 39vh;
+    width: 240px;
+    box-shadow: 0.1rem 0.1rem 0.5rem rgb(0 0 0 / 0.6), 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.8), 0.4rem 0.4rem 4rem rgb(0 0 0 / 1);
+    overflow: hidden;
+}
+
+.moviePoster {
+    width: 240px !important;
+    margin-left: 0% !important;
+    overflow: hidden;
+}
+.moviePoster:hover {
+    opacity: 0;
+}}
+.roleTitle {
+    position: center;
+    font-size: 32px;
+    height: 300px !important;
+    width: 240px !important;
+    padding-left: 24px !important;
+    padding-top: 10%;
+    text-transform: uppercase;
+    color: white;
+    text-align: center !important;
+    overflow: hidden;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}
+.roleTitle:link {
+    text-decoration: none !important;
+}
+
+
+/* CONTAINER SCROLL BARS*/
+#scrollBlackThin::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: var(--main-bg-dark-gray);
+}
+
+#scrollBlackThin::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--main-bg-dark-gray);
+}
+
+#scrollBlackThin::-webkit-scrollbar-thumb {
+    background-color: white;
+    z-index: 10;
+}

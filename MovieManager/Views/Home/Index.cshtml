@@ -1,11 +1,14 @@
-﻿@{
+﻿@model IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
+    var watched = MovieManager.Services.GetFromDB
+		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
 }
 
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
 	<link href="~/css/styleHome.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Maven+Pro:500' rel='stylesheet' type='text/css'>
+	<link href="~/css/styleHomeMovieList.css" rel="stylesheet">
 
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -23,6 +26,27 @@
 	<div class="header"> verus </div>
 </div>
 
+
+<!-- Home/Index popular movie cards-->
+@if (watched.Any())
+{
+    <main class="resultsLeft" id="scrollBlackThin">
+        @foreach (var movie in watched)
+        {
+            string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterUrl;
+            <div class="movieContainer">
+                <div class="flex-container">
+                    <div class="flex-items">	
+                        <img class="moviePoster" alt="Image" src="@movie.PosterUrl">
+                    </div>
+
+                    <a class="roleTitle" href="/Movie/MovieCard/@movie.MovieId">
+                    </a>
+                </div>
+            </div>
+        }
+    </main>
+}
 
 <!-- Arrow down scroller-->
 <section class="main">
@@ -71,7 +95,7 @@
         </a>
     </div>
     <div class="card">
-        <a class="noUnderline" href="/Error">
+        <a class="noUnderline" href="/Movie/Discover">
         <div class="face face1">
             <div class="content">
                 <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">

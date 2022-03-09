@@ -95,6 +95,7 @@
     transition: transform .4s;
     -webkit-font-smoothing: antialiased;
     overflow:hidden;
+    z-index: -2;
 }
 .movieContainer:hover {
     overflow: hidden;
@@ -109,18 +110,18 @@
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     transition: transform .4s;
+    z-index: 10 !important;
 }
 .moviePoster:hover {
-    display: none;
-    transform: translateX(-200px);
+    opacity: 0;
 }
 
 .roleTitle {
-    position: center;
+    position: absolute;
     font-size: 32px;
-    height: 300px !important;
-    width: 240px !important;
-    padding-left: 24px !important;
+    height: 200px !important;
+    width: 200px !important;
+    padding-left: 50px !important;
     padding-top: 10%;
     text-transform: uppercase;
     color: white;
@@ -128,11 +129,12 @@
     overflow: hidden;
     text-decoration: none !important;
     text-decoration-line: none !important;
+    z-index: -1;
 }
 .roleTitle:link{
     text-decoration: none !important;
-
 }
+
 
 /* COLUMN TITLE ANIMATIONS */
 .info {
