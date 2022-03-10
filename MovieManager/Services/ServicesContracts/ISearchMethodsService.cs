@@ -1,6 +1,4 @@
 ﻿using MovieManager.Models;
-using TMDbLib.Objects.General;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services.ServicesContracts
 {
