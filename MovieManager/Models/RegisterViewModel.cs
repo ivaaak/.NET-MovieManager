@@ -2,6 +2,8 @@
 {
     public class RegisterViewModel
     {
+        public RegisterViewModel() { }
+
         //not used currently because of ASP.NET IDENTITY
 
         public string Username { get; init; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieManager.Models;
 using MovieManager.Services;
+using MovieManager.Services.ServicesContracts;
 using System.Diagnostics;
 using System.Text;
 
@@ -9,10 +10,14 @@ namespace MovieManager.Controllers
     public class MovieController : Controller
     {
         private readonly ILogger<MovieController> _logger;
+        private readonly ISearchMethodsService searchMethods;
 
-        public MovieController(ILogger<MovieController> logger)
+        public MovieController(
+            ILogger<MovieController> logger, 
+            ISearchMethodsService searchMethods)
         {
             _logger = logger;
+            this.searchMethods = searchMethods;
         }
 
 
@@ -48,7 +53,7 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine($"Hit controller: Movie , hit view: MovieCard, ID = {id}");
 
-            var movieIdResult = SearchMethods.SearchApiWithMovieID(id);
+            var movieIdResult = searchMethods.SearchApiWithMovieID(id);
 
             return View(movieIdResult);
         }
@@ -59,7 +64,7 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine($"Hit controller: Show , hit view: ShowCard, ID = {id}");
 
-            var showIdResult = SearchMethods.SearchApiWithShowID(id);
+            var showIdResult = searchMethods.SearchApiWithShowID(id);
 
             return View(showIdResult);
         }
@@ -80,8 +85,8 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine("Hit controller: Movie , hit view: Search WITH TITLE PARAM");
 
-            var movieResults = SearchMethods.SearchMovieTitleToList(model.SearchTerm);
-            var showResults = SearchMethods.SearchShowTitleToList(model.SearchTerm);
+            var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm);
+            var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm);
 
             var results = new SearchResultViewModel()
             {
@@ -109,7 +114,7 @@ namespace MovieManager.Controllers
         [Route("Movie/ActorCard/{id}")]
         public IActionResult ActorCard(int id)
         {
-            var model = SearchMethods.GetActorWithID(id);
+            var model = searchMethods.GetActorWithID(id);
 
             foreach (var item in model.MovieCredits.Cast)
             {

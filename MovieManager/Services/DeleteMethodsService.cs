@@ -4,34 +4,34 @@ using MovieManager.Data.DataModels;
 
 namespace MovieManager.Services
 {
-    public class DeleteMethods : IDeleteMethods
+    public class DeleteMethodsService : IDeleteMethodsService
     {
-        private readonly MovieContext data;
+        private readonly MovieContext dataContext;
 
-        public DeleteMethods(MovieContext data)
+        public DeleteMethodsService(MovieContext data)
         {
-            this.data = data;
+            this.dataContext = data;
         }
 
         public string DeleteFromDbUsingName(string movieTitle) //dont use due to cascade deletes in user lists
         {
-            if (data.Movies.Any(i => i.Title == movieTitle))
+            if (dataContext.Movies.Any(i => i.Title == movieTitle))
             {
                 Console.WriteLine($"Found movie: {movieTitle}. Deleting from Db.");
 
-                var movie = data.Movies.Where(x => x.Title == movieTitle).FirstOrDefault();
+                var movie = dataContext.Movies.Where(x => x.Title == movieTitle).FirstOrDefault();
 
                 if (movie != null) 
                 {
-                    data.Movies.Remove(movie);
-                    data.SaveChanges();
+                    dataContext.Movies.Remove(movie);
+                    dataContext.SaveChanges();
                 }
             }
             else
             {
                 Console.WriteLine($"{movieTitle} doesn't exist in the DB!");
             }
-            data.Dispose();
+            dataContext.Dispose();
 
             return $"Deleted {movieTitle} from Movies DB.";
         }
@@ -39,19 +39,19 @@ namespace MovieManager.Services
 
         public string DeleteFromDbUsingId(int Id)
         {
-            if (data.Movies.Any(i => i.MovieId == Id))
+            if (dataContext.Movies.Any(i => i.MovieId == Id))
             {
-				Movie movie = data.Movies.Where(x => x.MovieId == Id).FirstOrDefault();
+				Movie movie = dataContext.Movies.Where(x => x.MovieId == Id).FirstOrDefault();
 				Console.WriteLine($"Found movie with ID: {movie.MovieId} and Name: {movie.Title}. Deleting from Db.");
 
-                data.Movies.Remove(movie);
-                data.SaveChanges();
+                dataContext.Movies.Remove(movie);
+                dataContext.SaveChanges();
             }
             else
             {
                 Console.WriteLine($"{Id} doesn't exist in the DB!");
             }
-            data.Dispose();
+            dataContext.Dispose();
             return $"Deleted Movie with ID - {Id} from Movies DB.";
         }
     }

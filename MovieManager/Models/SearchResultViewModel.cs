@@ -5,6 +5,8 @@ namespace MovieManager.Models
 {
     public class SearchResultViewModel
     {
+        public SearchResultViewModel() { }
+
         [Required]
         public string SearchTerm { get; init; }
         //save the search input to display on the top of the results page

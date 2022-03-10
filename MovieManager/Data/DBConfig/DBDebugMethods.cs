@@ -1,9 +1,17 @@
 ﻿using MovieManager.Services;
+using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Data.DBConfig
 {
     public class DbDebugMethods
     {
+        private IAddToDbService addToDb;
+
+        public DbDebugMethods(IAddToDbService addToDb)
+        {
+            this.addToDb = addToDb;
+        }
+
         public static void CheckDbInitialized(MovieContext context)
         {
             context.Database.EnsureCreated();
@@ -25,26 +33,26 @@ namespace MovieManager.Data.DBConfig
 
        
         //fill tables for debug
-        public static void FillMovies()
+        public static void FillMovies(SearchMethodsService searchMethods, AddToDbService addToDb)
         {
 			System.Timers.Timer t = new System.Timers.Timer();
             t.Start();
             var context = new MovieContext();
-            SearchMethods.SearchMovieTitleAndSaveToDb("blade runner");
-            SearchMethods.SearchMovieTitleAndSaveToDb("fargo");
-            SearchMethods.SearchMovieTitleAndSaveToDb("the ghost and the darkness");
-            SearchMethods.SearchMovieTitleAndSaveToDb("fight club");
-            SearchMethods.SearchMovieTitleAndSaveToDb("inherent vice");
-            SearchMethods.SearchMovieTitleAndSaveToDb("from russia with");
-            SearchMethods.SearchMovieTitleAndSaveToDb("you were never really here");
-            SearchMethods.SearchMovieTitleAndSaveToDb("le samourai");
-            SearchMethods.SearchShowTitleAndSaveToDb("ozark");
-            SearchMethods.SearchShowTitleAndSaveToDb("primal");
-            SearchMethods.SearchShowTitleAndSaveToDb("fargo");
-            SearchMethods.SearchShowTitleAndSaveToDb("vikings");
-            SearchMethods.SearchMovieTitleAndSaveToDb("primal");
-            SearchMethods.SearchMovieTitleAndSaveToDb("deer");
-            SearchMethods.SearchMovieTitleAndSaveToDb("batman");
+            searchMethods.SearchMovieTitleAndSaveToDb("blade runner", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("fargo", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("the ghost and the darkness", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("fight club", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("inherent vice", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("from russia with", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("you were never really here", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("le samourai", addToDb);
+            searchMethods.SearchShowTitleAndSaveToDb("ozark", addToDb);
+            searchMethods.SearchShowTitleAndSaveToDb("primal", addToDb);
+            searchMethods.SearchShowTitleAndSaveToDb("fargo", addToDb);
+            searchMethods.SearchShowTitleAndSaveToDb("vikings", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("primal", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("deer", addToDb);
+            searchMethods.SearchMovieTitleAndSaveToDb("batman", addToDb);
 
             t.Stop();
             Console.WriteLine($"Filled the table Movies with example data. Time elapsed: {t.Interval}");

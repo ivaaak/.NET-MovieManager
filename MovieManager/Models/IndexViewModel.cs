@@ -4,6 +4,8 @@ namespace MovieManager.Models
 {
     public class IndexViewModel
     {
+        public IndexViewModel() { }
+
         public List<SearchMovie> DiscoverMovies { get; set; }
 
         public List<SearchTv> DiscoverShows { get; set; }

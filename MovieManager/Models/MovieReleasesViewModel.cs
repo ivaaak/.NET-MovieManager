@@ -4,6 +4,7 @@ namespace MovieManager.Models
 {
     public class MovieReleasesViewModel
     {
+        public MovieReleasesViewModel() { }
 
         public List<Movie> MoviesList { get; set; }
         

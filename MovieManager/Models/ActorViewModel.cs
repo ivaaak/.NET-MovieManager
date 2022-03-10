@@ -4,6 +4,8 @@ namespace MovieManager.Models
 {
     public class ActorViewModel
     {
+        public ActorViewModel(){}
+
         public Person Person { get; set; }
 
         public MovieCredits MovieCredits { get; set; }

@@ -1,11 +1,15 @@
 ﻿using MovieManager.Data.DataModels;
+using MovieManager.Services.ServicesContracts;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
-    public class SaveMovieToDbObject
+    public class SaveMovieToDbObjectService : ISaveMovieToDbObjectService
     {
-        public static Movie MovieApiToObject(SearchMovie result)
+        public SaveMovieToDbObjectService(){}
+
+
+        public Movie MovieApiToObject(SearchMovie result)
         {
             if (result.Title == null || result.PosterPath == null || result.Overview == null) { return null; }
 
@@ -23,7 +27,7 @@ namespace MovieManager.Services
         }
 
 
-        public static Movie ShowApiToObject(SearchTv result)
+        public Movie ShowApiToObject(SearchTv result)
         {
             if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
 

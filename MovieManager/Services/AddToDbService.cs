@@ -1,35 +1,42 @@
 ﻿using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
+using MovieManager.Services.ServicesContracts;
 using System.Text;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
-    public class AddToDb
+    public class AddToDbService : IAddToDbService
     {
-        private readonly MovieContext data;
+        private readonly MovieContext dataContext;
 
-        public AddToDb(MovieContext data)
+        private ISaveMovieToDbObjectService service;
+
+        public AddToDbService() { } //used for DI
+
+        public AddToDbService(
+            ISaveMovieToDbObjectService saveMovieToDbObjectService, 
+            MovieContext data) 
         {
-            this.data = data;
+            this.service = saveMovieToDbObjectService;
+            this.dataContext = data;
         }
 
-        public static string AddMovies(SearchContainer<SearchMovie> results)
-        {
-            var data = new MovieContext();
 
+        public string AddMovies(SearchContainer<SearchMovie> results)
+        {
             StringBuilder sb = new StringBuilder();
             List<Movie> validMovies = new List<Movie>();
 
             foreach (SearchMovie result in results.Results)
             {
-                if(data.Movies.Where(i => i.MovieId == result.Id).Any())
+                if(dataContext.Movies.Where(i => i.MovieId == result.Id).Any())
                 {
                     Console.WriteLine($"{result.Title} is already added to watched movies.");
                     continue; // check so nothing is added twice
                 }
-                var m = SaveMovieToDbObject.MovieApiToObject(result);
+                var m = this.service.MovieApiToObject(result);
 
                 if(m != null)
                 {
@@ -38,67 +45,63 @@ namespace MovieManager.Services
                 sb.AppendLine($"Successfully added : {result.Title} to watched movies!");
             }
 
-            data.Movies.AddRange(validMovies);
-            data.SaveChanges();
-            data.Dispose();
+            dataContext.Movies.AddRange(validMovies);
+            dataContext.SaveChanges();
+            dataContext.Dispose();
 
             Console.WriteLine(sb.ToString());
             return sb.ToString().Trim();
         }
         
 
-        public static string AddShows(SearchContainer<SearchTv> results)
+        public string AddShows(SearchContainer<SearchTv> results)
         {
-            var data = new MovieContext();
-
             StringBuilder sb = new StringBuilder();
             List<Movie> validShows = new List<Movie>();
 
             foreach (SearchTv result in results.Results)
             {
-                if(data.Movies.Where(i => i.MovieId == result.Id).Any()) 
+                if(dataContext.Movies.Where(i => i.MovieId == result.Id).Any()) 
                 {
                     Console.WriteLine($"{result.Name} is already added to movies.");
                     continue;
                 }
 
-                var m = SaveMovieToDbObject.ShowApiToObject(result);
+                var m = this.service.ShowApiToObject(result);
 
                 if(m != null) { validShows.Add(m); }
 
                 sb.AppendLine($"Successfully added : {result.Name} to show watchlist.");
             }
 
-            data.Movies.AddRange(validShows);
-            data.SaveChanges();
-            data.Dispose();
+            dataContext.Movies.AddRange(validShows);
+            dataContext.SaveChanges();
+            dataContext.Dispose();
 
             Console.WriteLine(sb.ToString());
             return sb.ToString().Trim();
         }
 
 
-        public static string AddMovie(SearchMovie movie)
+        public string AddMovie(SearchMovie movie)
         {
-            var data = new MovieContext();
-
             StringBuilder sb = new StringBuilder();
             Console.WriteLine(movie.Title);
 
-            if (data.Movies.Any(i => i.MovieId == movie.Id))
+            if (dataContext.Movies.Any(i => i.MovieId == movie.Id))
             {
                 sb.Append($"{movie.Title} is already added to movies.");
             }
             else
             {
-                var m = SaveMovieToDbObject.MovieApiToObject(movie);
+                var m = this.service.MovieApiToObject(movie);
 
                 sb.Append($"Successfully added : {movie.Title} to movies!");
 
-                data.Movies.Add(m);
-                data.SaveChanges();
+                dataContext.Movies.Add(m);
+                dataContext.SaveChanges();
             }
-            data.Dispose();
+            dataContext.Dispose();
 
             return sb.ToString();
         }    

@@ -3,7 +3,7 @@ using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services.ServicesContracts
 {
-    public interface IDeleteMethods
+    public interface IDeleteMethodsService
     {
         string DeleteFromDbUsingName(string movieTitle);
 

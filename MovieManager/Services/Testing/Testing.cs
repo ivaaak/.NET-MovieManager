@@ -77,7 +77,7 @@ namespace MovieManager.Services
             {
                 await jsonWriter.WriteLineAsync(result.Title);
                 await jsonWriter.WriteLineAsync($"    Overview: {result.Overview}");
-                await jsonWriter.WriteLineAsync($"    Poster URL: {SaveMovieToDbObject.BuildImageURL(result.PosterPath)}");
+                await jsonWriter.WriteLineAsync($"    Poster URL: {SaveMovieToDbObjectService.BuildImageURL(result.PosterPath)}");
                 await jsonWriter.WriteLineAsync($"    Release date: {result.ReleaseDate.ToString()}");
                 await jsonWriter.WriteLineAsync($"    Movie ID: {result.Id.ToString()}");
                 await jsonWriter.WriteLineAsync($"    Rating: {result.VoteAverage}");

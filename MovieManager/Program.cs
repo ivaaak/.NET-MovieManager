@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
 using MovieManager.Services;
+using MovieManager.Services.ServicesContracts;
 
 
 //Builder
@@ -19,6 +20,10 @@ builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Conf
 //builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<ISearchMethodsService, SearchMethodsService>();
+builder.Services.AddTransient<IAddToDbService, AddToDbService>();
+builder.Services.AddTransient<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
+builder.Services.AddTransient<IDeleteMethodsService, DeleteMethodsService>();
 
 //Build
 WebApplication app = builder.Build();
