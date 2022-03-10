@@ -1,17 +1,23 @@
 ﻿using MovieManager.Data.DBConfig;
+using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
-    public class ApiGetPopular
+    public class ApiGetPopularService : IApiGetPopularService
     {
-        public static List<SearchMovie> GetPopularMovies(int movieCount)
-        {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
+        private TMDbClient tmdbClient;
 
-            Task<SearchContainer<SearchMovie>> results = client.GetMoviePopularListAsync();
+        public ApiGetPopularService()
+        {
+            tmdbClient = new TMDbClient(Configuration.APIKey);
+        }
+
+        public List<SearchMovie> GetPopularMovies(int movieCount)
+        {
+            Task<SearchContainer<SearchMovie>> results = tmdbClient.GetMoviePopularListAsync();
 
             var returnList = new List<SearchMovie>();
 
@@ -27,17 +33,13 @@ namespace MovieManager.Services
             }
             Console.WriteLine(Environment.NewLine);
 
-            client.Dispose();
-
             return returnList;
         }
 
 
-        public static List<SearchTv> GetPopularShows(int showCount)
+        public List<SearchTv> GetPopularShows(int showCount)
         {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
-
-            Task<SearchContainer<SearchTv>> results = client.GetTvShowPopularAsync();
+            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowPopularAsync();
 
             var returnList = new List<SearchTv>();
 
@@ -52,8 +54,6 @@ namespace MovieManager.Services
 
                 Console.WriteLine($"Show name - {show.Name}");
             }
-
-            client.Dispose();
 
             return returnList;
         }

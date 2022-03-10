@@ -11,13 +11,16 @@ namespace MovieManager.Controllers
     {
         private readonly ILogger<MovieController> _logger;
         private readonly ISearchMethodsService searchMethods;
+        private readonly IApiGetPopularService apiGetPopularService;
 
         public MovieController(
             ILogger<MovieController> logger, 
-            ISearchMethodsService searchMethods)
+            ISearchMethodsService searchMethods, 
+            IApiGetPopularService apiGetPopularService)
         {
             _logger = logger;
             this.searchMethods = searchMethods;
+            this.apiGetPopularService = apiGetPopularService;
         }
 
 
@@ -31,17 +34,6 @@ namespace MovieManager.Controllers
             //var watchedMovies = GetUserMovieList(this.User.Id, "watched")
             //var currentMovies = GetUserMovieList(this.User.Id, "current")
             //var futureMovies = GetUserMovieList(this.User.Id, "future")
-
-            return View();
-        }
-
-
-        //[Authorize]
-        public IActionResult MovieList()
-        {
-            Console.WriteLine("Hit controller: Movie , hit view: MovieList");
-            //takes a PlaylistId and returns a PlaylistViewModel (List<Movie>) with all movies in it to be displayed
-            //can edit the playlist?
 
             return View();
         }
@@ -125,16 +117,51 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
-        //TODO, hardcoded basics work
-        public IActionResult Discover() => View();
 
-        public IActionResult Releases() => View();
+
+        
+
+        public IActionResult Discover()
+        {
+            var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows
+            var popularShows = apiGetPopularService.GetPopularShows(7);   //because the carousel breaks with more
+
+            var model = new MovieDiscoverViewModel()
+            {
+                DiscoverMovies = popularMovies,
+                DiscoverShows = popularShows,
+            };
+
+            return View(model);
+        }
+
+        public IActionResult Releases()
+        {
+            var popularMovies = apiGetPopularService.GetPopularMovies(15); //load 15 popular movies/shows
+            var popularShows = apiGetPopularService.GetPopularShows(15);
+
+            var model = new MovieDiscoverViewModel()
+            {
+                DiscoverMovies = popularMovies,
+                DiscoverShows = popularShows,
+            };
+
+            return View(model);
+        }
+
+
+        //[Authorize]
+        public IActionResult MovieList()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: MovieList");
+            //takes a PlaylistId and returns a PlaylistViewModel (List<Movie>) with all movies in it to be displayed
+            //can edit the playlist?
+
+            return View();
+        }
+
 
         public IActionResult Review() => View();
-
-
-       
-
 
 
         //This is default from ASP.NET, not sure if its needed

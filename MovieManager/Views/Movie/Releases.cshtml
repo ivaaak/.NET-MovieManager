@@ -1,20 +1,20 @@
-﻿@{
-    ViewData["Title"] = "Releases";
+﻿@model MovieDiscoverViewModel
+@{
+	ViewData["Title"] = "Releases";
 
-	var releasedMovieList = MovieManager.Services.GetFromDbService
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	//var releasedMovieList = MovieManager.Services.GetFromDbService.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	var releasedMovieList = Model.DiscoverMovies;
 }
 @section styles{
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link href="~/css/style.css" asp-append-version="true"  rel="stylesheet">
 	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleDiscover.css" asp-append-version="true" rel="stylesheet">
 
 	<script src="~/js/home.js"></script>
-	<script src="~/js/discoverGrid.js"></script>
+	<script src="~/js/releaseGrid.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 }
 
 
@@ -30,35 +30,33 @@
 	</div>
 </div>
 
-<div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
-	<div class="row">
-		@foreach (var movie in releasedMovieList)
-		{
-		<div class="col-12 col-md-6 col-lg-4">
-		<div class="card">
-			<div class="movieContainer">
-				<div class="flex-container">
-					<div class="flex-items">	
-						<a href="/Movie/MovieCard/@movie.MovieId">
-							<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
-						</a>
-					</div>
-					<div class="flex-items">
-						<h2 class="movieTitle"> @movie.Title </h2>
-						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-						<p class="movieDesc"> @movie.Overview </p>
-						<div class="buttonsList">
-							<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-							<input class="TrailerButton" id="TrailerButton" type="button" value="Write a Review" onclick=""><br/>
-						</div>
+<div class="grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+<div class="row">
+	@foreach (var movie in releasedMovieList)
+	{
+	string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
+	<div class="col-12 col-md-6 col-lg-4">
+	<div class="card">
+		<div class="movieContainer">
+			<div class="flex-container">
+				<div class="flex-items leftCol">	
+					<a href="/Movie/MovieCard/@movie.Id">
+						<img class="moviePoster" alt="Image" src="@posterUrl"> 
+					</a>
+				</div>
+				<div class="flex-items">
+					<h2 class="movieTitle"> @movie.Title </h2>
+					<p class="movieRating"> Rating - @movie.VoteAverage/10</p>
+					<p class="movieDesc"> @movie.Overview </p>
+					<div class="buttonsList">
+						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
+						<input class="TrailerButton" id="TrailerButton" type="button" value="Add to " href="/Movie/MovieCard/@movie.Id">
 					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-		}	  
 	</div>
+	</div>
+	}	  
 </div>
-
-<div class="skewedBoxDiscover2"></div> 
-<div class="bgReleases"></div> 
+</div>

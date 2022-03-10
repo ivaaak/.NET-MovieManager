@@ -1,59 +1,100 @@
-
-  body{
+body {
     z-index: 10;
     background-color: var(--main-bg-dark-gray) !important;
-  }
+}
 
 .card {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     background-color: var(--main-bg-gray) !important;
     border-radius: 0px !important;
-  }
-  .card-img-top{
+    width: 100% !important;
+}
+.card-img-top {
     border-radius: 0px !important;
-    height: 300px;
-    width: 350px !important;
-    padding-left: 70px !important;
-    padding-right: 70px !important;
     overflow: visible !important;
-  }
-  h3{
-    color:var(--main-bg-orange) !important;
-  }
-  p{
-      color: var(--p-text-whiteblue) !important;
-      height: 150px;
-      overflow: hidden;
-  }
-  
-  .skewedBoxDiscover2{
-    background: var(--movie-container-bg);
-    clip-path: polygon(6% 100%, 44% 100%, 100% 50%,100% 6%);
-    top:0%;
-    position: fixed;
-    z-index: -11;  
-    /*background: linear-gradient(-45deg, #ff0f7b,#ff930f,#ff8989,#ffa585,#f9b16e, #ef709b);*/
-    background: linear-gradient(-45deg, var(--dark-peach) 40%, white 60%);
-    background-size: 400% 400%;
-    animation: gradient 25s ease infinite;
-    height: 100vh;
-    width: 100vw;
-    z-index: -10;
-  }
-
-.bgReleases {
-    background: #090d13 !important;
-    top: 0%;
+}
+.flex-container{
+    width: 100% !important;
+    padding: 0 !important;
     left: 0%;
-    position: fixed;
-    z-index: -12;
-    height: 100vh;
-    width: 100vw;
+    padding-left: 0;
+    margin: 0 !important;
+    margin-left: 0;
+    align-content: center !important;
+    justify-content: left !important;
+}
+.flex-items {
+    justify-content: center !important;
+    align-content: center !important;
+    left: 0;
+    right: 0;
+}
+
+.leftCol {
+}
+.movieContainer{
+    width: 100% !important;
+}
+
+/* MOVIE CARD STYLE */
+.moviePoster {
+    width: 270px;
+    margin-right: 15%;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    align-content: center !important;
+    justify-content: center !important;
+    left: 0% !important;
+    height: 100%;
+    overflow: hidden;
+}
+.movieTitle {
+    font-size: 30px;
+    height: 90px;
+    padding-top: 16px;
+    align-content: center;
+    text-align: center;
+    color: var(--main-bg-orange);
+    padding-top: 10px;
+    margin: 0 !important;
+}
+.movieDesc {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    color: #dcdcff;
+    font-weight: lighter;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+    height: 196px;
+    overflow: hidden;
+}
+.movieRating {
+    font-size: 22px;
+    text-align: center !important;
+    height: 45px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.IMDBStar {
+    width: 16px;
+    height: 20px;
+    padding-bottom: 4px;
+}
+.addMovie {
+    height: 100%;
+    margin-left: 85px;
 }
 
 
+
+
+
   .list-view .row > [class*=col-] {
-    max-width: 100%;
+    max-width: 80%;
+    padding-left: 20%;
     flex: 0 0 100%;
   }
   .list-view .card {
@@ -78,14 +119,15 @@
     padding:0px;
     overflow-x: hidden;
     overflow-y: auto;
-    width: 80%;
+    width: 90vw !important;
     height: 90vh !important;
     position: fixed;
     top: 10%;
+
     justify-content: center;
     align-content: center;
-    left:16%;
-    right:16%;
+    left:5%;
+    right:10%;
   }
 
   /*move buttons*/
@@ -95,12 +137,10 @@
     top:0%;
     z-index: 200;
   }
-
   * {
     box-sizing: border-box;
     margin: 0; padding: 0;
   }
- 
   :active, :hover, :focus {
     outline: 0 !important;
     outline-offset: 0;
@@ -111,11 +151,14 @@
     content: "";
   }
   
+
+
+
   .btn-holder {
     display: fixed;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 100vw;
+    width: 100vw;
     margin: 0px 0px;
   }
   .btn {
@@ -127,28 +170,34 @@
     margin-right: 0px !important;
     cursor: pointer;
     margin: 0px 0px 0px;
-    min-width: 180px;
   }
-    .btn span {         
-      position: relative;
-      display: inline-block;
-      font-size: 18px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      top: 0; left: 0;
-      width: 100%;
-      padding: 10px 10px;
-      transition: 0.3s;
-    }
-  
+  .btn span {         
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    top: 0; left: 0;
+    width: 100%;
+    padding: 10px 10px;
+    transition: 0.3s;
+  }
 
-  
   /*--- btn-2 ---*/
+.btn2 {
+    position: fixed;
+    top: 0%;
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid var(--bg-white) !important;
+    margin-right: 0px !important;
+    cursor: pointer;
+    margin: 0px 0px 0px;
+}
   .btn-2::before {
     background-color: rgb(255, 255, 255);
     transition: 0.3s ease-out;
-    
   }
   .btn-2 span {
     color: var(--bg-white);
@@ -182,21 +231,4 @@
   }
   .btn.hover-slide-up:hover::before {
     height: 100%;
-  }
-  
-
-
-  #particles-js{
-    position: fixed;
-    top:0%;
-    left:0%;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    background-image: url('');
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    z-index: -1;
-    opacity: 0.4;
   }

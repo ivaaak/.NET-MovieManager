@@ -1,18 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Playlist";
-    var movieList = MovieManager.Services.GetFromDbService.GetListFromDBbyTitle("Superman");
+    var movieList = MovieManager.Services.GetFromDbService.GetListFromDBbyTitle("Batman");
 
 }
 @section styles{
-	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/style.css" asp-append-version="true"  rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleDiscover.css" asp-append-version="true" rel="stylesheet">
 
 	<script src="~/js/home.js"></script>
-	<script src="~/js/discoverGrid.js"></script>
+	<script src="~/js/releaseGrid.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 }
 
 <div class="container mb-3 mt-3"">
@@ -26,20 +26,32 @@
 	</div>
 </div>
 
-<div class="container grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
-	@foreach(var movie in movieList){
-		<div class="row">
-		  <div class="col-12 col-md-6 col-lg-4">
-			<div class="card">
-				<a href="/Movie/MovieCard/@movie.MovieId">
-					<img class="card-img-top" src="@movie.PosterUrl" alt="Card image cap">
-				</a>
-			  <div class="card-body">
-				<h3 class="card-title">@movie.Title</h3>
-				<p class="card-text">@movie.Overview</p>
-			  </div>
+<div class="grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+<div class="row">
+	@foreach (var movie in movieList)
+	{
+	<div class="col-12 col-md-6 col-lg-4">
+	<div class="card">
+		<div class="movieContainer">
+			<div class="flex-container leftCol">
+				<div class="flex-items">	
+					<a href="/Movie/MovieCard/@movie.MovieId">
+						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
+					</a>
+				</div>
+				<div class="flex-itemsRight">
+					<h2 class="movieTitle"> @movie.Title </h2>
+					<p class="movieRating"> Rating - @movie.Rating/10</p>
+					<p class="movieDesc"> @movie.Overview </p>
+					<div class="buttonsList">
+						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
+						<input class="TrailerButton" id="TrailerButton" type="button" value="Add to " href="/Movie/MovieCard/@movie.MovieId">
+					</div>
+				</div>
 			</div>
-		  </div>
 		</div>
-	}
+	</div>
+	</div>
+	}	  
+</div>
 </div>

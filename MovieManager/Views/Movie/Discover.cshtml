@@ -1,9 +1,10 @@
-﻿@{
+﻿@model MovieDiscoverViewModel
+@{
 	//Add DiscoverListViewModel
 	ViewData["Title"] = "Discover";
 
-	var discoverMovieList = MovieManager.Services.GetFromDbService
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	//var discoverMovieList = MovieManager.Services.GetFromDbService.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+	var discoverMovieList = Model.DiscoverMovies;
 	int counter = 1;
 }
 @section styles{
@@ -29,19 +30,20 @@
 <ul class="carousel">
 	@foreach(var movie in discoverMovieList)
 	{
+		string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
 		<label for="@counter">
 			<div class="movieContainer">
 				<div class="flex-container">
 				<div class="flex-items">
-					<img class="moviePosterDiscover" alt="Image" src="@movie.PosterUrl"> 	
+					<img class="moviePosterDiscover" alt="Image" src="@posterUrl"> 	
 				</div>
 				<div class="flex-items">
+					<a href="/Movie/MovieCard/@movie.Id">  
 					<h2 class="movieTitleDiscover"> @movie.Title </h2>
-					<p class="movieRatingDiscover"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+					</a>
+
+					<p class="movieRatingDiscover"> <img class="IMDBStar" src="~/img/star.png"> @movie.VoteAverage/10 - Rating</p>
 					<p class="movieDescDiscover"> @movie.Overview </p>
-					<div class="buttonsListDiscover">
-						<a class="TrailerButtonDiscover" href="/Movie/MovieCard/@movie.MovieId"> Movie Details: </a>
-					</div>
 				</div>
 				</div>
 			</div>
@@ -59,4 +61,3 @@
   <label for="6"></label>
   <label for="7"></label>
 </ul>
-

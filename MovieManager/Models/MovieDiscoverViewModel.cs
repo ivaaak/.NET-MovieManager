@@ -1,4 +1,4 @@
-﻿using MovieManager.Data.DataModels;
+﻿using TMDbLib.Objects.Search;
 
 namespace MovieManager.Models
 {
@@ -6,7 +6,9 @@ namespace MovieManager.Models
     {
         public MovieDiscoverViewModel() { }
 
-        public List<Movie> DisoverMoviesList { get; set; }
+        public List<SearchMovie> DiscoverMovies { get; set; }
+
+        public List<SearchTv> DiscoverShows { get; set; }
 
     }
 }

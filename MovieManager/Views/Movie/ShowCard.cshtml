@@ -54,13 +54,13 @@
 		string posterUrl = "https://image.tmdb.org/t/p/w500"+@actor.ProfilePath;
 		<div class="movieContainer">
 			<div class="flex-container">
-				<div class="flex-items">	
-						<img class="moviePoster" alt="Image" src="@posterUrl">
-				</div>
-				
 				<a href="/Movie/ActorCard/@actor.Id">
-				<p class="roleTitle"> @actor.Name <br/><br/>Character: @actor.Character </p>
+				<div class="flex-items">	
+					<img class="moviePoster" alt="Image" src="@posterUrl">
+				</div>
 				</a>
+				
+				<p class="roleTitle"> @actor.Name <br/><br/>Character: @actor.Character </p>
 			</div>
 		</div>
 		}

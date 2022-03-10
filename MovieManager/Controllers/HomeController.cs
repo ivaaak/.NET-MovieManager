@@ -2,20 +2,22 @@
 using Microsoft.Extensions.Caching.Memory;
 using MovieManager.Models;
 using MovieManager.Services;
+using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Register() => View("Areas/Identity/Pages/Account/Register");
-        public IActionResult Home() => View();
+        private readonly IApiGetPopularService apiGetPopularService;
 
         private readonly IMemoryCache cache;
 
-
-        public HomeController(IMemoryCache cache)
+        public HomeController(
+            IMemoryCache cache,
+            IApiGetPopularService apiGetPopularService)
         {
             this.cache = cache;
+            this.apiGetPopularService = apiGetPopularService;
         }
 
 
@@ -23,8 +25,8 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine("Hit controller: Home , hit view: Index");
 
-            var popularMovies = ApiGetPopular.GetPopularMovies(15);
-            var popularShows = ApiGetPopular.GetPopularShows(15);
+            var popularMovies = apiGetPopularService.GetPopularMovies(15); //load 15 popular movies/shows
+            var popularShows = apiGetPopularService.GetPopularShows(15);
 
             var model = new IndexViewModel()
             {
@@ -36,7 +38,7 @@ namespace MovieManager.Controllers
         }
 
         public IActionResult Error() => View();
-
-        //this works
+        public IActionResult Register() => View("Areas/Identity/Pages/Account/Register");
+        public IActionResult Home() => View();
     }
 }

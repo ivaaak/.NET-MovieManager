@@ -1,4 +1,5 @@
 ﻿using MovieManager.Data.DataModels;
+using TMDbLib.Objects.Movies;
 
 namespace MovieManager.Models
 {
@@ -6,7 +7,7 @@ namespace MovieManager.Models
     {
         public MovieReleasesViewModel() { }
 
-        public List<Movie> MoviesList { get; set; }
+        public List<TMDbLib.Objects.Movies.Movie> MoviesList { get; set; }
         
         public Review MovieReview { get; set; }
         //reviews?

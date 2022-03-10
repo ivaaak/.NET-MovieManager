@@ -5,6 +5,7 @@
     justify-content: normal;
     align-items: normal;
     align-content: normal;
+    overflow: hidden !important;
 }
 
 .flex-items:nth-child(1) {
@@ -77,9 +78,9 @@
 .movieContainer {
     background: var(--main-bg-dark-gray);
     height: 30vh;
-    width: 10vw;
+    width: 60%;
     box-shadow: 0.1rem 0.1rem 0.5rem rgb(0 0 0 / 0.6), 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.8), 0.4rem 0.4rem 4rem rgb(0 0 0 / 1);
-    overflow: hidden;
+    overflow: hidden !important;
     z-index: -1 !important;
 }
 .moviePoster {
@@ -94,14 +95,15 @@
 .roleTitle {
     position: absolute;
     font-size: 24px;
-    height: 200px !important;
-    width: 200px !important;
-    padding-left: 0px !important;
-    padding-top: 10%;
+    height: 10% !important;
+    width: 35% !important;
+    padding-left: 20px !important;
+    padding-top: 20px;
     text-transform: uppercase;
     color: white;
     text-align: center !important;
-    overflow: hidden;
+    overflow: hidden !important;
+    overflow-block:hidden;
     text-decoration: none !important;
     text-decoration-line: none !important;
     z-index: -1;
