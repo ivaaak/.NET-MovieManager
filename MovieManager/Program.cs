@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
-using MovieManager.Data;
 using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 
@@ -15,8 +15,18 @@ builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Conf
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Add DB and Identity Services
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MovieContext>(); //pali s identityUser
+builder.Services.AddDefaultIdentity<User>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddRoles<IdentityRole>().AddEntityFrameworkStores<MovieContext>();
 
+//Custom Services
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ISearchMethodsService, SearchMethodsService>();
 builder.Services.AddTransient<IAddToDbService, AddToDbService>();
@@ -38,6 +48,8 @@ app.UseHttpsRedirection().UseStaticFiles().UseRouting()
     .UseAuthentication().UseAuthorization();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
+
+app.MapRazorPages(); //Login/Register views DONT load without this as they are RazorPages for some reason
 
 //Run the App
 app.Run();

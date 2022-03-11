@@ -38,6 +38,7 @@ namespace MovieManager.Data
             }
         }
 
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //playlist has many movies
@@ -53,5 +54,6 @@ namespace MovieManager.Data
             base.OnModelCreating(modelBuilder);
             //initializes Identity?
         }
+        */
     }
 }
