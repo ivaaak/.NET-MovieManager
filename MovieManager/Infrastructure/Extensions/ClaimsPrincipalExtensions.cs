@@ -1,7 +1,5 @@
 ﻿using System.Security.Claims;
 
-using static MovieManager.Areas.Admin.AdminConstants;
-
 namespace MovieManager.Infrastructure.Extensions
 {
     public static class ClaimsPrincipalExtensions
@@ -9,7 +7,7 @@ namespace MovieManager.Infrastructure.Extensions
         public static string Id(this ClaimsPrincipal user)
               => user.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        public static bool IsAdmin(this ClaimsPrincipal user)
-            => user.IsInRole(AdministratorRoleName);
+        //public static bool IsAdmin(this ClaimsPrincipal user)=> user.IsInRole(AdministratorRoleName);
+        //needs admin in areas
     }
 }

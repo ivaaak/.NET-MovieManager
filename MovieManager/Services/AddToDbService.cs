@@ -1,5 +1,5 @@
 ﻿using MovieManager.Data.DataModels;
-using MovieManager.Data.DBConfig;
+using MovieManager.Data;
 using MovieManager.Services.ServicesContracts;
 using System.Text;
 using TMDbLib.Objects.General;

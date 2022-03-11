@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieManager.Data.DBConfig;
+using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Services.ServicesContracts;
 

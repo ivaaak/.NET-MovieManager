@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
+using MovieManager.Data;
 using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 
@@ -10,14 +11,11 @@ using MovieManager.Services.ServicesContracts;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 //Add connection string
-var connectionString = builder.Configuration.GetConnectionString("DefauktConnection");
-builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.ConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Add DB and Identity Services
-builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.ConnectionString));
-
-//builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true);
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MovieContext>(); //pali s identityUser
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ISearchMethodsService, SearchMethodsService>();

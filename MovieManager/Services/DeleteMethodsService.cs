@@ -1,5 +1,5 @@
 ﻿using MovieManager.Services.ServicesContracts;
-using MovieManager.Data.DBConfig;
+using MovieManager.Data;
 using MovieManager.Data.DataModels;
 
 namespace MovieManager.Services

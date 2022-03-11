@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data.DataModels;
-using MovieManager.Models.DataModels;
+using MovieManager.Data.DBConfig;
 
-namespace MovieManager.Data.DBConfig
+namespace MovieManager.Data
 {
     public class MovieContext : IdentityDbContext<User> 
         //this overwrites the default Asp.Net Identity model

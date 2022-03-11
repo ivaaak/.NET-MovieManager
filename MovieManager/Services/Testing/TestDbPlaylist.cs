@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieManager.Data;
 using MovieManager.Data.DataModels;
-using MovieManager.Data.DBConfig;
-using MovieManager.Models.DataModels;
 
 namespace MovieManager.Services
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MovieManager.Data.DBConfig;
+using MovieManager.Data;
 using MovieManager.Infrastructure.Extensions;
 
 namespace MovieManager

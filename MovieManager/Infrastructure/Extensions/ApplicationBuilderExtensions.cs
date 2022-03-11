@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data.DataModels;
-using MovieManager.Data.DBConfig;
-using static MovieManager.Areas.Admin.AdminConstants;
+using MovieManager.Data;
 
 namespace MovieManager.Infrastructure.Extensions
 {
@@ -38,7 +37,7 @@ namespace MovieManager.Infrastructure.Extensions
         {
             var userManager = services.GetRequiredService<UserManager<User>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
+            /*
             Task
                 .Run(async () =>
                 {
@@ -66,6 +65,9 @@ namespace MovieManager.Infrastructure.Extensions
                 })
                 .GetAwaiter()
                 .GetResult();
+
+            this needs Admin in Areas
+             */
         }
     }
 }
