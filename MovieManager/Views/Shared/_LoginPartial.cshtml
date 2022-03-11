@@ -5,31 +5,20 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager  
 
+
 @if (SignInManager.IsSignedIn(User))
 {
-<!--ADD ADMIN PANEL AND CHECKS -->
-
-<!--No service for type 'Microsoft.AspNetCore.Identity.UserManager`1[Microsoft.AspNetCore.Identity.IdentityUser]' has been registered-->
-	
-
-	<li onclick="location.href = '/Movie/Main'" class="main-item"><span class="myprofile"></span></li>
-	<li class="main-item"><span class="watchlist"></span>
-		<ol class="sub-menu">
-			<li onclick="location.href = '/Movie/MovieList'" class="sub-item item-left"><span class="WLWatched"></span></li>
-			<li onclick="location.href = '/Movie/MovieList&name="watched"'" class="sub-item item-left"><span class="WLCurrent"></span></li>
-			<li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
-		</ol>
-	</li>
+<li onclick="location.href = '/Movie/Main'" class="main-item"><span class="myprofile"></span></li>
+<li class="main-item"><span class="watchlist"></span>
+	<ol class="sub-menu">
+		<li onclick="location.href = '/Movie/MovieList'" class="sub-item item-left"><span class="WLWatched"></span></li>
+		<li onclick="location.href = '/Movie/MovieList&name="watched"'" class="sub-item item-left"><span class="WLCurrent"></span></li>
+		<li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
+	</ol>
+</li>
 }
 else
 {
-	<li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-
-	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="Login "></span></li>
-	<li asp-area="Identity" asp-page="/Account/Register" class="main-item"><span class="Register "></span></li>
+	<li asp-area="Identity" onclick="location.href = '/Identity/Account/Login'" class="main-item"><span class="login"></span></li>
+	<li asp-area="Identity" onclick="location.href = '/Identity/Account/Register'" class="main-item"><span class="register"></span></li>
 }
