@@ -20,15 +20,15 @@ body {
 
 /* TITLE FIRST PART */
 .header {
-    font-size: 20vw;
+    font-size: 16vw;
     font-weight: 500;
     line-height: 1;
     text-transform: uppercase;
     position: absolute;
     font-family: "Anton", sans-serif !important;
     padding-top: 0px;
-    top: 12%;
-    left: 27% !important;
+    top: 18%;
+    left: 32% !important;
     height: 30vw !important;
     width: 100vw;
     color: #fff;
@@ -37,7 +37,7 @@ body {
     -webkit-text-fill-color: transparent;
     background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw-o.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw6-o.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/tw5-o.png");
     background-color: var(--dark-peach);
-    background-size: 25vw auto, 25vw auto, 20vw auto;
+    background-size: 20vw auto, 20vw auto, 16vw auto;
     background-repeat: repeat-x;
     background-position: 0px 15%, 200px 25%, -50px 2vw;
     z-index: 10;

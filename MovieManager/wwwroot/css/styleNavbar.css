@@ -164,16 +164,24 @@ li span::before, li span::after {
     -webkit-animation: fade 0.5s ease 0.2s both;
     animation: fade 0.5s ease 0.2s both;
 }
-
 .sub-item:nth-of-type(2) {
     -webkit-animation: fade 0.5s ease 0.4s both;
     animation: fade 0.5s ease 0.4s both;
 }
-
 .sub-item:nth-of-type(3) {
     -webkit-animation: fade 0.5s ease 0.6s both;
     animation: fade 0.5s ease 0.6s both;
 }
+.sub-item:nth-of-type(4) {
+    -webkit-animation: fade 0.5s ease 0.8s both;
+    animation: fade 0.5s ease 0.8s both;
+}
+.sub-item:nth-of-type(5) {
+    -webkit-animation: fade 0.5s ease 1s both;
+    animation: fade 0.5s ease 1s both;
+}
+
+
 
 @-webkit-keyframes fade {
     to {
@@ -233,14 +241,19 @@ li span::before, li span::after {
 .DiscShows::before, .DiscShows::after {
     content: "Search";
 }
-
 .DiscMovies::before, .DiscMovies::after {
     content: "Releases";
 }
-
 .DiscMisc::before, .DiscMisc::after {
     content: "Popular";
 }
+.DiscLatest::before, .DiscLatest::after {
+    content: "Latest";
+}
+.DiscTopRated::before, .DiscTopRated::after {
+    content: "Top Rated";
+}
+
 
 .main-item:nth-of-type(3):hover::before,
 .main-item:nth-of-type(4):hover::before {

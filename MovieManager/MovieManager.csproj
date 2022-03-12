@@ -58,6 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\fontAwesome\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 

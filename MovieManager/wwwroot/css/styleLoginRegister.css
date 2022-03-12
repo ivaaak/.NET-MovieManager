@@ -2,15 +2,14 @@ body{
     background-color: var(--main-bg-gray);
 }
 
-
-h1 { /* */
-    position: fixed;
-    top: 15%;
-    left: 40%;
-    width: 20vw;
+/* TEXT */
+h1 { 
+    position: relative;
+    width: 80%;
+    margin-left: 10%;
     font-family: 'Roboto', arial;
     font-weight: bold;
-    font-size: 64px;
+    font-size: 50px;
     padding-top: 30px;
     padding-bottom: 10px;
     color: white !important;
@@ -20,7 +19,7 @@ h1 { /* */
 h2 {
     padding-top: 16px;
     text-align: center;
-    font-size: x-large;
+    font-size: large;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     color: white !important;
@@ -32,31 +31,171 @@ h3 {
     color: white !important;
     text-transform: uppercase;
     text-align: center;
-}
-
-.form-label {
-    color: black !important;
-    text-transform: uppercase;
-}
-.form-labelRemember {
-    color: white !important;
-    text-transform: uppercase;
+    font-size: large;
 }
 p {
     font-family: 'Roboto', sans-serif;
     color: rgb(220,220,255);
     font-weight: lighter;
     text-align: center;
+    margin: 10px;
 }
 
-.formContainer{
-    position:fixed;
-    top:30%;
-    left: 30%;
-    width: 40%;
-}
 
+/* FORMS */
+.form-labelRemember {
+    color: white !important;
+    text-transform: uppercase;
+    margin-left: 40%;
+    width: 30%;
+}
+.formContainerReg {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    width: 30%;
+    background-color: var(--main-bg-dark-gray);
+    box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.6), 0.4rem 0.4rem 1rem rgb(0 0 0 / 0.8), 0.6rem 0.6rem 4rem rgb(0 0 0 / 1);
+    border-radius: 3%;
+}
+.formContainerLog {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    width: 30%;
+    background-color: var(--main-bg-dark-gray);
+    box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.6), 0.4rem 0.4rem 1rem rgb(0 0 0 / 0.8), 0.6rem 0.6rem 4rem rgb(0 0 0 / 1);
+    border-radius: 3%;
+}
+.formContainerLogout {
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    width: 30%;
+    height: 60vh;
+    background-color: var(--main-bg-dark-gray);
+    box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 0.6), 0.4rem 0.4rem 1rem rgb(0 0 0 / 0.8), 0.6rem 0.6rem 4rem rgb(0 0 0 / 1);
+    border-radius: 3%;
+}
 .form-floating {
     margin-bottom: 20px;
     border-radius: 0;
+    left: 5%;
+    width: 90%;
+}
+
+.formcontrol {
+    background: #fafafa;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 2px;
+    color: #666;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1em;
+    height: 50px;
+    transition: border-color 0.3s;
+    width: 100%;
+    padding-left: 10px;
+    z-index: -10;
+}
+.formcontrol input:focus {
+    border-bottom: 4px solid aliceblue;
+    outline: none;
+}
+.formcontrol::placeholder {
+    color: black !important;
+}
+
+
+.btn-primary {
+    height: 48px;
+    margin: 10px;
+    margin-left: 5%;
+    border-radius: 2px;
+    left: 5% !important;
+    width: 90% !important;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+
+
+/* LOCK ICON */
+.illustration {
+    text-align: center;
+    padding: 0px 0 0px;
+    font-size: 100px;
+}
+
+/* ANIMATION */
+.containerAnim {
+    position: fixed;
+    top: 48%;
+    left: 61%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2980ef;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+    z-index: 10;
+}
+.containerAnimLogout {
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    width: 10%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2980ef;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .1);
+}
+
+.loader {
+	height: 50%;
+	width: 50%;
+	position: relative;
+	transform-style: preserve-3d;
+	perspective: 1000px;
+    z-index: 10;
+}
+.loader .line {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	border-top: 5px solid #fff;
+}
+.loader .line--1 {
+	transform: rotateY(60deg) rotateX(30deg);
+	animation: spin--1 800ms linear infinite;
+}
+.loader .line--2 {
+	transform: rotateY(60deg) rotateX(-30deg);
+	animation: spin--2 800ms linear infinite;
+	animation-delay: 400ms;
+}
+
+@keyframes spin--1 {
+	to {
+		transform: rotateY(60deg) rotateX(30deg) rotate(360deg);
+	}
+}
+@keyframes spin--2 {
+	to {
+		transform: rotateY(60deg) rotateX(-30deg) rotate(360deg);
+	}
+}
+
+.emptyButton {
+    position: fixed;
+    width: 0 !important;
+    height: 0 !important;
+    left: 120%;
+    z-index: 10;
 }

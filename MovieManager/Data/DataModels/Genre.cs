@@ -7,7 +7,6 @@ namespace MovieManager.Data.DataModels
         [Key]
         public int GenreId { get; init; }
         
-        
         [Required]
         [StringLength(50)]
         public string GenreName { get; set; }
