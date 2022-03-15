@@ -70,7 +70,7 @@ body, html {
     color: #dcdcff;
     font-weight: lighter;
     width: 60%;
-    height: 48% !important;
+    height: 40% !important;
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -84,16 +84,57 @@ body, html {
 .movieDate {
     font-size: 22px;
     text-align: center;
-    width: 100px;
+    width: 108px;
     height: 22px;
     overflow: hidden;
     margin: 0;
     margin-left: 220px;
     padding: 0;
 }
-.IMDBStar{
-  width:16px;
-  height:20px;
+
+/* Genre list*/
+.genreItem {
+  display: block;
+  float: left;
+  margin-right: 0px;
+  font-family: Roboto;
+  font-weight: bold;
+  color: aliceblue;
+  margin-bottom: 0;
+}
+.genreContainer{
+    margin-left: 30px;
+}
+.genreContainer li {
+    list-style-type: none;
+    float: left;
+    margin-right: 2px;
+    margin-left: 0px;
+    position: center;
+    width: 80px;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0;
+}
+.genreContainer li:after {
+  content: "|";
+  position: absolute;
+  right: -5px;
+}
+.genreContainer li:last-child {
+  margin-right: 10px;
+  margin-left: 0px;
+}
+.genreContainer li:last-child:after {
+  display: none;
+}
+
+
+
+.IMDBStar {
+    width: 16px;
+    height: 20px;
 }
 
 
