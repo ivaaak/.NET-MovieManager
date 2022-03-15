@@ -6,12 +6,6 @@
 	// maybe? REVIEWS
 
 	var movie = Model.Movie;
-	Console.WriteLine($"Movie genre:");
-	foreach(var genre in movie.Genres)
-	{
-		Console.WriteLine($"  - {genre.Name}");
-
-	};
 
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
 }

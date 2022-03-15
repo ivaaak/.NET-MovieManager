@@ -32,6 +32,16 @@
 		<p class="movieDate">  @show.FirstAirDate </p>
 		<p class="movieDesc"> @show.Overview </p>
 
+		<ul class="genreContainer genreItem">
+		@foreach(var genre in show.Genres)
+		{
+			<li> @genre.Name</li>
+		}
+		<li> @show.NumberOfEpisodes eps</li>
+		<li> lang: @show.OriginalLanguage</li>
+		</ul>
+
+
 		<div class="buttonsList">
 			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
 			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>
