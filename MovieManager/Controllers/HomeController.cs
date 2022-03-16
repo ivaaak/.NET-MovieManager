@@ -8,13 +8,13 @@ namespace MovieManager.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IApiGetPopularService apiGetPopularService;
+        private readonly IApiGetListsService apiGetPopularService;
 
         private readonly IMemoryCache cache;
 
         public HomeController(
             IMemoryCache cache,
-            IApiGetPopularService apiGetPopularService)
+            IApiGetListsService apiGetPopularService)
         {
             this.cache = cache;
             this.apiGetPopularService = apiGetPopularService;
@@ -38,7 +38,5 @@ namespace MovieManager.Controllers
         }
 
         public IActionResult Error() => View();
-        public IActionResult Register() => View("Areas/Identity/Pages/Account/Register");
-        public IActionResult Home() => View();
     }
 }

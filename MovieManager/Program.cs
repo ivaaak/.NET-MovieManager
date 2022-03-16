@@ -32,7 +32,7 @@ builder.Services.AddTransient<ISearchMethodsService, SearchMethodsService>();
 builder.Services.AddTransient<IAddToDbService, AddToDbService>();
 builder.Services.AddTransient<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
 builder.Services.AddTransient<IDeleteMethodsService, DeleteMethodsService>();
-builder.Services.AddTransient<IApiGetPopularService, ApiGetPopularService>();
+builder.Services.AddTransient<IApiGetListsService, ApiGetListsService>();
 
 //Build
 WebApplication app = builder.Build();

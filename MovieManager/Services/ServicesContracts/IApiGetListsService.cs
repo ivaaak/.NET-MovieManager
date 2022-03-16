@@ -2,7 +2,7 @@
 
 namespace MovieManager.Services.ServicesContracts
 {
-    public interface IApiGetPopularService
+    public interface IApiGetListsService
     {
         List<SearchMovie> GetPopularMovies(int movieCount);
 

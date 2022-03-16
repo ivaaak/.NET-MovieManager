@@ -11,12 +11,12 @@ namespace MovieManager.Controllers
     {
         private readonly ILogger<MovieController> _logger;
         private readonly ISearchMethodsService searchMethods;
-        private readonly IApiGetPopularService apiGetPopularService;
+        private readonly IApiGetListsService apiGetPopularService;
 
         public MovieController(
             ILogger<MovieController> logger, 
             ISearchMethodsService searchMethods, 
-            IApiGetPopularService apiGetPopularService)
+            IApiGetListsService apiGetPopularService)
         {
             _logger = logger;
             this.searchMethods = searchMethods;

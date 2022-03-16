@@ -25,6 +25,5 @@ namespace MovieManager.Controllers
             Console.WriteLine("Controller hit: About, view hit: Privacy");
             return View();
         }
-        //all works
     }
 }
