@@ -81,15 +81,14 @@ namespace MovieManager.Services
         //========= FOR VIEWS DEBUG, REMOVE LATER  ==========
         //this is static for testing atm - calling in views
         //change after discover/popular/releases and main views are switched to viewmodels
-        public static List<Movie> GetUserMovieList(string UserId, string listName)
+        public static List<Movie> GetUserMovieList(string UserName, string listName) //used to be Id but this.User.Identity doesnt access Id
         {
             MovieContext context = new MovieContext();
 
             var result = context.Playlists
                 .Include(a => a.Movies)
-                .Where(u => u.User.Id == UserId && u.PlaylistName == listName) //playlistid = listname
+                .Where(u => u.User.UserName == UserName && u.PlaylistName == listName) //playlistid = listname
                 .FirstOrDefault();
-
 
             if (result == null) { return null; }
 
@@ -100,6 +99,8 @@ namespace MovieManager.Services
             }
             return result.Movies;
         }
+
+
         public static List<Movie> GetListFromDBbyTitle(string MovieTitle)
         {
             MovieContext context = new MovieContext();
@@ -110,6 +111,8 @@ namespace MovieManager.Services
 
             return result;
         }
+
+
         public static Movie GetMovieFromDBbyID(int MovieId)
         {
             MovieContext context = new MovieContext();

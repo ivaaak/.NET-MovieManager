@@ -28,6 +28,7 @@ namespace MovieManager.Controllers
         public IActionResult Main()
         {
             Console.WriteLine("Hit controller: Movie , hit view: Main");
+            var userId = this.User.Identity.Name;
             //add logic for getting movie for each column for each user
             //this requires Authentication to be fully working, 
             //var watched = MovieManager.Services.GetFromDB.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");

@@ -57,5 +57,4 @@ app.Run();
 
 
 //TestDbPlaylist.FillPlaylist();
-//UserOperations.CreateUser();
 //DbDebugMethods.FillMovies();

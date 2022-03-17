@@ -1,13 +1,13 @@
 ﻿@{
 	ViewData["Title"] = "Profile Page";
 
-	//var movieListWatched = MovieManager.Models.DB_Operations.GetFromDB.GetUserMovieList(int UserId, "watched");
-	//d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1 - id
+	var userName = this.User.Identity.Name;
+
 	var watched = MovieManager.Services.GetFromDbService
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
+		.GetUserMovieList(userName, "current");
 	
 	var current = MovieManager.Services.GetFromDbService
-		.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "watched");
+		.GetUserMovieList(userName, "watched");
 
 	var allMovies = MovieManager.Services.GetFromDbService.GetListFromDBbyTitle("");
 }

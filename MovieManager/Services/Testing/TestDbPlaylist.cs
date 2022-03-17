@@ -21,29 +21,36 @@ namespace MovieManager.Services
             {
                 44217, 69740, 414906, 171274, 335984, 5511, 1592
             };
-
             foreach (var item in collection)
             {
-                //AddMovieToPlaylist(item, "bb01f542-8cb6-4ac5-9d75-f87fd89d75d9"); //watched
-                AddMovieToPlaylist(item, "b8534caa-bcba-4f60-89e3-7c48b4894269"); //current
+                AddMovieToPlaylist(item, "current", "ivo@ivo.com"); 
+            }
+
+
+            var collection2 = new List<int>
+            {
+                550,657,60622,399057,398181,
+            };
+            foreach (var item in collection2)
+            {
+                AddMovieToPlaylist(item, "watched", "ivo@ivo.com");
             }
         }
 
 
-        public static void AddMovieToPlaylist(int movieId, string PlaylistId)
+        public static void AddMovieToPlaylist(int movieId, string PlaylistName, string UserName)
         {
             var data = new MovieContext();
             var m = data.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
             if(m != null)
             {
-                Console.WriteLine($"Movie {m.Title} found !!!");
-                Console.WriteLine($"Movie ID {m.MovieId}");
-                Console.WriteLine($"Movie poster - {m.PosterUrl}");
+                Console.WriteLine($"Movie {m.Title} found in db !!!");
             }
 
+
             var playlist = data.Playlists
-                .Include(a => a.Movies)         //deba prostotiqta
-                .Where(p => p.PlaylistId == PlaylistId)
+                .Include(a => a.Movies)         //needed
+                .Where(p => p.User.UserName == UserName && p.PlaylistName == PlaylistName)
                 .FirstOrDefault();
             
             if(playlist != null)
@@ -55,7 +62,7 @@ namespace MovieManager.Services
             data.Playlists.Update(playlist);
             data.SaveChanges();
 
-            var check = data.Playlists.Where(p => p.PlaylistId == PlaylistId).FirstOrDefault();
+            var check = data.Playlists.Where(p => p.PlaylistName == PlaylistName && p.User.UserName == UserName).FirstOrDefault();
             Console.WriteLine($"Movie count in playlist: {check.Movies.Count}");
         }
 
