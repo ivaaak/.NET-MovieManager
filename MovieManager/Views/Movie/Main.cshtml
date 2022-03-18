@@ -1,13 +1,15 @@
-﻿@{
+﻿@model MovieListViewModel
+@using MovieManager.Services
+@using MovieManager.Models.DataModels
+
+@{
 	ViewData["Title"] = "Profile Page";
 
 	var userName = this.User.Identity.Name;
 
-	var watched = MovieManager.Services.GetFromDbService
-		.GetUserMovieList(userName, "current");
-	
-	var current = MovieManager.Services.GetFromDbService
-		.GetUserMovieList(userName, "watched");
+	var watched = Model.MoviesList;
+
+	var current = Model.MoviesList2;
 
 	var allMovies = MovieManager.Services.GetFromDbService.GetListFromDBbyTitle("");
 }
@@ -22,6 +24,9 @@
 }
  
 
+
+
+<head runat="server"></head>
 <!--=====LOAD MOVIE COLUMNS=====-->
 <main class="app" id="scrollBlackThin">
 	<h1 class="info1"> 
@@ -42,8 +47,14 @@
 			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Write a Review" onclick=""><br/>
+				
+				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
+					<button class="TrailerButton" type="submit" name="addToButton">▶ Trailer</button>
+				}
+				@using (Html.BeginForm("RemoveWatchedButtonClick", "Button")){
+					<button class="TrailerButton" type="submit" name="addToButton">Remove from Watched</button>
+				}
+
 			</div>
 		</div>
 		</div>
@@ -77,10 +88,16 @@
 			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>
 				
-				<progress max="100" value="50" data-label="Watched: 50%"></progress>
+				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
+					<button class="TrailerButton" type="submit" name="addToButton">▶   Trailer</button>
+				}
+				@using (Html.BeginForm("AddToWatchedButtonClick", "Button")){
+					<button class="TrailerButton" type="submit" name="addToButton">Add to Watched</button>
+				}
+
+				<!--ADD PROGRESS BAR TO CURRENT MOVIE/SHOW-->
+				<progress max="100" value="50" data-label="Watched: 50%"></progress> 
 			</div>
 		</div>
 		</div>
@@ -114,8 +131,14 @@
 			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Current Movies" onclick=""><br/>
+
+				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
+					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton"> ▶   Trailer</button>
+				}
+				@using (Html.BeginForm("AddToCurrentButtonClick", "Button")){
+					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton">Add To Current</button>
+				}
+
 			</div>
 		</div>
 		</div>

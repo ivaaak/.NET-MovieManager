@@ -19,6 +19,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Movie\Main.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Movie\ActorCard.cshtml~RF257ef21.TMP" />
   </ItemGroup>
 

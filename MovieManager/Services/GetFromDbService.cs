@@ -92,11 +92,8 @@ namespace MovieManager.Services
 
             if (result == null) { return null; }
 
-            Console.WriteLine(result.Movies.Count);
-            foreach (var item in result.Movies)
-            {
-                Console.WriteLine($"Movie: {item.Title}");
-            }
+            Console.WriteLine($"The number of movies in playlist {result.PlaylistName} are {result.Movies.Count}");
+
             return result.Movies;
         }
 

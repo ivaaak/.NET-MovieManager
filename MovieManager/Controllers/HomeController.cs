@@ -38,5 +38,6 @@ namespace MovieManager.Controllers
         }
 
         public IActionResult Error() => View();
+        public IActionResult Test() => View();
     }
 }
