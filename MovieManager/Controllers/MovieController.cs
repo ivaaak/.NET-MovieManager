@@ -12,15 +12,18 @@ namespace MovieManager.Controllers
         private readonly ILogger<MovieController> _logger;
         private readonly ISearchMethodsService searchMethods;
         private readonly IApiGetListsService apiGetPopularService;
+        private readonly IGetFromDbService getFromDbService;
 
         public MovieController(
             ILogger<MovieController> logger, 
             ISearchMethodsService searchMethods, 
-            IApiGetListsService apiGetPopularService)
+            IApiGetListsService apiGetPopularService, 
+            IGetFromDbService getFromDbService)
         {
             _logger = logger;
             this.searchMethods = searchMethods;
             this.apiGetPopularService = apiGetPopularService;
+            this.getFromDbService = getFromDbService;
         }
 
 
@@ -31,15 +34,18 @@ namespace MovieManager.Controllers
             Console.WriteLine("Hit controller: Movie , hit view: Main");
 
             var userName = this.User.Identity.Name;
-            var watched = GetFromDbService.GetUserMovieList(userName, "current");
-            var current = GetFromDbService.GetUserMovieList(userName, "watched");
-            var future = GetFromDbService.GetUserMovieList(userName, "future");
+            var watched = getFromDbService.GetUserMovieList(userName, "current");
+            var current = getFromDbService.GetUserMovieList(userName, "watched");
+            var future = getFromDbService.GetUserMovieList(userName, "future");
+
+            var allMovies = getFromDbService.GetListFromDBbyTitle("");
 
             MovieListViewModel movieListViewModel = new MovieListViewModel()
             {
                 MoviesList = watched,
                 MoviesList2 = current,
                 //MoviesList3 = future
+                MoviesList3 = allMovies,
             };
 
             return View(movieListViewModel);
@@ -161,14 +167,32 @@ namespace MovieManager.Controllers
         public IActionResult MovieList()
         {
             Console.WriteLine("Hit controller: Movie , hit view: MovieList");
-            //takes a PlaylistId and returns a PlaylistViewModel (List<Movie>) with all movies in it to be displayed
-            //can edit the playlist?
 
-            return View();
+            var movies = getFromDbService.GetListFromDBbyTitle("Batman");
+
+            var model = new MovieListViewModel()
+            {
+                MoviesList = movies,
+            };
+
+            return View(model);
         }
 
 
-        public IActionResult Review() => View();
+        [Route("Movie/ActorCard/{id}")]
+        public IActionResult Review(int id)
+        {
+            Console.WriteLine($"Hit controller: Movie , hit view: Review");
+
+            var movieIdResult = searchMethods.SearchApiWithMovieID(id);
+            //var movieFromDb = GetFromDbService.GetMovieFromDBbyID(335984);
+            MovieCardViewModel model = new MovieCardViewModel()
+            {
+                Movie = movieIdResult.Movie,
+            };
+
+            return View(model);
+        }
 
 
         //This is default from ASP.NET, not sure if its needed

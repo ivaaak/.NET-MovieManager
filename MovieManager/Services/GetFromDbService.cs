@@ -5,9 +5,8 @@ using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Services
 {
-    public class GetFromDbService //:IGetFromDb uncomment after removing static methods
+    public class GetFromDbService : IGetFromDbService
     {
-        //needs context injected only?
         private readonly MovieContext dataContext;
 
         public GetFromDbService() { } //used for DI
@@ -17,7 +16,7 @@ namespace MovieManager.Services
             this.dataContext = data;
         }
 
-        public Movie GetMovieFromDBbyID(int MovieId, int i)
+        public Movie GetMovieFromDBbyID(int MovieId)
         {
 			Movie? result = dataContext.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
 
@@ -37,8 +36,7 @@ namespace MovieManager.Services
         }
 
 
-        public List<Movie> GetListFromDBbyTitle(string MovieTitle, int i) 
-            //int added to debug/recognize static method in views
+        public List<Movie> GetListFromDBbyTitle(string MovieTitle) 
         {
             var result = dataContext.Movies.Where(m => m.Title.Contains(MovieTitle)).ToList();
 
@@ -81,11 +79,9 @@ namespace MovieManager.Services
         //========= FOR VIEWS DEBUG, REMOVE LATER  ==========
         //this is static for testing atm - calling in views
         //change after discover/popular/releases and main views are switched to viewmodels
-        public static List<Movie> GetUserMovieList(string UserName, string listName) //used to be Id but this.User.Identity doesnt access Id
+        public List<Movie> GetUserMovieList(string UserName, string listName) //used to be Id but this.User.Identity doesnt access Id
         {
-            MovieContext context = new MovieContext();
-
-            var result = context.Playlists
+            var result = dataContext.Playlists
                 .Include(a => a.Movies)
                 .Where(u => u.User.UserName == UserName && u.PlaylistName == listName) //playlistid = listname
                 .FirstOrDefault();
@@ -98,7 +94,7 @@ namespace MovieManager.Services
         }
 
 
-        public static List<Movie> GetListFromDBbyTitle(string MovieTitle)
+        public static List<Movie> GetListFromDBbyTitle(string MovieTitle, int i)
         {
             MovieContext context = new MovieContext();
 
@@ -110,7 +106,7 @@ namespace MovieManager.Services
         }
 
 
-        public static Movie GetMovieFromDBbyID(int MovieId)
+        public static Movie GetMovieFromDBbyID(int MovieId, int i)
         {
             MovieContext context = new MovieContext();
 

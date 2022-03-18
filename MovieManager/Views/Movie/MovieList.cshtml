@@ -1,7 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Playlist";
-    var movieList = MovieManager.Services.GetFromDbService.GetListFromDBbyTitle("Batman");
-
+﻿@model MovieListViewModel
+@{
+	ViewData["Title"] = "Playlist";
+	var movieList = Model.MoviesList;
 }
 @section styles{
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />

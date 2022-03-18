@@ -13,5 +13,7 @@ namespace MovieManager.Services.ServicesContracts
         List<Movie> GetListFromDBbyTitle(string MovieTitle);
 
         List<Movie> GetUserMovieListObjects(string UserId, string ListType);
+        
+        List<Movie> GetUserMovieList(string UserName, string listName);
     }
 }

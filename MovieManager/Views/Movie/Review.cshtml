@@ -1,10 +1,10 @@
-﻿@using MovieManager.Services
+﻿@model MovieCardViewModel
+@using MovieManager.Services
 @using MovieManager.Models.DataModels
 @{
 	ViewData["Title"] = "Review";
-	//call this page using [HttpPost] with the Movie ID and User ID
-	var movieObj = GetFromDbService.GetMovieFromDBbyID(335984);
-
+	var movieObj = Model.Movie;
+	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movieObj.PosterPath;	
 }
 @section styles{
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
@@ -16,12 +16,12 @@
 <div class="MovieCard" >
 	<div class="flex-container">
 	   <div class="flex-items">	
-		   <img class="moviePoster" alt="Image" src="@movieObj.PosterUrl"> 	
+		   <img class="moviePoster" alt="Image" src="@posterMovieUrl"> 	
 		</div>
 		<!--Movie Data-->
 	   <div class="flex-items">
 		<h2 class="movieTitle">	Write a review of: @movieObj.Title </h2>
-		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.Rating/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
+		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.VoteAverage/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
 		
 		<textarea name="Text1" cols="60" rows="15"></textarea>
 

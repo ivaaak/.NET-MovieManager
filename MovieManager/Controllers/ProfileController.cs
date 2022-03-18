@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManager.Models;
-using System.Diagnostics;
 
 namespace MovieManager.Controllers
 {
@@ -12,7 +10,6 @@ namespace MovieManager.Controllers
         {
             _logger = logger;
         }
-
 
         //Review ?
 
