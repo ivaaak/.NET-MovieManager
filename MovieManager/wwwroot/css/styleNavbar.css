@@ -1,5 +1,7 @@
 @import url(https://allfont.net/allfont.css?fonts=roboto-bold);
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 
 :root {
     --main-bg-gray: #262a39;
@@ -31,14 +33,12 @@ nav {
     top: 0;
     height: 6%;
 }
-
 ol {
     width: 100%;
     margin: 0px !important;
     padding: 0px !important;
     list-style-type: none;
 }
-
 .main-menu {
     display: flex;
     position: relative;
@@ -47,7 +47,6 @@ ol {
     margin-left: 0 !important;
     padding-left: 0 !important;
 }
-
 li {
     width: 160px;
     position: relative;
@@ -55,7 +54,6 @@ li {
     margin-top: 0px !important;
     padding: 0 !important;
 }
-
 li span {
     width: 100%;
     height: 49px !important;
@@ -64,7 +62,6 @@ li span {
     transition: var(--ts);
    transform-style: preserve-3d;
 }
-
 li span::before, li span::after {
     width: 100%;
     padding: 16px 0;
@@ -82,9 +79,8 @@ li span::before, li span::after {
 .main-item:nth-of-type(4) {
     margin: 0 2px;
 }
-
-    .main-item:nth-of-type(3)::before,
-    .main-item:nth-of-type(4)::before {
+.main-item:nth-of-type(3)::before,
+.main-item:nth-of-type(4)::before {
         width: 100%;
         top: 35px;
         display: block;
@@ -97,12 +93,11 @@ li span::before, li span::after {
         transition: var(--ts);
         z-index: 100;
         content: "▾";
-    }
+}
 
 .main-item:hover > span {
     transform: var(--x90);
 }
-
 .main-item > span::before {
     background: var(--bg-white);
     color: rgb(0, 0, 0);
@@ -110,13 +105,13 @@ li span::before, li span::after {
     transform: var(--z24);
     box-shadow: 0 8px 6px -6px rgb(0, 0, 0);
 }
-
 .main-item > span::after {
     background: var(--main-bg-gray);
     /* was #008080 */
     color: #fff;
     transform: var(--xm90) var(--z24);
 }
+
 
 .home::before, .home::after {
     content: 'home';
@@ -298,3 +293,83 @@ li span::before, li span::after {
         }
 }
 
+
+/*Logout / search */
+.navbarContainer {
+    position: fixed;
+    top: 0%;
+    right: 40px;
+    height: 48px;
+    width: 20vw;
+    cursor: pointer;
+    margin-top: 0px !important;
+    padding: 0 !important;
+    z-index: 1000;
+}
+
+.buttonHolder {
+    margin-right: 0px;
+    align-content: flex-end !important;
+    align-items: flex-end !important;
+    align-self: flex-end !important;
+    width: 60px;
+    margin-right: 0 !important;
+    margin-left: 95% !important;
+}
+.logoutButton {
+    height: 52px;
+    /*width: 160px;*/
+    width: 60px;
+    border: none;
+    background-color: white;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.logoutButton:hover {
+    background-color: darkslateblue;
+}
+
+
+/* SEARCH BAR */
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    margin-top: 4px;
+    padding: 5px;
+    height: 30px;
+    border-radius: 2px;
+    outline: none;
+    color: #9DBFAF;
+}
+.searchTerm:focus {
+    color: #00B4CC;
+}
+
+.searchButton {
+    width: 40px;
+    height: 46px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 2px;
+    margin-top: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+    width: 90%;
+    height: 70%;
+    position: absolute;
+}

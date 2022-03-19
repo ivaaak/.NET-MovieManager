@@ -28,11 +28,12 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 //Custom Services
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<ISearchMethodsService, SearchMethodsService>();
-builder.Services.AddTransient<IAddToDbService, AddToDbService>();
-builder.Services.AddTransient<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
-builder.Services.AddTransient<IDeleteMethodsService, DeleteMethodsService>();
-builder.Services.AddTransient<IApiGetListsService, ApiGetListsService>();
+builder.Services.AddScoped<ISearchMethodsService, SearchMethodsService>();
+builder.Services.AddScoped<IAddToDbService, AddToDbService>();
+builder.Services.AddScoped<IGetFromDbService, GetFromDbService>();
+builder.Services.AddScoped<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
+builder.Services.AddScoped<IDeleteMethodsService, DeleteMethodsService>();
+builder.Services.AddScoped<IApiGetListsService, ApiGetListsService>();
 
 //Build
 WebApplication app = builder.Build();

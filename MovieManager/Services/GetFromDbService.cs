@@ -20,8 +20,6 @@ namespace MovieManager.Services
         {
 			Movie? result = dataContext.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
 
-            dataContext.Dispose();
-
             return result;
         }
 
@@ -39,8 +37,6 @@ namespace MovieManager.Services
         public List<Movie> GetListFromDBbyTitle(string MovieTitle) 
         {
             var result = dataContext.Movies.Where(m => m.Title.Contains(MovieTitle)).ToList();
-
-            dataContext.Dispose();
 
             return result;
         }
@@ -91,30 +87,6 @@ namespace MovieManager.Services
             Console.WriteLine($"The number of movies in playlist {result.PlaylistName} are {result.Movies.Count}");
 
             return result.Movies;
-        }
-
-
-        public static List<Movie> GetListFromDBbyTitle(string MovieTitle, int i)
-        {
-            MovieContext context = new MovieContext();
-
-            var result = context.Movies.Where(m => m.Title.Contains(MovieTitle)).ToList();
-
-            context.Dispose();
-
-            return result;
-        }
-
-
-        public static Movie GetMovieFromDBbyID(int MovieId, int i)
-        {
-            MovieContext context = new MovieContext();
-
-            Movie? result = context.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
-
-            context.Dispose();
-
-            return result;
         }
     }
 }

@@ -163,12 +163,18 @@ namespace MovieManager.Controllers
         }
 
 
+
         //[Authorize]
-        public IActionResult MovieList()
+        //[Route("Movie/MovieList/{id}")]
+        public IActionResult MovieList(string id)
         {
             Console.WriteLine("Hit controller: Movie , hit view: MovieList");
 
+            var userName = this.User.Identity.Name;
+
             var movies = getFromDbService.GetListFromDBbyTitle("Batman");
+            //this is for debug
+            // var movies = getFromDbService.GetListFromDB(id, userName);
 
             var model = new MovieListViewModel()
             {
