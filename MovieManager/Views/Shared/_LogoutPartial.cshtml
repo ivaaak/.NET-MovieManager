@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using MovieManager.Data.DataModels
 @using MovieManager.Infrastructure.Extensions;
+@using MovieManager.Views.Movie
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager  
@@ -12,16 +13,17 @@
 @if (SignInManager.IsSignedIn(User))
 {
 <div class="navbarContainer">
-   
+    <!--
     <div class="wrap">
        <div class="search">
-          <input type="text" class="searchTerm" placeholder="What are you looking for?">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-         </button>
+           using (Html.BeginForm("Search", "Movie", "searchTerm", "post", false, )){ 
+                <input type="text" class="searchTerm" placeholder="Search for a title?">
+                <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                </button>
        </div>
     </div>
-
+     -->
     <form class="buttonHolder" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
         <button class="logoutButton" type="submit" > <img src="~/img/logout.webp" width="40" height="40"></button>
     </form>

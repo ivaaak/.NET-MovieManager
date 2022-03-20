@@ -1,12 +1,17 @@
 ﻿using MovieManager.Data.DataModels;
 using TMDbLib.Objects.Search;
+using TMDbLib.Objects.TvShows;
 
 namespace MovieManager.Services.ServicesContracts
 {
     public interface ISaveMovieToDbObjectService
     {
-        Movie MovieApiToObject(SearchMovie result);
+        Movie SearchMovieApiToObject(SearchMovie result);
 
-        Movie ShowApiToObject(SearchTv result);
+        Movie SearchShowApiToObject(SearchTv result);
+
+        Movie MovieApiToObject(TMDbLib.Objects.Movies.Movie result);
+
+        Movie ShowApiToObject(TvShow result);
     }
 }

@@ -48,7 +48,7 @@ namespace MovieManager.Services
             {
                 if(movie != null) 
                 {
-                    dbMovies.Add(saveMovieToDbObjectService.MovieApiToObject(movie));
+                    dbMovies.Add(saveMovieToDbObjectService.SearchMovieApiToObject(movie));
                 }
             }
 
@@ -68,7 +68,7 @@ namespace MovieManager.Services
             {
                 if (movie != null)
                 {
-                    dbShows.Add(saveMovieToDbObjectService.ShowApiToObject(movie));
+                    dbShows.Add(saveMovieToDbObjectService.SearchShowApiToObject(movie));
                 }
             }
 

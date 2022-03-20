@@ -28,15 +28,14 @@ namespace MovieManager.Services
         {
             var result = dataContext.Movies.Where(m => m.Title.Equals(MovieTitle)).FirstOrDefault();
 
-            dataContext.Dispose();
-
             return result;
         }
 
 
         public List<Movie> GetListFromDBbyTitle(string MovieTitle) 
         {
-            var result = dataContext.Movies.Where(m => m.Title.Contains(MovieTitle)).ToList();
+            var result = dataContext.Movies
+                .Where(m => m.Title.Contains(MovieTitle)).ToList();
 
             return result;
         }
@@ -54,17 +53,11 @@ namespace MovieManager.Services
                     Movie m = new Movie()
                     {
                         //MovieId = item.MovieId,
-                        //Title = context.Movies.Where(n => n.MovieId == item.Id).FirstOrDefault().Title,
-                        //PosterUrl = context.Movies.Where(n => n.MovieId == item.Id).FirstOrDefault().PosterUrl,
-                        //Overview = context.Movies.Where(n => n.MovieId == item.Id).FirstOrDefault().Overview,
-                        //Rating = context.Movies.Where(n => n.MovieId == item.Id).FirstOrDefault().Rating,
-                        //ReleaseDate = context.Movies.Where(n => n.MovieId == item.Id).FirstOrDefault().ReleaseDate,
                     };
 
                     userMovieObjectsList.Add(m);
                 }
             }
-            dataContext.Dispose();
             return userMovieObjectsList;
         }
 

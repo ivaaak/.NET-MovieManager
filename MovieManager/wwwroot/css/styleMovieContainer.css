@@ -43,6 +43,7 @@
     text-align: center;
     align-content: center;
     justify-content: center;
+    margin-bottom: 4px;
     left: 0%;
     color: #dcdcff;
     font-weight: lighter;
@@ -66,9 +67,27 @@
 }
 
 
+.movieDescSearchRes {
+    position: relative;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    left: 0%;
+    color: #dcdcff;
+    font-weight: lighter;
+    width: 100%;
+    height: 172px;
+    overflow: hidden;
+}
+
 
 .buttonsList {
+    position:relative;
     text-align: center;
+    margin-top: 0px;
+    overflow: hidden;
+    bottom: 0px !important;
 }
 .TrailerButton {
   appearance: none;
@@ -80,6 +99,7 @@
   font-size: 16px;
   font-weight: 800;
   margin-bottom: 0px;
+  margin-top: 2px;
   text-align: center;
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   width: 80%;

@@ -4,6 +4,9 @@ using MovieManager.Services.ServicesContracts;
 using System.Text;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
+using Microsoft.EntityFrameworkCore;
+using TMDbLib.Client;
+using MovieManager.Data.DBConfig;
 
 namespace MovieManager.Services
 {
@@ -11,7 +14,9 @@ namespace MovieManager.Services
     {
         private readonly MovieContext dataContext;
 
-        private ISaveMovieToDbObjectService service;
+        private ISaveMovieToDbObjectService saveMovieFromApiToDbObject;
+
+        private TMDbClient tmdbClient;
 
         public AddToDbService() { } //used for DI
 
@@ -19,9 +24,43 @@ namespace MovieManager.Services
             ISaveMovieToDbObjectService saveMovieToDbObjectService, 
             MovieContext data) 
         {
-            this.service = saveMovieToDbObjectService;
+            this.saveMovieFromApiToDbObject = saveMovieToDbObjectService;
             this.dataContext = data;
+            tmdbClient = new TMDbClient(Configuration.APIKey);
         }
+
+
+        public void AddMovieToUserPlaylist(int movieId, string PlaylistName, string Name) //playlistid?
+        {
+            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
+
+            if(movie == null) //movie doesnt exist in db
+            {
+                var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
+            };
+
+
+            dataContext.Movies.Add(movie); //add to db
+
+            var targetPlaylist = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(u => u.User.UserName == Name && u.PlaylistName == PlaylistName)
+                .FirstOrDefault();
+                
+            targetPlaylist.Movies.Add(movie);
+
+            dataContext.SaveChangesAsync();
+
+            Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
+        }
+
+
+
+
+
+
+
 
 
         public string AddMovies(SearchContainer<SearchMovie> results)
@@ -36,7 +75,7 @@ namespace MovieManager.Services
                     Console.WriteLine($"{result.Title} is already added to watched movies.");
                     continue; // check so nothing is added twice
                 }
-                var m = this.service.MovieApiToObject(result);
+                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(result);
 
                 if(m != null)
                 {
@@ -47,7 +86,6 @@ namespace MovieManager.Services
 
             dataContext.Movies.AddRange(validMovies);
             dataContext.SaveChanges();
-            dataContext.Dispose();
 
             Console.WriteLine(sb.ToString());
             return sb.ToString().Trim();
@@ -67,7 +105,7 @@ namespace MovieManager.Services
                     continue;
                 }
 
-                var m = this.service.ShowApiToObject(result);
+                var m = this.saveMovieFromApiToDbObject.SearchShowApiToObject(result);
 
                 if(m != null) { validShows.Add(m); }
 
@@ -76,7 +114,6 @@ namespace MovieManager.Services
 
             dataContext.Movies.AddRange(validShows);
             dataContext.SaveChanges();
-            dataContext.Dispose();
 
             Console.WriteLine(sb.ToString());
             return sb.ToString().Trim();
@@ -94,14 +131,13 @@ namespace MovieManager.Services
             }
             else
             {
-                var m = this.service.MovieApiToObject(movie);
+                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(movie);
 
                 sb.Append($"Successfully added : {movie.Title} to movies!");
 
                 dataContext.Movies.Add(m);
                 dataContext.SaveChanges();
             }
-            dataContext.Dispose();
 
             return sb.ToString();
         }    

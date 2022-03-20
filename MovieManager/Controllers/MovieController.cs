@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieManager.Models;
-using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 using System.Diagnostics;
-using System.Text;
 
 namespace MovieManager.Controllers
 {
@@ -34,8 +32,8 @@ namespace MovieManager.Controllers
             Console.WriteLine("Hit controller: Movie , hit view: Main");
 
             var userName = this.User.Identity.Name;
-            var watched = getFromDbService.GetUserMovieList(userName, "current");
-            var current = getFromDbService.GetUserMovieList(userName, "watched");
+            var watched = getFromDbService.GetUserMovieList(userName, "watched");
+            var current = getFromDbService.GetUserMovieList(userName, "current");
             var future = getFromDbService.GetUserMovieList(userName, "future");
 
             var allMovies = getFromDbService.GetListFromDBbyTitle("");

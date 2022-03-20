@@ -5,3 +5,9 @@ dotnet_diagnostic.CS8618.severity = none
 
 # CS8601: Possible null reference assignment.
 dotnet_diagnostic.CS8601.severity = none
+
+# IDE0003: Remove qualification
+dotnet_diagnostic.IDE0003.severity = none
+
+# CS1717: Assignment made to same variable
+dotnet_diagnostic.CS1717.severity = none

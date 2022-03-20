@@ -41,11 +41,20 @@
 					<div class="flex-items">
 						<h2 class="movieTitle"> @movie.Title </h2>
 						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-						<p class="movieDesc"> @movie.Overview </p>
+						<p class="movieDescSearchRes"> @movie.Overview </p>
 						<div class="buttonsList">
-							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
-							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
-							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watchlist" onclick=""><br/>
+							@using (Html.BeginForm("AddMovieToWatchedButtonClick", "Button",
+										new { movieId = @movie.MovieId },   FormMethod.Post)) //this is a db movie
+							{
+
+								<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched hidden</button>
+							}
+							@using (Html.BeginForm("AddMovieToWatchedButtonClick", "Button", FormMethod.Post)){
+								<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched editor</button>
+							}
+							@using (Html.BeginForm("AddMovieToWatchedButtonClick", "Button", FormMethod.Post)){
+								<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched id</button>
+							}
 						</div>
 					</div>
 				</div>
@@ -74,7 +83,7 @@
 					<div class="flex-items">
 						<h2 class="movieTitle"> @movie.Title </h2>
 						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-						<p class="movieDesc"> @movie.Overview </p>
+						<p class="movieDescSearchRes"> @movie.Overview </p>
 						<div class="buttonsList">
 							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to watched" onclick=""><br/>
 							<input class="TrailerButton" id="TrailerButton" type="button" value="Add to current" onclick=""><br/>
