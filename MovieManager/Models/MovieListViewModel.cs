@@ -6,6 +6,8 @@ namespace MovieManager.Models
     {
         public MovieListViewModel() { }
 
+        public string MoviesListName { get; set; }
+
         public List<Movie> MoviesList { get; set; }
         //Playlist instead of a movie list?
 

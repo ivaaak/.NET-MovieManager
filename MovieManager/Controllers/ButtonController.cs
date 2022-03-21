@@ -9,14 +9,16 @@ namespace MovieManager.Controllers
     {
         private readonly IAddToDbService addToDbService;
         private readonly IGetFromDbService getFromDbService;
-
+        private readonly IDeleteFromDbService deleteFromDbService;
 
         public ButtonController(
             IGetFromDbService getFromDbService,
-            IAddToDbService addToDbService)
+            IAddToDbService addToDbService,
+            IDeleteFromDbService deleteFromDbService)
         {
             this.getFromDbService = getFromDbService;
             this.addToDbService = addToDbService;
+            this.deleteFromDbService = deleteFromDbService;
         }
 
         //Main button click functionality
@@ -41,6 +43,15 @@ namespace MovieManager.Controllers
         }
 
 
+        public IActionResult RemoveMovieButtonClick(int movieId, string playlistName)
+        {
+            string UserName = this.User.Identity.Name;
+
+            deleteFromDbService.DeleteMovieFromUserPlaylist(movieId, playlistName, UserName);
+
+            return RedirectToAction("Main", "Movie");
+        }
+
         //TODO Logic and calling services
         public IActionResult ShowTrailerButtonClick()
         {
@@ -49,15 +60,6 @@ namespace MovieManager.Controllers
         }
 
 
-        public IActionResult RemoveWatchedButtonClick()
-        {
-            Console.WriteLine("REMOVE WATCHED MOVIE");
-            return RedirectToAction("Main", "Movie");
-        }
-
-
-
-        
 
     }
 }

@@ -1,17 +1,40 @@
 ﻿using MovieManager.Services.ServicesContracts;
 using MovieManager.Data;
 using MovieManager.Data.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieManager.Services
 {
-    public class DeleteMethodsService : IDeleteMethodsService
+    public class DeleteFromDbService : IDeleteFromDbService
     {
         private readonly MovieContext dataContext;
 
-        public DeleteMethodsService(MovieContext data)
+        public DeleteFromDbService(MovieContext data)
         {
             this.dataContext = data;
         }
+
+
+        public void DeleteMovieFromUserPlaylist(int movieId, string playlistName, string userName)
+        {
+            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
+
+
+            var targetPlaylist = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(u => u.User.UserName == userName && u.PlaylistName == playlistName)
+                .FirstOrDefault();
+
+            if (targetPlaylist.Movies.Contains(movie))
+            {
+                targetPlaylist.Movies.Remove(movie);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Removed Movie {movieId} from user - {userName}'s list: {playlistName}");
+        }
+
 
         public string DeleteFromDbUsingName(string movieTitle) //dont use due to cascade deletes in user lists
         {

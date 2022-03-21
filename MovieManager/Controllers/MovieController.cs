@@ -176,6 +176,7 @@ namespace MovieManager.Controllers
             var model = new MovieListViewModel()
             {
                 MoviesList = movies,
+                MoviesListName = playlistName,
             };
 
             return View(model);

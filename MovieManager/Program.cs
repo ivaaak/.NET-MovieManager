@@ -32,7 +32,7 @@ builder.Services.AddScoped<ISearchMethodsService, SearchMethodsService>();
 builder.Services.AddScoped<IAddToDbService, AddToDbService>();
 builder.Services.AddScoped<IGetFromDbService, GetFromDbService>();
 builder.Services.AddScoped<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
-builder.Services.AddScoped<IDeleteMethodsService, DeleteMethodsService>();
+builder.Services.AddScoped<IDeleteFromDbService, DeleteFromDbService>();
 builder.Services.AddScoped<IApiGetListsService, ApiGetListsService>();
 
 //Build

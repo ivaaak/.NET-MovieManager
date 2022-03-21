@@ -2,6 +2,7 @@
 @{
 	ViewData["Title"] = "Playlist";
 	var movieList = Model.MoviesList;
+	var listName = Model.MoviesListName;
 }
 @section styles{
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -38,6 +39,11 @@
 					<a href="/Movie/MovieCard/@movie.MovieId">
 						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
 					</a>
+					@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
+					{
+						<button class="RemoveButton" type="submit"> X </button>
+					}
 				</div>
 				<div class="flex-itemsRight">
 					<h2 class="movieTitle"> @movie.Title </h2>
@@ -45,7 +51,7 @@
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
 						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
-						<input class="TrailerButton" id="TrailerButton" type="button" value="Add to " href="/Movie/MovieCard/@movie.MovieId">
+						<input class="TrailerButton" id="TrailerButton" type="button" value=" This is stupid " href="/Movie/MovieCard/@movie.MovieId">
 					</div>
 				</div>
 			</div>

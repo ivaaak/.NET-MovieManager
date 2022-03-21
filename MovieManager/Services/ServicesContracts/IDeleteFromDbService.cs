@@ -3,8 +3,10 @@ using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services.ServicesContracts
 {
-    public interface IDeleteMethodsService
+    public interface IDeleteFromDbService
     {
+        void DeleteMovieFromUserPlaylist(int movieId, string playlistName, string userName);
+
         string DeleteFromDbUsingName(string movieTitle);
 
         string DeleteFromDbUsingId(int  movieId);

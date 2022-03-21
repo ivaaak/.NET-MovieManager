@@ -44,6 +44,11 @@
 			<a href="/Movie/MovieCard/@movie.MovieId">
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
+			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
+			{
+				<button class="RemoveButton" type="submit"> X </button>
+			}
 		</div>
 		<div class="flex-items">
 			<h2 class="movieTitle"> @movie.Title </h2>
@@ -55,7 +60,7 @@
 					<button class="TrailerButton" type="submit" name="addToButton">▶ Trailer</button>
 				}
 				@using (Html.BeginForm("RemoveWatchedButtonClick", "Button")){
-					<button class="TrailerButton" type="submit" name="addToButton">Remove from Watched</button>
+					<button class="TrailerButton" type="submit" name="addToButton">Rate & Review</button>
 				}
 				<!--add small remove button to all 3 cols, change remove from watched to write a review-->
 			</div>
@@ -89,6 +94,11 @@
 			<a href="/Movie/MovieCard/@movie.MovieId">
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
+			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
+			{
+				<button class="RemoveButton" type="submit"> X </button>
+			}
 		</div>
 		<div class="flex-items">
 			<h2 class="movieTitle"> @movie.Title </h2>
@@ -99,7 +109,7 @@
 				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
 					<button class="TrailerButton" type="submit" name="addToButton">▶   Trailer</button>
 				}
-				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
 							new { movieId = @movie.MovieId, playlistName = "watched" },FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
@@ -138,6 +148,11 @@
 			<a href="/Movie/MovieCard/@movie.MovieId">
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
+			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
+			{
+				<button class="RemoveButton" type="submit"> X </button>
+			}
 		</div>
 		<div class="flex-items">
 			<h2 class="movieTitle"> @movie.Title </h2>
@@ -148,7 +163,7 @@
 				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
 					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton"> ▶   Trailer</button>
 				}
-				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
 							new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
