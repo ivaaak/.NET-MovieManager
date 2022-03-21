@@ -8,7 +8,7 @@ namespace MovieManager.Services.ServicesContracts
     {
         void AddMovieToUserPlaylist(int movieId, string PlaylistName, string Name);
 
-        //void AddShowToUserPlaylist(SearchTv show, string PlaylistName, string Name);
+        void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name);
 
         string AddMovies(SearchContainer<SearchMovie> results);
 

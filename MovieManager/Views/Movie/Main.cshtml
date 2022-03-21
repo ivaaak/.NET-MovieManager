@@ -22,11 +22,9 @@
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
- 
 
 
 
-<head runat="server"></head>
 <!--=====LOAD MOVIE COLUMNS=====-->
 <main class="app" id="scrollBlackThin">
 	<h1 class="info1"> 
@@ -68,7 +66,6 @@
 </main>
 
 
-
 <main class="app2" id="scrollBlackThin">
 	<h1 class="info2"> 
 		<img src="~/img/current icon dark.png" width="40" height="40">Current
@@ -92,8 +89,10 @@
 				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
 					<button class="TrailerButton" type="submit" name="addToButton">▶   Trailer</button>
 				}
-				@using (Html.BeginForm("AddToWatchedButtonClick", "Button")){
-					<button class="TrailerButton" type="submit" name="addToButton">Add to Watched</button>
+				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+							new { movieId = @movie.MovieId, playlistName = "watched" },FormMethod.Post))
+				{
+					<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
 				}
 
 				<!--ADD PROGRESS BAR TO CURRENT MOVIE/SHOW-->
@@ -109,7 +108,6 @@
 		</a>
 	</div>
 </main>
-
 
 
 <main class="app3" id="scrollBlackThin">
@@ -135,8 +133,10 @@
 				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
 					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton"> ▶   Trailer</button>
 				}
-				@using (Html.BeginForm("AddToCurrentButtonClick", "Button")){
-					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton">Add To Current</button>
+				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+							new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post))
+				{
+					<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
 				}
 
 			</div>

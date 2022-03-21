@@ -38,24 +38,49 @@ namespace MovieManager.Services
             {
                 var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
                 movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
+                dataContext.Movies.Add(movie); //add to db
             };
-
-
-            dataContext.Movies.Add(movie); //add to db
 
             var targetPlaylist = dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(u => u.User.UserName == Name && u.PlaylistName == PlaylistName)
                 .FirstOrDefault();
-                
-            targetPlaylist.Movies.Add(movie);
 
-            dataContext.SaveChangesAsync();
+            if (!targetPlaylist.Movies.Contains(movie))
+            {
+                targetPlaylist.Movies.Add(movie);
+            }
+
+            dataContext.SaveChanges();
 
             Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
+        public void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name)
+        {
+            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
 
+            if (movie == null) //movie doesnt exist in db
+            {
+                var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;       //get from api
+                movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);   //turn to db object
+                dataContext.Movies.Add(movie); //add to db
+            };
+
+            var targetPlaylist = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(u => u.User.UserName == Name && u.PlaylistName == PlaylistName)
+                .FirstOrDefault();
+
+            if (!targetPlaylist.Movies.Contains(movie))
+            {
+                targetPlaylist.Movies.Add(movie);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
+        }
 
 
 

@@ -7,43 +7,41 @@ namespace MovieManager.Controllers
 {
     public class ButtonController : Controller
     {
-
-        private readonly ILogger<ButtonController> _logger;
-        private readonly IGetFromDbService getFromDbService;
         private readonly IAddToDbService addToDbService;
+        private readonly IGetFromDbService getFromDbService;
 
 
         public ButtonController(
-            ILogger<ButtonController> logger,
-            ISearchMethodsService searchMethods,
-            IApiGetListsService apiGetPopularService,
             IGetFromDbService getFromDbService,
             IAddToDbService addToDbService)
         {
-            _logger = logger;
             this.getFromDbService = getFromDbService;
             this.addToDbService = addToDbService;
         }
 
         //Main button click functionality
         [HttpPost]
-        public IActionResult AddMovieToWatchedButtonClick(int movieId) //add playlist name prop?
+        public IActionResult AddMovieToPlaylistButtonClick(int movieId, string playlistName) //add playlist name prop?
         {
-            string UserName = this.User.Identity.Name; //works
+            string UserName = this.User.Identity.Name;
 
-            addToDbService.AddMovieToUserPlaylist(movieId, "watched", "ivo@ivo.com");
-
-            Console.WriteLine($" Movie binded to model: {movieId}");
+            addToDbService.AddMovieToUserPlaylist(movieId, playlistName, UserName);
 
             return RedirectToAction("Main", "Movie");
         }
 
-        public IActionResult AddShowToWatchedButtonClick(SearchTv show, string PlaylistName)
+        [HttpPost]
+        public IActionResult AddShowToPlaylistButtonClick(int movieId, string playlistName) //add playlist name prop?
         {
+            string UserName = this.User.Identity.Name;
 
-            Console.WriteLine(" ADD MOVIE TO WATCHED");
+            addToDbService.AddShowToUserPlaylist(movieId, playlistName, UserName);
+
             return RedirectToAction("Main", "Movie");
         }
+
+
+
 
         public IActionResult AddToCurrentButtonClick()
         {
