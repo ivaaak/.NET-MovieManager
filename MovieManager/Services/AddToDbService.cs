@@ -58,14 +58,14 @@ namespace MovieManager.Services
 
         public void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name)
         {
-            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
+            var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;       //get from api
+            var movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);
 
-            if (movie == null) //movie doesnt exist in db
+            if (dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault() == null) //movie doesnt exist in db
             {
-                var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;       //get from api
-                movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);   //turn to db object
                 dataContext.Movies.Add(movie); //add to db
             };
+            
 
             var targetPlaylist = dataContext.Playlists
                 .Include(p => p.Movies)
@@ -79,7 +79,7 @@ namespace MovieManager.Services
 
             dataContext.SaveChanges();
 
-            Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
+            Console.WriteLine($"Added Show {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
 

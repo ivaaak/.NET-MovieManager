@@ -41,15 +41,6 @@ namespace MovieManager.Controllers
         }
 
 
-
-
-        public IActionResult AddToCurrentButtonClick()
-        {
-            Console.WriteLine("ADD MOVIE TO CURRENT");
-            return RedirectToAction("Main", "Movie");
-        }
-
-
         //TODO Logic and calling services
         public IActionResult ShowTrailerButtonClick()
         {
@@ -65,6 +56,8 @@ namespace MovieManager.Controllers
         }
 
 
+
+        
 
     }
 }

@@ -44,9 +44,21 @@
 
 		<div class="buttonsList">
 			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watched Movies" onclick=""><br/>
-			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Current Movies" onclick=""><br/>
-			<input class="TrailerButton" id="TrailerButton" type="button" value="Add to Watchlist" onclick=""><br/>
+			@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+						new { movieId = @show.Id, playlistName = "watched" },   FormMethod.Post)) 
+			{
+				<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
+			}
+			@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+						new { movieId = @show.Id, playlistName = "current" },   FormMethod.Post)) 
+			{
+				<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
+			}
+			@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
+						new { movieId = @show.Id, playlistName = "future" },   FormMethod.Post)) 
+			{
+				<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+			}
 		</div>
 		</div>
 	</div>

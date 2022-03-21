@@ -36,14 +36,14 @@ namespace MovieManager.Controllers
             var current = getFromDbService.GetUserMovieList(userName, "current");
             var future = getFromDbService.GetUserMovieList(userName, "future");
 
-            var allMovies = getFromDbService.GetListFromDBbyTitle("");
+            //var allMovies = getFromDbService.GetListFromDBbyTitle("");
 
             MovieListViewModel movieListViewModel = new MovieListViewModel()
             {
                 MoviesList = watched,
                 MoviesList2 = current,
-                //MoviesList3 = future
-                MoviesList3 = allMovies,
+                MoviesList3 = future
+                //MoviesList3 = allMovies,
             };
 
             return View(movieListViewModel);
@@ -164,15 +164,14 @@ namespace MovieManager.Controllers
 
         //[Authorize]
         //[Route("Movie/MovieList/{id}")]
-        public IActionResult MovieList(string id)
+        [HttpPost]
+        public IActionResult MovieList(string playlistName)
         {
             Console.WriteLine("Hit controller: Movie , hit view: MovieList");
 
             var userName = this.User.Identity.Name;
 
-            var movies = getFromDbService.GetListFromDBbyTitle("Batman");
-            //this is for debug
-            // var movies = getFromDbService.GetListFromDB(id, userName);
+            var movies = getFromDbService.GetUserMovieList(userName, playlistName);
 
             var model = new MovieListViewModel()
             {
@@ -183,7 +182,7 @@ namespace MovieManager.Controllers
         }
 
 
-        [Route("Movie/ActorCard/{id}")]
+        [Route("Movie/Review/{id}")]
         public IActionResult Review(int id)
         {
             Console.WriteLine($"Hit controller: Movie , hit view: Review");

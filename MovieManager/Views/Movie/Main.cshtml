@@ -11,7 +11,7 @@
 
 	var current = Model.MoviesList2;
 
-	var allMovies = Model.MoviesList3;
+	var future = Model.MoviesList3;
 }
 
 @section styles{
@@ -27,10 +27,15 @@
 
 <!--=====LOAD MOVIE COLUMNS=====-->
 <main class="app" id="scrollBlackThin">
-	<h1 class="info1"> 
-		<img src="~/img/watched icon2 dark.png" width="60" height="40">Watched
-		<div class="hidden-info1">Past</div>
-	</h1>
+	@using (Html.BeginForm("MovieList", "Movie",
+		new { playlistName = "watched" },FormMethod.Post)){
+		<button class="emptyButton">
+			<h1 class="info1"> 
+				<img src="~/img/watched icon2 dark.png" width="60" height="40">Watched
+				<div class="hidden-info1">Past</div>
+			</h1>
+		</button>
+	}
 	@foreach (var movie in watched)
 	{
 	<div class="movieContainer">
@@ -52,7 +57,7 @@
 				@using (Html.BeginForm("RemoveWatchedButtonClick", "Button")){
 					<button class="TrailerButton" type="submit" name="addToButton">Remove from Watched</button>
 				}
-
+				<!--add small remove button to all 3 cols, change remove from watched to write a review-->
 			</div>
 		</div>
 		</div>
@@ -67,10 +72,15 @@
 
 
 <main class="app2" id="scrollBlackThin">
-	<h1 class="info2"> 
-		<img src="~/img/current icon dark.png" width="40" height="40">Current
-		<div class="hidden-info2">Present</div>
-	</h1>
+	@using (Html.BeginForm("MovieList", "Movie",
+		new { playlistName = "current" },FormMethod.Post)){
+		<button class="emptyButton2">
+			<h1 class="info2"> 
+				<img src="~/img/current icon dark.png" width="40" height="40">Current
+				<div class="hidden-info2">Present</div>
+			</h1>
+		</button>
+	}
 	@foreach (var movie in current)
 	{
 	<div class="movieContainer">
@@ -111,11 +121,16 @@
 
 
 <main class="app3" id="scrollBlackThin">
-	<h1 class="info3"> 
-		<img src="~/img/watchlist1 dark.png" width="40" height="40">Watchlist
-		<div class="hidden-info3">Future</div>
-	</h1>	
-	@foreach (var movie in allMovies)
+	@using (Html.BeginForm("MovieList", "Movie",
+		new { playlistName = "future" },FormMethod.Post)){
+		<button class="emptyButton3">
+			<h1 class="info3"> 
+				<img src="~/img/watchlist1 dark.png" width="40" height="40">Watchlist
+				<div class="hidden-info3">Future</div>
+			</h1>	
+		</button>
+		}
+	@foreach (var movie in future)
 	{
 	<div class="movieContainer">
 		<div class="flex-container">
