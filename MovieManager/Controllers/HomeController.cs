@@ -37,6 +37,10 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
+        public IActionResult Playlists() => View();
+
+
+
         public IActionResult Error() => View();
         public IActionResult Test() => View();
     }

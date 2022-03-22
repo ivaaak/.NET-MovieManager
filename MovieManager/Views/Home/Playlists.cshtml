@@ -1,0 +1,47 @@
+﻿@model PlaylistsViewModel
+
+@using MovieManager.Services
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+    <script src="~/js/scripts.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/js/bootstrap.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/styleAbout.css" rel="stylesheet">
+}
+
+<!--foreach of all user playlists-->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	@foreach(var playlist in @Model.Playlists)
+	{
+	<div class="panel panel-default no-gutters">
+		<div class="panel-heading" role="tab" id="headingOne">
+			<h4 class="panel-title">
+				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						
+				</a>
+				</h4>
+			</div>
+		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<div class="panel-body">
+				Placeholder Text:Bootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front EndBootstrap + JS for the Front End .
+			</div>
+		</div>
+	</div>
+	}
+</div>
+
+
+<!--ADD form for adding a playlist: 
+    Playlist name
+    Public/Private
+-->

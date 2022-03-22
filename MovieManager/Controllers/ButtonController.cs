@@ -53,13 +53,11 @@ namespace MovieManager.Controllers
         }
 
         //TODO Logic and calling services
+        //Make this a popup window/embed trailer from a yt link
         public IActionResult ShowTrailerButtonClick()
         {
             Console.WriteLine(" TRAILER POPUP HERE ");
             return RedirectToAction("Main", "Movie");
         }
-
-
-
     }
 }
