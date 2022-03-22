@@ -28,6 +28,7 @@ namespace MovieManager.Api.Controllers
         public string? GetUserPlaylists(string userName)
         {
             var playlists = getFromDbService.GetAllUserPlaylists(userName);
+            //make async and add try/catch block
 
             return playlists.ToString();
         }
