@@ -8,6 +8,5 @@ namespace MovieManager.Infrastructure.Extensions
               => user.FindFirst(ClaimTypes.NameIdentifier).Value;
 
         //public static bool IsAdmin(this ClaimsPrincipal user)=> user.IsInRole(AdministratorRoleName);
-        //needs admin in areas
     }
 }

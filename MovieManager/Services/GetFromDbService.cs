@@ -9,37 +9,12 @@ namespace MovieManager.Services
     {
         private readonly MovieContext dataContext;
 
-        public GetFromDbService() { } //used for DI
+        public GetFromDbService() { } 
 
         public GetFromDbService(MovieContext data)
         {
             this.dataContext = data;
         }
-
-        public Movie GetMovieFromDBbyID(int MovieId)
-        {
-			Movie? result = dataContext.Movies.Where(m => m.MovieId == MovieId).FirstOrDefault();
-
-            return result;
-        }
-
-
-        public Movie GetMovieFromDBbyTitle(string MovieTitle)
-        {
-            var result = dataContext.Movies.Where(m => m.Title.Equals(MovieTitle)).FirstOrDefault();
-
-            return result;
-        }
-
-
-        public List<Movie> GetMovieListFromDBbyTitle(string MovieTitle) 
-        {
-            var result = dataContext.Movies
-                .Where(m => m.Title.Contains(MovieTitle)).ToList();
-
-            return result;
-        }
-
 
         public List<Playlist> GetAllUserPlaylists(string UserName)
         {
@@ -68,6 +43,31 @@ namespace MovieManager.Services
         }
 
 
+        public Movie GetMovieFromDBbyID(int MovieId)
+        {
+            Movie? result = dataContext.Movies
+                .Where(m => m.MovieId == MovieId).FirstOrDefault();
+
+            return result;
+        }
+
+        public Movie GetMovieFromDBbyTitle(string MovieTitle)
+        {
+            var result = dataContext.Movies
+                .Where(m => m.Title.Equals(MovieTitle)).FirstOrDefault(); 
+                //change equals to contains?
+
+            return result;
+        }
+
+        public List<Movie> GetMovieListFromDBbyTitle(string MovieTitle)
+        {
+            var result = dataContext.Movies
+                .Where(m => m.Title.Contains(MovieTitle)).ToList();
+
+            return result;
+        }
+
 
         //WIP
         public List<Movie> GetUserMovieListObjects(string UserId, string ListType)
@@ -89,7 +89,8 @@ namespace MovieManager.Services
             }
             return userMovieObjectsList;
         }
-        //GET TRAILER FROM API
+
+        //GET TRAILER FROM API/DB
 
     }
 }

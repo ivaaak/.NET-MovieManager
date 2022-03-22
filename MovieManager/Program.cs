@@ -6,7 +6,6 @@ using MovieManager.Data.DBConfig;
 using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 
-
 //Builder
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +49,7 @@ app.UseHttpsRedirection().UseStaticFiles().UseRouting()
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
 
-app.MapRazorPages(); //Login/Register views DONT load without this as they are RazorPages for some reason
+app.MapRazorPages(); //for Login/Register views
 
 //Run the App
 app.Run();

@@ -65,8 +65,6 @@ namespace MovieManager.Infrastructure.Extensions
                 })
                 .GetAwaiter()
                 .GetResult();
-
-            this needs Admin in Areas
              */
         }
     }
