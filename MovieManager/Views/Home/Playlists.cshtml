@@ -3,6 +3,7 @@
 @using MovieManager.Services
 @{
     ViewData["Title"] = "Home Page";
+    int counter = 0;
 }
 
 @section styles{
@@ -16,28 +17,24 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link href="~/css/styleAbout.css" rel="stylesheet">
+	<link href="~/css/stylePlaylists.css" rel="stylesheet">
 }
 
-<!--foreach of all user playlists-->
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	@foreach(var playlist in @Model.Playlists)
-	{
-	<div class="panel panel-default no-gutters">
-		<div class="panel-heading" role="tab" id="headingOne">
-			<h4 class="panel-title">
-				<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						Playlist: @playlist.PlaylistName
-				</a>
-				</h4>
-			</div>
-		<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-			<div class="panel-body">
-				FOREACH FOR THE PLAYLIST MOVIE NAMES HERE?
-			</div>
-		</div>
-	</div>
-	}
+
+
+<div class="accordeon check">
+    @foreach(var playlist in Model.Playlists)
+    {
+        <label for="panel+@counter"> @playlist.PlaylistName</label>
+        <input id="panel+@counter" type="checkbox" />
+        <div class="panel">
+            <h1>@playlist.PlaylistName Movies: </h1>
+            foreach(var movieText in @playlist.Movies){
+
+            }
+        </div>
+        counter++;
+    }
 </div>
 
 

@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: black;
+}
+
+
+/* Accordeon styling */
+.accordeon {
+    height: 100%;
+    margin: 200px auto;
+    overflow-y:scroll;
+}
+
+.accordeon label {
+    display: block;
+    padding: 1em;
+    font-weight: 700;
+    font-size: 1.5em;
+    background: #16A085;
+    color: #f5f5f5;
+    cursor: pointer;
+    border-bottom: 1px solid #1ABC9C;
+}
+.accordeon label:hover {
+	background: #2fe2bf;
+}
+.accordeon .panel {
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    background: #1ABC9C;
+    color: #f0f0f0;
+}
+
+/* Hide checkboxes and radio-buttons */
+.accordeon input[type="radio"], .accordeon input[type="checkbox"] {
+    display: none;
+}
+/* Show .panel for corresponding to checked radio or checkbox */
+.accordeon input[type="radio"]:checked + .panel, .accordeon input[type="checkbox"]:checked + .panel {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+    padding: 1.5em;
+}
