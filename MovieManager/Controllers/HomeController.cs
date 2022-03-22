@@ -12,12 +12,17 @@ namespace MovieManager.Controllers
 
         private readonly IMemoryCache cache;
 
+        private readonly IGetFromDbService getFromDbService;
+
+
         public HomeController(
             IMemoryCache cache,
-            IApiGetListsService apiGetPopularService)
+            IApiGetListsService apiGetPopularService,
+            IGetFromDbService getFromDbService)
         {
             this.cache = cache;
             this.apiGetPopularService = apiGetPopularService;
+            this.getFromDbService = getFromDbService;
         }
 
 
@@ -37,8 +42,22 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
-        public IActionResult Playlists() => View();
 
+        public IActionResult Playlists()
+        {
+            Console.WriteLine("Hit controller: Home , hit view: Playlists");
+
+            var userName = this.User.Identity.Name;
+
+            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
+
+            var model = new PlaylistsViewModel()
+            {
+                Playlists = userPlaylists,
+            };
+
+            return View(model);
+        }
 
 
         public IActionResult Error() => View();

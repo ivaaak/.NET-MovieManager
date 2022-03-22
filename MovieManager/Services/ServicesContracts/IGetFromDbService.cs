@@ -1,6 +1,4 @@
 ﻿using MovieManager.Data.DataModels;
-using TMDbLib.Objects.General;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services.ServicesContracts
 {
@@ -10,10 +8,12 @@ namespace MovieManager.Services.ServicesContracts
 
         Movie GetMovieFromDBbyTitle(string MovieTitle);
 
-        List<Movie> GetListFromDBbyTitle(string MovieTitle);
+        List<Movie> GetMovieListFromDBbyTitle(string MovieTitle);
 
         List<Movie> GetUserMovieListObjects(string UserId, string ListType);
         
         List<Movie> GetUserMovieList(string UserName, string listName);
+
+        List<Playlist> GetAllUserPlaylists(string UserName);
     }
 }
