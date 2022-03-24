@@ -4,7 +4,10 @@ using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
 using MovieManager.Services;
+using MovieManager.Services.MovieServices;
+using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
+
 
 //Builder
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -27,6 +30,8 @@ builder.Services.AddDefaultIdentity<User>(options =>
 
 //Custom Services
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
 builder.Services.AddScoped<ISearchMethodsService, SearchMethodsService>();
 builder.Services.AddScoped<IAddToDbService, AddToDbService>();
 builder.Services.AddScoped<IGetFromDbService, GetFromDbService>();

@@ -12,8 +12,8 @@ using MovieManager.Data;
 namespace MovieManager.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220302113114_UserOverwrite02")]
-    partial class UserOverwrite02
+    [Migration("20220323224324_240322MtMPlaylistMovie")]
+    partial class _240322MtMPlaylistMovie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,10 +104,12 @@ namespace MovieManager.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -144,10 +146,12 @@ namespace MovieManager.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -155,6 +159,185 @@ namespace MovieManager.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Actor", b =>
+                {
+                    b.Property<int>("ActorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActorId"), 1L, 1);
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActorId");
+
+                    b.ToTable("Actors");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Genre", b =>
+                {
+                    b.Property<int>("GenreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreId"), 1L, 1);
+
+                    b.Property<string>("GenreName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("GenreId");
+
+                    b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Movie", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MediaType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Overview")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlatformId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Popularity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PosterUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MovieId");
+
+                    b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Platform", b =>
+                {
+                    b.Property<int>("PlatformId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"), 1L, 1);
+
+                    b.Property<string>("PlatformName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("PlatformId");
+
+                    b.ToTable("Platforms");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Playlist", b =>
+                {
+                    b.Property<string>("PlaylistId")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PlaylistName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QrCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PlaylistId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Playlists");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.PlaylistMovie", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaylistId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("MovieId", "PlaylistId");
+
+                    b.HasIndex("PlaylistId");
+
+                    b.ToTable("PlaylistMovie");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"), 1L, 1);
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Rating")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ReviewContent")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ReviewTitle")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("ReviewId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("MovieManager.Data.DataModels.User", b =>
@@ -225,102 +408,6 @@ namespace MovieManager.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("MovieManager.Data.DataModels.UserPlaylist", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserPlaylists");
-                });
-
-            modelBuilder.Entity("MovieManager.Models.DataModels.Movie", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Actors")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MediaType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Overview")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlatformId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PlaylistId")
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<decimal?>("Popularity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("PosterUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("ReleaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MovieId");
-
-                    b.HasIndex("PlaylistId");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
-                {
-                    b.Property<string>("PlaylistId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PlaylistName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("QrCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserPlaylistUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("PlaylistId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserPlaylistUserId");
-
-                    b.ToTable("Playlists");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -372,16 +459,7 @@ namespace MovieManager.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MovieManager.Models.DataModels.Movie", b =>
-                {
-                    b.HasOne("MovieManager.Models.DataModels.Playlist", "Playlist")
-                        .WithMany("Movies")
-                        .HasForeignKey("PlaylistId");
-
-                    b.Navigation("Playlist");
-                });
-
-            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
+            modelBuilder.Entity("MovieManager.Data.DataModels.Playlist", b =>
                 {
                     b.HasOne("MovieManager.Data.DataModels.User", "User")
                         .WithMany("Playlists")
@@ -389,26 +467,41 @@ namespace MovieManager.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MovieManager.Data.DataModels.UserPlaylist", null)
-                        .WithMany("Playlists")
-                        .HasForeignKey("UserPlaylistUserId");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.PlaylistMovie", b =>
+                {
+                    b.HasOne("MovieManager.Data.DataModels.Movie", "Movie")
+                        .WithMany("PlaylistMovies")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieManager.Data.DataModels.Playlist", "Playlist")
+                        .WithMany("PlaylistMovies")
+                        .HasForeignKey("PlaylistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Playlist");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Movie", b =>
+                {
+                    b.Navigation("PlaylistMovies");
+                });
+
+            modelBuilder.Entity("MovieManager.Data.DataModels.Playlist", b =>
+                {
+                    b.Navigation("PlaylistMovies");
                 });
 
             modelBuilder.Entity("MovieManager.Data.DataModels.User", b =>
                 {
                     b.Navigation("Playlists");
-                });
-
-            modelBuilder.Entity("MovieManager.Data.DataModels.UserPlaylist", b =>
-                {
-                    b.Navigation("Playlists");
-                });
-
-            modelBuilder.Entity("MovieManager.Models.DataModels.Playlist", b =>
-                {
-                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

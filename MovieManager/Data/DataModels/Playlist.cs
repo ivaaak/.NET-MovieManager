@@ -21,10 +21,13 @@ namespace MovieManager.Data.DataModels
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
-        //[Required]
-        //public string UserId { get; set; }
+
+
 
         public List<Movie> Movies { get; init; }
+
+        public List<PlaylistMovie> PlaylistMovies { get; set; }
+
 
         public User User { get; set; } 
         //need for the one to many?

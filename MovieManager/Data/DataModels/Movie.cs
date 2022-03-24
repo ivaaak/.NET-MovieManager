@@ -23,17 +23,11 @@ namespace MovieManager.Data.DataModels
         public string? MediaType { get; set; } //TV/Movie/Episode
         public decimal? Popularity { get; set; }
 
-
         public int? LanguageId { get; set; } //change to string?
         public int? PlatformId { get; set; }
 
-        //public string?[] Actors { get; set; }
-        //many to many
-        //public string?[] Genre { get; set; }
-        //ImdbId
-        //Runtime
 
-        public Playlist? Playlist { get; set; }
-        //public IEnumerable<Playlist> Playlists { get; init; } = new List<Playlist>();
+        public List<Playlist> Playlists { get; set; }
+        public List<PlaylistMovie> PlaylistMovies { get; set; }
     }
 }

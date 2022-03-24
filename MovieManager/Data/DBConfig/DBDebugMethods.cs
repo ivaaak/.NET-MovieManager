@@ -33,7 +33,7 @@ namespace MovieManager.Data.DBConfig
 
        
         //fill tables for debug
-        public static void FillMovies(SearchMethodsService searchMethods, AddToDbService addToDb)
+        public void FillMovies(SearchMethodsService searchMethods, AddToDbService addToDb)
         {
 			System.Timers.Timer t = new System.Timers.Timer();
             t.Start();
