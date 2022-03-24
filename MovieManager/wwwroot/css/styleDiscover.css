@@ -133,7 +133,7 @@ body {
   /*move buttons*/
   .mb-3{
     position: fixed;
-    left:20%;
+    left:10%;
     top:0%;
     z-index: 200;
   }
@@ -158,7 +158,7 @@ body {
     display: fixed;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100vw;
+    width: 10vw;
     margin: 0px 0px;
   }
   .btn {
@@ -210,7 +210,10 @@ body {
   
   /* hover-slide-down */
   .hover-slide-down{
-    left:15%;
+    left:72%;
+    width: 8%;
+    height: 58px;
+    border-radius: 2px;
   }
   .btn.hover-slide-down::before {
     top: 0; left: 0; right: 0; 
@@ -221,9 +224,12 @@ body {
   }
   
   /*  hover-slide-up */
-  .btn.hover-slide-up{
-    right:15%;
-  }
+.btn.hover-slide-up {
+    right: 11%;
+    width: 8%;
+    height: 58px;
+    border-radius: 2px;
+}
 
   .btn.hover-slide-up::before {
     bottom: 0; left: 0; right: 0; 
@@ -232,3 +238,13 @@ body {
   .btn.hover-slide-up:hover::before {
     height: 100%;
   }
+.playlistTitle{
+    position:fixed;
+    width: 25%;
+    top: -1%;
+    left: 2%;
+    margin-top: 0;
+    text-transform: uppercase;
+    color: var(--dark-peach);
+
+}

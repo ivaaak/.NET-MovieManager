@@ -294,13 +294,15 @@ li span::before, li span::after {
 }
 
 
+
+
 /*Logout / search */
 .navbarContainer {
     position: fixed;
     top: 0%;
     right: 40px;
     height: 48px;
-    width: 20vw;
+    width: 10vw;
     cursor: pointer;
     margin-top: 0px !important;
     padding: 0 !important;
@@ -320,6 +322,7 @@ li span::before, li span::after {
     height: 52px;
     /*width: 160px;*/
     width: 60px;
+    margin-right: 10px;
     border: none;
     background-color: white;
     border-radius: 2px;

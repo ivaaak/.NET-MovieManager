@@ -28,11 +28,15 @@
         <label for="panel+@counter"> @playlist.PlaylistName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
+            @using (Html.BeginForm("MovieList", "Movie",
+                new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
+            {
+                <button class="playlistButton"> Go to playlist: @playlist.PlaylistName </button>
+            }
             @foreach(var movie in playlist.Movies)
             {
                 <h2> Title: @movie.Title Id: @movie.MovieId  </h2>
             }
-
         </div>
         counter++;
     }
