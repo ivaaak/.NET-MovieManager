@@ -1,6 +1,7 @@
 ﻿@model MovieCardViewModel
 @using MovieManager.Services
 @using MovieManager.Models.DataModels
+@using System.Linq
 @{
 	ViewData["Title"] = "Review";
 	var movieObj = Model.Movie;
@@ -13,29 +14,43 @@
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
 
-<div class="MovieCard" >
+<div class="MovieCard">
 	<div class="flex-container">
 	   <div class="flex-items">	
-		   <img class="moviePoster" alt="Image" src="@posterMovieUrl"> 	
+		   <a href="/Movie/MovieCard/@movieObj.Id">
+				<img class="moviePoster" alt="Image" src="@posterMovieUrl"> 	
+		   </a>
 		</div>
 		<!--Movie Data-->
-	   <div class="flex-items">
-		<h2 class="movieTitle">	Write a review of: @movieObj.Title </h2>
-		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.VoteAverage/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
+		@if (User.Identity.IsAuthenticated)
+		{
+			<div class="flex-items">
+			<h2 class="movieTitle">	Write a review of: @movieObj.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.VoteAverage/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
 		
-		<textarea name="Text1" cols="60" rows="15"></textarea>
+			<textarea name="Text1" cols="60" rows="15"></textarea>
 
-		<div class="buttonsList">
-			<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Rating" onclick=""><br/>
-			<input class="TrailerButton" id="TrailerButton" type="button" value="Post Review" onclick=""><br/>
-		</div>
-		</div>
+			<div class="buttonsList">
+				<input class="TrailerButton" id="TrailerButton" type="button" value="★ Rate ★" onclick=""><br/>
+				<input class="TrailerButton" id="TrailerButton" type="button" value="Post Review" onclick=""><br/>
+			</div>
+			</div>
+		}
+		else
+		{
+			<div class="flex-items">
+			<h2 class="movieTitle">	@movieObj.Title </h2>
+			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.VoteAverage/10 - Rating <p class="movieDesc"> @movieObj.ReleaseDate </p></p>
+			</div>
+		}
 	</div>
 </div>
 
 
-@foreach(var review in @movieObj.Reviews.Results)
-{
-	<h2> Author: @review.Author </h2>
-	<p> Review: @review.Content </p>
-}
+<div class="ReviewsContainer">
+	@foreach(var review in Model.Reviews){
+		<h2 class="ReviewAuthor">Author: @review.Author</h2>
+		<p class="ReviewContent">Review: @review.Content</p>
+	}
+
+</div>

@@ -13,9 +13,9 @@ namespace MovieManager.Controllers
         private readonly IGetFromDbService getFromDbService;
 
         public MovieController(
-            ILogger<MovieController> logger, 
-            ISearchMethodsService searchMethods, 
-            IApiGetListsService apiGetPopularService, 
+            ILogger<MovieController> logger,
+            ISearchMethodsService searchMethods,
+            IApiGetListsService apiGetPopularService,
             IGetFromDbService getFromDbService)
         {
             _logger = logger;
@@ -119,12 +119,6 @@ namespace MovieManager.Controllers
         {
             var model = searchMethods.GetActorWithID(id);
 
-            foreach (var item in model.MovieCredits.Cast)
-            {
-                Console.WriteLine($" Title: {item.Title}");
-                Console.WriteLine($" Title: {item.Character}");
-            }
-
             return View(model);
         }
 
@@ -184,17 +178,14 @@ namespace MovieManager.Controllers
         [Route("Movie/Review/{id}")]
         public IActionResult Review(int id)
         {
-            Console.WriteLine($"Hit controller: Movie , hit view: Review");
+            var movie = searchMethods.SearchApiWithMovieID(id);
+            var reviews = searchMethods.GetReviewWithMovieID(id);
 
-            var movieIdResult = searchMethods.SearchApiWithMovieID(id);
-            //var movieFromDb = GetFromDbService.GetMovieFromDBbyID(335984);
-            MovieCardViewModel model = new MovieCardViewModel()
-            {
-                Movie = movieIdResult.Movie,
-            };
+            movie.Reviews = reviews;
 
-            return View(model);
+            return View(movie);
         }
+
 
 
         //This is default from ASP.NET, not sure if its needed

@@ -1,4 +1,6 @@
 ﻿using MovieManager.Models;
+using TMDbLib.Objects.General;
+using TMDbLib.Objects.Reviews;
 
 namespace MovieManager.Services.ServicesContracts
 {
@@ -10,18 +12,21 @@ namespace MovieManager.Services.ServicesContracts
 
         List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME);
 
-        //save to Db
-        void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
-
-        void SearchShowTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
-
         MovieCardViewModel SearchApiWithMovieID(int id);
 
         ShowCardViewModel SearchApiWithShowID(int id);
 
         ActorViewModel GetActorWithID(int id);
 
-        Task SearchMovieVideos(string KEY, string Movie_Id);
+        List<ReviewBase> GetReviewWithMovieID(int id);
+
+        List<Video> SearchMovieTrailer(int id);
+
+
+        //save to Db
+        void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
+
+        void SearchShowTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
 
         bool IsCorrectTableType(string TableTypeInput);
     }

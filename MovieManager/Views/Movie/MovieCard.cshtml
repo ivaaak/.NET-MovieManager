@@ -59,6 +59,11 @@
 			{
 				<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
 			}
+			@using (Html.BeginForm("Review", "Movie",
+				new { Id = @movie.Id },   FormMethod.Post)) //this is a db movie
+			{
+				<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
+			}
 		</div>
 		</div>
 	</div>

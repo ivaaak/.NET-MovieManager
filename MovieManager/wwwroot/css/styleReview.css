@@ -5,10 +5,25 @@ body, html {
 .MovieCard{
   position: fixed;
   top:25%;
-  left: 25%;
+  left: 5%;
   width: 50vw;
   background-color: var(--main-bg-dark-gray);
-
+}
+.ReviewsContainer {
+    position: fixed;
+    top: 10%;
+    right:5%;
+    width: 35vw;
+    height: 90vh;
+    overflow-y: scroll;
+    background-color: var(--main-bg-dark-gray);
+}
+.ReviewAuthor{
+    color: var(--dark-peach);
+}
+.ReviewContent {
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .flex-container {

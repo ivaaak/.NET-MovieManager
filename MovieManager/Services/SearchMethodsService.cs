@@ -4,6 +4,7 @@ using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.Reviews;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
@@ -203,20 +204,20 @@ namespace MovieManager.Services
 
 
 
+        //get Reviews
+        public List<ReviewBase> GetReviewWithMovieID(int id)
+        {
+             var reviews = tmdbClient.GetMovieReviewsAsync(id).Result.Results;
+
+             return reviews;
+        }
 
         //TODO still
-        public async Task SearchMovieVideos(string KEY, string Movie_Id)
+        public List<Video> SearchMovieTrailer(int id)
         {
-            TMDbClient client = new TMDbClient(KEY);
+            var trailers = tmdbClient.GetMovieVideosAsync(id).Result.Results;
 
-            TMDbLib.Objects.Movies.Movie movie = await client.GetMovieAsync(Movie_Id, MovieMethods.Videos);
-
-            Console.WriteLine($"Movie title: {movie.Title}");
-
-            foreach (Video video in movie.Videos.Results)
-            {
-                Console.WriteLine($"Trailer: {video.Type} ({video.Site}), {video.Name}");
-            }
+            return trailers;
         }
         public bool IsCorrectTableType(string TableTypeInput)
         {
