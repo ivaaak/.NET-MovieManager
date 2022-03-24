@@ -130,8 +130,6 @@ namespace MovieManager.Controllers
 
 
 
-        
-
         public IActionResult Discover()
         {
             var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows

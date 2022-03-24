@@ -82,7 +82,45 @@ namespace MovieManager.Services
             Console.WriteLine($"Added Show {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
+        public void AddMovieToFavorites(int movieId, string Name) //playlistid?
+        {
+            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
 
+            if (movie == null) //movie doesnt exist in db
+            {
+                var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
+                dataContext.Movies.Add(movie); //add to db
+            };
+
+            var targetPlaylist = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(u => u.User.UserName == Name && u.PlaylistName == "favorites")
+                .FirstOrDefault();
+           
+            if(targetPlaylist == null)
+            {
+                targetPlaylist = new Playlist()
+                {
+                    PlaylistName = "favorites",
+                    CreatedOn = DateTime.Now,
+                };
+                dataContext.Playlists.Add(targetPlaylist);
+                dataContext.Users
+                    .Where(u => u.UserName == Name)
+                    .FirstOrDefault()
+                    .Playlists.Add(targetPlaylist); //fug
+            }
+
+            if (!targetPlaylist.Movies.Contains(movie))
+            {
+                targetPlaylist.Movies.Add(movie);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Added Movie {movieId} to user - {Name}'s favorites list");
+        }
 
 
 

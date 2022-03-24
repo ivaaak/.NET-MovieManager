@@ -3,6 +3,7 @@
 	ViewData["Title"] = "Playlist";
 	var movieList = Model.MoviesList;
 	var listName = Model.MoviesListName;
+	string movieOrShowCard = "MovieCard";
 }
 @section styles{
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -36,9 +37,16 @@
 		<div class="movieContainer">
 			<div class="flex-container leftCol">
 				<div class="flex-items">	
-					<a href="/Movie/MovieCard/@movie.MovieId">
+					@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+						else{ movieOrShowCard = "MovieCard"; }
+					<a href="/Movie/@movieOrShowCard/@movie.MovieId">
 						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
 					</a>
+					@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
+						new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
+					{
+						<button class="FavButton" type="submit"> ❤ </button>
+					}
 					@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
 						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
 					{

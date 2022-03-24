@@ -5,13 +5,11 @@
 @{
 	ViewData["Title"] = "Profile Page";
 
-	var userName = this.User.Identity.Name;
-
 	var watched = Model.MoviesList;
-
 	var current = Model.MoviesList2;
-
 	var future = Model.MoviesList3;
+
+	string movieOrShowCard = "MovieCard";
 }
 
 @section styles{
@@ -41,9 +39,16 @@
 	<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">
-			<a href="/Movie/MovieCard/@movie.MovieId">
+			@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+				else{ movieOrShowCard = "MovieCard"; }
+			<a href="/Movie/@movieOrShowCard/@movie.MovieId">				
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
+			@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId },   FormMethod.Post)) 
+			{
+				<button class="FavButton" type="submit"> ❤ </button>
+			}
 			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
 				new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
 			{
@@ -57,11 +62,13 @@
 			<div class="buttonsList">
 				
 				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
-					<button class="TrailerButton" type="submit" name="addToButton">▶ Trailer</button>
+					<button class="TrailerButton" type="submit">▶ Trailer</button>
 				}
-				@using (Html.BeginForm("RemoveWatchedButtonClick", "Button")){
-					<button class="TrailerButton" type="submit" name="addToButton">Rate & Review</button>
-				}
+				<a href="/Movie/Review/@movie.MovieId">
+					<button class="TrailerButton">Rate & Review</button>
+				</a>
+				
+
 				<!--add small remove button to all 3 cols, change remove from watched to write a review-->
 			</div>
 		</div>
@@ -91,11 +98,19 @@
 	<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">	
-			<a href="/Movie/MovieCard/@movie.MovieId">
+			@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+				else{ movieOrShowCard = "MovieCard"; }
+			<a href="/Movie/@movieOrShowCard/@movie.MovieId">
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
-			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+
+			@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
 				new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
+			{
+				<button class="FavButton" type="submit"> ❤ </button>
+			}
+			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
 			{
 				<button class="RemoveButton" type="submit"> X </button>
 			}
@@ -145,9 +160,16 @@
 	<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">	
-			<a href="/Movie/MovieCard/@movie.MovieId">
+			@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+				else{ movieOrShowCard = "MovieCard"; }
+			<a href="/Movie/@movieOrShowCard/@movie.MovieId">
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
+			@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
+				new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
+			{
+				<button class="FavButton" type="submit"> ❤  </button>
+			}
 			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
 				new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
 			{

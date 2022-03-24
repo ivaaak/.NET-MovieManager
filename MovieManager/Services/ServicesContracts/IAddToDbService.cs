@@ -10,6 +10,8 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name);
 
+        public void AddMovieToFavorites(int movieId, string Name);
+
         string AddMovies(SearchContainer<SearchMovie> results);
 
         string AddShows(SearchContainer<SearchTv> results);

@@ -28,9 +28,8 @@
         <label for="panel+@counter"> @playlist.PlaylistName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
-            <h1>@playlist.PlaylistName Movies: </h1>
-            foreach(var movieText in @playlist.Movies){
-
+            @foreach(var movieText in @playlist.Movies){
+               <h2> @movieText.MovieId </h2>
             }
         </div>
         counter++;

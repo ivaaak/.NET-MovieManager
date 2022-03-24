@@ -32,3 +32,10 @@
 		</div>
 	</div>
 </div>
+
+
+@foreach(var review in @movieObj.Reviews.Results)
+{
+	<h2> Author: @review.Author </h2>
+	<p> Review: @review.Content </p>
+}

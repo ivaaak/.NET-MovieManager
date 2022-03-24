@@ -81,11 +81,11 @@ namespace MovieManager.Services
                 QrCode = "qr-code-bytes here",
             };
 
-            var userPlaylist = data.UserPlaylists.Where(u => u.UserId == userId).FirstOrDefault();
-            userPlaylist.Playlists.Add(playlist);
-            Console.WriteLine($"Number of playlists for the user: {userPlaylist.Playlists.Count}");
+            //var userPlaylist = data.UserPlaylists.Where(u => u.UserId == userId).FirstOrDefault();
+            //userPlaylist.Playlists.Add(playlist);
+            //Console.WriteLine($"Number of playlists for the user: {userPlaylist.Playlists.Count}");
             
-            data.UserPlaylists.Update(userPlaylist);
+            //data.UserPlaylists.Update(userPlaylist);
             data.SaveChanges();
         }
 

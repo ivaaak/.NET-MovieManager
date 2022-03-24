@@ -52,6 +52,17 @@ namespace MovieManager.Controllers
             return RedirectToAction("Main", "Movie");
         }
 
+
+        [HttpPost]
+        public IActionResult FavoriteMovieButtonClick(int movieId, string playlistName) //add playlist name prop?
+        {
+            string UserName = this.User.Identity.Name;
+
+            addToDbService.AddMovieToFavorites(movieId, UserName);
+
+            return RedirectToAction("Main", "Movie");
+        }
+
         //TODO Logic and calling services
         //Make this a popup window/embed trailer from a yt link
         public IActionResult ShowTrailerButtonClick()
