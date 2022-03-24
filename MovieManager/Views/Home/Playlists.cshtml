@@ -2,7 +2,7 @@
 
 @using MovieManager.Services
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = @User.Identity.Name+" Playlists";
     int counter = 0;
 }
 
@@ -28,9 +28,11 @@
         <label for="panel+@counter"> @playlist.PlaylistName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
-            @foreach(var movieText in @playlist.Movies){
-               <h2> @movieText.MovieId </h2>
+            @foreach(var movie in playlist.Movies)
+            {
+                <h2> Title: @movie.Title Id: @movie.MovieId  </h2>
             }
+
         </div>
         counter++;
     }

@@ -20,6 +20,7 @@ namespace MovieManager.Services
         {
             var playlists = dataContext.Users
                 .Include(u => u.Playlists)
+                .ThenInclude(p => p.Movies) //?????
                 .Where(u => u.UserName == UserName)
                 .SelectMany(u => u.Playlists)
                 .ToList();
@@ -28,7 +29,7 @@ namespace MovieManager.Services
         }
         
 
-        public List<Movie> GetUserMovieList(string UserName, string listName) //used to be Id but this.User.Identity doesnt access Id
+        public List<Movie> GetUserMovieList(string UserName, string listName)
         {
             var result = dataContext.Playlists
                 .Include(a => a.Movies)
