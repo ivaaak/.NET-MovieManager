@@ -7,7 +7,6 @@ body{
     background-color: black;
 }
 
-
 /* Accordeon styling */
 .accordeon {
     max-height: 77vh;
@@ -56,9 +55,15 @@ body{
 .playlistButton{
     width: 40%;
     margin-left: 30%;
+    margin-bottom: 10px;
     height: 40px;
     text-transform: uppercase;
     font-size: 24px;
     padding: 0;
     border: none;
+}
+.movieTitleText {
+    color: aliceblue !important;
+    padding: 0px;
+    margin: 4px;
 }
