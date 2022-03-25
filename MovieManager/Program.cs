@@ -33,8 +33,3 @@ app.MapRazorPages(); //for Login/Register views
 
 //Run the App
 app.Run();
-
-
-
-//TestDbPlaylist.FillPlaylist();
-//DbDebugMethods.FillMovies();
