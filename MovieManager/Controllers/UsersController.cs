@@ -31,13 +31,23 @@ namespace MovieManager.Controllers
         }
 
 
-        //Create roles by changing the 
+        //Moved to Admin area with more functionality
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ManageUsers() 
+        {
+            var users = await service.GetUsers();
+
+            return Ok(users);
+        }
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> CreateRole()
         {
+            /*
             await roleManager.CreateAsync(new IdentityRole()
             {
                 Name = "Administrator"
             });
+            */
             return Ok();
         }
     }

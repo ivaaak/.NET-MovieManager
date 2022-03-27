@@ -37,6 +37,7 @@ namespace MovieManager.Services
                 {
                     Email = u.Email,
                     Id = u.Id,
+                    Name = u.UserName
                 })
                 .ToListAsync();
         }
@@ -48,8 +49,7 @@ namespace MovieManager.Services
 
             if (user != null)
             {
-                //user.FirstName = model.FirstName;
-                //user.LastName = model.LastName;
+                user.UserName = model.FirstName;
 
                 await repo.SaveChangesAsync();
                 result = true;

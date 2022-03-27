@@ -25,7 +25,7 @@ namespace MovieManager.Infrastructure
             services.AddScoped<IDeleteFromDbService, DeleteFromDbService>();
             services.AddScoped<IApiGetListsService, ApiGetListsService>();
 
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, UserService>(); //for admin user edit/view
 
             services.AddControllersWithViews();
 
