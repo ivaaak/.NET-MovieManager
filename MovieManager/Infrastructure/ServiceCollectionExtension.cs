@@ -6,6 +6,7 @@ using MovieManager.Data.DBConfig;
 using MovieManager.Services;
 using MovieManager.Services.MovieServices;
 using MovieManager.Services.Repositories;
+using MovieManager.Services.ServiceContracts;
 using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Infrastructure
@@ -23,6 +24,8 @@ namespace MovieManager.Infrastructure
             services.AddScoped<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
             services.AddScoped<IDeleteFromDbService, DeleteFromDbService>();
             services.AddScoped<IApiGetListsService, ApiGetListsService>();
+
+            services.AddScoped<IUserService, UserService>();
 
             services.AddControllersWithViews();
 
@@ -54,7 +57,9 @@ namespace MovieManager.Infrastructure
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedAccount = false;
             })
-            .AddRoles<IdentityRole>().AddEntityFrameworkStores<MovieContext>();
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<MovieContext>();
+            
 
             return services;
         }

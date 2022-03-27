@@ -1,33 +1,44 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieManager.Data.DataModels;
+using MovieManager.Services.ServiceContracts;
 
 namespace MovieManager.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
-        private UserManager<User> UserMngr { get; set; }
-        private SignInManager<User> SignInMngr { get; set; }
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UsersController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly UserManager<User> userManager;
+
+        private readonly IUserService service;
+
+        public UsersController(
+            RoleManager<IdentityRole> _roleManager,
+            UserManager<User> _userManager,
+            IUserService _service)
         {
-            UserMngr = userManager;
-            SignInMngr = signInManager; 
+            roleManager = _roleManager;
+            userManager = _userManager;
+            service = _service;
         }
 
-        public async Task<IActionResult> Register()
+        public IActionResult Index()
         {
-            User user = await UserMngr.FindByNameAsync("TestUser");
-            if (User == null)
-            {
-                user = new User();
-                user.UserName = "testUser";
-                user.Email = "testUser@test.com";
-
-                IdentityResult result = await UserMngr.CreateAsync(user, "Test123!");
-
-            }
             return View();
+        }
+
+
+        //Create roles by changing the 
+        public async Task<IActionResult> CreateRole()
+        {
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Administrator"
+            });
+            return Ok();
         }
     }
 }
