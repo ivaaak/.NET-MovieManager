@@ -1,5 +1,6 @@
 ﻿using MovieManager.Data.DataModels;
 using MovieManager.Services.ServicesContracts;
+using TMDbLib.Objects.People;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.TvShows;
 
@@ -82,6 +83,22 @@ namespace MovieManager.Services
             return m;
         }
 
+
+
+        public Actor ActorApiToObject(TMDbLib.Objects.People.Person result)
+        {
+            if (result.Name == null || result.Images==null) { return null; }
+
+            Actor a = new Actor()
+            {
+                ActorId = result.Id,
+                FullName = result.Name,
+                CountryCode = result.PlaceOfBirth,
+                Overview = result.Biography,
+                KnownFor = result.MovieCredits.Cast.ToList(),
+            };
+            return a;
+        }
 
         public static string BuildImageURL(string resImageURL)
         {

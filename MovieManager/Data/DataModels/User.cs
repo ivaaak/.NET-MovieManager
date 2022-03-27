@@ -21,14 +21,16 @@ namespace MovieManager.Data.DataModels
                 PlaylistName = "future"
             });
             //generate the 3 default playlists when creating an user
+
+            Actors = new List<Actor>();
+            //saved actors
         }
 
-        public string? THISWILLSHOW { get; set; }
-
-        //[Required]
-        //public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         public List<Playlist> Playlists { get; init; }
+        
+        public List<Actor> Actors { get; init; }
+
 
         //public string? CountryCode { get; set; }
 

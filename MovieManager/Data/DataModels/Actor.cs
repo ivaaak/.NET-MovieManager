@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TMDbLib.Objects.People;
 
 namespace MovieManager.Data.DataModels
 {
@@ -11,11 +12,12 @@ namespace MovieManager.Data.DataModels
         [StringLength(50)]
         public string FullName { get; set; }
 
+        public string Overview { get; set; }
+
         public string? CountryCode { get; set; }
 
-        public int LanguageId { get; set; }
+        public List<MovieRole> KnownFor { get; set; }
 
-        //public IEnumerable<Movie> Movies { get; init; } = new List<Movie>();
-        //many to many
+        //public int LanguageId { get; set; }
     }
 }

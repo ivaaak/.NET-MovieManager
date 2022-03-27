@@ -203,6 +203,35 @@ namespace MovieManager.Services
             }
 
             return sb.ToString();
-        }    
+        }
+
+
+
+        //ACTORS
+        public void AddActorToUserList(int ActorId, string Name)
+        {
+            var actor = dataContext.Actors.Where(m => m.ActorId == ActorId).FirstOrDefault();
+
+            if (actor == null) //movie doesnt exist in db
+            {
+                var apiActor = tmdbClient.GetPersonAsync(ActorId);                      //get from api
+                actor = saveMovieFromApiToDbObject.ActorApiToObject(apiActor.Result);   //turn to db object
+                dataContext.Actors.Add(actor);                                          //add to db
+            };
+
+            var targetPlaylist = dataContext.Users
+                .Include(p => p.Actors)
+                .Where(u => u.UserName == Name)
+                .FirstOrDefault();
+
+            if (!targetPlaylist.Actors.Contains(actor))
+            {
+                targetPlaylist.Actors.Add(actor);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Added {actor.FullName} to user - {Name}'s list of saved actors");
+        }
     }
 }

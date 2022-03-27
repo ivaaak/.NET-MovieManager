@@ -24,6 +24,17 @@
 			<h2 class="movieTitle">	@Model.Person.Name </h2> <br/>
 			<p class="actorBio"> @Model.Person.Biography  </p><br/>
 			<p class="actorBirthplace">Born:  @Model.Person.PlaceOfBirth </p>
+
+			@using (Html.BeginForm("FavoriteActorButtonClick", "Button",
+				new { actorId = @Model.Person.Id },   FormMethod.Post)) 
+			{
+				<button class="FavButton" type="submit"> ❤ </button>
+			}
+			@using (Html.BeginForm("RemoveActorButtonClick", "Button",
+				new { actorId = @Model.Person.Id },   FormMethod.Post)) 
+			{
+				<button class="FavButton" type="submit"> X </button>
+			}
 		</div>
 	</div>
 </div>

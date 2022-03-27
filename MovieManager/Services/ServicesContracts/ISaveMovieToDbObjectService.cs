@@ -13,5 +13,7 @@ namespace MovieManager.Services.ServicesContracts
         Movie MovieApiToObject(TMDbLib.Objects.Movies.Movie result);
 
         Movie ShowApiToObject(TvShow result);
+
+        Actor ActorApiToObject(TMDbLib.Objects.People.Person result);
     }
 }

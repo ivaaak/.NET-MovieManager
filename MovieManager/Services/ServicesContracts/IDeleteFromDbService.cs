@@ -10,5 +10,7 @@ namespace MovieManager.Services.ServicesContracts
         string DeleteFromDbUsingName(string movieTitle);
 
         string DeleteFromDbUsingId(int  movieId);
+
+        void DeleteActorFromUserList(int actorId, string userName);
     }
 }

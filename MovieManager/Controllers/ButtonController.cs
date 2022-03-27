@@ -23,7 +23,7 @@ namespace MovieManager.Controllers
 
         //Main button click functionality
         [HttpPost]
-        public IActionResult AddMovieToPlaylistButtonClick(int movieId, string playlistName) //add playlist name prop?
+        public IActionResult AddMovieToPlaylistButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
 
@@ -33,7 +33,7 @@ namespace MovieManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddShowToPlaylistButtonClick(int movieId, string playlistName) //add playlist name prop?
+        public IActionResult AddShowToPlaylistButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
 
@@ -54,7 +54,7 @@ namespace MovieManager.Controllers
 
 
         [HttpPost]
-        public IActionResult FavoriteMovieButtonClick(int movieId, string playlistName) //add playlist name prop?
+        public IActionResult FavoriteMovieButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
 
@@ -62,6 +62,27 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("Main", "Movie");
         }
+
+
+        [HttpPost]
+        public IActionResult FavoriteActorButtonClick(int actorId)
+        {
+            string UserName = this.User.Identity.Name;
+
+            addToDbService.AddActorToUserList(actorId, UserName);
+
+            return RedirectToAction("Main", "Movie");
+        }
+        [HttpPost]
+        public IActionResult RemoveActorButtonClick(int actorId)
+        {
+            string UserName = this.User.Identity.Name;
+
+            deleteFromDbService.DeleteActorFromUserList(actorId, UserName);
+
+            return RedirectToAction("Main", "Movie");
+        }
+
 
         //TODO Logic and calling services
         //Make this a popup window/embed trailer from a yt link

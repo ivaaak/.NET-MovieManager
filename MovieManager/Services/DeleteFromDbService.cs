@@ -77,5 +77,25 @@ namespace MovieManager.Services
             dataContext.Dispose();
             return $"Deleted Movie with ID - {Id} from Movies DB.";
         }
+
+
+        public void DeleteActorFromUserList(int actorId, string userName)
+        {
+            var actor = dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefault();
+
+
+            var targetUser = dataContext.Users
+                .Where(u => u.UserName == userName)
+                .FirstOrDefault();
+
+            if (targetUser.Actors.Contains(actor))
+            {
+                targetUser.Actors.Remove(actor);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Removed Actor {actor.FullName} from user - {userName}'s favorite actors");
+        }
     }
 }
