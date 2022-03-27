@@ -17,6 +17,7 @@ builder.Services.AddApplicationServices();
 WebApplication app = builder.Build();
 
 
+
 //Http request pipeline
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage().UseMigrationsEndPoint();
@@ -24,8 +25,8 @@ if (app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Error").UseHsts();
 }
 
-app.UseHttpsRedirection().UseStaticFiles().UseRouting()
-    .UseAuthentication().UseAuthorization();
+app.UseHttpsRedirection().UseStaticFiles().UseRouting();
+app.UseAuthentication().UseAuthorization();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
 

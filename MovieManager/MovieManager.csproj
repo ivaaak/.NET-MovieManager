@@ -62,7 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="wwwroot\css\fontAwesome\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
