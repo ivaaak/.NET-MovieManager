@@ -44,17 +44,18 @@
     --cyan: #61c7b3;
   }
 
-  body {
+body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    background: transparent;   
+    /*background: transparent;    */
+    background-color: var(--main-bg-gray);
     font-family: Roboto, sans-serif;
     font-weight: 100;
     line-height: 1.5em;
     color: #888;
     z-index: 0;
-  }
+}
 
 
   .container-fluid{
@@ -167,3 +168,12 @@
     color: white;
   }
   
+
+/* admin area content container*/
+.adminContainer{
+   position:fixed;
+   top:20%;
+   height: 80%;
+   width: 50%;
+   left: 25%;
+}

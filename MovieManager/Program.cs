@@ -28,7 +28,9 @@ if (app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection().UseStaticFiles().UseRouting();
 app.UseAuthentication().UseAuthorization();
 
+app.MapControllerRoute(name: "Area", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
+
 
 app.MapRazorPages(); //for Login/Register views
 

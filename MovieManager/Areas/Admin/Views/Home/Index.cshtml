@@ -2,7 +2,14 @@
     ViewData["Title"] = "Admin Area Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Admin area</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section styles{
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+}
+
+<div class="adminContainer">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Admin area</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
 </div>

@@ -3,9 +3,14 @@
 @{
     ViewData["Title"] = "User Edit";
 }
+@section styles{
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+}
 
+<div class="adminContainer">
 <div class="row">
-    <div class="col-4">
+        <div class="col-4">
         <form id="edit" method="post">
             <input type="hidden" name="Id" value="@Model.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -28,6 +33,9 @@
         </form>
     </div>
 </div>
+</div>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
