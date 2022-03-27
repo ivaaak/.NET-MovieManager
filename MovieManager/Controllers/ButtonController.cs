@@ -10,6 +10,8 @@ namespace MovieManager.Controllers
         private readonly IAddToDbService addToDbService;
         private readonly IGetFromDbService getFromDbService;
         private readonly IDeleteFromDbService deleteFromDbService;
+        private readonly ISearchMethodsService searchMethodsService;
+
 
         public ButtonController(
             IGetFromDbService getFromDbService,
@@ -86,10 +88,19 @@ namespace MovieManager.Controllers
 
         //TODO Logic and calling services
         //Make this a popup window/embed trailer from a yt link
-        public IActionResult ShowTrailerButtonClick()
+        [HttpGet]
+        public IActionResult ShowTrailerButtonClick(int Id, string MediaType)
         {
-            Console.WriteLine(" TRAILER POPUP HERE ");
-            return RedirectToAction("Main", "Movie");
+            string trailerLink = String.Empty;
+            if (MediaType == "movie")
+            {
+                trailerLink = searchMethodsService.GetMovieTrailer(Id);
+            }
+            else
+            {
+                trailerLink = searchMethodsService.GetShowTrailer(Id);
+            }
+            return PartialView("_TrailerPartial");
         }
     }
 }

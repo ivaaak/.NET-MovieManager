@@ -20,10 +20,13 @@ namespace MovieManager.Data.DataModels
         public string Overview { get; set; }
         public decimal Rating { get; set; }
         public DateTime? ReleaseDate { get; set; }
+
         public string? MediaType { get; set; } //TV/Movie/Episode
         public decimal? Popularity { get; set; }
 
-        public int? LanguageId { get; set; } //change to string?
+        public string TrailerLink { get; set; }
+
+        public string Language { get; set; }
         public int? PlatformId { get; set; }
 
 

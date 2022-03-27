@@ -212,18 +212,34 @@ namespace MovieManager.Services
              return reviews;
         }
 
-        //TODO still
-        public List<Video> SearchMovieTrailer(int id)
+        public string GetMovieTrailer(int id)
         {
-            var trailers = tmdbClient.GetMovieVideosAsync(id).Result.Results;
+            var trailer = tmdbClient.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
+            string ytLink = String.Empty;
 
-            return trailers;
+            if(trailer.Site == "YouTube")
+            {
+                var ytKey = trailer.Key;
+                var partial = "https://www.youtube.com/watch?v=";
+                ytLink = partial + ytKey;
+            }
+
+            return ytLink;
         }
-        public bool IsCorrectTableType(string TableTypeInput)
+
+        public string GetShowTrailer(int id)
         {
-            string[] types = new[] { "watched", "current", "future" };
-            if (types.Contains(TableTypeInput)) { return true; }
-            return false;
+            var trailer = tmdbClient.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
+            string ytLink = String.Empty;
+
+            if (trailer.Site == "YouTube")
+            {
+                var ytKey = trailer.Key;
+                var partial = "https://www.youtube.com/watch?v=";
+                ytLink = partial + ytKey;
+            }
+
+            return ytLink;
         }
     }
 }

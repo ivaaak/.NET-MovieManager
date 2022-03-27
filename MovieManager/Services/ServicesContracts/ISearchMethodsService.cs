@@ -20,14 +20,13 @@ namespace MovieManager.Services.ServicesContracts
 
         List<ReviewBase> GetReviewWithMovieID(int id);
 
-        List<Video> SearchMovieTrailer(int id);
-
-
         //save to Db
         void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
 
         void SearchShowTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
 
-        bool IsCorrectTableType(string TableTypeInput);
+        //Trailers
+        string GetMovieTrailer(int id);
+        string GetShowTrailer(int id);
     }
 }

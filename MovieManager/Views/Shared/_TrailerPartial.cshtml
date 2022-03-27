@@ -1,0 +1,14 @@
+﻿@model Name.NotFoundModel
+
+using (Ajax.BeginForm("NotFound", "Name", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "div-record", OnSuccess = "$('.close').click()" }))
+{
+    <div class="modal-body">
+        <table class="table-bordered table-responsive table table-striped">
+            <tr class="col-lg-12">
+                <th class="label-primary">
+                    @Html.Label("NotFoundLabel")
+                </th>
+            </tr>
+        </table>
+    </div>
+}
