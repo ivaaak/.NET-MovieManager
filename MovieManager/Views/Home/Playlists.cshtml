@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = @User.Identity.Name+" Playlists";
     int counter = 0;
+    string movieOrShowCard = "MovieCard";
 }
 
 @section styles{
@@ -36,7 +37,11 @@
             }
             @foreach(var movie in playlist.Movies)
             {
-                <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
+                @if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+				else{ movieOrShowCard = "MovieCard"; }
+			    <a style="text-decoration: none" href="/Movie/@movieOrShowCard/@movie.MovieId">	
+                    <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
+                </a>
             }
         </div>
         counter++;

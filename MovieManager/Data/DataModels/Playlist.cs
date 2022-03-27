@@ -18,6 +18,9 @@ namespace MovieManager.Data.DataModels
 
         public string? QrCode { get; set; }
 
+        public bool? IsPublic { get; set; } = false; 
+        //default is private, only make public if user wants to 
+
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
