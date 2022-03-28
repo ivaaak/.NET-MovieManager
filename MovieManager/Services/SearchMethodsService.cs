@@ -4,6 +4,7 @@ using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.People;
 using TMDbLib.Objects.Reviews;
 using TMDbLib.Objects.Search;
 
@@ -174,29 +175,46 @@ namespace MovieManager.Services
         //Used in MovieController for ActorCard
         public ActorViewModel GetActorWithID(int id)
         {
-            var actor = tmdbClient.GetPersonAsync(id).Result;
-            var credits = tmdbClient.GetPersonMovieCreditsAsync(id).Result;
-            if(credits == null) //show
+            Person actor = new Person();
+            MovieCredits credits = new MovieCredits();
+            try
             {
-                var creditsShow = tmdbClient.GetPersonTvCreditsAsync(id).Result;
+                actor = tmdbClient.GetPersonAsync(id).Result;
+                credits = tmdbClient.GetPersonMovieCreditsAsync(id).Result;
+            }
+            catch (Exception e) { e.ToString(); };
 
-                var model = new ActorViewModel()
+            if (credits == null) //show
+            {
+                var creditsShow = new TvCredits();
+                var model = new ActorViewModel();
+                try
                 {
-                    Person = actor,
-                    TvCredits = creditsShow,
-                    PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actor.ProfilePath),
-                };
+                    creditsShow = tmdbClient.GetPersonTvCreditsAsync(id).Result;
+                    model = new ActorViewModel()
+                    {
+                        Person = actor,
+                        TvCredits = creditsShow,
+                        PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actor.ProfilePath),
+                    };
+                }
+                catch (Exception e) { e.ToString(); };
 
                 return model;
             }
             else //movie
             {
-                var model = new ActorViewModel()
+                var model = new ActorViewModel();
+                try
                 {
-                    Person = actor,
-                    MovieCredits = credits,
-                    PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actor.ProfilePath),
-                };
+                    model = new ActorViewModel()
+                    {
+                        Person = actor,
+                        MovieCredits = credits,
+                        PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actor.ProfilePath),
+                    };
+                }
+                catch (Exception e) { e.ToString(); };
 
                 return model;
             }
@@ -204,7 +222,6 @@ namespace MovieManager.Services
 
 
 
-        //get Reviews
         public List<ReviewBase> GetReviewWithMovieID(int id)
         {
              var reviews = tmdbClient.GetMovieReviewsAsync(id).Result.Results;
@@ -230,6 +247,45 @@ namespace MovieManager.Services
         public string GetShowTrailer(int id)
         {
             var trailer = tmdbClient.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
+            string ytLink = String.Empty;
+
+            if (trailer.Site == "YouTube")
+            {
+                var ytKey = trailer.Key;
+                var partial = "https://www.youtube.com/watch?v=";
+                ytLink = partial + ytKey;
+            }
+
+            return ytLink;
+        }
+
+
+
+
+
+        //these 2 are static to avoid circular reference in SaveMovieToDbObjectService service
+        public static string GetMovieTrailerStatic(int id)
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            var trailer = client.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
+            string ytLink = String.Empty;
+
+            if (trailer.Site == "YouTube")
+            {
+                var ytKey = trailer.Key;
+                var partial = "https://www.youtube.com/watch?v=";
+                ytLink = partial + ytKey;
+            }
+
+            return ytLink;
+        }
+
+        public static string GetShowTrailerStatic(int id)
+        {
+            TMDbClient client = new TMDbClient(Configuration.APIKey);
+
+            var trailer = client.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
             string ytLink = String.Empty;
 
             if (trailer.Site == "YouTube")

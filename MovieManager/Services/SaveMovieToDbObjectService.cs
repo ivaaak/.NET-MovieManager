@@ -7,17 +7,13 @@ namespace MovieManager.Services
 {
     public class SaveMovieToDbObjectService : ISaveMovieToDbObjectService
     {
-        private ISearchMethodsService searchMethodsService;
-
-        public SaveMovieToDbObjectService(ISearchMethodsService searchMethodsService) {
-            this.searchMethodsService = searchMethodsService;
-        }
+        public SaveMovieToDbObjectService() { }
 
 
         public Movie SearchMovieApiToObject(SearchMovie result)
         {
             if (result.Title == null || result.PosterPath == null || result.Overview == null) { return null; }
-            string trailerLink = searchMethodsService.GetMovieTrailer(result.Id);
+            //string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id);
 
             Movie m = new Movie()
             {
@@ -28,8 +24,8 @@ namespace MovieManager.Services
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.ReleaseDate,
                 MediaType = "movie",
-                TrailerLink = trailerLink,
-                Language = result.OriginalLanguage,
+                //TrailerLink = trailerLink,
+                //Language = result.OriginalLanguage,
             };
             return m;
         }
@@ -38,8 +34,7 @@ namespace MovieManager.Services
         public Movie SearchShowApiToObject(SearchTv result)
         {
             if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
-            string trailerLink = searchMethodsService.GetShowTrailer(result.Id);
-
+            //string trailerLink = SearchMethodsService.GetShowTrailerStatic(result.Id);
 
             Movie m = new Movie()
             {
@@ -50,8 +45,8 @@ namespace MovieManager.Services
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.FirstAirDate,
                 MediaType = "show",
-                TrailerLink = trailerLink,
-                Language = result.OriginalLanguage,
+                //TrailerLink = trailerLink,
+                //Language = result.OriginalLanguage,
             };
             return m;
         }
@@ -62,7 +57,7 @@ namespace MovieManager.Services
         public Movie MovieApiToObject(TMDbLib.Objects.Movies.Movie result)
         {
             if (result.Title == null || result.PosterPath == null || result.Overview == null) { return null; }
-            string trailerLink = searchMethodsService.GetMovieTrailer(result.Id);
+            //string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id);
 
             Movie m = new Movie()
             {
@@ -73,8 +68,8 @@ namespace MovieManager.Services
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.ReleaseDate,
                 MediaType = "movie",
-                TrailerLink = trailerLink,
-                Language = result.OriginalLanguage,
+                //TrailerLink = trailerLink,
+                //Language = result.OriginalLanguage,
             };
             return m;
         }
@@ -82,7 +77,7 @@ namespace MovieManager.Services
         public Movie ShowApiToObject(TvShow result)
         {
             if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
-            string trailerLink = searchMethodsService.GetShowTrailer(result.Id);
+            //string trailerLink = SearchMethodsService.GetShowTrailerStatic(result.Id);
 
             Movie m = new Movie()
             {
@@ -93,8 +88,8 @@ namespace MovieManager.Services
                 Rating = (decimal)result.VoteAverage,
                 ReleaseDate = result.FirstAirDate,
                 MediaType = "show",
-                TrailerLink = trailerLink,
-                Language = result.OriginalLanguage,
+                //TrailerLink = trailerLink,
+                //Language = result.OriginalLanguage,
             };
             return m;
         }

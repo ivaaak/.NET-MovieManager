@@ -44,12 +44,12 @@
 					<a href="/Movie/@movieOrShowCard/@movie.MovieId">
 						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
 					</a>
-					@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
+					@using (Html.BeginForm("FavoriteMovieButtonClickList", "Button",
 						new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
 					{
 						<button class="FavButton" type="submit"> ❤ </button>
 					}
-					@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
+					@using (Html.BeginForm("RemoveMovieButtonClickList", "Button",
 						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
 					{
 						<button class="RemoveButton" type="submit"> X </button>

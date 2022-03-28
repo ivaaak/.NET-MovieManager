@@ -24,9 +24,9 @@ namespace MovieManager.Data.DataModels
         public string? MediaType { get; set; } //TV/Movie/Episode
         public decimal? Popularity { get; set; }
 
-        public string TrailerLink { get; set; }
+        //public string? TrailerLink { get; set; }
 
-        public string Language { get; set; }
+        //public string? Language { get; set; }
         public int? PlatformId { get; set; }
 
 
