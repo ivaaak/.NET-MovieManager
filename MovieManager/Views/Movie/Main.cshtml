@@ -110,7 +110,7 @@
 				<button class="FavButton" type="submit"> ❤ </button>
 			}
 			@using (Html.BeginForm("RemoveMovieButtonClick", "Button",
-				new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
+				new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
 			{
 				<button class="RemoveButton" type="submit"> X </button>
 			}

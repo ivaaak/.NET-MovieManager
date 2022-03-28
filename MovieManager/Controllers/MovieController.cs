@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
@@ -27,7 +28,8 @@ namespace MovieManager.Controllers
 
 
 
-        //[Authorize]
+        [Authorize]
+        [Route("Movie/Main")]
         public IActionResult Main()
         {
             Console.WriteLine("Hit controller: Movie , hit view: Main");
@@ -37,7 +39,14 @@ namespace MovieManager.Controllers
             var current = getFromDbService.GetUserMovieList(userName, "current");
             var future = getFromDbService.GetUserMovieList(userName, "future");
 
-            //var allMovies = getFromDbService.GetListFromDBbyTitle("");
+            if (TempData["Success"] != null && TempData.ContainsKey("Success"))
+            {
+                ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
+            } 
+            else if(TempData["Error"] != null && TempData.ContainsKey("Error"))
+            {
+                ViewData[MessageConstant.ErrorMessage] = Convert.ToString(TempData["Error"]);
+            }
 
             MovieListViewModel movieListViewModel = new MovieListViewModel()
             {
@@ -179,14 +188,21 @@ namespace MovieManager.Controllers
 
 
 
-        //[Authorize]
+        [Authorize]
         [Route("Movie/MovieList/{playlistName}")]
         [HttpPost]
-        public IActionResult MovieList(string playlistName)
+        public IActionResult MovieList(string playlistName, string? messageFlag)
         {
             Console.WriteLine("Hit controller: Movie , hit view: MovieList");
 
             var userName = this.User.Identity.Name;
+
+            if(messageFlag == "added")
+            {
+                ViewData[MessageConstant.SuccessMessage] = $"Successfully added movie to favorites! ";
+            } else if (messageFlag == "removed"){
+                ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
+            }
 
             var movies = getFromDbService.GetUserMovieList(userName, playlistName);
 

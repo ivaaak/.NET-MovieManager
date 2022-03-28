@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManager.Data.DataModels;
+using MovieManager.Infrastructure.Alerts;
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Services.ServicesContracts;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Controllers
 {
@@ -17,11 +16,13 @@ namespace MovieManager.Controllers
         public ButtonController(
             IGetFromDbService getFromDbService,
             IAddToDbService addToDbService,
-            IDeleteFromDbService deleteFromDbService)
+            IDeleteFromDbService deleteFromDbService, 
+            ISearchMethodsService searchMethodsService)
         {
             this.getFromDbService = getFromDbService;
             this.addToDbService = addToDbService;
             this.deleteFromDbService = deleteFromDbService;
+            this.searchMethodsService = searchMethodsService;
         }
 
         //Main button click functionality
@@ -32,7 +33,7 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToUserPlaylist(movieId, playlistName, UserName);
 
-            ViewData[MessageConstant.SuccessMessage] = $"Successfully added movie to {playlistName}! ";
+            TempData["Success"] = $"Successfully added movie to {playlistName}!";
 
             return RedirectToAction("Main", "Movie");
         }
@@ -44,7 +45,7 @@ namespace MovieManager.Controllers
 
             addToDbService.AddShowToUserPlaylist(movieId, playlistName, UserName);
 
-            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to {playlistName}! ";
+            TempData["Success"] = $"Successfully added show to {playlistName}!";
 
             return RedirectToAction("Main", "Movie");
         }
@@ -56,21 +57,20 @@ namespace MovieManager.Controllers
 
             deleteFromDbService.DeleteMovieFromUserPlaylist(movieId, playlistName, UserName);
 
-            ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
+            TempData["Error"] = $"Removed movie from {playlistName}!";
 
             return RedirectToAction("Main", "Movie");
         }
 
 
         [HttpPost]
-        public IActionResult FavoriteMovieButtonClick(int movieId, string playlistName)
+        public IActionResult FavoriteMovieButtonClick(int movieId)
         {
             string UserName = this.User.Identity.Name;
 
             addToDbService.AddMovieToFavorites(movieId, UserName);
 
-            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to favorites! ";
-
+            TempData["Success"] = $"Successfully added movie to favorites!";
 
             return RedirectToAction("Main", "Movie");
         }
@@ -83,9 +83,9 @@ namespace MovieManager.Controllers
 
             deleteFromDbService.DeleteMovieFromUserPlaylist(movieId, playlistName, UserName);
 
-            ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
+            TempData["Error"] = $"Removed movie from {playlistName}!";
 
-            return RedirectToAction("MovieList", "Movie", new { playlistName = playlistName });
+            return RedirectToAction("MovieList", "Movie"); //doesnt work? needs parameter of playlist name/id?
         }
         [HttpPost]
         public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
@@ -94,11 +94,10 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToFavorites(movieId, UserName);
 
-            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to favorites! ";
-
+            TempData["Success"] = $"Successfully added movie to favorites!";
 
             //return RedirectToAction("MovieList", "Movie", new {playlistName = playlistName});
-            return RedirectToAction("MovieList", new RouteValueDictionary( new { controller = "Movie", action = "MovieList", playlistName = playlistName }));
+            return RedirectToAction("MovieList", "Movie");
         }
 
 
@@ -109,6 +108,8 @@ namespace MovieManager.Controllers
 
             addToDbService.AddActorToUserList(actorId, UserName);
 
+            TempData["Success"] = $"Successfully added actor to favorite actors!";
+
             return RedirectToAction("Main", "Movie");
         }
         [HttpPost]
@@ -118,8 +119,12 @@ namespace MovieManager.Controllers
 
             deleteFromDbService.DeleteActorFromUserList(actorId, UserName);
 
+            TempData["Error"] = $"Removed actor from favorites!";
+
             return RedirectToAction("Main", "Movie");
         }
+
+
 
 
         //TODO Logic and calling services

@@ -19,7 +19,6 @@ namespace MovieManager.Services
         {
             var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
 
-
             var targetPlaylist = dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(u => u.User.UserName == userName && u.PlaylistName == playlistName)
@@ -34,6 +33,27 @@ namespace MovieManager.Services
 
             Console.WriteLine($"Removed Movie {movieId} from user - {userName}'s list: {playlistName}");
         }
+
+
+        public void DeleteActorFromUserList(int actorId, string userName)
+        {
+            var actor = dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefault();
+
+
+            var targetUser = dataContext.Users
+                .Where(u => u.UserName == userName)
+                .FirstOrDefault();
+
+            if (targetUser.Actors.Contains(actor))
+            {
+                targetUser.Actors.Remove(actor);
+            }
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Removed Actor {actor.FullName} from user - {userName}'s favorite actors");
+        }
+
 
 
         public string DeleteFromDbUsingName(string movieTitle) //dont use due to cascade deletes in user lists
@@ -76,26 +96,6 @@ namespace MovieManager.Services
             }
             dataContext.Dispose();
             return $"Deleted Movie with ID - {Id} from Movies DB.";
-        }
-
-
-        public void DeleteActorFromUserList(int actorId, string userName)
-        {
-            var actor = dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefault();
-
-
-            var targetUser = dataContext.Users
-                .Where(u => u.UserName == userName)
-                .FirstOrDefault();
-
-            if (targetUser.Actors.Contains(actor))
-            {
-                targetUser.Actors.Remove(actor);
-            }
-
-            dataContext.SaveChanges();
-
-            Console.WriteLine($"Removed Actor {actor.FullName} from user - {userName}'s favorite actors");
         }
     }
 }

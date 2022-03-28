@@ -56,13 +56,16 @@ namespace MovieManager.Services
             Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
+
+
         public void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name)
         {
-            var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;       //get from api
-            var movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);
+            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
 
-            if (dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault() == null) //movie doesnt exist in db
+            if (movie == null) //movie doesnt exist in db
             {
+                var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;
+                movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);  //turn to db object
                 dataContext.Movies.Add(movie); //add to db
             };
             
