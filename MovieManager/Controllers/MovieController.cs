@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using System.Diagnostics;
@@ -90,6 +91,19 @@ namespace MovieManager.Controllers
 
             var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm);
             var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm);
+            
+            if(movieResults.Count != 0 && showResults.Count != 0)
+            {
+                ViewData[MessageConstant.SuccessMessage] = $"Found {movieResults.Count} movies and {showResults.Count} shows!";
+            }
+            else if(movieResults.Count == 0)
+            {
+                ViewData[MessageConstant.ErrorMessage] = $"No movies found for {model.SearchTerm}";
+            }
+            else // 0 shows
+            {
+                ViewData[MessageConstant.ErrorMessage] = $"No shows found for {model.SearchTerm}";
+            }
 
             var results = new SearchResultViewModel()
             {
@@ -107,8 +121,6 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine("Hit controller: Movie , hit view: SearchResult");
 
-            Console.WriteLine($"search term - {results.SearchTerm}");
-
             return View();
         }
 
@@ -118,6 +130,14 @@ namespace MovieManager.Controllers
         public IActionResult ActorCard(int id)
         {
             var model = searchMethods.GetActorWithID(id);
+            if(model == null)
+            {
+                ViewData[MessageConstant.ErrorMessage] = $"No actor with an Id of {id} found!";
+            }
+            else
+            {
+                ViewData[MessageConstant.SuccessMessage] = $"Actor {model.Person.Name} found!";
+            }
 
             return View(model);
         }
@@ -128,6 +148,9 @@ namespace MovieManager.Controllers
         {
             var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows
             var popularShows = apiGetPopularService.GetPopularShows(7);   //because the carousel breaks with more
+
+
+            ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular movies!";
 
             var model = new MovieDiscoverViewModel()
             {
@@ -143,6 +166,8 @@ namespace MovieManager.Controllers
             var popularMovies = apiGetPopularService.GetPopularMovies(15); //load 15 popular movies/shows
             var popularShows = apiGetPopularService.GetPopularShows(15);
 
+            ViewData[MessageConstant.SuccessMessage] = $"These are the 15 most popular movies!";
+
             var model = new MovieDiscoverViewModel()
             {
                 DiscoverMovies = popularMovies,
@@ -155,7 +180,7 @@ namespace MovieManager.Controllers
 
 
         //[Authorize]
-        //[Route("Movie/MovieList/{id}")]
+        [Route("Movie/MovieList/{playlistName}")]
         [HttpPost]
         public IActionResult MovieList(string playlistName)
         {

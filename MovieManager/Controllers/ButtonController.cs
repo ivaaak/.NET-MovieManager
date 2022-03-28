@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieManager.Data.DataModels;
+using MovieManager.Infrastructure.Constants;
 using MovieManager.Services.ServicesContracts;
 using TMDbLib.Objects.Search;
 
@@ -31,6 +32,8 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToUserPlaylist(movieId, playlistName, UserName);
 
+            ViewData[MessageConstant.SuccessMessage] = $"Successfully added movie to {playlistName}! ";
+
             return RedirectToAction("Main", "Movie");
         }
 
@@ -41,15 +44,19 @@ namespace MovieManager.Controllers
 
             addToDbService.AddShowToUserPlaylist(movieId, playlistName, UserName);
 
+            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to {playlistName}! ";
+
             return RedirectToAction("Main", "Movie");
         }
 
-
+        //main
         public IActionResult RemoveMovieButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
 
             deleteFromDbService.DeleteMovieFromUserPlaylist(movieId, playlistName, UserName);
+
+            ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
 
             return RedirectToAction("Main", "Movie");
         }
@@ -62,7 +69,36 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToFavorites(movieId, UserName);
 
+            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to favorites! ";
+
+
             return RedirectToAction("Main", "Movie");
+        }
+
+
+        //playlist view
+        public IActionResult RemoveMovieButtonClickList(int movieId, string playlistName)
+        {
+            string UserName = this.User.Identity.Name;
+
+            deleteFromDbService.DeleteMovieFromUserPlaylist(movieId, playlistName, UserName);
+
+            ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
+
+            return RedirectToAction("MovieList", "Movie", new { playlistName = playlistName });
+        }
+        [HttpPost]
+        public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
+        {
+            string UserName = this.User.Identity.Name;
+
+            addToDbService.AddMovieToFavorites(movieId, UserName);
+
+            ViewData[MessageConstant.SuccessMessage] = $"Successfully added show to favorites! ";
+
+
+            //return RedirectToAction("MovieList", "Movie", new {playlistName = playlistName});
+            return RedirectToAction("MovieList", new RouteValueDictionary( new { controller = "Movie", action = "MovieList", playlistName = playlistName }));
         }
 
 
