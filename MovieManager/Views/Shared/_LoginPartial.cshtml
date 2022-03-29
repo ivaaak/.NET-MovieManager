@@ -9,11 +9,14 @@
 @if (SignInManager.IsSignedIn(User))
 {
 <li onclick="location.href = '/Movie/Main'" class="main-item"><span class="myprofile"></span></li>
+
 <li class="main-item"><span class="watchlist"></span>
 	<ol class="sub-menu">
-		<li onclick="location.href = '/Movie/MovieList'" class="sub-item item-left"><span class="WLWatched"></span></li>
-		<li onclick="location.href = '/Movie/MovieList&name="watched"'" class="sub-item item-left"><span class="WLCurrent"></span></li>
-		<li onclick="location.href = '/Movie/MoviesFuture'" class="sub-item item-left"><span class="WLToWatch"></span></li>
+		<li onclick="location.href = '/Home/Profile'" class="sub-item item-left"><span class="ProfilePage"></span></li>
+		<li onclick="location.href = '/Home/Playlists'" class="sub-item item-left"><span class="Playlists"></span></li>
+		<li onclick="location.href = '/Movie/MovieList/favorites'" class="sub-item item-left"><span class="Favorites"></span></li>
+		<li onclick="location.href = '/Home/Actors'" class="sub-item item-left"><span class="Actors"></span></li>
+		<li onclick="location.href = '/Home/Reviews'" class="sub-item item-left"><span class="Reviews"></span></li>
 	</ol>
 </li>
 

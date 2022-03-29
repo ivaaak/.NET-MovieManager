@@ -76,7 +76,7 @@ namespace MovieManager.Controllers
         }
 
 
-        //playlist view
+        //in the playlist view - also needs to be turned into ajax
         public IActionResult RemoveMovieButtonClickList(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -85,7 +85,7 @@ namespace MovieManager.Controllers
 
             TempData["Error"] = $"Removed movie from {playlistName}!";
 
-            return RedirectToAction("MovieList", "Movie"); //doesnt work? needs parameter of playlist name/id?
+            return RedirectToAction("MovieList", "Movie"); //doesnt work, needs parameter of playlist name/id?
         }
         [HttpPost]
         public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
@@ -99,6 +99,32 @@ namespace MovieManager.Controllers
             //return RedirectToAction("MovieList", "Movie", new {playlistName = playlistName});
             return RedirectToAction("MovieList", "Movie");
         }
+
+        //in the search results view
+        //change these to AJAX? so you can add multiple movies from the same results page
+        [HttpPost]
+        public IActionResult AddMovieToPlaylistButtonClickSearch(int movieId, string playlistName)
+        {
+            string UserName = this.User.Identity.Name;
+
+            addToDbService.AddMovieToUserPlaylist(movieId, playlistName, UserName);
+
+            TempData["Success"] = $"Successfully added movie to {playlistName}!";
+
+            return RedirectToAction("Main", "Movie");
+        }
+        [HttpPost]
+        public IActionResult AddShowToPlaylistButtonClickSearch(int movieId, string playlistName) 
+        {
+            string UserName = this.User.Identity.Name;
+
+            addToDbService.AddShowToUserPlaylist(movieId, playlistName, UserName);
+
+            TempData["Success"] = $"Successfully added show to {playlistName}!";
+
+            return RedirectToAction("Main", "Movie");
+        }
+
 
 
         [HttpPost]

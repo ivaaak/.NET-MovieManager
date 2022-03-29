@@ -191,17 +191,20 @@ namespace MovieManager.Controllers
         [Authorize]
         [Route("Movie/MovieList/{playlistName}")]
         [HttpPost]
-        public IActionResult MovieList(string playlistName, string? messageFlag)
+        public IActionResult MovieList(string playlistName)
         {
             Console.WriteLine("Hit controller: Movie , hit view: MovieList");
 
             var userName = this.User.Identity.Name;
 
-            if(messageFlag == "added")
+            //can use temp data to pass messages 
+            if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
-                ViewData[MessageConstant.SuccessMessage] = $"Successfully added movie to favorites! ";
-            } else if (messageFlag == "removed"){
-                ViewData[MessageConstant.ErrorMessage] = $"Removed movie from {playlistName}! ";
+                ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
+            }
+            else if (TempData["Error"] != null && TempData.ContainsKey("Error"))
+            {
+                ViewData[MessageConstant.ErrorMessage] = Convert.ToString(TempData["Error"]);
             }
 
             var movies = getFromDbService.GetUserMovieList(userName, playlistName);
@@ -210,6 +213,26 @@ namespace MovieManager.Controllers
             {
                 MoviesList = movies,
                 MoviesListName = playlistName,
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [Route("Movie/MovieList/favorites")]
+        [HttpPost]
+        public IActionResult MovieList()
+        {
+            Console.WriteLine("Hit controller: Movie , hit view: Favorites");
+
+            var userName = this.User.Identity.Name;
+
+            var movies = getFromDbService.GetUserMovieList(userName, "favorites");
+
+            var model = new MovieListViewModel()
+            {
+                MoviesList = movies,
+                MoviesListName = "favorites",
             };
 
             return View(model);

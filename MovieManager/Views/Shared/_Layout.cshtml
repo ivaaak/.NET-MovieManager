@@ -14,27 +14,35 @@
 
 <body>
     <header>
-        <nav>
+    <nav>
 		<ol class="main-menu">
-		  <li onclick="location.href = '/Home/Index'" class="main-item" ><span class="home"></span></li>
+			<li onclick="location.href = '/Home/Index'" class="main-item" ><span class="home"></span></li>
 		  
-		  <partial name="_LoginPartial" /> <!--The login/register navbar fields are in  loginPartial-->
+			<partial name="_LoginPartial" /> <!--The login/register navbar fields are in  loginPartial-->
 
-		  <li class="main-item"><span class="discover"></span>
-			<ol class="sub-menu">
-			  <li onclick="location.href = '/Movie/Search'" class="sub-item item-right"><span class="DiscShows"></span></li>
-			  <li onclick="location.href = '/Movie/Releases'" class="sub-item item-right"><span class="DiscMovies"></span></li>
-			  <li onclick="location.href = '/Movie/Discover'" class="sub-item item-right"><span class="DiscMisc"></span></li>
-			  <li onclick="location.href = '/Movie/Latest'" class="sub-item item-right"><span class="DiscLatest"></span></li>
-			  <li onclick="location.href = '/Movie/TopRated'" class="sub-item item-right"><span class="DiscTopRated"></span></li>
-			</ol>
-		  </li>
-		  <li onclick="location.href = '/About/About'" class="main-item"><span class="about"></span></li>
+			<li class="main-item"><span class="discover"></span>
+				<ol class="sub-menu">
+				  <li onclick="location.href = '/Movie/Search'" class="sub-item item-right"><span class="DiscShows"></span></li>
+				  <li onclick="location.href = '/Movie/Releases'" class="sub-item item-right"><span class="DiscMovies"></span></li>
+				  <li onclick="location.href = '/Movie/Discover'" class="sub-item item-right"><span class="DiscMisc"></span></li>
+				  <li onclick="location.href = '/Movie/Latest'" class="sub-item item-right"><span class="DiscLatest"></span></li>
+				  <li onclick="location.href = '/Movie/TopRated'" class="sub-item item-right"><span class="DiscTopRated"></span></li>
+				</ol>
+			</li>
+
+			<li class="main-item"><span class="more"></span>
+				<ol class="sub-menu">
+					<li onclick="location.href = '/About/About'" class="sub-item item-right"><span class="About"></span></li>
+					<li onclick="location.href = '/About/Privacy'" class="sub-item item-right"><span class="Privacy"></span></li>
+				</ol>
+			</li>		
 		</ol>
+
 	</nav>
     </header>
-	 <partial name="_LogoutPartial" />
-
+	<!--ADD SEARCH ICON-->
+	<img class="searchIcon" src="~/img/search.png"  onclick="location.href = '/Movie/Search'">
+	<partial name="_LogoutPartial" />
 
     <div class="container">
         <main role="main" class="pb-3">
