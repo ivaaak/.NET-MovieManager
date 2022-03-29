@@ -8,7 +8,7 @@ namespace MovieManager.Services.ServiceContracts
         Task<IEnumerable<UserListViewModel>> GetUsers();
 
         Task<UserEditViewModel> GetUserForEdit(string id);
-
+        //commit test
         Task<bool> UpdateUser(UserEditViewModel model);
 
         Task<User> GetUserById(string id);
