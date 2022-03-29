@@ -1,0 +1,41 @@
+﻿@model ActorListViewModel
+
+@using MovieManager.Services
+@{
+    ViewData["Title"] = @User.Identity.Name+" Playlists";
+    int counter = 0;
+}
+
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+    <script src="~/js/scripts.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/js/bootstrap.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/stylePlaylists.css" rel="stylesheet">
+}
+
+
+
+<div class="accordeon check">
+    @foreach(var actor in Model.Actors)
+    {
+        int counterPlus = counter+1;
+        <label for="panel+@counter"> @counterPlus . @actor.FullName</label>
+        <input id="panel+@counter" type="checkbox" />
+        <div class="panel">
+            <a href="/Movie/ActorCard/@actor.Id">                
+                <button class="playlistButton"> Go to actor: @actor.FullName </button>
+            </a>
+            <h2 class="movieTitleText"> Biography: @actor.Overview </h2>
+            <h2 class="movieTitleText"> Country: @actor.CountryCode </h2>
+            <h2 class="movieTitleText"> Known: @actor.KnownFor </h2>
+        </div>
+        counter++;
+    }
+</div>

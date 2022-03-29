@@ -199,6 +199,7 @@ input {
     font-weight: bold;
     color: var(--main-bg-orange);
     margin-right: 15%;
+    text-decoration: none !important;
 }
 .movieDescDiscover {
     position: relative;

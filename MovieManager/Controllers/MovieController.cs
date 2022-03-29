@@ -156,19 +156,31 @@ namespace MovieManager.Controllers
         public IActionResult Discover()
         {
             var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows
-            var popularShows = apiGetPopularService.GetPopularShows(7);   //because the carousel breaks with more
-
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular movies!";
 
             var model = new MovieDiscoverViewModel()
             {
                 DiscoverMovies = popularMovies,
+            };
+
+            return View(model);
+        }
+        public IActionResult DiscoverShows()
+        {
+            var popularShows = apiGetPopularService.GetPopularShows(7);  
+
+
+            ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular shows!";
+
+            var model = new MovieDiscoverViewModel()
+            {
                 DiscoverShows = popularShows,
             };
 
             return View(model);
         }
+
 
         public IActionResult Releases()
         {

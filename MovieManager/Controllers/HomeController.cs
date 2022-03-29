@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using MovieManager.Data.DataModels;
 using MovieManager.Models;
 using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
@@ -58,9 +59,47 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+        public IActionResult Favorites()
+        {
+            var userName = this.User.Identity.Name;
+
+            var userPlaylists = getFromDbService.GetUserMovieList(userName, "favorites");
+
+            var model = new MovieListViewModel()
+            {
+                MoviesList = userPlaylists,
+            };
+
+            return View(model);
+        }
+        public IActionResult Actors()
+        {
+            var userName = this.User.Identity.Name;
+
+            List<Actor> actors = null; //getFromDbService.GetActors(userName);
+
+            var model = new ActorListViewModel()
+            {
+                Actors = actors,
+            };
+
+            return View(model);
+        }
+        public IActionResult Reviews()
+        {
+            var userName = this.User.Identity.Name;
+
+            List<Review> reviews = null; //getFromDbService.GetActors(userName);
+
+            var model = new ReviewListViewModel()
+            {
+                Reviews = reviews,
+            };
+
+            return View(model);
+        }
 
 
         public IActionResult Error() => View();
-        public IActionResult Test() => View();
     }
 }

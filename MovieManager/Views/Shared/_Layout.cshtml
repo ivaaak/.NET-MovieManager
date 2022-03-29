@@ -49,11 +49,11 @@
             @RenderBody()
         </main>
     </div>
+	<script src="~/plugins/toastr/toastr.min.js"></script>
+	<partial name="_UserMessages" />
+
 
     @await RenderSectionAsync("scripts", required: false)
 	@await RenderSectionAsync("styles", required: false)
-	
-	<script src="~/plugins/toastr/toastr.min.js"></script>
-	<partial name="_UserMessages" />
 </body>
 </html>

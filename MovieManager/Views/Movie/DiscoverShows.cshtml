@@ -1,10 +1,10 @@
 ﻿@model MovieDiscoverViewModel
 @{
 	//Add DiscoverListViewModel
-	ViewData["Title"] = "Discover";
+	ViewData["Title"] = "Discover Shows";
 
 	//var discoverMovieList = MovieManager.Services.GetFromDbService.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
-	var discoverMovieList = Model.DiscoverMovies;
+	var discoverShowList = Model.DiscoverShows;
 	int counter = 1;
 }
 @section styles{
@@ -25,10 +25,10 @@
 <input type="radio" name="slide-nav" id="6">
 <input type="radio" name="slide-nav" id="7">
 
-<h1>DISCOVER MOVIES: </h1>
+<h1>DISCOVER SHOWS: </h1>
 
 <ul class="carousel">
-	@foreach(var movie in discoverMovieList)
+	@foreach(var movie in discoverShowList)
 	{
 		string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
 		<label for="@counter">
@@ -39,7 +39,7 @@
 				</div>
 				<div class="flex-items">
 					<a href="/Movie/MovieCard/@movie.Id" style="text-decoration:none !important">  
-					<h2 class="movieTitleDiscover"> @movie.Title </h2>
+					<h2 class="movieTitleDiscover"> @movie.Name </h2>
 					</a>
 
 					<p class="movieRatingDiscover"> <img class="IMDBStar" src="~/img/star.png"> @movie.VoteAverage/10 - Rating</p>

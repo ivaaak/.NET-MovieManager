@@ -1,0 +1,72 @@
+﻿@model MovieListViewModel
+@{
+	ViewData["Title"] = "Favorites";
+	var movieList = Model.MoviesList;
+	var listName = Model.MoviesListName;
+	string movieOrShowCard = "MovieCard";
+}
+@section styles{
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/style.css" asp-append-version="true"  rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleDiscover.css" asp-append-version="true" rel="stylesheet">
+
+	<script src="~/js/releaseGrid.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+
+<div class="buttonsGridList mb-3 mt-3">
+	<div class="btn-holder">
+		<button class="btn btn-2 hover-slide-down">
+			<span>Grid</span>
+		  </button>
+		  <button class="btn btn-2 hover-slide-up">
+			<span>List</span>
+		</button>
+	</div>
+</div>
+
+<h1 class="playlistTitle">Favorites Playlist:</h1>
+
+<div class="grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
+<div class="row">
+	@foreach (var movie in movieList)
+	{
+	<div class="col-12 col-md-6 col-lg-4">
+	<div class="card">
+		<div class="movieContainer">
+			<div class="flex-container leftCol">
+				<div class="flex-items">	
+					@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
+						else{ movieOrShowCard = "MovieCard"; }
+					<a href="/Movie/@movieOrShowCard/@movie.MovieId">
+						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
+					</a>
+					@using (Html.BeginForm("FavoriteMovieButtonClickList", "Button",
+						new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
+					{
+						<button class="FavButton" type="submit"> ❤ </button>
+					}
+					@using (Html.BeginForm("RemoveMovieButtonClickList", "Button",
+						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
+					{
+						<button class="RemoveButton" type="submit"> X </button>
+					}
+				</div>
+				<div class="flex-itemsRight">
+					<h2 class="movieTitle"> @movie.Title </h2>
+					<p class="movieRating"> Rating - @movie.Rating/10</p>
+					<p class="movieDesc"> @movie.Overview </p>
+					<div class="buttonsList">
+						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
+						<input class="TrailerButton" id="TrailerButton" type="button" value=" This is stupid " href="/Movie/MovieCard/@movie.MovieId">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	}	  
+</div>
+</div>

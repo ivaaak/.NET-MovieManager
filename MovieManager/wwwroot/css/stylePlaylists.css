@@ -67,3 +67,14 @@ body{
     padding: 0px;
     margin: 4px;
 }
+
+.playlistTitle {
+    position: fixed;
+    width: 50%;
+    top: 10%;
+    left: 25%;
+    text-align:center;
+    margin-top: 0;
+    text-transform: uppercase;
+    color: var(--dark-peach);
+}
