@@ -129,7 +129,7 @@ namespace MovieManager.Services
 
 
 
-        public string AddMovies(SearchContainer<SearchMovie> results)
+        public void AddMovies(SearchContainer<SearchMovie> results)
         {
             StringBuilder sb = new StringBuilder();
             List<Movie> validMovies = new List<Movie>();
@@ -154,11 +154,11 @@ namespace MovieManager.Services
             dataContext.SaveChanges();
 
             Console.WriteLine(sb.ToString());
-            return sb.ToString().Trim();
+            //return sb.ToString().Trim();
         }
         
 
-        public string AddShows(SearchContainer<SearchTv> results)
+        public void AddShows(SearchContainer<SearchTv> results)
         {
             StringBuilder sb = new StringBuilder();
             List<Movie> validShows = new List<Movie>();
@@ -182,11 +182,11 @@ namespace MovieManager.Services
             dataContext.SaveChanges();
 
             Console.WriteLine(sb.ToString());
-            return sb.ToString().Trim();
+            //return sb.ToString().Trim();
         }
 
 
-        public string AddMovie(SearchMovie movie)
+        public void AddMovie(SearchMovie movie)
         {
             StringBuilder sb = new StringBuilder();
             Console.WriteLine(movie.Title);
@@ -205,7 +205,7 @@ namespace MovieManager.Services
                 dataContext.SaveChanges();
             }
 
-            return sb.ToString();
+            //return sb.ToString();
         }
 
 

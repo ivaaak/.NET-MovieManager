@@ -1,5 +1,4 @@
-﻿using MovieManager.Data.DataModels;
-using TMDbLib.Objects.General;
+﻿using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services.ServicesContracts
@@ -12,11 +11,11 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddMovieToFavorites(int movieId, string Name);
 
-        string AddMovies(SearchContainer<SearchMovie> results);
-        
-        string AddShows(SearchContainer<SearchTv> results);
+        void AddMovies(SearchContainer<SearchMovie> results);
 
-        string AddMovie(SearchMovie movie);
+        void AddShows(SearchContainer<SearchTv> results);
+
+        void AddMovie(SearchMovie movie);
 
         void AddActorToUserList(int ActorId, string Name);
     }
