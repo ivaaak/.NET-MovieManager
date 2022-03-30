@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.Api", "MovieManager.Api\MovieManager.Api.csproj", "{836C2C6C-817D-42CC-9783-00D560C306B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Api", "MovieManager.Api\MovieManager.Api.csproj", "{836C2C6C-817D-42CC-9783-00D560C306B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.Test", "MovieManager.Test\MovieManager.Test.csproj", "{D88238B2-FD13-4201-A3BE-4FF926680108}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{836C2C6C-817D-42CC-9783-00D560C306B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{836C2C6C-817D-42CC-9783-00D560C306B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{836C2C6C-817D-42CC-9783-00D560C306B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D88238B2-FD13-4201-A3BE-4FF926680108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D88238B2-FD13-4201-A3BE-4FF926680108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D88238B2-FD13-4201-A3BE-4FF926680108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D88238B2-FD13-4201-A3BE-4FF926680108}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
