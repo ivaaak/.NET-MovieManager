@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MovieManager.Data.DataModels;
 using MovieManager.Models;
@@ -43,7 +44,7 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
-
+        [Authorize]
         public IActionResult Playlists()
         {
             Console.WriteLine("Hit controller: Home , hit view: Playlists");
@@ -59,6 +60,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+        [Authorize]
         public IActionResult Favorites()
         {
             var userName = this.User.Identity.Name;
@@ -72,6 +74,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+        [Authorize]
         public IActionResult Actors()
         {
             var userName = this.User.Identity.Name;
@@ -85,11 +88,12 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+        [Authorize]
         public IActionResult Reviews()
         {
             var userName = this.User.Identity.Name;
 
-            List<Review> reviews = null; //getFromDbService.GetActors(userName);
+            List<Review> reviews = null; //getFromDbService.GetReviews(userName);
 
             var model = new ReviewListViewModel()
             {
@@ -98,7 +102,6 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
-
 
         public IActionResult Error() => View();
     }
