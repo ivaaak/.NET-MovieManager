@@ -92,6 +92,27 @@ namespace MovieManager.Services
         }
 
         //GET TRAILER FROM API/DB
+        public async Task<string> GetAllUserPlaylistsAsync(string UserName)
+        {
+            string result = String.Empty;
+            try
+            {
+                var playlists = await dataContext.Users
+                   .Include(u => u.Playlists)
+                   .ThenInclude(p => p.Movies)
+                   .Where(u => u.UserName == UserName)
+                   .SelectMany(u => u.Playlists)
+                   .ToListAsync();
 
+                result = playlists.ToString();
+            } 
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+           
+
+            return result;
+        }
     }
 }

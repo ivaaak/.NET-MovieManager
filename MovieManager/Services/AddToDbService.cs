@@ -57,7 +57,6 @@ namespace MovieManager.Services
         }
 
 
-
         public void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name)
         {
             var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
@@ -126,90 +125,6 @@ namespace MovieManager.Services
         }
 
 
-
-
-
-        public void AddMovies(SearchContainer<SearchMovie> results)
-        {
-            StringBuilder sb = new StringBuilder();
-            List<Movie> validMovies = new List<Movie>();
-
-            foreach (SearchMovie result in results.Results)
-            {
-                if(dataContext.Movies.Where(i => i.MovieId == result.Id).Any())
-                {
-                    Console.WriteLine($"{result.Title} is already added to watched movies.");
-                    continue; // check so nothing is added twice
-                }
-                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(result);
-
-                if(m != null)
-                {
-                    validMovies.Add(m);
-                }
-                sb.AppendLine($"Successfully added : {result.Title} to watched movies!");
-            }
-
-            dataContext.Movies.AddRange(validMovies);
-            dataContext.SaveChanges();
-
-            Console.WriteLine(sb.ToString());
-            //return sb.ToString().Trim();
-        }
-        
-
-        public void AddShows(SearchContainer<SearchTv> results)
-        {
-            StringBuilder sb = new StringBuilder();
-            List<Movie> validShows = new List<Movie>();
-
-            foreach (SearchTv result in results.Results)
-            {
-                if(dataContext.Movies.Where(i => i.MovieId == result.Id).Any()) 
-                {
-                    Console.WriteLine($"{result.Name} is already added to movies.");
-                    continue;
-                }
-
-                var m = this.saveMovieFromApiToDbObject.SearchShowApiToObject(result);
-
-                if(m != null) { validShows.Add(m); }
-
-                sb.AppendLine($"Successfully added : {result.Name} to show watchlist.");
-            }
-
-            dataContext.Movies.AddRange(validShows);
-            dataContext.SaveChanges();
-
-            Console.WriteLine(sb.ToString());
-            //return sb.ToString().Trim();
-        }
-
-
-        public void AddMovie(SearchMovie movie)
-        {
-            StringBuilder sb = new StringBuilder();
-            Console.WriteLine(movie.Title);
-
-            if (dataContext.Movies.Any(i => i.MovieId == movie.Id))
-            {
-                sb.Append($"{movie.Title} is already added to movies.");
-            }
-            else
-            {
-                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(movie);
-
-                sb.Append($"Successfully added : {movie.Title} to movies!");
-
-                dataContext.Movies.Add(m);
-                dataContext.SaveChanges();
-            }
-
-            //return sb.ToString();
-        }
-
-
-
         //ACTORS
         public void AddActorToUserList(int ActorId, string Name)
         {
@@ -235,6 +150,106 @@ namespace MovieManager.Services
             dataContext.SaveChanges();
 
             Console.WriteLine($"Added {actor.FullName} to user - {Name}'s list of saved actors");
+        }
+
+        //Reviews
+        public void AddReviewToUsersReviews(Review review, string Name)
+        {
+            var user = dataContext.Users.Where(m => m.UserName == Name).FirstOrDefault();
+
+            Review reviewData = new Review()
+            {
+                ReviewId = review.ReviewId,
+                ReviewTitle = review.ReviewTitle,
+                Rating = review.Rating,
+                ReviewContent = review.ReviewContent,
+                MovieId = review.MovieId,
+                UserId = user.Id,
+            };
+            //user.Reviews.Add(reviewData);
+
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Added review to user - {Name}'s list of saved actors");
+        }
+
+
+        //Add to DB methods
+        public void AddMovies(SearchContainer<SearchMovie> results)
+        {
+            StringBuilder sb = new StringBuilder();
+            List<Movie> validMovies = new List<Movie>();
+
+            foreach (SearchMovie result in results.Results)
+            {
+                if (dataContext.Movies.Where(i => i.MovieId == result.Id).Any())
+                {
+                    Console.WriteLine($"{result.Title} is already added to watched movies.");
+                    continue; // check so nothing is added twice
+                }
+                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(result);
+
+                if (m != null)
+                {
+                    validMovies.Add(m);
+                }
+                sb.AppendLine($"Successfully added : {result.Title} to watched movies!");
+            }
+
+            dataContext.Movies.AddRange(validMovies);
+            dataContext.SaveChanges();
+
+            Console.WriteLine(sb.ToString());
+            //return sb.ToString().Trim();
+        }
+
+        public void AddShows(SearchContainer<SearchTv> results)
+        {
+            StringBuilder sb = new StringBuilder();
+            List<Movie> validShows = new List<Movie>();
+
+            foreach (SearchTv result in results.Results)
+            {
+                if (dataContext.Movies.Where(i => i.MovieId == result.Id).Any())
+                {
+                    Console.WriteLine($"{result.Name} is already added to movies.");
+                    continue;
+                }
+
+                var m = this.saveMovieFromApiToDbObject.SearchShowApiToObject(result);
+
+                if (m != null) { validShows.Add(m); }
+
+                sb.AppendLine($"Successfully added : {result.Name} to show watchlist.");
+            }
+
+            dataContext.Movies.AddRange(validShows);
+            dataContext.SaveChanges();
+
+            Console.WriteLine(sb.ToString());
+            //return sb.ToString().Trim();
+        }
+
+        public void AddMovie(SearchMovie movie)
+        {
+            StringBuilder sb = new StringBuilder();
+            Console.WriteLine(movie.Title);
+
+            if (dataContext.Movies.Any(i => i.MovieId == movie.Id))
+            {
+                sb.Append($"{movie.Title} is already added to movies.");
+            }
+            else
+            {
+                var m = this.saveMovieFromApiToDbObject.SearchMovieApiToObject(movie);
+
+                sb.Append($"Successfully added : {movie.Title} to movies!");
+
+                dataContext.Movies.Add(m);
+                dataContext.SaveChanges();
+            }
+
+            //return sb.ToString();
         }
     }
 }

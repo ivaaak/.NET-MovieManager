@@ -21,28 +21,18 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param name="userName">The user's username</param>
         /// <returns></returns>
+        /// 
+
+
         [HttpPost]
         [Route("userPlaylists")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public string? GetUserPlaylists(string userName)
-        {
-            var playlists = getFromDbService.GetAllUserPlaylists(userName);
-            //make async and add try/catch block
-
-            return playlists.ToString();
-        }
-
-        //get user stats
-
-        //get movie stats
-
-        /*
         public async Task<IActionResult> GetPlaylists(string userName)
         {
             try
             {
-                await getFromDbService.GetAllUserPlaylists(userName); //this needs to be async
+                await getFromDbService.GetAllUserPlaylistsAsync(userName); //this needs to be async
             }
             catch (ArgumentException ae)
             {
@@ -51,6 +41,22 @@ namespace MovieManager.Api.Controllers
 
             return Ok();
         }
-         */
+
+        //get user stats
+
+        //get movie stats
+
+        /* - not async
+        [HttpPost]
+        [Route("userPlaylists")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public string? GetUserPlaylists(string userName)
+        {
+            var playlists = getFromDbService.GetAllUserPlaylists(userName);
+
+            return playlists.ToString();
+        }
+        */
     }
 }

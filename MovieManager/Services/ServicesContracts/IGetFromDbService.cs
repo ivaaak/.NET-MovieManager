@@ -15,5 +15,7 @@ namespace MovieManager.Services.ServicesContracts
         List<Movie> GetUserMovieList(string UserName, string listName);
 
         List<Playlist> GetAllUserPlaylists(string UserName);
+
+        Task<string> GetAllUserPlaylistsAsync(string UserName);
     }
 }

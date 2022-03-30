@@ -11,12 +11,15 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddMovieToFavorites(int movieId, string Name);
 
+        void AddActorToUserList(int ActorId, string Name);
+
+        void AddReviewToUsersReviews(int ActorId, string Name);
+
+
         void AddMovies(SearchContainer<SearchMovie> results);
 
         void AddShows(SearchContainer<SearchTv> results);
 
         void AddMovie(SearchMovie movie);
-
-        void AddActorToUserList(int ActorId, string Name);
     }
 }
