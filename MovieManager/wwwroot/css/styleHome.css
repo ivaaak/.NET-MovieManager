@@ -18,7 +18,7 @@ body {
     z-index: 0;
 }
 
-/* TITLE FIRST PART */
+/* TITLE FIRST PART 
 .header {
     font-size: 16vw;
     font-weight: 500;
@@ -41,19 +41,74 @@ body {
     background-repeat: repeat-x;
     background-position: 0px 15%, 200px 25%, -50px 2vw;
     z-index: 10;
+}*/
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+
+.header {
+    margin: 0;
+    /*font-family: "Montserrat", sans-serif;*/
+    font-family: "Anton", sans-serif !important;
+    font-size: 40vh;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: absolute;
+    top: 15vh;
+    padding-left: 2%;
+    padding-top: 10%;
+    left: 50%;
+    height: 40vh;
+    transform: translateX(-50%);
+    color: white;
+    background: url('../posters wall/gridLong.jpg');
+    background-size: auto 400%;
+    background-clip: text;
+    background-repeat: repeat;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 30s linear infinite;
+}
+h1:nth-child(2) {
+    top: 50vh;
+}
+@keyframes shine {
+    from {
+        background-position: center 0;
+    }
+
+    to {
+        background-position: center 100%;
+    }
+}
+.movieManager {
+    position: absolute;
+    z-index: 10;
+    font: Roboto-bold;
+    font-size: 100px;
+    font-weight: bold;
+    text-transform: uppercase;
+    top: 70% !important;
+    left: 25%;
+    width: 50vw;
+    height: 50px !important;
+    color: white;
+    background-color: transparent;
+    text-align: center;
+    align-content: center;
 }
 
 
 .menu {
-  width: 100vw;
-  overflow-y: visible;
-  height: 100vh;
-  left: 0%;
-  background-color: var(--main-bg-gray);
-  -webkit-clip-path: circle(0px at 50px 50px);
-  clip-path: circle(0px at 50% 50%);
-  transition: 1.5s;
-  z-index: 2000;
+    width: 100vw;
+    overflow-y: visible;
+    height: 100vh;
+    left: 0%;
+    background-color: var(--main-bg-gray);
+    -webkit-clip-path: circle(0px at 50px 50px);
+    clip-path: circle(0px at 50% 50%);
+    transition: 1.5s;
+    z-index: 2000;
 }
 .menu-button {
   position: absolute;
@@ -65,18 +120,18 @@ body {
   border-radius: 0%;
   z-index: 100; /*navbar z is 100*/
 }
-.menu ~ .header {
+.menu ~ .movieManager {
   transition: all 2s ease;
-  background-color: var(--dark-peach);
+  color: var(--dark-peach);
   background-position: 0px 15%, 150px 5%, -50px 2vw;
 }
 .menu-active {
   -webkit-clip-path: circle(65% at center);
   clip-path: circle(65% at center);
 }
-.menu-active ~ .header {
+.menu-active ~ .movieManager {
   transition: all 2s ease;
-  background-color: var(--egg-shell);
+  color: var(--egg-shell);
   background-position: -240px 15%, 260px 5%, -150px 1vw;
 }
 .menu ~ .desc{

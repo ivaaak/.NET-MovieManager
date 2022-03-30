@@ -60,7 +60,9 @@
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
 						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
-						<input class="TrailerButton" id="TrailerButton" type="button" value=" This is stupid " href="/Movie/MovieCard/@movie.MovieId">
+						<a href="/Movie/Review/@movie.MovieId">
+							<button class="TrailerButton">Rate & Review</button>
+						</a>
 					</div>
 				</div>
 			</div>

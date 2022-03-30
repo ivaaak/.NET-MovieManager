@@ -3,8 +3,8 @@
     padding: 0;
 }
 
-body{
-    background-color: black;
+body {
+    background-color: var(--main-bg-gray) !important;
 }
 
 /* Accordeon styling */
@@ -33,7 +33,7 @@ body{
     height: 0;
     visibility: hidden;
     opacity: 0;
-    background: #2C3E50;
+    background: var(--main-bg-dark-gray);
     color: #f0f0f0;
 }
 
@@ -61,6 +61,9 @@ body{
     font-size: 24px;
     padding: 0;
     border: none;
+}
+.playlistButton:hover{
+    background-color: gray;
 }
 .movieTitleText {
     color: aliceblue !important;

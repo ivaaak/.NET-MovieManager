@@ -1,10 +1,12 @@
 ﻿@model IndexViewModel
-
+@using Microsoft.AspNetCore.Identity
+@using MovieManager.Data.DataModels
 @using MovieManager.Services
 @{
     ViewData["Title"] = "Home Page";
 }
-
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager  
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
 	<link href="~/css/styleHome.css" rel="stylesheet">
@@ -25,6 +27,7 @@
 
 	<!--aulus verus vento nomad-->
 	<div class="header"> verus </div>
+	<div class="movieManager"> Movie Manager </div>
 </div>
 
 
@@ -94,7 +97,44 @@
 
 <!--3 Cards - Login Register Discover-->
 <div class="containerCards">
-    <div class="card">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="card">
+        <a class="noUnderline" href="/Movie/Main">
+        <div class="face face1">
+            <div class="content">
+                <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/design_128.png?raw=true">
+                <h3>Watchlist</h3>
+            </div>
+        </div>
+        <div class="face face2">
+            <div class="content">
+                <p>Log into your existing account to view movies.</p>
+                <a href="/Movie/Main">Watchlist</a>
+            </div>
+        </div>
+        </a>
+        </div>
+        <div class="card">
+            <a class="noUnderline" href="/Home/Playlists">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/code_128.png?raw=true">
+                    <h3>Playlists</h3>
+                </div>
+            </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>View created playlists:</p>
+                    <a href="/Home/Playlists">Playlists</a>
+                </div>
+            </div>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="card">
         <a class="noUnderline" href="/Identity/Account/Login">
         <div class="face face1">
             <div class="content">
@@ -105,29 +145,32 @@
         <div class="face face2">
             <div class="content">
                 <p>Log into your existing account to view movies.</p>
-                    <a href="#">Login</a>
+                <a onclick="location.href = 'Login'">Login</a>
             </div>
         </div>
         </a>
-    </div>
-    <div class="card">
-        <a class="noUnderline" href="/Identity/Account/Register">
-        <div class="face face1">
-            <div class="content">
-                <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/code_128.png?raw=true">
-                <h3>Register</h3>
-            </div>
         </div>
-        <div class="face face2">
-            <div class="content">
-                <p>Create an account to start logging.</p>
-                <a onclick="location.href = 'Register'">Register</a>
+        <div class="card">
+            <a class="noUnderline" href="/Identity/Account/Register">
+            <div class="face face1">
+                <div class="content">
+                    <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/code_128.png?raw=true">
+                    <h3>Register</h3>
+                </div>
             </div>
+            <div class="face face2">
+                <div class="content">
+                    <p>Create an account to start logging.</p>
+                    <a onclick="location.href = 'Register'">Register</a>
+                </div>
+            </div>
+            </a>
         </div>
-        </a>
-    </div>
+    }
+
+
     <div class="card">
-        <a class="noUnderline" href="/Movie/Discover">
+        <a class="noUnderline" href="/Movie/Search">
         <div class="face face1">
             <div class="content">
                 <img src="https://github.com/Jhonierpc/WebDevelopment/blob/master/CSS%20Card%20Hover%20Effects/img/launch_128.png?raw=true">
@@ -137,7 +180,7 @@
         <div class="face face2">
             <div class="content">
                 <p>Look at popular and new releases as a guest.</p>
-                <a onclick="location.href = '/Movie/Discover'">Discover</a>
+                <a href="/Movie/Search">Discover</a>
             </div>
         </div>
         </a>
