@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace MovieManager.Test
 {
-    public class SaveMovieToDbObjectServiceTest
+    public class SearchMethodsServiceTest
     {
         [SetUp]
         public void Setup()

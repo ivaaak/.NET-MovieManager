@@ -16,7 +16,6 @@ namespace MovieManager.Services
         private TMDbClient tmdbClient;
 
         public SearchMethodsService(ISaveMovieToDbObjectService service) 
-            //this doesnt use Context at all
         {
             saveMovieToDbObjectService = service;
             tmdbClient = new TMDbClient(Configuration.APIKey);
@@ -32,13 +31,10 @@ namespace MovieManager.Services
             CombinedResultsList.AddRange(ShowResultsList);
 
             return CombinedResultsList;
-            //return show and movie results in a single list - not used atm
         }
 
 
-        //User in MovieController for SearchResults
         public List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
-            //search and return a Movie list
         {
             SearchContainer<SearchMovie> results = tmdbClient.SearchMovieAsync(SEARCH_NAME).Result;
 
@@ -53,12 +49,10 @@ namespace MovieManager.Services
                     dbMovies.Add(saveMovieToDbObjectService.SearchMovieApiToObject(movie));
                 }
             }
-
             return dbMovies;
         }
 
         public List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME)
-            //search and return a Show list
         {
             SearchContainer<SearchTv> results = tmdbClient.SearchTvShowAsync(SEARCH_NAME).Result;
 
@@ -73,7 +67,6 @@ namespace MovieManager.Services
                     dbShows.Add(saveMovieToDbObjectService.SearchShowApiToObject(movie));
                 }
             }
-
             return dbShows;
         }
 
@@ -240,7 +233,6 @@ namespace MovieManager.Services
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
-
             return ytLink;
         }
 
@@ -255,7 +247,6 @@ namespace MovieManager.Services
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
-
             return ytLink;
         }
 
@@ -277,7 +268,6 @@ namespace MovieManager.Services
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
-
             return ytLink;
         }
 
@@ -294,7 +284,6 @@ namespace MovieManager.Services
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
-
             return ytLink;
         }
     }

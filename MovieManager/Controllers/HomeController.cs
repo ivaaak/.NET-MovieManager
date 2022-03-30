@@ -60,6 +60,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+
         [Authorize]
         public IActionResult Favorites()
         {
@@ -74,6 +75,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+
         [Authorize]
         public IActionResult Actors()
         {
@@ -88,6 +90,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+
         [Authorize]
         public IActionResult Reviews()
         {
