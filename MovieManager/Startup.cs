@@ -5,6 +5,8 @@ using MovieManager.Infrastructure.Extensions;
 
 namespace MovieManager
 {
+    //This is the old startup - used for ASP.NET Core 5
+    //Not in use currently
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -23,7 +25,7 @@ namespace MovieManager
             services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-            //Identiry and Login options
+            //Identity and Login options
             services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
@@ -38,16 +40,6 @@ namespace MovieManager
                 .AddEntityFrameworkStores<MovieContext>();
 
             services.AddMemoryCache();
-
-            //services.AddControllersWithViews(options =>
-            //{
-            //    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-            //});
-
-    //TODO Register Services Here
-            //services.AddTransient<ICarService, CarService>();
-            //services.AddTransient<IDealerService, DealerService>();
-            //services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -73,16 +65,10 @@ namespace MovieManager
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    endpoints.MapDefaultAreaRoute();
-
                     endpoints.MapControllerRoute(
-                        name: "Car Details",
-                        pattern: "/Cars/Details/{id}/{information}",
-                        defaults: new
-                        {
-                            //controller = typeof(MovieController).GetControllerName(),
-                            //action = nameof(MovieController.Details)
-                        });
+                        name: "Area", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute(
+                        name: "default", pattern: "{controller=Home}/{action=Index}");
 
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
