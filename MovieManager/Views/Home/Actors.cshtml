@@ -2,7 +2,7 @@
 
 @using MovieManager.Services
 @{
-    ViewData["Title"] = @User.Identity.Name+" Playlists";
+    ViewData["Title"] = @User.Identity.Name+" Actors";
     int counter = 0;
 }
 
@@ -29,7 +29,7 @@
         <label for="panel+@counter"> @counterPlus . @actor.FullName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
-            <a href="/Movie/ActorCard/@actor.Id">                
+            <a href="/Movie/ActorCard/@actor.ActorId">                
                 <button class="playlistButton"> Go to actor: @actor.FullName </button>
             </a>
             <h2 class="movieTitleText"> Biography: @actor.Overview </h2>

@@ -1,10 +1,9 @@
-﻿@model PlaylistsViewModel
+﻿@model ReviewListViewModel
 
 @using MovieManager.Services
 @{
-    ViewData["Title"] = @User.Identity.Name+" Playlists";
+    ViewData["Title"] = @User.Identity.Name+" Reviews";
     int counter = 0;
-    string movieOrShowCard = "MovieCard";
 }
 
 @section styles{
@@ -24,32 +23,18 @@
 
 
 <div class="accordeon check">
-    @foreach(var playlist in Model.Playlists)
+    @foreach(var review in Model.Reviews)
     {
         int counterPlus = counter+1;
-        <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
+        <label for="panel+@counter"> @counterPlus . @review.ReviewTitle </label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
-            @using (Html.BeginForm("MovieList", "Movie",
-                new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
-            {
-                <button class="playlistButton"> Go to playlist: @playlist.PlaylistName </button>
-            }
-            @foreach(var movie in playlist.Movies)
-            {
-                @if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
-				else{ movieOrShowCard = "MovieCard"; }
-			    <a style="text-decoration: none" href="/Movie/@movieOrShowCard/@movie.MovieId">	
-                    <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
-                </a>
-            }
+
+            <h2 class="movieTitleText"> Title: @review.ReviewTitle   </h2>
+            <h2 class="movieTitleText"> Content: @review.ReviewContent  </h2>
+            <h2 class="movieTitleText"> Rating: @review.Rating  </h2>
+
         </div>
         counter++;
     }
 </div>
-
-
-<!--ADD form for adding a playlist: 
-    Playlist name
-    Public/Private
--->
