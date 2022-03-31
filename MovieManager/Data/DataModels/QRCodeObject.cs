@@ -1,13 +1,10 @@
-﻿using QRCoder;
-using System.Drawing;
-
-namespace MovieManager.Data.DataModels
+﻿namespace MovieManager.Data.DataModels
 {
-    public class QRCode
+    public class QRCodeObject
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        public byte[] QrCodeImage { get; set; }
+        public string QrCodeImage { get; set; } //string which can be converted to img
 
         //public QRCodeData QrCodeData { get; set; }
 

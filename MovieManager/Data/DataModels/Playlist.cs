@@ -28,6 +28,6 @@ namespace MovieManager.Data.DataModels
 
         public User User { get; set; } 
 
-        public QRCode QrCode { get; set; }
+        public QRCodeObject QrCode { get; set; }
     }
 }

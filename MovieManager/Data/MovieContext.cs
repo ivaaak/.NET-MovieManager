@@ -32,7 +32,7 @@ namespace MovieManager.Data
 
         public DbSet<Platform> Platforms { get; set; }
 
-        public DbSet<QRCode> QRCodes { get; set; }
+        public DbSet<QRCodeObject> QRCodes { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
