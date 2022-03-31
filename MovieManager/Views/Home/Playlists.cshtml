@@ -44,6 +44,11 @@
                     <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
                 </a>
             }
+            @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
+                new { playlistId = playlist.PlaylistId }, FormMethod.Post))
+            {
+                <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
+            }
         </div>
         counter++;
     }

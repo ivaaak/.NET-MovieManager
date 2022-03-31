@@ -26,7 +26,7 @@ namespace MovieManager.Controllers
             this.searchMethodsService = searchMethodsService;
         }
 
-        //Main button click functionality
+        //Button click functionality in the MAIN lists view
         [HttpPost]
         public IActionResult AddMovieToPlaylistButtonClick(int movieId, string playlistName)
         {
@@ -51,7 +51,6 @@ namespace MovieManager.Controllers
             return RedirectToAction("Main", "Movie");
         }
 
-        //main
         public IActionResult RemoveMovieButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -127,7 +126,7 @@ namespace MovieManager.Controllers
         }
 
 
-
+        //Actor
         [HttpPost]
         public IActionResult FavoriteActorButtonClick(int actorId)
         {
@@ -152,10 +151,11 @@ namespace MovieManager.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GenerateQRCodeButtonClick(Playlist playlist)
+        [HttpPost]
+        public IActionResult GenerateQRCodeButtonClick(string playlistId)
         {
-            addToDbService.GenerateQRCode(playlist);
+            //only transfers the playlistId for some reason
+            addToDbService.GenerateQRCode(playlistId);
 
             return RedirectToAction("Playlists", "Home");
         }

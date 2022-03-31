@@ -176,21 +176,28 @@ namespace MovieManager.Services
         }
 
         //QrCode
-        public void GenerateQRCode(Playlist playlist)
+        public void GenerateQRCode(string playlistId)
         {
+            var playlist = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(p => p.PlaylistId == playlistId)
+                .FirstOrDefault();
             QRCode QRCode = new QRCode();
             StringBuilder playlistToText = new StringBuilder();
 
+            if (playlist.Movies != null) { Console.WriteLine("NO MOVIES IN PLAYLIST???"); }
             foreach (var item in playlist.Movies)
             {
-                playlistToText.Append(item.MovieId);
-                playlistToText.Append(item.Title);
+                playlistToText.Append(item.MovieId + "-");
+                playlistToText.Append(item.Title + ", ");
                 playlistToText.Append("");
+                Console.WriteLine($"QR - ID - {item.MovieId}"); //debug
+                Console.WriteLine($"QR - Movie - {item.Title}");
             }
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator
-                .CreateQrCode(playlistToText.ToString(), 
+                .CreateQrCode(playlistToText.ToString(),
                               QRCodeGenerator.ECCLevel.Q);
 
             BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
@@ -199,14 +206,16 @@ namespace MovieManager.Services
             using (var ms = new MemoryStream(qrCodeAsBitmapByteArr))
             {
                 var qrCodeImage = new Bitmap(ms);
-                QRCode.QrCodeData = qrCodeData;
-                QRCode.QrCodeImage = qrCodeImage;
+                QRCode.QrCodeImage = qrCodeAsBitmapByteArr;
                 QRCode.TextContent = playlistToText.ToString();
                 QRCode.PlaylistId = playlist.PlaylistId;
             }
-            playlist.QrCode = QRCode;
-            //dataContext.QrCodes.Add(QRCode);
-            dataContext.SaveChanges();
+            if (!dataContext.QRCodes.Any(q => q.PlaylistId == QRCode.PlaylistId)) //skip adding if a qr code exists already
+            {
+                playlist.QrCode = QRCode;
+                dataContext.QRCodes.Add(QRCode);
+                dataContext.SaveChanges();
+            }
         }
 
         //Add to DB methods

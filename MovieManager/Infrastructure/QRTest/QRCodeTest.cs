@@ -19,8 +19,7 @@ namespace MovieManager.Infrastructure.QRTest
             using (var ms = new MemoryStream(qrCodeAsBitmapByteArr))
             {
                 var qrCodeImage = new Bitmap(ms);
-                QRCode.QrCodeData = qrCodeData;
-                QRCode.QrCodeImage = qrCodeImage;
+                QRCode.QrCodeImage = qrCodeAsBitmapByteArr;
                 QRCode.TextContent = textInput;
             }
         }
