@@ -32,8 +32,8 @@ namespace MovieManager.Data.DataModels
         public List<Actor> Actors { get; init; }
 
 
-        //public string? CountryCode { get; set; }
+        public string? CountryCode { get; set; }
 
-        //public int? LanguageId { get; set; }
+        public string? Language { get; set; }
     }
 }

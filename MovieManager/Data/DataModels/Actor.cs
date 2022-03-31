@@ -18,6 +18,6 @@ namespace MovieManager.Data.DataModels
 
         public List<MovieRole> KnownFor { get; set; }
 
-        //public int LanguageId { get; set; }
+        public string? Language { get; set; }
     }
 }

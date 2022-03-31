@@ -32,6 +32,8 @@ namespace MovieManager.Data
 
         public DbSet<Platform> Platforms { get; set; }
 
+        public DbSet<QRCode> QRCodes { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,35 +64,15 @@ namespace MovieManager.Data
                         j.HasKey(t => new { t.MovieId, t.PlaylistId });
                     });
 
-            /*
-            modelBuilder.Entity<PlaylistMovie>()
-                .HasKey(e => new { e.MovieId, e.PlaylistId });
-
-            modelBuilder.Entity<PlaylistMovie>()
-                .HasOne(e => e.Movie)
-                .WithMany(e => e.PlaylistMovies)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<PlaylistMovie>()
-                .HasOne(e => e.Playlist)
-                .WithMany(e => e.PlaylistMovies)
-                .OnDelete(DeleteBehavior.Restrict);
-            */
-
-            /*playlist has many movies
-            modelBuilder.Entity<Playlist>()
-                .HasMany(c => c.Movies)
-                .WithOne();
-
-            modelBuilder.Entity<Movie>()
-               .HasMany(c => c.Playlists)
-               .WithOne();
-            */
-
             //user has many playlists
             modelBuilder.Entity<User>()
                 .HasMany(c => c.Playlists)
                 .WithOne(e => e.User);
+
+            //playlist has a qrcode
+            modelBuilder.Entity<Playlist>()
+                .HasOne(c => c.QrCode)
+                .WithOne(e => e.Playlist);
 
             base.OnModelCreating(modelBuilder);
             //initializes Identity?
