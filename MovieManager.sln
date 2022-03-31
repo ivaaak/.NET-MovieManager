@@ -13,6 +13,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Api", "MovieManager.Api\MovieManager.Api.csproj", "{836C2C6C-817D-42CC-9783-00D560C306B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.Test", "MovieManager.Test\MovieManager.Test.csproj", "{D88238B2-FD13-4201-A3BE-4FF926680108}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BF948C3-E850-4758-B345-72AF0DD22805} = {2BF948C3-E850-4758-B345-72AF0DD22805}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
