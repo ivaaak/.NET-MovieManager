@@ -90,8 +90,23 @@ namespace MovieManager.Services
             }
             return userMovieObjectsList;
         }
+        public List<QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists)
+        {
+            var qrCodes = new List<QRCodeObject>();
+            foreach (var playlist in playlists)
+            {
+                var res = dataContext.Playlists
+                    .Include(a => a.QrCode)
+                    .Where(p => p.PlaylistId == playlist.PlaylistId)
+                    .Select(p => p.QrCode)
+                    .ToList();
+                qrCodes.AddRange(res);
+            }
 
-        //GET TRAILER FROM API/DB
+            return qrCodes;
+        }
+
+        //GET FOR API
         public async Task<string> GetAllUserPlaylistsAsync(string UserName)
         {
             string result = String.Empty;

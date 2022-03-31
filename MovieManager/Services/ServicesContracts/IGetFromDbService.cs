@@ -16,6 +16,8 @@ namespace MovieManager.Services.ServicesContracts
 
         List<Playlist> GetAllUserPlaylists(string UserName);
 
+        List<QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
+
         Task<string> GetAllUserPlaylistsAsync(string UserName);
     }
 }

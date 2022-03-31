@@ -1,10 +1,12 @@
 ﻿@model PlaylistsViewModel
 
 @using MovieManager.Services
+@using MovieManager.Data.DataModels
 @{
     ViewData["Title"] = @User.Identity.Name+" Playlists";
     int counter = 0;
     string movieOrShowCard = "MovieCard";
+    var qrList = Model.QRCodes;
 }
 
 @section styles{
@@ -28,6 +30,7 @@
     @foreach(var playlist in Model.Playlists)
     {
         int counterPlus = counter+1;
+        var qr = qrList.Where(q => q.PlaylistId == playlist.PlaylistId).FirstOrDefault();
         <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
@@ -49,6 +52,9 @@
             {
                 <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
             }
+            <!--IF playlist has QRCode -> show the qr code image (and label)-->
+            <img src="data:image/png;base64, @qr.QrCodeImage">
+            
         </div>
         counter++;
     }

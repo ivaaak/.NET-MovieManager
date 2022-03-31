@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using TMDbLib.Client;
 using MovieManager.Data.DBConfig;
 using QRCoder;
-using System.Drawing;
+using System.DrawingCore;
 
 namespace MovieManager.Services
 {
@@ -182,41 +182,33 @@ namespace MovieManager.Services
                 .Include(p => p.Movies)
                 .Where(p => p.PlaylistId == playlistId)
                 .FirstOrDefault();
-            QRCode QRCode = new QRCode();
-            StringBuilder playlistToText = new StringBuilder();
 
-            if (playlist.Movies != null) { Console.WriteLine("NO MOVIES IN PLAYLIST???"); }
+            StringBuilder playlistToText = new StringBuilder();
             foreach (var item in playlist.Movies)
             {
-                playlistToText.Append(item.MovieId + "-");
-                playlistToText.Append(item.Title + ", ");
-                playlistToText.Append("");
-                Console.WriteLine($"QR - ID - {item.MovieId}"); //debug
-                Console.WriteLine($"QR - Movie - {item.Title}");
+                playlistToText.Append(item.MovieId + "-" + item.Title + ", ");
+                Console.WriteLine($"QR - ID - {item.MovieId} QR - Movie - {item.Title}"); //debug
             }
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator
-                .CreateQrCode(playlistToText.ToString(),
-                              QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(playlistToText.ToString(), QRCodeGenerator.ECCLevel.Q);
+            Base64QRCode base64Code = new Base64QRCode(qrCodeData);
+            var workingStringImage = base64Code.GetGraphic(10);
 
-            BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
-            byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(20);
-
-            using (var ms = new MemoryStream(qrCodeAsBitmapByteArr))
+            QRCodeObject qrCodeObj = new QRCodeObject()
             {
-                var qrCodeImage = new Bitmap(ms);
-                QRCode.QrCodeImage = qrCodeAsBitmapByteArr;
-                QRCode.TextContent = playlistToText.ToString();
-                QRCode.PlaylistId = playlist.PlaylistId;
-            }
-            if (!dataContext.QRCodes.Any(q => q.PlaylistId == QRCode.PlaylistId)) //skip adding if a qr code exists already
+                TextContent = playlistToText.ToString(),
+                PlaylistId = playlist.PlaylistId,
+                QrCodeImage = workingStringImage,
+            };
+            if (!dataContext.QRCodes.Any(q => q.PlaylistId == qrCodeObj.PlaylistId)) //skip adding if a qr code exists already
             {
-                playlist.QrCode = QRCode;
-                dataContext.QRCodes.Add(QRCode);
+                playlist.QrCode = qrCodeObj;
+                dataContext.QRCodes.Add(qrCodeObj);
                 dataContext.SaveChanges();
             }
         }
+
 
         //Add to DB methods
         public void AddMovies(SearchContainer<SearchMovie> results)

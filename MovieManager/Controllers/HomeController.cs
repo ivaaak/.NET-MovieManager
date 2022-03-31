@@ -52,10 +52,12 @@ namespace MovieManager.Controllers
             var userName = this.User.Identity.Name;
 
             var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
+            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(userPlaylists);
 
             var model = new PlaylistsViewModel()
             {
                 Playlists = userPlaylists,
+                QRCodes = userQrCodes,
             };
 
             return View(model);
