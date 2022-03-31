@@ -1,5 +1,6 @@
 ﻿using QRCoder;
 using System.Drawing;
+using MovieManager.Data.DataModels;
 
 namespace MovieManager.Infrastructure.QRTest
 {
@@ -24,5 +25,4 @@ namespace MovieManager.Infrastructure.QRTest
             }
         }
     }
-
 }

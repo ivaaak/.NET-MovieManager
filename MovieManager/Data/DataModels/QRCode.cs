@@ -1,7 +1,7 @@
 ﻿using QRCoder;
 using System.Drawing;
 
-namespace MovieManager.Infrastructure.QRTest
+namespace MovieManager.Data.DataModels
 {
     public class QRCode
     {
@@ -12,5 +12,7 @@ namespace MovieManager.Infrastructure.QRTest
         public QRCodeData QrCodeData { get; set; }
 
         public string TextContent { get; set; }
+        
+        public string PlaylistId { get; set; }
     }
 }

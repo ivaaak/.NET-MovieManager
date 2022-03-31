@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieManager.Data.DataModels;
 using MovieManager.Infrastructure.Alerts;
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Services.ServicesContracts;
@@ -151,7 +152,13 @@ namespace MovieManager.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult GenerateQRCodeButtonClick(Playlist playlist)
+        {
+            addToDbService.GenerateQRCode(playlist);
 
+            return RedirectToAction("Playlists", "Home");
+        }
 
         //TODO Logic and calling services
         //Make this a popup window/embed trailer from a yt link

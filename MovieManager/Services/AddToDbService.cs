@@ -7,6 +7,8 @@ using TMDbLib.Objects.Search;
 using Microsoft.EntityFrameworkCore;
 using TMDbLib.Client;
 using MovieManager.Data.DBConfig;
+using QRCoder;
+using System.Drawing;
 
 namespace MovieManager.Services
 {
@@ -173,6 +175,39 @@ namespace MovieManager.Services
             Console.WriteLine($"Added review to user - {Name}'s list of saved actors");
         }
 
+        //QrCode
+        public void GenerateQRCode(Playlist playlist)
+        {
+            QRCode QRCode = new QRCode();
+            StringBuilder playlistToText = new StringBuilder();
+
+            foreach (var item in playlist.Movies)
+            {
+                playlistToText.Append(item.MovieId);
+                playlistToText.Append(item.Title);
+                playlistToText.Append("");
+            }
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator
+                .CreateQrCode(playlistToText.ToString(), 
+                              QRCodeGenerator.ECCLevel.Q);
+
+            BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
+            byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(20);
+
+            using (var ms = new MemoryStream(qrCodeAsBitmapByteArr))
+            {
+                var qrCodeImage = new Bitmap(ms);
+                QRCode.QrCodeData = qrCodeData;
+                QRCode.QrCodeImage = qrCodeImage;
+                QRCode.TextContent = playlistToText.ToString();
+                QRCode.PlaylistId = playlist.PlaylistId;
+            }
+            playlist.QrCode = QRCode;
+            //dataContext.QrCodes.Add(QRCode);
+            dataContext.SaveChanges();
+        }
 
         //Add to DB methods
         public void AddMovies(SearchContainer<SearchMovie> results)
