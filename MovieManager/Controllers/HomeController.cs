@@ -109,5 +109,18 @@ namespace MovieManager.Controllers
         }
 
         public IActionResult Error() => View();
+        public IActionResult Profile()
+        {
+            var userName = this.User.Identity.Name;
+
+            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
+
+            var model = new PlaylistsViewModel()
+            {
+                Playlists = userPlaylists,
+            };
+
+            return View(model);
+        }
     }
 }
