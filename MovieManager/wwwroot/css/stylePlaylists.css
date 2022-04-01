@@ -81,3 +81,24 @@ body {
     text-transform: uppercase;
     color: var(--dark-peach);
 }
+
+
+.qrCodeContainer {
+    margin-left: 100px !important;
+    padding: 0 !important;
+    position: relative;
+    top: 0%;
+    right: 0 !important;
+    height: 300px;
+    width: 300px;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: center;
+    align-content:center;
+}
+

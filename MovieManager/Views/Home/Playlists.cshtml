@@ -34,6 +34,8 @@
         <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
         <input id="panel+@counter" type="checkbox" />
         <div class="panel">
+        <div class="flex-container">
+	    <div class="flex-items">
             @using (Html.BeginForm("MovieList", "Movie",
                 new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
             {
@@ -52,9 +54,11 @@
             {
                 <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
             }
-            <!--IF playlist has QRCode -> show the qr code image (and label)-->
-            <img src="data:image/png;base64, @qr.QrCodeImage">
-            
+        </div>
+	        <div class="flex-items">
+                <img class="qrCodeContainer" src="data:image/png;base64, @qr.QrCodeImage">
+            </div>
+        </div>
         </div>
         counter++;
     }

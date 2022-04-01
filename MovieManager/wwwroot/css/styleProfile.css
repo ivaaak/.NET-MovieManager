@@ -1,0 +1,119 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--main-bg-gray);
+}
+
+
+.app {
+    position: fixed;
+    top: 14%;
+    left: 0%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: visible;
+    width: 33%;
+    height: 86%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 0px;
+    display: grid;
+    grid-row-gap: 20px;
+}
+.app > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(5, 40%);
+    overflow-x: scroll;
+    height: 15vh;
+}
+
+.app2 {
+    position: fixed;
+    top: 20%;
+    left: 33%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: visible;
+    width: 33%;
+    height: 86%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 0px;
+    display: grid;
+    grid-row-gap: 20px;
+}
+.app2 > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(40, 40%);
+    overflow-x: scroll;
+    height: 15vh;
+}
+
+.app3 {
+    position: fixed;
+    top: 14%;
+    right: 1%;
+    background: transparent;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 33%;
+    height: 86%;
+    padding-right: 30px;
+    padding-left: 50px;
+    padding-top: 0px;
+    display: grid;
+    grid-row-gap: 20px;
+    z-index:-1;
+}
+.app3 > .horizontal {
+    display: grid;
+    grid-gap: calc(20px / 2);
+    grid-template-columns: repeat(40, 40%);
+    overflow-x: scroll;
+    height: 15vh;
+    overflow-y: hidden;
+}
+
+.green {
+    background: #34495E;
+    height: 26vh;
+}
+
+.blue {
+    background: #49afdd;
+}
+
+.block {
+    border-radius: 5px;
+}
+
+
+.app::-webkit-scrollbar {
+    display: none;
+}
+.app2::-webkit-scrollbar {
+    display: none;
+}
+.app3::-webkit-scrollbar {
+    display: none;
+}
+
+.app2 > .horizontal::-webkit-scrollbar {
+    display: none;
+}
+.app3 > .horizontal::-webkit-scrollbar {
+    display: none;
+}
+.noUnderline {
+    overflow: hidden;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+}

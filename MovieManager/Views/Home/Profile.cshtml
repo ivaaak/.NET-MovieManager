@@ -1,0 +1,69 @@
+﻿@model PlaylistsViewModel
+@{
+    ViewData["Title"] = @User.Identity.Name+" Profile";
+    int moviecount = 0;
+    foreach(var playlist in Model.Playlists)
+    {
+        moviecount += playlist.Movies.Count();
+    }
+    var favs = Model.Playlists.Where(p => p.PlaylistName == "favorites").FirstOrDefault();
+    int favscount = 0;
+    foreach(var movie in favs.Movies)
+    {
+        favscount++;
+    }
+}
+
+@section styles{
+	<link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleProfile.css" rel="stylesheet">
+}
+
+<main class="app">
+    <a class="noUnderline" href="/Movie/Main">
+        <div class="green block">
+            <h1>watchlist</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Movie/Search">
+        <div class="green block">
+            <h1>discover</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Home/Favorites">
+        <div class="green block">
+            <h1>favorites actors reviews</h1>
+        </div>
+    </a>
+</main>
+
+<main class="app2">
+    <div class="green block">
+        <h1>User: @User.Identity.Name</h1>
+        <img src="~/img/profile-pic.png" width="100" height="100">   
+        <h2>Has: @Model.Playlists.Count Playlists</h2>
+        <h2>Has @moviecount movies in all lists</h2>
+        <h2>Has @favscount liked movies.</h2>
+        <h2>Has reviewed movies.</h2>
+          
+     </div>
+    <a class="noUnderline" href="/Home/Index">
+    <div class="green block"><h1>admin things?</h1></div>
+    </a>
+</main>
+
+<main class="app3">
+    @foreach(var playlist in Model.Playlists)
+    {
+        <section class="horizontal">
+            @foreach(var movie in playlist.Movies)
+            {
+                <div class="blue block"> 
+                    <h2>Movie - @movie.Title</h2>
+                    <h2>List - @playlist.PlaylistName</h2>
+
+                </div> 
+            }
+        </section>
+     }
+</main>  
