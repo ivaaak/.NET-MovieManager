@@ -3,9 +3,10 @@
 @using MovieManager.Models
 @{
 	ViewData["Title"] = @Model.Show.Name;
-	// maybe? REVIEWS
-
+	TrailerViewModel trailerModel = new TrailerViewModel();
 	var show = Model.Show;
+	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(show.Id);
+	trailerModel.TrailerId = show.Id;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+show.PosterPath;	
 }
 @section styles{
@@ -23,7 +24,6 @@
 		    <a href="https://www.themoviedb.org/tv/@show.Id">
 				<img class="moviePosterBig" alt="Image" src="@posterMovieUrl"> 	
 			</a>
-		   <!--onclick -> tmdb Id-->
 		</div>
 	   <div class="flex-items">
 		<h2 class="movieTitle">	@show.Name </h2>
@@ -40,27 +40,32 @@
 		<li> @show.NumberOfEpisodes eps</li>
 		<li> lang: @show.OriginalLanguage</li>
 		</ul>
-
-		@if(User.Identity.IsAuthenticated){
 			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
+			@await Html.PartialAsync("_TrailerPartial", trailerModel)
+			@if (User.Identity.IsAuthenticated)
+			{
 				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
-							new { movieId = @show.Id, playlistName = "watched" },   FormMethod.Post)) 
+					new { movieId = @show.Id, playlistName = "watched" }, FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
 				}
 				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
-							new { movieId = @show.Id, playlistName = "current" },   FormMethod.Post)) 
+					new { movieId = @show.Id, playlistName = "current" }, FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
 				}
 				@using (Html.BeginForm("AddShowToPlaylistButtonClick", "Button",
-							new { movieId = @show.Id, playlistName = "future" },   FormMethod.Post)) 
+					new { movieId = @show.Id, playlistName = "future" }, FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
 				}
+			}
+			@using (Html.BeginForm("Review", "Movie",
+				new { Id = @show.Id },   FormMethod.Post)) //this doesnt work for shows atm
+			{
+				<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
+			}
 			</div>
-		}
 		</div>
 	</div>
 </div>

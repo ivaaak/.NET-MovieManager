@@ -9,6 +9,7 @@
 	var current = Model.MoviesList2;
 	var future = Model.MoviesList3;
 
+	TrailerViewModel trailerModel = new TrailerViewModel();
 	string movieOrShowCard = "MovieCard";
 }
 
@@ -36,7 +37,9 @@
 	}
 	@foreach (var movie in watched)
 	{
-	<div class="movieContainer">
+		trailerModel.TrailerKey = movie.TrailerLink;
+		trailerModel.TrailerId = movie.MovieId;
+		<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">
 			@if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
@@ -61,9 +64,7 @@
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
 				
-				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
-					<button class="TrailerButton" type="submit">▶ Trailer</button>
-				}
+				@await Html.PartialAsync("_TrailerPartial", trailerModel)
 				<a href="/Movie/Review/@movie.MovieId">
 					<button class="TrailerButton">Rate & Review</button>
 				</a>
@@ -93,6 +94,7 @@
 	}
 	@foreach (var movie in current)
 	{
+
 	<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">	
@@ -119,9 +121,6 @@
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
 				
-				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
-					<button class="TrailerButton" type="submit" name="addToButton">▶   Trailer</button>
-				}
 				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
 							new { movieId = @movie.MovieId, playlistName = "watched" },FormMethod.Post))
 				{
@@ -155,6 +154,7 @@
 		}
 	@foreach (var movie in future)
 	{
+
 	<div class="movieContainer">
 		<div class="flex-container">
 		<div class="flex-items">	
@@ -180,9 +180,6 @@
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
 
-				@using (Html.BeginForm("ShowTrailerButtonClick", "Button")){
-					<button class="TrailerButton" id="TrailerButton" type="submit" name="addToButton"> ▶   Trailer</button>
-				}
 				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
 							new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post))
 				{

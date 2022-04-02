@@ -1,9 +1,11 @@
 ﻿@model MovieListViewModel
+@using MovieManager.Models
 @{
 	ViewData["Title"] = "Favorites";
 	var movieList = Model.MoviesList;
 	var listName = Model.MoviesListName;
 	string movieOrShowCard = "MovieCard";
+	TrailerViewModel trailerModel = new TrailerViewModel();
 }
 @section styles{
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -35,6 +37,8 @@
     {
 	@foreach (var movie in movieList)
 	{
+		trailerModel.TrailerKey = movie.TrailerLink;
+		trailerModel.TrailerId = movie.MovieId;
 	<div class="col-12 col-md-6 col-lg-4">
 	<div class="card">
 		<div class="movieContainer">
@@ -46,7 +50,7 @@
 						<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
 					</a>
 					@using (Html.BeginForm("RemoveMovieButtonClickList", "Button",
-						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
+						new { movieId = @movie.MovieId, playlistName = "favorites" },  FormMethod.Post)) 
 					{
 						<button class="RemoveButton" type="submit"> X </button>
 					}
@@ -56,7 +60,8 @@
 					<p class="movieRating"> Rating - @movie.Rating/10</p>
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
-						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
+						@await Html.PartialAsync("_TrailerPartial", trailerModel)
+
 						<a href="/Movie/Review/@movie.MovieId">
 							<button class="TrailerButton">Rate & Review</button>
 						</a>

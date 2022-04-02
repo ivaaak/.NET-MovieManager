@@ -3,11 +3,12 @@
 @using MovieManager.Models
 @{
 	ViewData["Title"] = @Model.Movie.Title;
-	// maybe? REVIEWS
 
 	var movie = Model.Movie;
-
+	TrailerViewModel trailerModel = new TrailerViewModel();
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
+	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id);
+	trailerModel.TrailerId = movie.Id;
 }
 @section styles{
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
@@ -40,23 +41,26 @@
 		<li> @movie.Runtime min</li>
 		<li> lang: @movie.OriginalLanguage</li>
 		</ul>
-		@if(User.Identity.IsAuthenticated){
 			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br/>
-				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-					new { movieId = @movie.Id, playlistName = "watched" },   FormMethod.Post)) //this is a db movie
+				@await Html.PartialAsync("_TrailerPartial", trailerModel)
+
+				@if (User.Identity.IsAuthenticated)
 				{
-					<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
-				}
-				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-					new { movieId = @movie.Id, playlistName = "current" },   FormMethod.Post)) //this is a db movie
-				{
-					<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
-				}
-				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-					new { movieId = @movie.Id, playlistName = "future" },   FormMethod.Post)) //this is a db movie
-				{
-					<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+											new { movieId = @movie.Id, playlistName = "watched" }, FormMethod.Post)) //this is a db movie
+					{
+						<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
+					}
+					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+											new { movieId = @movie.Id, playlistName = "current" }, FormMethod.Post)) //this is a db movie
+					{
+						<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
+					}
+					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+											new { movieId = @movie.Id, playlistName = "future" }, FormMethod.Post)) //this is a db movie
+					{
+						<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+					}
 				}
 				@using (Html.BeginForm("Review", "Movie",
 					new { Id = @movie.Id },   FormMethod.Post)) //this is a db movie
@@ -64,7 +68,7 @@
 					<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
 				}
 			</div>
-		}
+
 		</div>
 	</div>
 </div>

@@ -4,6 +4,7 @@
 	var movieList = Model.MoviesList;
 	var listName = Model.MoviesListName;
 	string movieOrShowCard = "MovieCard";
+	TrailerViewModel trailerModel = new TrailerViewModel();
 }
 @section styles{
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -33,6 +34,8 @@
 <div class="row">
 	@foreach (var movie in movieList)
 	{
+		trailerModel.TrailerKey = movie.TrailerLink;
+		trailerModel.TrailerId = movie.MovieId;
 	<div class="col-12 col-md-6 col-lg-4">
 	<div class="card">
 		<div class="movieContainer">
@@ -59,7 +62,7 @@
 					<p class="movieRating"> Rating - @movie.Rating/10</p>
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
-						<input class="TrailerButton" id="TrailerButton" type="button" value="▶ Trailer" onclick=""><br>
+						@await Html.PartialAsync("_TrailerPartial", trailerModel)
 						<input class="TrailerButton" id="TrailerButton" type="button" value=" This is stupid " href="/Movie/MovieCard/@movie.MovieId">
 					</div>
 				</div>
