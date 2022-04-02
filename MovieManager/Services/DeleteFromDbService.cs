@@ -24,10 +24,8 @@ namespace MovieManager.Services
                 .Where(u => u.User.UserName == userName && u.PlaylistName == playlistName)
                 .FirstOrDefault();
 
-            if (targetPlaylist.Movies.Contains(movie))
-            {
-                targetPlaylist.Movies.Remove(movie);
-            }
+
+            targetPlaylist.Movies.Remove(movie);
 
             dataContext.SaveChanges();
 

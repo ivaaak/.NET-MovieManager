@@ -261,14 +261,14 @@ namespace MovieManager.Services
 
             var trailer = client.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
             string ytLink = String.Empty;
-
+            var ytKey = trailer.Key;
             if (trailer.Site == "YouTube")
             {
-                var ytKey = trailer.Key;
-                var partial = "https://www.youtube.com/watch?v=";
-                ytLink = partial + ytKey;
+                return ytKey;                
+                //var partial = "https://www.youtube.com/watch?v=";
+                //ytLink = partial + ytKey;
             }
-            return ytLink;
+            return "notrailer";
         }
 
         public static string GetShowTrailerStatic(int id)
@@ -281,10 +281,12 @@ namespace MovieManager.Services
             if (trailer.Site == "YouTube")
             {
                 var ytKey = trailer.Key;
-                var partial = "https://www.youtube.com/watch?v=";
-                ytLink = partial + ytKey;
+                return ytLink;
+
+                //var partial = "https://www.youtube.com/watch?v=";
+                //ytLink = partial + ytKey;
             }
-            return ytLink;
+            return "notrailer";
         }
     }
 }
