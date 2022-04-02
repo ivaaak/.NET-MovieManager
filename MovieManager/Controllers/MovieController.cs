@@ -230,26 +230,6 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
-        [Authorize]
-        [Route("Movie/MovieList/favorites")]
-        [HttpPost]
-        public IActionResult MovieList()
-        {
-            Console.WriteLine("Hit controller: Movie , hit view: Favorites");
-
-            var userName = this.User.Identity.Name;
-
-            var movies = getFromDbService.GetUserMovieList(userName, "favorites");
-
-            var model = new MovieListViewModel()
-            {
-                MoviesList = movies,
-                MoviesListName = "favorites",
-            };
-
-            return View(model);
-        }
-
 
         [Route("Movie/Review/{id}")]
         public IActionResult Review(int id)

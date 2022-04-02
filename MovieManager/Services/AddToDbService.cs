@@ -150,7 +150,7 @@ namespace MovieManager.Services
                     FullName = actorApi.Name,
                     CountryCode = actorApi.PlaceOfBirth,
                     Overview = actorApi.Biography,
-                    MovieCredits = credits,
+                    //MovieCredits = credits,
                     PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actorApi.ProfilePath),
                 };
 

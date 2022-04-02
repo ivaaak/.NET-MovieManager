@@ -83,7 +83,7 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            List<Actor> actors = null; //getFromDbService.GetActors(userName);
+            List<Actor> actors = getFromDbService.GetUserActors(userName);
 
             var model = new ActorListViewModel()
             {

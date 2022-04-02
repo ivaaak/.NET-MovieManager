@@ -20,22 +20,30 @@
 	<link href="~/css/stylePlaylists.css" rel="stylesheet">
 }
 
-
+<h1 class="playlistTitle"> @User.Identity.Name's Liked Actors:</h1>
 
 <div class="accordeon check">
     @if (Model.Actors != null)
     {
-       @foreach(var actor in Model.Actors)
+        @foreach(var actor in Model.Actors)
         {
             int counterPlus = counter+1;
             <label for="panel+@counter"> @counterPlus . @actor.FullName</label>
             <input id="panel+@counter" type="checkbox" />
             <div class="panel">
-                <a href="/Movie/ActorCard/@actor.ActorId">                
-                    <button class="playlistButton"> Go to actor: @actor.FullName </button>
-                </a>
-                <h2 class="movieTitleText"> Biography: @actor.Overview </h2>
-                <h2 class="movieTitleText"> Country: @actor.CountryCode </h2>
+            <a href="/Movie/ActorCard/@actor.ActorId">                
+                <button class="playlistButton"> Go to actor: @actor.FullName </button>
+            </a>
+            <div class="flex-container">
+                <div class="flex-items"> 
+                    <img class="actorPoster" style="height:600px !important" alt="Image" src="@actor.PhotoUrl"> 
+                </div>
+
+                <div class="flex-items"> 
+                    <h2 class="movieTitleText"> Biography: @actor.Overview </h2>
+                     <h2 class="movieTitleText"> Country: @actor.CountryCode </h2>
+                </div>    
+            </div>
             </div>
             counter++;
         }

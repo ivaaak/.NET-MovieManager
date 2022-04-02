@@ -106,6 +106,18 @@ namespace MovieManager.Services
             return qrCodes;
         }
 
+        //Actors
+        public List<Actor> GetUserActors(string UserName)
+        {
+            var actors = dataContext.Users
+                .Include(u => u.Actors)
+                .Where(u => u.UserName == UserName)
+                .SelectMany(u => u.Actors)
+                .ToList();
+
+            return actors;
+        }
+
         //GET FOR API
         public async Task<string> GetAllUserPlaylistsAsync(string UserName)
         {
