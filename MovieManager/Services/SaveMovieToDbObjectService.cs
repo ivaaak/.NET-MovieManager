@@ -95,7 +95,7 @@ namespace MovieManager.Services
         }
 
 
-
+        //errors
         public Actor ActorApiToObject(TMDbLib.Objects.People.Person result)
         {
             if (result.Name == null || result.Images==null) { return null; }
@@ -106,7 +106,6 @@ namespace MovieManager.Services
                 FullName = result.Name,
                 CountryCode = result.PlaceOfBirth,
                 Overview = result.Biography,
-                KnownFor = result.MovieCredits.Cast.ToList(),
             };
             return a;
         }

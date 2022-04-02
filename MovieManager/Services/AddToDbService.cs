@@ -9,6 +9,7 @@ using TMDbLib.Client;
 using MovieManager.Data.DBConfig;
 using QRCoder;
 using System.DrawingCore;
+using TMDbLib.Objects.People;
 
 namespace MovieManager.Services
 {
@@ -130,23 +131,40 @@ namespace MovieManager.Services
         //ACTORS
         public void AddActorToUserList(int ActorId, string Name)
         {
-            var actor = dataContext.Actors.Where(m => m.ActorId == ActorId).FirstOrDefault();
+            Actor actor = dataContext.Actors.Where(m => m.ActorId == ActorId).FirstOrDefault();
 
-            if (actor == null) //movie doesnt exist in db
+            if (actor == null) //actor doesnt exist in db
             {
-                var apiActor = tmdbClient.GetPersonAsync(ActorId);                      //get from api
-                actor = saveMovieFromApiToDbObject.ActorApiToObject(apiActor.Result);   //turn to db object
-                dataContext.Actors.Add(actor);                                          //add to db
+                Person actorApi = new Person();
+                MovieCredits credits = new MovieCredits();
+                try
+                {
+                    actorApi = tmdbClient.GetPersonAsync(ActorId).Result;
+                    credits = tmdbClient.GetPersonMovieCreditsAsync(ActorId).Result;
+                }
+                catch (Exception e) { e.ToString(); };
+
+                actor = new Actor()
+                {
+                    ActorId = actorApi.Id,
+                    FullName = actorApi.Name,
+                    CountryCode = actorApi.PlaceOfBirth,
+                    Overview = actorApi.Biography,
+                    MovieCredits = credits,
+                    PhotoUrl = SaveMovieToDbObjectService.BuildImageURL(actorApi.ProfilePath),
+                };
+
+                dataContext.Actors.Add(actor);
             };
 
-            var targetPlaylist = dataContext.Users
+            var targetUser = dataContext.Users
                 .Include(p => p.Actors)
                 .Where(u => u.UserName == Name)
                 .FirstOrDefault();
 
-            if (!targetPlaylist.Actors.Contains(actor))
+            if (!targetUser.Actors.Contains(actor))
             {
-                targetPlaylist.Actors.Add(actor);
+                targetUser.Actors.Add(actor);
             }
 
             dataContext.SaveChanges();
