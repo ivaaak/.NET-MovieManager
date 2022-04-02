@@ -27,40 +27,49 @@
 <h1 class="playlistTitle"> @User.Identity.Name's Playlists:</h1>
 
 <div class="accordeon check">
-    @foreach(var playlist in Model.Playlists)
+    @if (Model.Playlists != null)
     {
-        int counterPlus = counter+1;
-        var qr = qrList.Where(q => q.PlaylistId == playlist.PlaylistId).FirstOrDefault();
-        <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
-        <input id="panel+@counter" type="checkbox" />
-        <div class="panel">
-        <div class="flex-container">
-	    <div class="flex-items">
-            @using (Html.BeginForm("MovieList", "Movie",
-                new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
-            {
-                <button class="playlistButton"> Go to playlist: @playlist.PlaylistName </button>
-            }
-            @foreach(var movie in playlist.Movies)
-            {
-                @if(movie.MediaType == "show"){ movieOrShowCard = "ShowCard"; }
-				else{ movieOrShowCard = "MovieCard"; }
-			    <a style="text-decoration: none" href="/Movie/@movieOrShowCard/@movie.MovieId">	
-                    <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
-                </a>
-            }
-            @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
-                new { playlistId = playlist.PlaylistId }, FormMethod.Post))
-            {
-                <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
-            }
-        </div>
-	        <div class="flex-items">
-                <img class="qrCodeContainer" src="data:image/png;base64, @qr.QrCodeImage">
+        @foreach (var playlist in Model.Playlists)
+        {
+            int counterPlus = counter + 1;
+            QRCodeObject qr = null;
+            
+            <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
+            <input id="panel+@counter" type="checkbox" />
+            <div class="panel">
+                <div class="flex-container">
+                    <div class="flex-items">
+                        @using (Html.BeginForm("MovieList", "Movie",
+                                  new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
+                        {
+                            <button class="playlistButton"> Go to playlist: @playlist.PlaylistName </button>
+                        }
+                        @foreach (var movie in playlist.Movies)
+                        {
+                            @if (movie.MediaType == "show") { movieOrShowCard = "ShowCard"; }
+                            else { movieOrShowCard = "MovieCard"; }
+                            <a style="text-decoration: none" href="/Movie/@movieOrShowCard/@movie.MovieId">	
+                                <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
+                            </a>
+                        }
+                        @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
+                                  new { playlistId = playlist.PlaylistId }, FormMethod.Post))
+                        {
+                            <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
+                        }
+                    </div>
+                    <div class="flex-items">
+                        @if (playlist.QrCode != null)
+                        {
+                            qr = qrList.Where(q => q.PlaylistId == playlist.PlaylistId).FirstOrDefault();
+
+                            <img class="qrCodeContainer" src="data:image/png;base64, @qr.QrCodeImage">
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-        </div>
-        counter++;
+            counter++;
+        }
     }
 </div>
 

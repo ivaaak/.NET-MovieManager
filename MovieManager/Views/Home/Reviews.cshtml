@@ -23,6 +23,8 @@
 
 
 <div class="accordeon check">
+    @if (Model.Reviews != null)
+    {
     @foreach(var review in Model.Reviews)
     {
         int counterPlus = counter+1;
@@ -36,5 +38,11 @@
 
         </div>
         counter++;
+        }
     }
+    else
+    {
+        <h2> @User.Identity.Name hasnt written any reviews yet.</h2>
+    }
+
 </div>
