@@ -162,10 +162,7 @@ namespace MovieManager.Migrations
             modelBuilder.Entity("MovieManager.Data.DataModels.Actor", b =>
                 {
                     b.Property<int>("ActorId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActorId"), 1L, 1);
 
                     b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
@@ -178,7 +175,14 @@ namespace MovieManager.Migrations
                     b.Property<string>("Language")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MovieCreditsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Overview")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -186,6 +190,8 @@ namespace MovieManager.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ActorId");
+
+                    b.HasIndex("MovieCreditsId");
 
                     b.HasIndex("UserId");
 
@@ -319,7 +325,7 @@ namespace MovieManager.Migrations
                     b.ToTable("PlaylistMovie");
                 });
 
-            modelBuilder.Entity("MovieManager.Data.DataModels.QRCode", b =>
+            modelBuilder.Entity("MovieManager.Data.DataModels.QRCodeObject", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -449,7 +455,7 @@ namespace MovieManager.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("TMDbLib.Objects.People.MovieRole", b =>
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieCredits", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -457,17 +463,33 @@ namespace MovieManager.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ActorId")
+                    b.HasKey("Id");
+
+                    b.ToTable("MovieCredits");
+                });
+
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieJob", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Adult")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Character")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CreditId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Job")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MovieCreditsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("OriginalTitle")
                         .HasColumnType("nvarchar(max)");
@@ -483,7 +505,46 @@ namespace MovieManager.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ActorId");
+                    b.HasIndex("MovieCreditsId");
+
+                    b.ToTable("MovieJob");
+                });
+
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Adult")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Character")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreditId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("MovieCreditsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("OriginalTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PosterPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieCreditsId");
 
                     b.ToTable("MovieRole");
                 });
@@ -541,9 +602,15 @@ namespace MovieManager.Migrations
 
             modelBuilder.Entity("MovieManager.Data.DataModels.Actor", b =>
                 {
+                    b.HasOne("TMDbLib.Objects.People.MovieCredits", "MovieCredits")
+                        .WithMany()
+                        .HasForeignKey("MovieCreditsId");
+
                     b.HasOne("MovieManager.Data.DataModels.User", null)
                         .WithMany("Actors")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("MovieCredits");
                 });
 
             modelBuilder.Entity("MovieManager.Data.DataModels.Playlist", b =>
@@ -576,27 +643,29 @@ namespace MovieManager.Migrations
                     b.Navigation("Playlist");
                 });
 
-            modelBuilder.Entity("MovieManager.Data.DataModels.QRCode", b =>
+            modelBuilder.Entity("MovieManager.Data.DataModels.QRCodeObject", b =>
                 {
                     b.HasOne("MovieManager.Data.DataModels.Playlist", "Playlist")
                         .WithOne("QrCode")
-                        .HasForeignKey("MovieManager.Data.DataModels.QRCode", "PlaylistId")
+                        .HasForeignKey("MovieManager.Data.DataModels.QRCodeObject", "PlaylistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Playlist");
                 });
 
-            modelBuilder.Entity("TMDbLib.Objects.People.MovieRole", b =>
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieJob", b =>
                 {
-                    b.HasOne("MovieManager.Data.DataModels.Actor", null)
-                        .WithMany("KnownFor")
-                        .HasForeignKey("ActorId");
+                    b.HasOne("TMDbLib.Objects.People.MovieCredits", null)
+                        .WithMany("Crew")
+                        .HasForeignKey("MovieCreditsId");
                 });
 
-            modelBuilder.Entity("MovieManager.Data.DataModels.Actor", b =>
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieRole", b =>
                 {
-                    b.Navigation("KnownFor");
+                    b.HasOne("TMDbLib.Objects.People.MovieCredits", null)
+                        .WithMany("Cast")
+                        .HasForeignKey("MovieCreditsId");
                 });
 
             modelBuilder.Entity("MovieManager.Data.DataModels.Movie", b =>
@@ -617,6 +686,13 @@ namespace MovieManager.Migrations
                     b.Navigation("Actors");
 
                     b.Navigation("Playlists");
+                });
+
+            modelBuilder.Entity("TMDbLib.Objects.People.MovieCredits", b =>
+                {
+                    b.Navigation("Cast");
+
+                    b.Navigation("Crew");
                 });
 #pragma warning restore 612, 618
         }

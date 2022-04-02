@@ -5,25 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MovieManager.Migrations
 {
-    public partial class _240322MtMPlaylistMovie : Migration
+    public partial class actorupate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Actors",
-                columns: table => new
-                {
-                    ActorId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LanguageId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Actors", x => x.ActorId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -43,7 +28,8 @@ namespace MovieManager.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    THISWILLSHOW = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -78,6 +64,18 @@ namespace MovieManager.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MovieCredits",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieCredits", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
@@ -89,8 +87,10 @@ namespace MovieManager.Migrations
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     MediaType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Popularity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    LanguageId = table.Column<int>(type: "int", nullable: true),
-                    PlatformId = table.Column<int>(type: "int", nullable: true)
+                    TrailerLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PlatformId = table.Column<int>(type: "int", nullable: true),
+                    Platform = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -240,7 +240,7 @@ namespace MovieManager.Migrations
                 {
                     PlaylistId = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     PlaylistName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QrCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsPublic = table.Column<bool>(type: "bit", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -253,6 +253,85 @@ namespace MovieManager.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Actors",
+                columns: table => new
+                {
+                    ActorId = table.Column<int>(type: "int", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Overview = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MovieCreditsId = table.Column<int>(type: "int", nullable: true),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Language = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Actors", x => x.ActorId);
+                    table.ForeignKey(
+                        name: "FK_Actors_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Actors_MovieCredits_MovieCreditsId",
+                        column: x => x.MovieCreditsId,
+                        principalTable: "MovieCredits",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieJob",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Adult = table.Column<bool>(type: "bit", nullable: false),
+                    CreditId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Job = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OriginalTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PosterPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MovieCreditsId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieJob", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovieJob_MovieCredits_MovieCreditsId",
+                        column: x => x.MovieCreditsId,
+                        principalTable: "MovieCredits",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MovieRole",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Adult = table.Column<bool>(type: "bit", nullable: false),
+                    Character = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreditId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OriginalTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PosterPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MovieCreditsId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieRole", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MovieRole_MovieCredits_MovieCreditsId",
+                        column: x => x.MovieCreditsId,
+                        principalTable: "MovieCredits",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -278,6 +357,36 @@ namespace MovieManager.Migrations
                         principalColumn: "PlaylistId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "QRCodes",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    QrCodeImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TextContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaylistId = table.Column<string>(type: "nvarchar(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_QRCodes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_QRCodes_Playlists_PlaylistId",
+                        column: x => x.PlaylistId,
+                        principalTable: "Playlists",
+                        principalColumn: "PlaylistId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Actors_MovieCreditsId",
+                table: "Actors",
+                column: "MovieCreditsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Actors_UserId",
+                table: "Actors",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -319,6 +428,16 @@ namespace MovieManager.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MovieJob_MovieCreditsId",
+                table: "MovieJob",
+                column: "MovieCreditsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MovieRole_MovieCreditsId",
+                table: "MovieRole",
+                column: "MovieCreditsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlaylistMovie_PlaylistId",
                 table: "PlaylistMovie",
                 column: "PlaylistId");
@@ -327,6 +446,12 @@ namespace MovieManager.Migrations
                 name: "IX_Playlists_UserId",
                 table: "Playlists",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QRCodes_PlaylistId",
+                table: "QRCodes",
+                column: "PlaylistId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -353,16 +478,28 @@ namespace MovieManager.Migrations
                 name: "Genres");
 
             migrationBuilder.DropTable(
+                name: "MovieJob");
+
+            migrationBuilder.DropTable(
+                name: "MovieRole");
+
+            migrationBuilder.DropTable(
                 name: "Platforms");
 
             migrationBuilder.DropTable(
                 name: "PlaylistMovie");
 
             migrationBuilder.DropTable(
+                name: "QRCodes");
+
+            migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "MovieCredits");
 
             migrationBuilder.DropTable(
                 name: "Movies");
