@@ -42,7 +42,7 @@
                         @using (Html.BeginForm("MovieList", "Movie",
                                   new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
                         {
-                            <button class="playlistButton"> Go to playlist: @playlist.PlaylistName </button>
+                            <button class="playlistButton"> Go to playlist </button>
                         }
                         @foreach (var movie in playlist.Movies)
                         {
@@ -55,7 +55,7 @@
                         @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
                                   new { playlistId = playlist.PlaylistId }, FormMethod.Post))
                         {
-                            <button class="playlistButton"> Generate QR for : @playlist.PlaylistName </button>
+                            <button class="playlistButton"> Generate QR code </button>
                         }
                     </div>
                     <div class="flex-items">

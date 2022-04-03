@@ -5,7 +5,7 @@
 	ViewData["Title"] = @Model.Show.Name;
 	TrailerViewModel trailerModel = new TrailerViewModel();
 	var show = Model.Show;
-	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(show.Id);
+	trailerModel.TrailerKey = SearchMethodsService.GetShowTrailerStatic(show.Id);
 	trailerModel.TrailerId = show.Id;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+show.PosterPath;	
 }

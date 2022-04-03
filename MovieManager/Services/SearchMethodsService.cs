@@ -260,13 +260,10 @@ namespace MovieManager.Services
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
             var trailer = client.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
-            string ytLink = String.Empty;
             var ytKey = trailer.Key;
             if (trailer.Site == "YouTube")
             {
                 return ytKey;                
-                //var partial = "https://www.youtube.com/watch?v=";
-                //ytLink = partial + ytKey;
             }
             return "notrailer";
         }
@@ -276,15 +273,11 @@ namespace MovieManager.Services
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
             var trailer = client.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
-            string ytLink = String.Empty;
+            var ytKey = trailer.Key;
 
             if (trailer.Site == "YouTube")
             {
-                var ytKey = trailer.Key;
-                return ytLink;
-
-                //var partial = "https://www.youtube.com/watch?v=";
-                //ytLink = partial + ytKey;
+                return ytKey;
             }
             return "notrailer";
         }
