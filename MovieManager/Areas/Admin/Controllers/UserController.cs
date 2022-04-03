@@ -104,13 +104,16 @@ namespace MovieManager.Areas.Admin.Controllers
             return View(model);
         }
 
+        //remove authentication and area in base controller
+        //before creating a role if not admin account
         public async Task<IActionResult> CreateRole()
         {
+            /*
             await roleManager.CreateAsync(new IdentityRole()
             {
                 Name = "Administrator"
             });
-
+            */
             return Ok();
         }
     }

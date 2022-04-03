@@ -9,6 +9,36 @@
 body {
     background: var(--main-bg-gray);
 }
+h1 {
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    color: var(--dark-peach);
+    padding-top: 100px;
+}
+.profileImage{
+    border-radius: 10px;
+    position: fixed;
+    margin-left: 40px;
+    margin-top: 40px;
+}
+.desc{
+    margin-top: 30px;
+}
+.profileDesc {
+    color: aliceblue;
+    margin-left: 190px;
+}
+.smallContainer{
+    padding-bottom: 100px;
+}
+.smallTitle{
+    margin-top: 20px;
+    color: aliceblue;
+}
+.smallList {
+    color: aliceblue;
+}
 
 
 .app {
@@ -60,14 +90,13 @@ body {
 .app3 {
     position: fixed;
     top: 14%;
-    right: 1%;
+    right: -2%;
     background: transparent;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 33%;
+    width: 34%;
     height: 86%;
     padding-right: 30px;
-    padding-left: 50px;
     padding-top: 0px;
     display: grid;
     grid-row-gap: 20px;
@@ -86,13 +115,12 @@ body {
     background: #34495E;
     height: 26vh;
 }
-
 .blue {
     background: #49afdd;
+    background: #34495E;
 }
-
 .block {
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 
@@ -105,7 +133,9 @@ body {
 .app3::-webkit-scrollbar {
     display: none;
 }
-
+.app > .horizontal::-webkit-scrollbar {
+    display: none;
+}
 .app2 > .horizontal::-webkit-scrollbar {
     display: none;
 }
@@ -116,4 +146,5 @@ body {
     overflow: hidden;
     text-decoration: none !important;
     text-decoration-line: none !important;
+    color: var(--dark-peach);
 }

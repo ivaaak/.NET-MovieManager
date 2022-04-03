@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MovieManager.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     [Area("Admin")]
+    [Authorize(Roles = "Administrator")]
     public class BaseController : Controller
     {
 

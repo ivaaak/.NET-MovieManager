@@ -34,7 +34,9 @@
             int counterPlus = counter + 1;
             QRCodeObject qr = null;
             
-            <label for="panel+@counter"> @counterPlus . @playlist.PlaylistName</label>
+            <label for="panel+@counter"> 
+                @counterPlus . @playlist.PlaylistName  -  @playlist.PlaylistMovies.Count movies.
+            </label>
             <input id="panel+@counter" type="checkbox" />
             <div class="panel">
                 <div class="flex-container">
