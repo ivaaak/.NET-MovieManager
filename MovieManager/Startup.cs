@@ -24,7 +24,6 @@ namespace MovieManager
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-
             //Identity and Login options
             services
                 .AddDefaultIdentity<IdentityUser>(options =>
