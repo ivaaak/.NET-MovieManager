@@ -1,9 +1,7 @@
+using Autofac.Extras.Moq;
 using MovieManager.Data.DataModels;
 using MovieManager.Services;
 using Xunit;
-using Moq;
-using Autofac.Extras.Moq;
-using MovieManager.Data;
 
 namespace MovieManager.Test
 {
