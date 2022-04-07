@@ -16,7 +16,7 @@ namespace MovieManager.Services.ServicesContracts
 
         List<Playlist> GetAllUserPlaylists(string UserName);
 
-        List<QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
+        Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
 
         List<Actor> GetUserActors(string UserName);
 

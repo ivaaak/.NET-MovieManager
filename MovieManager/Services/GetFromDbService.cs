@@ -90,17 +90,19 @@ namespace MovieManager.Services
             }
             return userMovieObjectsList;
         }
-        public List<QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists)
+        public Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists)
         {
-            var qrCodes = new List<QRCodeObject>();
+            var qrCodes = new Dictionary<string, QRCodeObject>();
+
             foreach (var playlist in playlists)
             {
                 var res = dataContext.Playlists
                     .Include(a => a.QrCode)
                     .Where(p => p.PlaylistId == playlist.PlaylistId)
                     .Select(p => p.QrCode)
-                    .ToList();
-                qrCodes.AddRange(res);
+                    .FirstOrDefault();
+
+                qrCodes.Add(playlist.PlaylistId, res);
             }
 
             return qrCodes;

@@ -6,7 +6,6 @@
     ViewData["Title"] = @User.Identity.Name+" Playlists";
     int counter = 0;
     string movieOrShowCard = "MovieCard";
-    var qrList = Model.QRCodes;
 }
 
 @section styles{
@@ -61,11 +60,10 @@
                         }
                     </div>
                     <div class="flex-items">
-                        @if (playlist.QrCode != null)
+                        @if (Model.QRCodes[playlist.PlaylistId]!=null)
                         {
-                            qr = qrList.Where(q => q.PlaylistId == playlist.PlaylistId).FirstOrDefault();
-
-                            <img class="qrCodeContainer" src="data:image/png;base64, @qr.QrCodeImage">
+                            var image = Model.QRCodes[playlist.PlaylistId].QrCodeImage;
+                            <img class="qrCodeContainer" src="data:image/png;base64, @image">
                         }
                     </div>
                 </div>

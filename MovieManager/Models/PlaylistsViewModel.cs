@@ -8,6 +8,6 @@ namespace MovieManager.Models
 
         public List<Playlist> Playlists { get; set; }
 
-        public List<QRCodeObject> QRCodes { get; set; }
+        public Dictionary<string, QRCodeObject> QRCodes { get; set; }
     }
 }

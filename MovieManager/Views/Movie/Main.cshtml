@@ -13,15 +13,16 @@
 	string movieOrShowCard = "MovieCard";
 }
 
-@section styles{
-	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
-	<link href="~/css/styleMovies.css" asp-append-version="true" rel="stylesheet">
-	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
-
+@section scripts{
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
 
+<head>
+	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleMovies.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
+</head>
 
 
 <!--=====LOAD MOVIE COLUMNS=====-->
@@ -63,12 +64,9 @@
 			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
 			<p class="movieDesc"> @movie.Overview </p>
 			<div class="buttonsList">
-				
-				@await Html.PartialAsync("_TrailerPartial", trailerModel)
 				<a href="/Movie/Review/@movie.MovieId">
 					<button class="TrailerButton">Rate & Review</button>
 				</a>
-
 			</div>
 		</div>
 		</div>
