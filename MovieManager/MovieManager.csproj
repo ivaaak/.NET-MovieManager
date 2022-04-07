@@ -65,7 +65,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Profile\" />
-    <Folder Include="wwwroot\css\fontAwesome\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 

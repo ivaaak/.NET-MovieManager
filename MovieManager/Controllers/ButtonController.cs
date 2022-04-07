@@ -136,7 +136,7 @@ namespace MovieManager.Controllers
 
             TempData["Success"] = $"Successfully added actor to favorite actors!";
 
-            return RedirectToAction("Main", "Movie");
+            return RedirectToAction("Actors", "Home");
         }
         [HttpPost]
         public IActionResult RemoveActorButtonClick(int actorId)

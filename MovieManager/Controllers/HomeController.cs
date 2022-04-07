@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MovieManager.Data.DataModels;
+using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 
@@ -88,6 +89,10 @@ namespace MovieManager.Controllers
             {
                 Actors = actors,
             };
+            if (TempData["Success"] != null && TempData.ContainsKey("Success"))
+            {
+                ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
+            }
 
             return View(model);
         }

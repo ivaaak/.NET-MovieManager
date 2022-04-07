@@ -19,7 +19,7 @@ namespace MovieManager.Services
         // POPULAR GET
         public List<SearchMovie> GetPopularMovies(int movieCount)
         {
-            Task<SearchContainer<SearchMovie>> results = tmdbClient.GetMoviePopularListAsync();
+            Task<SearchContainer<SearchMovie>> results = tmdbClient.GetMoviePopularListAsync(null, 1, null);
 
             var returnList = new List<SearchMovie>();
 
@@ -40,7 +40,7 @@ namespace MovieManager.Services
 
         public List<SearchTv> GetPopularShows(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowPopularAsync();
+            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowPopularAsync(1, null);
 
             var returnList = new List<SearchTv>();
 
@@ -64,7 +64,7 @@ namespace MovieManager.Services
         // NEW RELEASES
         public List<SearchMovie> GetMovieReleases(int movieCount)
         {
-            var results = tmdbClient.GetMovieNowPlayingListAsync();
+            var results = tmdbClient.GetMovieNowPlayingListAsync(null, 1);
 
             var returnList = new List<SearchMovie>();
 
@@ -84,7 +84,7 @@ namespace MovieManager.Services
         }
         public List<SearchTv> GetShowReleases(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.AiringToday); //.OnTheAir??
+            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.AiringToday, 1, null); //.OnTheAir??
 
             var returnList = new List<SearchTv>();
 
@@ -108,7 +108,7 @@ namespace MovieManager.Services
         // TRENDING
         public List<SearchMovie> GetMovieTrending(int movieCount)
         {
-            var results = tmdbClient.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week);
+            var results = tmdbClient.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week, 1);
 
             var returnList = new List<SearchMovie>();
 
@@ -128,7 +128,7 @@ namespace MovieManager.Services
         }
         public List<SearchTv> GetShowTrending(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.OnTheAir);
+            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.OnTheAir, 1);
 
             var returnList = new List<SearchTv>();
 
@@ -152,7 +152,7 @@ namespace MovieManager.Services
         // TOP RATED
         public List<SearchMovie> GetMovieTopRated(int movieCount)
         {
-            var results = tmdbClient.GetMovieTopRatedListAsync();
+            var results = tmdbClient.GetMovieTopRatedListAsync(null, 1, null);
 
             var returnList = new List<SearchMovie>();
 
@@ -172,7 +172,7 @@ namespace MovieManager.Services
         }
         public List<SearchTv> GetShowTopRated(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowTopRatedAsync();
+            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowTopRatedAsync(1, null);
 
             var returnList = new List<SearchTv>();
 
