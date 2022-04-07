@@ -166,16 +166,16 @@ body, html {
 }
 
 .ReviewsButton {
-    position: absolute;
-    top: 78%;
-    right: -7%;
-    background-color: rgb(30, 70, 109);
+    position: fixed;
+    top: 46%;
+    right: -8%;
+    background-color: var(--main-bg-dark-gray);
     border: 1px solid #000000;
-    height: 40px;
-    width: 20%;
+    height: 6vw;
+    width: 65vh;
     color: #ffffff;
     font-family: Roboto;
-    font-size: 16px;
+    font-size: 50px;
     font-weight: 800;
     margin-bottom: 10px;
     transform: rotate(90deg);

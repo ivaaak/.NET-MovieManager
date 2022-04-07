@@ -36,7 +36,9 @@
 .movieTitle{
   font-size: 30px;
   padding-top: 16px;
-  color:var(--main-bg-orange)
+  color:var(--main-bg-orange);
+  height:70px;
+  overflow:hidden;
 }
 .movieDesc {
     position: relative;
@@ -113,29 +115,58 @@
 /* Favorite and Remove Buttons on each movie poster */
 .FavButton {
   position: absolute;
-  appearance: none;
   background-color: #27AE60;
-  border: 1px solid #16A085;
+  border: none;
+  height: 30px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  transform: translateY(-375px);
+  width: 34px;
+}
+.FavButton:hover {
+  background-color: #16A085;
+}
+.RemoveButton {
+  position: absolute;
+  background-color: #C0392B;
+  border: none;
+  height: 30px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+  transform: translateY(-37px);
+  width: 34px;
+}
+.RemoveButton:hover {
+  background-color: #E74C3C;
+}
+
+
+.FavButtonList {
+  position: absolute;
+  top: 0%;
+  background-color: #27AE60;
+  border: none;
   height: 30px;
   color: #ffffff;
   font-family: Roboto;
   font-size: 16px;
   font-weight: 800;
   margin-bottom: 0px;
-  margin-top: 2px;
   text-align: center;
-  transform: translateY(-376px);
   width: 34px;
 }
-.FavButton:hover {
-  color: #fff;
+.FavButtonList:hover {
   background-color: #16A085;
-  width: 34px;
 }
-
-.RemoveButton {
+.RemoveButtonList {
   position: absolute;
-  appearance: none;
+  bottom: 0%;
   background-color: #C0392B;
   border: none;
   height: 30px;
@@ -146,16 +177,11 @@
   margin-bottom: 0px;
   margin-top: 2px;
   text-align: center;
-  transform: translateY(-39px);
   width: 34px;
 }
-.RemoveButton:hover {
-  color: #fff;
+.RemoveButtonList:hover {
   background-color: #E74C3C;
-  width: 34px;
 }
-
-
 
 
 progress {
