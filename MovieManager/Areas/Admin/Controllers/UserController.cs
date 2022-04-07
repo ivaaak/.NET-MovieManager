@@ -108,12 +108,11 @@ namespace MovieManager.Areas.Admin.Controllers
         //before creating a role if not admin account
         public async Task<IActionResult> CreateRole()
         {
-            /*
             await roleManager.CreateAsync(new IdentityRole()
             {
                 Name = "Administrator"
             });
-            */
+            
             return Ok();
         }
     }

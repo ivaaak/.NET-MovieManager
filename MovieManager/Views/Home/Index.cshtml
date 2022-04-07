@@ -5,8 +5,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager  
+
 @section styles{
 	<link href="~/css/style.css" rel="stylesheet">
 	<link href="~/css/styleHome.css" rel="stylesheet">
@@ -97,7 +96,7 @@
 
 <!--3 Cards - Login Register Discover-->
 <div class="containerCards">
-    @if (SignInManager.IsSignedIn(User))
+    @if (User.Identity.IsAuthenticated)
     {
         <div class="card">
         <a class="noUnderline" href="/Movie/Main">

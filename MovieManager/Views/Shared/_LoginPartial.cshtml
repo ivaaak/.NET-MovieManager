@@ -2,11 +2,7 @@
 @using MovieManager.Data.DataModels
 @using MovieManager.Infrastructure.Extensions;
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager  
-
-
-@if (SignInManager.IsSignedIn(User))
+@if (User.Identity.IsAuthenticated)
 {
 <li onclick="location.href = '/Movie/Main'" class="main-item"><span class="myprofile"></span></li>
 
@@ -19,7 +15,6 @@
 		<li onclick="location.href = '/Home/Reviews'" class="sub-item item-left"><span class="Reviews"></span></li>
 	</ol>
 </li>
-
 }
 else
 {
