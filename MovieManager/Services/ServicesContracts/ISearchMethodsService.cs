@@ -20,6 +20,8 @@ namespace MovieManager.Services.ServicesContracts
 
         List<ReviewBase> GetReviewWithMovieID(int id);
 
+        List<ReviewBase> GetReviewWithShowID(int id);
+
         //save to Db
         void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
 

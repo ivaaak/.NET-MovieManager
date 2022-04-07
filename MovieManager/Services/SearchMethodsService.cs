@@ -60,7 +60,7 @@ namespace MovieManager.Services
 
 
 
-        //CALLED IN MovieCard(int id) in MovieController -> 
+        //MovieCard in MovieController 
         public MovieCardViewModel SearchApiWithMovieID(int id)
         {
             Movie movie = tmdbClient.GetMovieAsync(id, MovieMethods.Videos).Result;

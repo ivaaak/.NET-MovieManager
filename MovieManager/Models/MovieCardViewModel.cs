@@ -1,5 +1,4 @@
 ﻿using TMDbLib.Objects.Movies;
-using TMDbLib.Objects.People;
 using TMDbLib.Objects.Reviews;
 
 namespace MovieManager.Models

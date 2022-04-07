@@ -158,7 +158,7 @@ namespace MovieManager.Controllers
         public IActionResult ShowReview(int id)
         {
             var movie = searchMethods.SearchApiWithShowID(id);
-            //var reviews = searchMethods.GetReviewWithMovieID(id);
+            var reviews = searchMethods.GetReviewWithShowID(id);
 
             movie.Reviews = reviews;
 

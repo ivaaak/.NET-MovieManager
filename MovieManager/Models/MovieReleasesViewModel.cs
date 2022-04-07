@@ -10,6 +10,5 @@ namespace MovieManager.Models
         public List<TMDbLib.Objects.Movies.Movie> MoviesList { get; set; }
         
         public Review MovieReview { get; set; }
-        //reviews?
     }
 }

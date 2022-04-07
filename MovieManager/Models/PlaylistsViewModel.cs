@@ -7,6 +7,7 @@ namespace MovieManager.Models
         public PlaylistsViewModel() { }
 
         public List<Playlist> Playlists { get; set; }
+
         public List<QRCodeObject> QRCodes { get; set; }
     }
 }

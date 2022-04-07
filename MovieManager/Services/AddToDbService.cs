@@ -1,15 +1,14 @@
-﻿using MovieManager.Data.DataModels;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieManager.Data;
-using MovieManager.Services.ServicesContracts;
-using System.Text;
-using TMDbLib.Objects.General;
-using TMDbLib.Objects.Search;
-using Microsoft.EntityFrameworkCore;
-using TMDbLib.Client;
+using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
+using MovieManager.Services.ServicesContracts;
 using QRCoder;
-using System.DrawingCore;
+using System.Text;
+using TMDbLib.Client;
+using TMDbLib.Objects.General;
 using TMDbLib.Objects.People;
+using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
