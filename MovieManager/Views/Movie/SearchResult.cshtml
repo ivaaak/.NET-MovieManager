@@ -1,21 +1,20 @@
 ﻿@model SearchResultViewModel
-
 @{
 	ViewData["Title"] = "Search Results";
 }
-
-@section styles{
-	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
-	<link href="~/css/styleMovies.css" asp-append-version="true" rel="stylesheet">
-	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
-
+@section scripts{
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
+<head>
+	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleMovies.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
+</head>
+
 
 
 <div class="bgIndex"></div>  
-
 <h1 class="resultsLabel"> Results for:</h1>
 <h1 class="resultsTerm"> @Model.SearchTerm </h1>
 <h1 class="resultsTerm2"> @Model.SearchTerm </h1>

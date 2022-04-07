@@ -5,12 +5,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-@section styles{
-	<link href="~/css/style.css" rel="stylesheet">
-	<link href="~/css/styleHome.css" rel="stylesheet">
-	<link href="~/css/styleHomeMovieList.css" rel="stylesheet">
-
+@section scripts{
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <!--arrow/scroll animation-->
@@ -18,19 +13,25 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script  src="~/script.js"></script>
 }
+<head>
+    <link href="~/css/style.css" rel="stylesheet">
+	<link href="~/css/styleHome.css" rel="stylesheet">
+	<link href="~/css/styleHomeMovieList.css" rel="stylesheet">
+</head>
+
+
 
 
 <div class="main">
 	<div class="menu"></div>
 	<div class="menu-button"></div>
 
-	<!--aulus verus vento nomad-->
-	<div class="header"> verus </div>
+	<div class="header"> verus </div>	<!--aulus verus vento nomad-->
 	<div class="movieManager"> Movie Manager </div>
 </div>
 
 
-<!-- Home/Index popular movie cards-->
+<!-- Index popular movie/show cards-->
 @if (Model.DiscoverMovies.Any())
 {
     <main class="resultsLeft" id="scrollBlackThin">

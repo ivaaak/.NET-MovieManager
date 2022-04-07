@@ -1,20 +1,17 @@
 ﻿@model MovieDiscoverViewModel
 @{
-	//Add DiscoverListViewModel
 	ViewData["Title"] = "Discover Shows";
-
-	//var discoverMovieList = MovieManager.Services.GetFromDbService.GetUserMovieList("d1c2cdda-d6c7-48a3-b681-a2c11d7e8fc1", "current");
 	var discoverShowList = Model.DiscoverShows;
 	int counter = 1;
 }
-@section styles{
+<head>
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleCarousel.css" asp-append-version="true" rel="stylesheet">
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="~/style.css"> 
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-}
+</head>
+
 
 
 <input type="radio" name="slide-nav" id="1">

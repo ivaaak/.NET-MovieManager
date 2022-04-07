@@ -7,20 +7,20 @@
     int counter = 0;
     string movieOrShowCard = "MovieCard";
 }
-
-@section styles{
-	<link href="~/css/style.css" rel="stylesheet">
+@section scripts{
     <script src="~/js/scripts.js"></script>
-
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-
     <script src="~/js/bootstrap.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link href="~/css/stylePlaylists.css" rel="stylesheet">
 }
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/stylePlaylists.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+
 
 
 <h1 class="playlistTitle"> @User.Identity.Name's Playlists:</h1>

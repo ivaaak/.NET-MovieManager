@@ -10,13 +10,15 @@
 	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id);
 	trailerModel.TrailerId = movie.Id;
 }
-@section styles{
+@section scripts{
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+}
+<head>
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleMovieCard.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleActor.css" asp-append-version="true" rel="stylesheet">
+</head>
 
-	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-}
 
 
 <div class="MovieCard" >

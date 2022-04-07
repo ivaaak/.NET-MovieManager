@@ -1,7 +1,6 @@
 ﻿@model MovieListViewModel
 @using MovieManager.Services
 @using MovieManager.Models
-
 @{
 	ViewData["Title"] = "Profile Page";
 
@@ -12,17 +11,16 @@
 	TrailerViewModel trailerModel = new TrailerViewModel();
 	string movieOrShowCard = "MovieCard";
 }
-
 @section scripts{
 	<script src="~/js/home.js"></script>
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
-
 <head>
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleMovies.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleMovieContainer.css" asp-append-version="true" rel="stylesheet">
 </head>
+
 
 
 <!--=====LOAD MOVIE COLUMNS=====-->

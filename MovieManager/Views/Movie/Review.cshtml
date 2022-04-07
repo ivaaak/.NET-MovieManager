@@ -7,12 +7,14 @@
 	var movieObj = Model.Movie;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movieObj.PosterPath;	
 }
-@section styles{
-	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
-	<link href="~/css/styleReview.css" asp-append-version="true" rel="stylesheet">
-
+@section scripts{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 }
+
+<head>
+	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleReview.css" asp-append-version="true" rel="stylesheet">
+</head>
 
 <div class="MovieCard">
 	<div class="flex-container">

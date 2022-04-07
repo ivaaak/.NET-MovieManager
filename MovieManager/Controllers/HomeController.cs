@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MovieManager.Data.DataModels;
 using MovieManager.Models;
-using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
