@@ -6,11 +6,8 @@ using MovieManager.Data.DBConfig;
 namespace MovieManager.Data
 {
     public class MovieContext : IdentityDbContext<User> 
-        //this overwrites the default Asp.Net Identity model
     {
-        public MovieContext()
-        {
-        }
+        public MovieContext(){}
 
         public MovieContext(DbContextOptions<MovieContext> options)
             : base(options) 
@@ -19,10 +16,7 @@ namespace MovieManager.Data
 
         public DbSet<Movie> Movies { get; set; }
 
-        public DbSet<Playlist> Playlists { get; set; }
-
-        //public DbSet<PlaylistMovie> PlaylistMovies { get; set; }
-        
+        public DbSet<Playlist> Playlists { get; set; }        
 
         public DbSet<Actor> Actors { get; set; }
 
@@ -47,6 +41,7 @@ namespace MovieManager.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //playlist <-> movie many to many
             modelBuilder.Entity<Movie>()
                 .HasMany(m => m.Playlists)
                 .WithMany(m => m.Movies)

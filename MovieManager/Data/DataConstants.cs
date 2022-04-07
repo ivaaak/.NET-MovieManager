@@ -17,26 +17,25 @@
 
         public class Movie
         {
-            public const int BrandMinLength = 2;
-            public const int BrandMaxLength = 20;
-            public const int ModelMinLength = 2;
-            public const int ModelMaxLength = 30;
-            public const int DescriptionMinLength = 10;
-            public const int YearMinValue = 2000;
-            public const int YearMaxValue = 2050;
+            public const int TitleMinLength = 2;
+            public const int TitleMaxLength = 20;
+            public const int OverviewMinLength = 10;
+            public const int OverviewMaxLength = 3000;
+            public const int YearMinValue = 1890;
+            public const int YearMaxValue = 2100;
         }
 
-        public class Category
+        public class Genre
         {
-            public const int NameMaxLength = 25;
+            public const int NameMaxLength = 50;
         }
 
-        public class Dealer
+        public class Review
         {
-            public const int NameMinLength = 2;
-            public const int NameMaxLength = 25;
-            public const int PhoneNumberMinLength = 6;
-            public const int PhoneNumberMaxLength = 30;
+            public const int TitleMinLength = 2;
+            public const int TitleMaxLength = 25;
+            public const int ContentMinLength = 20;
+            public const int ContentMaxLength = 3000;
         }
     }
 }
