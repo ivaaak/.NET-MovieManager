@@ -22,12 +22,12 @@
 
 <div class="MovieCard" >
 	<div class="flex-container">
-	   <div class="flex-items">	
+		<div class="flex-items">	
 		    <a href="https://www.themoviedb.org/tv/@show.Id">
 				<img class="moviePosterBig" alt="Image" src="@posterMovieUrl"> 	
 			</a>
 		</div>
-	   <div class="flex-items">
+		<div class="flex-items">
 		<h2 class="movieTitle">	@show.Name </h2>
 
 		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @show.VoteAverage/10 - Rating</p>
@@ -37,12 +37,12 @@
 		<ul class="genreContainer genreItem">
 		@foreach(var genre in show.Genres)
 		{
-			<li> @genre.Name</li>
+		<li> @genre.Name</li>
 		}
 		<li> @show.NumberOfEpisodes eps</li>
 		<li> lang: @show.OriginalLanguage</li>
 		</ul>
-			<div class="buttonsList">
+		<div class="buttonsList">
 			@await Html.PartialAsync("_TrailerPartial", trailerModel)
 			@if (User.Identity.IsAuthenticated)
 			{
@@ -62,16 +62,16 @@
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
 				}
 			}
-			@using (Html.BeginForm("Review", "Movie",
-				new { Id = @show.Id },   FormMethod.Post)) //this doesnt work for shows atm
-			{
-				<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
-			}
 			</div>
 		</div>
 	</div>
 </div>
 
+@using (Html.BeginForm("ShowReview", "Movie",
+	new { Id = @show.Id },   FormMethod.Post)) //this is a db movie
+{
+	<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
+}
 
 <!--Movie Credits Column-->
 <main class="resultsLeft" id="scrollBlackThin">

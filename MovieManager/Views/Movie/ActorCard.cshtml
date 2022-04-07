@@ -30,11 +30,6 @@
 			{
 				<button class="FavButton" type="submit"> ❤ </button>
 			}
-			@using (Html.BeginForm("RemoveActorButtonClick", "Button",
-				new { actorId = @Model.Person.Id },   FormMethod.Post)) 
-			{
-				<button class="FavButton" type="submit"> X </button>
-			}
 		</div>
 	</div>
 </div>

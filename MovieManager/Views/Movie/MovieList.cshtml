@@ -52,12 +52,12 @@
 					@using (Html.BeginForm("FavoriteMovieButtonClickList", "Button",
 						new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
 					{
-						<button class="FavButton" type="submit"> ❤ </button>
+						<button class="FavButtonList" type="submit"> ❤ </button>
 					}
 					@using (Html.BeginForm("RemoveMovieButtonClickList", "Button",
 						new { movieId = @movie.MovieId, playlistName = listName },  FormMethod.Post)) 
 					{
-						<button class="RemoveButton" type="submit"> X </button>
+						<button class="RemoveButtonList" type="submit"> X </button>
 					}
 				</div>
 				<div class="flex-itemsRight">

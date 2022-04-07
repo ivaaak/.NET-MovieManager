@@ -28,7 +28,7 @@
 				<img class="moviePosterBig" alt="Image" src="@posterMovieUrl"> 	
 			</a>
 		</div>
-	   <div class="flex-items">
+		<div class="flex-items">
 		<h2 class="movieTitle">	@movie.Title </h2>
 
 		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.VoteAverage/10 - Rating</p>
@@ -63,11 +63,11 @@
 					{
 						<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
 					}
-				}
-				@using (Html.BeginForm("Review", "Movie",
-					new { Id = @movie.Id },   FormMethod.Post)) //this is a db movie
-				{
-					<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
+					@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
+						new { movieId = @movie.Id },   FormMethod.Post)) 
+					{
+						<button class="FavButton" type="submit"> ❤ </button>
+					}
 				}
 			</div>
 
@@ -75,6 +75,11 @@
 	</div>
 </div>
 
+@using (Html.BeginForm("Review", "Movie",
+	new { Id = @movie.Id },   FormMethod.Post)) //this is a db movie
+{
+	<button class="ReviewsButton" type="submit" name="addToButton"> Reviews </button>
+}
 
 <!--Actor movie Credits Column-->
 <main class="resultsLeft" id="scrollBlackThin">
