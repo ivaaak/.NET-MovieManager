@@ -32,8 +32,6 @@ namespace MovieManager.Controllers
         [Route("Movie/Main")]
         public IActionResult Main()
         {
-            Console.WriteLine("Hit controller: Movie , hit view: Main");
-
             var userName = this.User.Identity.Name;
             var watched = getFromDbService.GetUserMovieList(userName, "watched");
             var current = getFromDbService.GetUserMovieList(userName, "current");
@@ -63,8 +61,6 @@ namespace MovieManager.Controllers
         //Search
         public IActionResult Search()
         {
-            Console.WriteLine("Hit controller: Movie , hit view: Search WITHOUT PARAM");
-
             return View();
         }
 
@@ -72,8 +68,6 @@ namespace MovieManager.Controllers
         [HttpPost]
         public IActionResult Search(SearchResultViewModel model)
         {
-            Console.WriteLine("Hit controller: Movie , hit view: Search WITH TITLE PARAM");
-
             var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm);
             var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm);
             
@@ -104,8 +98,6 @@ namespace MovieManager.Controllers
         //Search Results Page - SearchResultViewModel 
         public IActionResult SearchResult(SearchResultViewModel results)
         {
-            Console.WriteLine("Hit controller: Movie , hit view: SearchResult");
-
             return View();
         }
 
@@ -115,8 +107,6 @@ namespace MovieManager.Controllers
         [Route("Movie/MovieCard/{id}")]
         public IActionResult MovieCard(int id)
         {
-            Console.WriteLine($"Hit controller: Movie , hit view: MovieCard, ID = {id}");
-
             var movieIdResult = searchMethods.SearchApiWithMovieID(id);
 
             return View(movieIdResult);
@@ -124,8 +114,6 @@ namespace MovieManager.Controllers
         [Route("Movie/ShowCard/{id}")]
         public IActionResult ShowCard(int id)
         {
-            Console.WriteLine($"Hit controller: Show , hit view: ShowCard, ID = {id}");
-
             var showIdResult = searchMethods.SearchApiWithShowID(id);
 
             return View(showIdResult);
@@ -166,62 +154,12 @@ namespace MovieManager.Controllers
         }
 
 
-        //Discover Pages
-        public IActionResult Discover()
-        {
-            var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows
-
-            ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular movies!";
-
-            var model = new MovieDiscoverViewModel()
-            {
-                DiscoverMovies = popularMovies,
-            };
-
-            return View(model);
-        }
-
-        public IActionResult DiscoverShows()
-        {
-            var popularShows = apiGetPopularService.GetPopularShows(7);  
-
-
-            ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular shows!";
-
-            var model = new MovieDiscoverViewModel()
-            {
-                DiscoverShows = popularShows,
-            };
-
-            return View(model);
-        }
-
-        public IActionResult Releases()
-        {
-            var popularMovies = apiGetPopularService.GetPopularMovies(15); 
-            var popularShows = apiGetPopularService.GetPopularShows(15);
-            //load 15 popular movies/shows from api
-
-            ViewData[MessageConstant.SuccessMessage] = $"These are the 15 most popular movies!";
-
-            var model = new MovieDiscoverViewModel()
-            {
-                DiscoverMovies = popularMovies,
-                DiscoverShows = popularShows,
-            };
-
-            return View(model);
-        }
-
-
         //playlists are user-specific
         [Authorize]
         [Route("Movie/MovieList/{playlistName}")]
         [HttpPost]
         public IActionResult MovieList(string playlistName)
         {
-            Console.WriteLine("Hit controller: Movie , hit view: MovieList");
-
             var userName = this.User.Identity.Name;
 
             //use temp data to pass messages 

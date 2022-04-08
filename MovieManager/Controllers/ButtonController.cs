@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManager.Data.DataModels;
-using MovieManager.Infrastructure.Alerts;
-using MovieManager.Infrastructure.Constants;
 using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
