@@ -52,11 +52,6 @@
                                 <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
                             </a>
                         }
-                        @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
-                                  new { playlistId = playlist.PlaylistId }, FormMethod.Post))
-                        {
-                            <button class="playlistButton"> Generate QR code </button>
-                        }
                     </div>
                     <div class="flex-items">
                         @if (Model.QRCodes[playlist.PlaylistId]!=null)
@@ -71,9 +66,3 @@
         }
     }
 </div>
-
-
-<!--ADD form for adding a playlist: 
-    Playlist name
-    Public/Private
--->

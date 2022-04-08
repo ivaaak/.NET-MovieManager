@@ -239,13 +239,13 @@ li span::before, li span::after {
 
 /*DISCOVER DROPDOWN ITEMS*/
 .DiscShows::before, .DiscShows::after {
-    content: "Search";
+    content: "Start";
 }
 .DiscMovies::before, .DiscMovies::after {
     content: "Releases";
 }
 .DiscMisc::before, .DiscMisc::after {
-    content: "Popular";
+    content: "Trending";
 }
 .DiscLatest::before, .DiscLatest::after {
     content: "Latest";
