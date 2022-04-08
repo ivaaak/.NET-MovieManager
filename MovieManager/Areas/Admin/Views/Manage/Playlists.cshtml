@@ -1,0 +1,55 @@
+﻿@using MovieManager.Models
+@model PlaylistsViewModel
+@section styles{
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+}
+
+
+<h1 style="text-align: center; color:coral; padding-top: 100px;">Manage Playlists</h1>
+<div class="adminContainer">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">All Playlists Saved In Database: </h3>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Playlist Id</th>
+                            <th>Playlist Name</th>
+                            <th>User's Name</th>
+                            <th>Public</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var list in Model.Playlists)
+                        {
+                            <tr>
+                                <td>@list.PlaylistId</td>
+                                <td>@list.PlaylistName</td>
+                                <td>@list.User.UserName</td>
+                                <td>@list.IsPublic</td>
+                                <td>
+                                    <a asp-area="admin" asp-action="PlaylistEdit" asp-controller="home" asp-route-id="@list.PlaylistId" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+                                    @using (Html.BeginForm("DeleteListFromDb", "Button",
+				                        new { playlistId = list.PlaylistId },   FormMethod.Post)) 
+			                        {
+				                        <a class="btn btn-block btn-outline-warning btn-xs"> Delete </a>
+			                        }
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

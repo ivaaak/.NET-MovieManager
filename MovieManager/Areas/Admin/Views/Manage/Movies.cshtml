@@ -1,0 +1,51 @@
+﻿@using MovieManager.Models
+@model MovieListViewModel
+@section styles{
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+}
+
+
+<h1 style="text-align: center; color: coral; padding-top: 100px;">Manage Movies</h1>
+<div class="adminContainer">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">All Movies Saved In Database: </h3>
+            </div>
+
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var movie in Model.MoviesList)
+                        {
+                            <tr>
+                                <td>@movie.MovieId</td>
+                                <td>@movie.Title</td>
+                                <td>
+                                    <a asp-area="admin" asp-action="MovieEdit" asp-controller="home" asp-route-id="@movie.MovieId" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+                                    @using (Html.BeginForm("DeleteMovieFromDb", "Button",
+				                        new { movieId = @movie.MovieId },   FormMethod.Post)) 
+			                        {
+				                        <a class="btn btn-block btn-outline-warning btn-xs"> Delete </a>
+			                        }
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

@@ -5,11 +5,27 @@
 @section styles{
     <link rel="stylesheet" href="~/css/adminlte.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/css/styleProfile.css" rel="stylesheet">
 }
-
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Admin area</h1>
+</div>
 <div class="adminContainer">
-    <div class="text-center">
-        <h1 class="display-4">Welcome to Admin area</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>
+    
+
+    <a class="noUnderline" href="/Admin/Manage/Playlists">
+        <div class="green block" style="margin-bottom: 10px">
+            <h1>Manage Playlists</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Admin/User/ManageUsers">
+        <div class="green block" style="margin-bottom: 10px">
+           <h1>Manage Users</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Admin/Manage/Movies">
+        <div class="green block">
+            <h1>Manage Movies</h1>
+        </div>
+    </a>
 </div>
