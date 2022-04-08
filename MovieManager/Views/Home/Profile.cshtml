@@ -8,9 +8,12 @@
     }
     var favs = Model.Playlists.Where(p => p.PlaylistName == "favorites").FirstOrDefault();
     int favscount = 0;
-    foreach(var movie in favs.Movies)
+    if(favs != null)
     {
-        favscount++;
+        foreach(var movie in favs.Movies)
+        {
+            favscount++;
+        }
     }
     string movieOrShowCard = "MovieCard";
 }
@@ -53,9 +56,12 @@
             <h2 class="profileDesc">- has reviewed ?? movies.</h2>
         </div>
      </div>
-    <a class="noUnderline" href="/Admin/User/ManageUsers">
-    <div class="green block"><h1>Admin Panel</h1></div>
-    </a>
+    @if (User.IsInRole("Administrator"))
+    {
+        <a class="noUnderline" href="/Admin">
+            <div class="green block"><h1>Admin Panel</h1></div>
+        </a>
+    }
 </main>
 
 <main class="app3">

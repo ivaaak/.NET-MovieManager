@@ -1,0 +1,52 @@
+﻿@using MovieManager.Views.Movie
+@model SearchResultViewModel
+@{
+    ViewData["Title"] = "Discover";
+}
+@section styles{
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/js/particles.js"></script>
+	<script src="~/js/app.js"></script>
+}
+<head>
+	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/styleProfile.css" asp-append-version="true" rel="stylesheet">
+</head>
+
+
+
+<main class="app" style="left: 12%;">
+    <a class="noUnderline" href="/Discover/Movies">
+        <div class="green block">
+            <h1>Popular Movies</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Discover/Shows">
+        <div class="green block">
+            <h1>Popular Shows</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Discover/Releases">
+        <div class="green block">
+            <h1>Releases</h1>
+        </div>
+    </a>
+</main>
+
+<main class="app3"style="right: 10%;">
+    <a class="noUnderline" href="/Discover/Trending">
+        <div class="green block">
+            <h1>Trending</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Discover/Latest">
+        <div class="green block">
+            <h1>Latest</h1>
+        </div>
+    </a>
+    <a class="noUnderline" href="/Discover/HighestRated">
+        <div class="green block">
+            <h1>Highest Rated</h1>
+        </div>
+    </a>
+</main>

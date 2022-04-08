@@ -8,7 +8,7 @@
 @if (User.Identity.IsAuthenticated)
 {
 <div class="navbarContainer">
-    <form class="buttonHolder" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+    <form class="buttonHolder" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Home/Index", new { area = "" })" method="post">
         <button class="logoutButton" type="submit" > <img src="~/img/logout.webp" width="40" height="40"></button>
     </form>
 </div>
