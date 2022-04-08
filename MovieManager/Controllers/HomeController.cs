@@ -30,8 +30,6 @@ namespace MovieManager.Controllers
 
         public IActionResult Index()
         {
-            Console.WriteLine("Hit controller: Home , hit view: Index");
-
             var popularMovies = apiGetPopularService.GetPopularMovies(15); //load 15 popular movies/shows
             var popularShows = apiGetPopularService.GetPopularShows(15);
 
@@ -47,8 +45,6 @@ namespace MovieManager.Controllers
         [Authorize]
         public IActionResult Playlists()
         {
-            Console.WriteLine("Hit controller: Home , hit view: Playlists");
-
             var userName = this.User.Identity.Name;
 
             var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
@@ -112,7 +108,6 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
-        public IActionResult Error() => View();
         public IActionResult Profile()
         {
             var userName = this.User.Identity.Name;
@@ -126,5 +121,7 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+        public IActionResult Error() => View();
+
     }
 }

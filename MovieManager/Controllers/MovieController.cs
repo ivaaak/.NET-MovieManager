@@ -27,7 +27,6 @@ namespace MovieManager.Controllers
         }
 
 
-
         [Authorize]
         [Route("Movie/Main")]
         public IActionResult Main()
@@ -57,13 +56,11 @@ namespace MovieManager.Controllers
         }
 
 
-
         //Search
         public IActionResult Search()
         {
             return View();
         }
-
         //Post Request on Search Bar Submit
         [HttpPost]
         public IActionResult Search(SearchResultViewModel model)
@@ -94,13 +91,11 @@ namespace MovieManager.Controllers
 
             return View("SearchResult", results);
         }
-
         //Search Results Page - SearchResultViewModel 
         public IActionResult SearchResult(SearchResultViewModel results)
         {
             return View();
         }
-
 
 
         //Movie - Show - Actor - Review card pages

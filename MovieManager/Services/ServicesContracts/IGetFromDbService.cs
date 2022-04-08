@@ -4,9 +4,15 @@ namespace MovieManager.Services.ServicesContracts
 {
     public interface IGetFromDbService
     {
+        List<Playlist> GetAllUserPlaylists(string UserName);
+
+        List<Playlist> GetAllPublicPlaylists();
+
+
         Movie GetMovieFromDBbyID(int MovieId);
 
         Movie GetMovieFromDBbyTitle(string MovieTitle);
+
 
         List<Movie> GetMovieListFromDBbyTitle(string MovieTitle);
 
@@ -14,7 +20,6 @@ namespace MovieManager.Services.ServicesContracts
         
         List<Movie> GetUserMovieList(string UserName, string listName);
 
-        List<Playlist> GetAllUserPlaylists(string UserName);
 
         Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
 

@@ -20,14 +20,23 @@ namespace MovieManager.Services
         {
             var playlists = dataContext.Users
                 .Include(u => u.Playlists)
-                .ThenInclude(p => p.Movies) //?????
+                .ThenInclude(p => p.Movies)
                 .Where(u => u.UserName == UserName)
                 .SelectMany(u => u.Playlists)
                 .ToList();
 
             return playlists;
         }
-        
+        public List<Playlist> GetAllPublicPlaylists()
+        {
+            var playlists = dataContext.Playlists
+                .Include(p => p.Movies)
+                .Where(p => p.IsPublic==true)
+                .ToList();
+
+            return playlists;
+        }
+
 
         public List<Movie> GetUserMovieList(string UserName, string listName)
         {

@@ -55,6 +55,7 @@ namespace MovieManager.Controllers
 
         public IActionResult Releases()
         {
+            //fix it to get latest
             var popularMovies = apiGetPopularService.GetPopularMovies(15);
             var popularShows = apiGetPopularService.GetPopularShows(15);
             //load 15 popular movies/shows from api
@@ -70,5 +71,25 @@ namespace MovieManager.Controllers
             return View(model);
         }
 
+
+        public IActionResult PublicPlaylists()
+        {
+            var userName = this.User.Identity.Name;
+
+            var playlists = getFromDbService.GetAllPublicPlaylists();
+            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(playlists);
+
+            var model = new PlaylistsViewModel()
+            {
+                Playlists = playlists,
+                QRCodes = userQrCodes,
+            };
+
+            return View(model);
+        }
+
+        public IActionResult Trending() => View();
+        public IActionResult Latest() => View();
+        public IActionResult HighestRated() => View();
     }
 }
