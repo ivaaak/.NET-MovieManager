@@ -37,7 +37,6 @@ namespace MovieManager.Services
 
             return returnList;
         }
-
         public List<SearchTv> GetPopularShows(int showCount)
         {
             Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowPopularAsync(1, null);

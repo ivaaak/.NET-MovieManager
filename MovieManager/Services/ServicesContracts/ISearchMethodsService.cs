@@ -6,8 +6,6 @@ namespace MovieManager.Services.ServicesContracts
 {
     public interface ISearchMethodsService
     {
-        List<Data.DataModels.Movie> SearchResultCombined(string SEARCH_NAME);
-
         List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME);
 
         List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME);
@@ -22,10 +20,6 @@ namespace MovieManager.Services.ServicesContracts
 
         List<ReviewBase> GetReviewWithShowID(int id);
 
-        //save to Db
-        void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
-
-        void SearchShowTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb);
 
         //Trailers
         string GetMovieTrailer(int id);

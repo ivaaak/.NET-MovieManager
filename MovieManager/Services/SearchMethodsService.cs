@@ -21,7 +21,7 @@ namespace MovieManager.Services
             tmdbClient = new TMDbClient(Configuration.APIKey);
         }
 
-
+        //SearchResult
         public List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
         {
             SearchContainer<SearchMovie> results = tmdbClient.SearchMovieAsync(SEARCH_NAME).Result;
@@ -30,6 +30,10 @@ namespace MovieManager.Services
 
             Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
             
+            if(results.Results.Count() == 0)
+            {
+                //throw new InvalidOperationException("No Movies Found"); - this shouldnt throw, but rather transfer a null so the view gives an error
+            }
             foreach (var movie in results.Results)
             {
                 if(movie != null) 
@@ -39,7 +43,6 @@ namespace MovieManager.Services
             }
             return dbMovies;
         }
-
         public List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME)
         {
             SearchContainer<SearchTv> results = tmdbClient.SearchTvShowAsync(SEARCH_NAME).Result;
@@ -91,7 +94,7 @@ namespace MovieManager.Services
             return movieModel;
         }
 
-
+        //ShowCard
         public ShowCardViewModel SearchApiWithShowID(int id)
         {
             var show = tmdbClient.GetTvShowAsync(id, TMDbLib.Objects.TvShows.TvShowMethods.Videos).Result;
@@ -106,7 +109,7 @@ namespace MovieManager.Services
 
             foreach (var person in credits.Cast)
             {
-                if (person != null && person.ProfilePath != null) //dont save null images
+                if (person != null && person.ProfilePath != null) //dont save people with no images
                 {
                     TMDbLib.Objects.TvShows.Cast personShowCast = new TMDbLib.Objects.TvShows.Cast()
                     {
@@ -114,7 +117,6 @@ namespace MovieManager.Services
                         Name = person.Name,
                         ProfilePath = person.ProfilePath,
                     };
-
                     people.Add(personShowCast);
                 }
             }
@@ -129,7 +131,7 @@ namespace MovieManager.Services
 
 
 
-        //Used in MovieController for ActorCard
+        //Used for ActorCard  (MovieController)
         public ActorViewModel GetActorWithID(int id)
         {
             Person actor = new Person();
@@ -141,7 +143,7 @@ namespace MovieManager.Services
             }
             catch (Exception e) { e.ToString(); };
 
-            if (credits == null) //show
+            if (credits == null) //has no movie credits -> get and display show credits
             {
                 var creditsShow = new TvCredits();
                 var model = new ActorViewModel();
@@ -159,7 +161,7 @@ namespace MovieManager.Services
 
                 return model;
             }
-            else //movie
+            else //display movie credits (roles)
             {
                 var model = new ActorViewModel();
                 try
@@ -192,6 +194,7 @@ namespace MovieManager.Services
             return reviews;
         }
 
+        //Get Trailers
         public string GetMovieTrailer(int id)
         {
             var trailer = tmdbClient.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
@@ -205,7 +208,6 @@ namespace MovieManager.Services
             }
             return ytLink;
         }
-
         public string GetShowTrailer(int id)
         {
             var trailer = tmdbClient.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
@@ -221,7 +223,8 @@ namespace MovieManager.Services
         }
 
 
-        //these 2 are static to avoid circular reference in SaveMovieToDbObjectService service
+        //these 2 are also static to avoid circular reference in SaveMovieToDbObjectService service
+        //this can be optimized
         public static string GetMovieTrailerStatic(int id)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
@@ -234,7 +237,6 @@ namespace MovieManager.Services
             }
             return "notrailer";
         }
-
         public static string GetShowTrailerStatic(int id)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
@@ -247,38 +249,6 @@ namespace MovieManager.Services
                 return ytKey;
             }
             return "notrailer";
-        }
-
-
-
-        public List<Data.DataModels.Movie> SearchResultCombined(string SEARCH_NAME)
-        {
-            var CombinedResultsList = new List<Data.DataModels.Movie>();
-            var MovieResultsList = SearchMovieTitleToList(SEARCH_NAME);
-            var ShowResultsList = SearchShowTitleToList(SEARCH_NAME);
-
-            CombinedResultsList.AddRange(MovieResultsList);
-            CombinedResultsList.AddRange(ShowResultsList);
-
-            return CombinedResultsList;
-        }
-
-        //Used in Debug - FillDatabase
-        public void SearchMovieTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb)
-        {
-            SearchContainer<SearchMovie> results = tmdbClient.SearchMovieAsync(SEARCH_NAME).Result;
-
-            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
-
-            addToDb.AddMovies(results);
-        }
-        public void SearchShowTitleAndSaveToDb(string SEARCH_NAME, AddToDbService addToDb)
-        {
-            SearchContainer<SearchTv> results = tmdbClient.SearchTvShowAsync(SEARCH_NAME).Result;
-
-            Console.WriteLine($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
-
-            addToDb.AddShows(results);
         }
     }
 }

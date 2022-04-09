@@ -7,13 +7,12 @@ namespace MovieManager.Services
 {
     public class SaveMovieToDbObjectService : ISaveMovieToDbObjectService
     {
-        public SaveMovieToDbObjectService() { }
-
-
         public Movie SearchMovieApiToObject(SearchMovie result)
         {
-            if (result.Title == null || result.PosterPath == null || result.Overview == null) { return null; }
-
+            if (result.Title == null || result.PosterPath == null || result.Overview == null) 
+            {
+                throw new ArgumentException("Movie data isnt valid");
+            }
             Movie m = new Movie()
             {
                 MovieId = result.Id,
@@ -28,11 +27,12 @@ namespace MovieManager.Services
             return m;
         }
 
-
         public Movie SearchShowApiToObject(SearchTv result)
         {
-            if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
-
+            if (result.Name == null || result.PosterPath == null || result.Overview == null)
+            {
+                throw new ArgumentException("Show data isnt valid");
+            }
             Movie m = new Movie()
             {
                 MovieId = result.Id,
@@ -47,12 +47,13 @@ namespace MovieManager.Services
             return m;
         }
 
-
-
         //save to db
         public Movie MovieApiToObject(TMDbLib.Objects.Movies.Movie result)
         {
-            if (result.Title == null || result.PosterPath == null || result.Overview == null) { return null; }
+            if (result.Title == null || result.PosterPath == null || result.Overview == null)
+            {
+                throw new ArgumentException("Movie data isnt valid");
+            }
             string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id);
 
             Movie m = new Movie()
@@ -72,7 +73,10 @@ namespace MovieManager.Services
 
         public Movie ShowApiToObject(TvShow result)
         {
-            if (result.Name == null || result.PosterPath == null || result.Overview == null) { return null; }
+            if (result.Name == null || result.PosterPath == null || result.Overview == null)
+            {
+                throw new ArgumentException("Show data isnt valid");
+            }
             string trailerLink = SearchMethodsService.GetShowTrailerStatic(result.Id);
 
             Movie m = new Movie()
@@ -91,10 +95,12 @@ namespace MovieManager.Services
         }
 
 
-        //errors
         public Actor ActorApiToObject(TMDbLib.Objects.People.Person result)
         {
-            if (result.Name == null || result.Images==null) { return null; }
+            if (result.Name == null || result.Images==null)
+            {
+                throw new ArgumentException("Actor data isnt valid");
+            }
 
             Actor a = new Actor()
             {
@@ -106,14 +112,9 @@ namespace MovieManager.Services
             return a;
         }
 
+
         public static string BuildImageURL(string resImageURL)
         {
-            //url part returned from API example
-            //string exImageURL = "/bQLrHIRNEkE3PdIWQrZHynQZazu.jpg";
-
-            //string baseImageURL = "https://tmdb.mrunblock.bar/t/p/w600_and_h900_bestv2";
-            //This has Hotlinking protection so it cant be loaded into the site
-
             string baseImageURL = "https://image.tmdb.org/t/p/w500";
 
             return baseImageURL + resImageURL;

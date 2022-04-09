@@ -5,12 +5,11 @@ using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
-    public class Testing
+    public class PrintApiObject	//this class is for testing purposes only
     {
-		public static void ApiWrapperTestCall(string KEY, string SEARCH_NAME)
+        public static void ApiWrapperTestCall(string KEY, string SEARCH_NAME)
 		{
-			//this class is for testing purposes only
-			PrintMovieObj("Fight Club");
+			PrintMovieObj("");
 		}
 
 
@@ -60,27 +59,6 @@ namespace MovieManager.Services
                 Console.WriteLine($"FirstAirDate: {result.FirstAirDate}");
                 Console.WriteLine($"VoteAverage: {result.VoteAverage}");
                 Console.WriteLine($"VoteCount: {result.VoteCount}");
-            }
-        }
-
-
-        public async void WriteMovieToJson(SearchContainer<SearchMovie> results)
-        {
-
-            //TODO write result to the json.txt - INIT writer here
-            var jsonSavePath = "D:\\Softuni\\WEB PROJ IDEA\\MOVI\\Backend C# EF\\MovieManager\\Movies\\JSONstring.txt";
-            await using var jsonWriter = File.AppendText(jsonSavePath);
-
-            await jsonWriter.WriteLineAsync($"Got {results.Results.Count:N0} of {results.TotalResults:N0} results");
-
-            foreach (SearchMovie result in results.Results)
-            {
-                await jsonWriter.WriteLineAsync(result.Title);
-                await jsonWriter.WriteLineAsync($"    Overview: {result.Overview}");
-                await jsonWriter.WriteLineAsync($"    Poster URL: {SaveMovieToDbObjectService.BuildImageURL(result.PosterPath)}");
-                await jsonWriter.WriteLineAsync($"    Release date: {result.ReleaseDate.ToString()}");
-                await jsonWriter.WriteLineAsync($"    Movie ID: {result.Id.ToString()}");
-                await jsonWriter.WriteLineAsync($"    Rating: {result.VoteAverage}");
             }
         }
     }

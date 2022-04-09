@@ -17,12 +17,5 @@ namespace MovieManager.Services.ServicesContracts
         void AddReviewToUsersReviews(Review review, string Name);
 
         void GenerateQRCode(string playlistId);
-
-        //add to db for debug
-        void AddMovies(SearchContainer<SearchMovie> results);
-
-        void AddShows(SearchContainer<SearchTv> results);
-
-        void AddMovie(SearchMovie movie);
     }
 }
