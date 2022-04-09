@@ -36,7 +36,24 @@ namespace MovieManager.Test.Data
             Popularity = 11.68,
             OriginalLanguage = "hu",
         };
+        //api result movie
+        public static Actor actor = new Actor() 
+        {
+            ActorId = 111,
+            FullName = "Test Actor",
+            Overview = "An actor."
+        };
 
+        public static User user = new User()
+        {
+            UserName = "testUser",
+            Id = "abcde",
+        };
+        public static Playlist userPlaylist = new Playlist()
+        {
+            PlaylistId = "aaaaa",
+            PlaylistName = "playlist name"
+        };
 
 
         public static IEnumerable<Movie> moviesCollection
