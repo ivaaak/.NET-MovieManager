@@ -1,49 +1,48 @@
-using Autofac.Extras.Moq;
-using MovieManager.Data.DataModels;
+using Microsoft.Extensions.DependencyInjection;
 using MovieManager.Services;
+using MovieManager.Services.Repositories;
+using MovieManager.Services.ServicesContracts;
+using MovieManager.Test.Data;
+using NUnit.Framework;
+using TMDbLib.Objects.Search;
 using Xunit;
 
 namespace MovieManager.Test
 {
     public class AddToDbServiceUnitTest
     {
-        private Playlist playlist;
-        private Movie movie;
+        private ServiceProvider serviceProvider;
+        private InMemoryDbContext dbContext;
 
+        [SetUp]
         public void Setup()
         {
-            this.playlist = new Playlist()
-            {
+            dbContext = new InMemoryDbContext();
+            var serviceCollection = new ServiceCollection();
 
-            };
-            this.movie = new Movie()
-            {
-                MovieId = 31414,
-                Title = "Satantango",
-                Overview = "Inhabitants of a small village in Hungary deal with the effects of the fall of Communism.",
-                PosterUrl = "/y38z0v4HJ12MHiKddLEoFlvPiBt.jpg",
-                Rating = 8.3m,
-                Popularity = 11.68m,
-                Language = "hu",
-                MediaType = "movie",
-            };
+            serviceProvider = serviceCollection
+                .AddSingleton(sp => dbContext.CreateContext())
+                .AddSingleton<IApplicationDbRepository, ApplicationDbRepository>()
+                .AddSingleton<IAddToDbService, AddToDbService>()
+                .BuildServiceProvider();
+
+            //var repo = serviceProvider.GetService<IApplicationDbRepository>();
         }
 
 
         [Fact]
-        //[InlineData()]
-        public void AddMovieToUserPlaylist_ValidCall(int movieId, string PlaylistName, string Name)
+        public void AddMovieToFavorites_ValidCall(SearchMovie searchMovie)
         {
-            using (var playlistMock = AutoMock.GetLoose()) //GetStrict?
-            {
-                //playlistMock.Mock<MovieContext>().Setup(x => x.Playlists());
-                //playlistMock.MockRepository
+            var service = serviceProvider.GetService<IAddToDbService>();
 
-            }
+            Assert.DoesNotThrow(() => service.AddMovieToFavorites(TestConstants.movie.MovieId, "testUser"));
+        }
+        [Fact]
+        public void AddMovieToFavorites_NullCall(SearchMovie searchMovie)
+        {
+            var service = serviceProvider.GetService<IAddToDbService>();
 
-            AddToDbService service = new AddToDbService();
-            service.AddMovieToUserPlaylist(movieId, PlaylistName, Name);    
-            //Assert.AreEqual();
+            Assert.DoesNotThrow(() => service.AddMovieToFavorites(TestConstants.movie.MovieId, null));
         }
     }
 }
