@@ -1,8 +1,7 @@
 ﻿using MovieManager.Data;
 using MovieManager.Data.Common;
-using MovieManager.Services.Repositories;
 
-namespace MovieManager.Services.MovieServices
+namespace MovieManager.Services.Repositories
 {
     public class ApplicationDbRepository : Repository, IApplicationDbRepository
     {

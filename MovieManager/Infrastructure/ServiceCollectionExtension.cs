@@ -4,7 +4,6 @@ using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
 using MovieManager.Services;
-using MovieManager.Services.MovieServices;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServiceContracts;
 using MovieManager.Services.ServicesContracts;
