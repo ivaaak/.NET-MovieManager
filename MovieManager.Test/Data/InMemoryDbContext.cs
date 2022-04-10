@@ -16,14 +16,23 @@ namespace MovieManager.Test.Data
             connection.Open();
 
             dbContextOptions = new DbContextOptionsBuilder<MovieContext>()
-                .UseSqlServer(connection)
+                .UseSqlite(connection)
                 .Options;
 
             using var context = new MovieContext(dbContextOptions);
 
             context.Database.EnsureCreated();
+           
         }
         public MovieContext CreateContext() => new MovieContext(dbContextOptions);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                    .UseSqlite(connection);
+            }
+        }
 
         public DbSet<User> Users { get; set; } //users hashset as the test context has no identity
         public DbSet<Movie> Movies { get; set; }

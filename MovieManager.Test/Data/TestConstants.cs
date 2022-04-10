@@ -7,6 +7,12 @@ namespace MovieManager.Test.Data
 {
     public class TestConstants
     {
+        public TestConstants()
+        {
+            movieList.Add(movie);
+            userPlaylist.Movies.Add(movie);
+            userPlaylist.PlaylistMovies.Add(playlistMovie);
+        }
         //Data constant objects to be used in all tests
         public static Playlist playlist = new Playlist()
         {
@@ -25,8 +31,17 @@ namespace MovieManager.Test.Data
             Language = "hu",
             MediaType = "movie",
         };
+        public static PlaylistMovie playlistMovie = new PlaylistMovie()
+        {
+            Movie = movie,
+            MovieId = movie.MovieId,
+            Playlist = playlist,
+            PlaylistId = playlist.PlaylistId
+        };
+        public static List<Movie> movieList = new List<Movie>();
+        
         //api result movie
-        public static SearchMovie searchMovie = new SearchMovie() //this is the api movie result
+        public static SearchMovie searchMovie = new SearchMovie()
         {
             Id = 31414,
             Title = "Satantango",
@@ -36,7 +51,7 @@ namespace MovieManager.Test.Data
             Popularity = 11.68,
             OriginalLanguage = "hu",
         };
-        //api result movie
+
         public static Actor actor = new Actor() 
         {
             ActorId = 111,
@@ -52,10 +67,14 @@ namespace MovieManager.Test.Data
         public static Playlist userPlaylist = new Playlist()
         {
             PlaylistId = "aaaaa",
-            PlaylistName = "playlist name"
+            PlaylistName = "playlist name",
+            PlaylistMovies = new List<PlaylistMovie>(),
+            Movies = new List<Movie>()
         };
+        
 
 
+        //unused atm
         public static IEnumerable<Movie> moviesCollection
             => Enumerable.Range(0, 100).Select(i => new Movie
             {

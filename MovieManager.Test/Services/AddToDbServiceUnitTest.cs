@@ -1,13 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
-using MovieManager.Data.DataModels;
 using MovieManager.Services;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
 using TMDbLib.Objects.Search;
-using Xunit;
 
 namespace MovieManager.Test
 {
@@ -34,17 +33,21 @@ namespace MovieManager.Test
 
         //AddMovieToFavorites
         [Test]
-        public void AddMovieToFavorites_ValidCall(SearchMovie searchMovie)
+        public void AddMovieToFavorites_ValidCall()
         {
-            string test = "excepasjkld;as";
+            int movieId = TestConstants.movie.MovieId;
+            string userName = TestConstants.user.UserName;
+
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToFavorites(TestConstants.movie.MovieId, TestConstants.user.Id), test);
+            Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, userName));
         }
         [Test]
-        public void AddMovieToFavorites_NullCall(SearchMovie searchMovie)
+        public void AddMovieToFavorites_NullCall()
         {
+            int movieId = TestConstants.movie.MovieId;
+
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToFavorites(TestConstants.movie.MovieId, null), "test");
+            Assert.Throws<InvalidOperationException>(() => service.AddMovieToFavorites(movieId, null));
         }
 
         //AddMovieToUserPlaylist
@@ -52,13 +55,13 @@ namespace MovieManager.Test
         public void AddMovieToUserPlaylist_ValidCall(SearchMovie searchMovie)
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, "current", "testUser"), "test");
+            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
         }
         [Test]
         public void AddMovieToUserPlaylist_NullCall(SearchMovie searchMovie)
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, "current", null));
+            Assert.Throws<InvalidOperationException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
         }
 
         //AddActorToUserList - this uses api if actor isnt in db already
@@ -82,6 +85,7 @@ namespace MovieManager.Test
         {
             await dbContext.Users.AddAsync(TestConstants.user);
             await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
+            
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }
