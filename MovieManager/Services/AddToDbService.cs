@@ -37,6 +37,10 @@ namespace MovieManager.Services
             if(movie == null) //movie doesnt exist in db
             {
                 var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                if(apiMovie == null)
+                {
+                    throw new ArgumentNullException("Api result movie invalid");
+                }
                 movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
                 dataContext.Movies.Add(movie); //add to db
             };
