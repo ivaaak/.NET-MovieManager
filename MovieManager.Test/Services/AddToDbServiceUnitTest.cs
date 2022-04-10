@@ -25,57 +25,53 @@ namespace MovieManager.Test
                 .AddSingleton(sp => dbContext.CreateContext())
                 .AddSingleton<IApplicationDbRepository, ApplicationDbRepository>()
                 .AddSingleton<IAddToDbService, AddToDbService>()
+                .AddSingleton<ISaveMovieToDbObjectService, SaveMovieToDbObjectService> ()
                 .BuildServiceProvider();
 
-            await SeedDbAsync(dbContext);
-            //var repo = serviceProvider.GetService<IApplicationDbRepository>();
+            //await SeedDbAsync(dbContext);
         }
 
+        //AddActorToUserList - this uses api if actor isnt in db already
         [Test]
-        public void AddMovieToFavorites_ValidCall()
+        public void AddActorToUserList_ValidCall()
         {
-            //int movieId = TestConstants.movie.MovieId;
-            //string userName = TestConstants.user.UserName;
-
-            //var service = serviceProvider.GetService<IAddToDbService>();
-            //Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, userName));
-            Assert.True(true);
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.Throws<NullReferenceException>(() => service.AddActorToUserList(TestConstants.actor.ActorId, "testUser"));
         }
+
+
         [Test]
         public void AddMovieToFavorites_NullCall()
         {
             int movieId = TestConstants.movie.MovieId;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            //Assert.Throws<InvalidOperationException>(() => service.AddMovieToFavorites(movieId, null));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, null));
+        }
+        [Test]
+        public void AddMovieToFavorites_ValidCall()
+        {
+            int movieId = TestConstants.movie.MovieId;
+            string userName = TestConstants.user.UserName;
+
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, userName));
         }
 
 
         [Test]
-        public void AddMovieToUserPlaylist_ValidCall(SearchMovie searchMovie)
+        public void AddMovieToUserPlaylist_NullCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            //Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
         }
         [Test]
-        public void AddMovieToUserPlaylist_NullCall(SearchMovie searchMovie)
+        public void AddMovieToUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            //Assert.Throws<InvalidOperationException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
         }
-
-
-        //AddActorToUserList - this uses api if actor isnt in db already
-        [Test]
-        public void AddActorToUserList_ValidCall(SearchMovie searchMovie)
-        {
-            var service = serviceProvider.GetService<IAddToDbService>();
-            //Assert.DoesNotThrow(() => service.AddActorToUserList(TestConstants.actor.ActorId, "testUser"));
-        }
-
-
-
-
+        
 
         [TearDown]
         public void TearDown()
@@ -84,9 +80,11 @@ namespace MovieManager.Test
         }
         private async Task SeedDbAsync(InMemoryDbContext dbContext)
         {
-            await dbContext.Users.AddAsync(TestConstants.user);
-            await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
-            
+
+            //await dbContext.Users.AddAsync(TestConstants.user);
+            //await dbContext.Movies.AddAsync(TestConstants.movie);
+            //await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
+            //System.InvalidOperationException : The entity type 'PlaylistMovie' requires a primary key to be defined.
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }

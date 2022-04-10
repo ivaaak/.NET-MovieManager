@@ -24,7 +24,9 @@ namespace MovieManager.Test.Data
             context.Database.EnsureCreated();
            
         }
+
         public MovieContext CreateContext() => new MovieContext(dbContextOptions);
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -32,6 +34,13 @@ namespace MovieManager.Test.Data
                 optionsBuilder
                     .UseSqlite(connection);
             }
+        }
+        //The entity type 'PlaylistMovie' requires a primary key to be defined.
+        //If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PlaylistMovie>().HasNoKey();
+            //modelBuilder.Entity<PlaylistMovie>().EntityTypeBuilder.Ignore();
         }
 
         public DbSet<User> Users { get; set; } //users hashset as the test context has no identity

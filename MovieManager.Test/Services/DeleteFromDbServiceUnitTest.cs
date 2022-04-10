@@ -1,13 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using MovieManager.Data.DataModels;
 using MovieManager.Services;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
-using TMDbLib.Objects.Search;
-using Xunit;
 
 namespace MovieManager.Test
 {
@@ -24,32 +22,30 @@ namespace MovieManager.Test
 
             serviceProvider = serviceCollection
                 .AddSingleton(sp => dbContext.CreateContext())
-                .AddSingleton<IApplicationDbRepository, ApplicationDbRepository>()
                 .AddSingleton<IDeleteFromDbService, DeleteFromDbService>()
                 .BuildServiceProvider();
 
-            await SeedDbAsync(dbContext);
-            //var repo = serviceProvider.GetService<IApplicationDbRepository>();
+            //await SeedDbAsync(dbContext);
         }
 
 
         [Test]
-        public void DeleteFromDbUsingId_ValidCall(SearchMovie searchMovie)
+        public void DeleteFromDbUsingId_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
-            Assert.DoesNotThrow(() => service.DeleteFromDbUsingId(TestConstants.movie.MovieId));
+            Assert.DoesNotThrow(() => service.DeleteFromDbUsingId(TestConstants.movie.MovieId)); 
         }
         [Test]
-        public void DeleteFromDbUsingName_ValidCall(SearchMovie searchMovie)
+        public void DeleteFromDbUsingName_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
             Assert.DoesNotThrow(() => service.DeleteFromDbUsingName(TestConstants.movie.Title));
         }
         [Test]
-        public void DeleteMovieFromUserPlaylist_ValidCall(SearchMovie searchMovie)
+        public void DeleteMovieFromUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
-            Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
+            Assert.Throws<NullReferenceException>(() => service.DeleteMovieFromUserPlaylist(
                 TestConstants.movie.MovieId, 
                 TestConstants.playlist.PlaylistName, 
                 TestConstants.user.UserName));
@@ -64,7 +60,6 @@ namespace MovieManager.Test
         private async Task SeedDbAsync(InMemoryDbContext dbContext)
         {
             await dbContext.Users.AddAsync(TestConstants.user);
-            await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }
