@@ -252,3 +252,17 @@ input {
     background-color: rgb(24, 24, 24);
     transform: translateY(-2px);
 }
+
+.noUnderline {
+    overflow: hidden;
+    text-decoration: none !important;
+    text-decoration-line: none !important;
+    color: var(--dark-peach);
+}
+
+.pageLink {
+    color:aliceblue;
+    position:fixed;
+    bottom: 3%;
+    right: 2%;
+}

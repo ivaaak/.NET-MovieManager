@@ -1,8 +1,8 @@
 ﻿@model MovieDiscoverViewModel
 @{
-	ViewData["Title"] = "Releases";
+	ViewData["Title"] = "Trending";
 
-	var releasedMovieList = Model.DiscoverMovies;
+	var trendingMovieList = Model.DiscoverMovies;
 }
 @section scripts{
 	<script src="~/js/home.js"></script>
@@ -18,7 +18,7 @@
 </head>
 
 
-<h1 class="playlistTitle">Releases:</h1>
+<h1 class="playlistTitle">Trending:</h1>
 
 <div class="container mb-3 mt-3"">
 	<div class="btn-holder">
@@ -33,7 +33,7 @@
 
 <div class="grid-container ContainerListScroll scrollbar scrollbar-black bordered-black square thin"style="height: 750px;">
 <div class="row">
-	@foreach (var movie in releasedMovieList)
+	@foreach (var movie in trendingMovieList)
 	{
 	string posterUrl = "https://image.tmdb.org/t/p/w500" + @movie.PosterPath;
 	<div class="col-12 col-md-6 col-lg-4">

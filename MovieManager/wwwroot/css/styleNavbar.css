@@ -248,7 +248,7 @@ li span::before, li span::after {
     content: "Trending";
 }
 .DiscLatest::before, .DiscLatest::after {
-    content: "Latest";
+    content: "Popular";
 }
 .DiscTopRated::before, .DiscTopRated::after {
     content: "Top Rated";

@@ -11,19 +11,15 @@
 <head>
 	<link href="~/css/style.css" asp-append-version="true" rel="stylesheet">
 	<link href="~/css/styleProfile.css" asp-append-version="true" rel="stylesheet">
+	<link href="~/css/loader.css" asp-append-version="true" rel="stylesheet">
 </head>
 
 
 
-<main class="app" style="left: 12%;">
+<main class="app" style="left: 12%; margin-top: 60px;">
     <a class="noUnderline" href="/Discover/Movies">
         <div class="green block">
-            <h1>Popular Movies</h1>
-        </div>
-    </a>
-    <a class="noUnderline" href="/Discover/Shows">
-        <div class="green block">
-            <h1>Popular Shows</h1>
+            <h1>Popular</h1>
         </div>
     </a>
     <a class="noUnderline" href="/Discover/Releases">
@@ -33,20 +29,18 @@
     </a>
 </main>
 
-<main class="app3"style="right: 10%;">
+<main class="app3"style="right: 10%; margin-top: 60px;">
     <a class="noUnderline" href="/Discover/Trending">
         <div class="green block">
             <h1>Trending</h1>
         </div>
     </a>
-    <a class="noUnderline" href="/Discover/Latest">
-        <div class="green block">
-            <h1>Latest</h1>
-        </div>
-    </a>
-    <a class="noUnderline" href="/Discover/HighestRated">
+
+    <a class="noUnderline" href="/Discover/TopRated">
         <div class="green block">
             <h1>Highest Rated</h1>
         </div>
     </a>
 </main>
+
+<div class="loader"></div>
