@@ -1,4 +1,5 @@
 ﻿using MovieManager.Data.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMDbLib.Objects.Search;
@@ -7,17 +8,25 @@ namespace MovieManager.Test.Data
 {
     public class TestConstants
     {
-        public TestConstants()
-        {
-            movieList.Add(movie);
-            userPlaylist.Movies.Add(movie);
-            userPlaylist.PlaylistMovies.Add(playlistMovie);
-        }
         //Data constant objects to be used in all tests
+        public static User user = new User()
+        {
+            UserName = "testUser",
+            Id = "abcde",
+            Email = "test@test.com",
+            Playlists = new List<Playlist>(),
+            Actors = new List<Actor>(),
+        };
         public static Playlist playlist = new Playlist()
         {
-            PlaylistName = "current",
-            PlaylistId = "aaaaaa"
+            PlaylistName = "favorites",
+            PlaylistId = "aaaaaa",
+            PlaylistMovies = new List<PlaylistMovie>(),
+            CreatedOn = DateTime.UtcNow,
+            Movies = new List<Movie>(),
+            User = user,
+            IsPublic = false,
+            QrCode = new QRCodeObject(),
         };
         //db movie
         public static Movie movie = new Movie()
@@ -30,17 +39,33 @@ namespace MovieManager.Test.Data
             Popularity = 11.68m,
             Language = "hu",
             MediaType = "movie",
+            ReleaseDate = DateTime.UtcNow,
+            Playlists = new List<Playlist>(),
+            PlaylistMovies = new List<PlaylistMovie>(),
         };
+        
         public static PlaylistMovie playlistMovie = new PlaylistMovie()
         {
             Movie = movie,
             MovieId = movie.MovieId,
             Playlist = playlist,
-            PlaylistId = playlist.PlaylistId
+            PlaylistId = playlist.PlaylistId,
+        };
+
+        public static Playlist userPlaylist = new Playlist()
+        {
+            PlaylistId = "aaaaa",
+            PlaylistName = "playlist name",
+            PlaylistMovies = new List<PlaylistMovie>(),
+            Movies = new List<Movie>(),
+            CreatedOn = DateTime.UtcNow,
+            IsPublic = false,
+            QrCode = new QRCodeObject(),
+            User = new User(),
         };
         public static List<Movie> movieList = new List<Movie>();
         
-        //api result movie
+        //api results
         public static SearchMovie searchMovie = new SearchMovie()
         {
             Id = 31414,
@@ -59,18 +84,6 @@ namespace MovieManager.Test.Data
             Overview = "An actor."
         };
 
-        public static User user = new User()
-        {
-            UserName = "testUser",
-            Id = "abcde",
-        };
-        public static Playlist userPlaylist = new Playlist()
-        {
-            PlaylistId = "aaaaa",
-            PlaylistName = "playlist name",
-            PlaylistMovies = new List<PlaylistMovie>(),
-            Movies = new List<Movie>()
-        };
         
 
 

@@ -7,8 +7,6 @@ namespace MovieManager.Data
 {
     public class MovieContext : IdentityDbContext<User> 
     {
-        public MovieContext(){}
-
         public MovieContext(DbContextOptions<MovieContext> options)
             : base(options) 
         {

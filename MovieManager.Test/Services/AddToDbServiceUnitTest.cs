@@ -29,6 +29,12 @@ namespace MovieManager.Test
                 .BuildServiceProvider();
 
             //await SeedDbAsync(dbContext);
+            //identityto u rekata
+            /*
+            Microsoft.EntityFrameworkCore.DbUpdateException : 
+            An error occurred while saving the entity changes.See the inner exception for details.
+            Microsoft.Data.Sqlite.SqliteException : SQLite Error 1: 'no such table: Users'.
+            */
         }
 
         //AddActorToUserList - this uses api if actor isnt in db already
@@ -80,10 +86,20 @@ namespace MovieManager.Test
         }
         private async Task SeedDbAsync(InMemoryDbContext dbContext)
         {
+            var user = TestConstants.user;
+            var movie = TestConstants.movie;
+            var playlist = TestConstants.playlist;
+            var playlistMovie = TestConstants.playlistMovie;
+            var actor = TestConstants.actor;
 
-            //await dbContext.Users.AddAsync(TestConstants.user);
-            //await dbContext.Movies.AddAsync(TestConstants.movie);
-            //await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
+            playlist.Movies.Add(movie);
+            playlist.PlaylistMovies.Add(playlistMovie);
+            user.Playlists.Add(playlist);
+
+
+            await dbContext.Users.AddAsync(user);
+            await dbContext.Movies.AddAsync(movie);
+            await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
             //System.InvalidOperationException : The entity type 'PlaylistMovie' requires a primary key to be defined.
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }

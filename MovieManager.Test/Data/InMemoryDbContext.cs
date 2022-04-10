@@ -35,12 +35,41 @@ namespace MovieManager.Test.Data
                     .UseSqlite(connection);
             }
         }
+
         //The entity type 'PlaylistMovie' requires a primary key to be defined.
         //If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PlaylistMovie>().HasNoKey();
-            //modelBuilder.Entity<PlaylistMovie>().EntityTypeBuilder.Ignore();
+            //modelBuilder.Entity<PlaylistMovie>().HasNoKey();
+            //playlist <-> movie many to many
+            modelBuilder.Entity<Movie>()
+                .HasMany(m => m.Playlists)
+                .WithMany(m => m.Movies)
+                .UsingEntity<PlaylistMovie>(
+                     j => j
+                        .HasOne(pt => pt.Playlist)
+                        .WithMany(t => t.PlaylistMovies)
+                        .HasForeignKey(pt => pt.PlaylistId),
+                    j => j
+                        .HasOne(pt => pt.Movie)
+                        .WithMany(p => p.PlaylistMovies)
+                        .HasForeignKey(pt => pt.MovieId),
+                    j =>
+                    {
+                        j.HasKey(t => new { t.MovieId, t.PlaylistId });
+                    });
+
+            //user has many playlists
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.Playlists)
+                .WithOne(e => e.User);
+
+            //playlist has a qrcode
+            modelBuilder.Entity<Playlist>()
+                .HasOne(c => c.QrCode)
+                .WithOne(e => e.Playlist);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<User> Users { get; set; } //users hashset as the test context has no identity
