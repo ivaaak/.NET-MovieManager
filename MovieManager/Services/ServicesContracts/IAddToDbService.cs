@@ -8,14 +8,14 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddShowToUserPlaylist(int movieId, string PlaylistName, string Name);
 
-        void AddMovieToFavorites(int movieId, string Name);
+        Task AddMovieToFavorites(int movieId, string Name);
 
         void AddActorToUserList(int ActorId, string Name);
 
-        public void AddReviewToUsersReviews(string reviewTitle, string reviewContent, decimal rating, string userName, int movieId, string movieTitle);
+        Task AddReviewToUsersReviews(string reviewTitle, string reviewContent, decimal rating, string userName, int movieId, string movieTitle);
 
-        void GenerateQRCode(string playlistId);
+        Task GenerateQRCode(string playlistId);
 
-        void CreateCustomPlaylist(string playlistTitle, string userId);
+        Task CreateCustomPlaylist(string playlistTitle, string userId);
     }
 }

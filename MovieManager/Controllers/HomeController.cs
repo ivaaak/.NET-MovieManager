@@ -30,8 +30,8 @@ namespace MovieManager.Controllers
 
         public IActionResult Index()
         {
-            var popularMovies = apiGetPopularService.GetPopularMovies(15); //load 15 popular movies/shows
-            var popularShows = apiGetPopularService.GetPopularShows(15);
+            var popularMovies = apiGetPopularService.GetPopularMovies(15).Result; //load 15 popular movies/shows
+            var popularShows = apiGetPopularService.GetPopularShows(15).Result;
 
             var model = new IndexViewModel()
             {
@@ -47,8 +47,8 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
-            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(userPlaylists);
+            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
+            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(userPlaylists).Result;
 
             var model = new PlaylistsViewModel()
             {
@@ -64,7 +64,7 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            var userPlaylists = getFromDbService.GetUserMovieList(userName, "favorites");
+            var userPlaylists = getFromDbService.GetUserMovieList(userName, "favorites").Result;
 
             var model = new MovieListViewModel()
             {
@@ -79,7 +79,7 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            List<Actor> actors = getFromDbService.GetUserActors(userName);
+            List<Actor> actors = getFromDbService.GetUserActors(userName).Result;
 
             var model = new ActorListViewModel()
             {
@@ -97,9 +97,9 @@ namespace MovieManager.Controllers
         public IActionResult Reviews()
         {
             var userName = this.User.Identity.Name;
-            var userId = getFromDbService.GetUserIdFromUserName(userName);
+            var userId = getFromDbService.GetUserIdFromUserName(userName).Result;
 
-            List<Review> reviews = getFromDbService.GetAllUserReviews(userId);
+            List<Review> reviews = getFromDbService.GetAllUserReviews(userId).Result;
 
             var model = new ReviewListViewModel()
             {
@@ -113,7 +113,7 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName);
+            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
 
             var model = new PlaylistsViewModel()
             {

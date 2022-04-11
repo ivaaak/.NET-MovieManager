@@ -27,7 +27,6 @@ namespace MovieManager.Services
             tmdbClient = new TMDbClient(Configuration.APIKey);
         }
 
-
         public void AddMovieToUserPlaylist(int movieId, string PlaylistName, string Name)
         {
             var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
@@ -85,21 +84,21 @@ namespace MovieManager.Services
             Console.WriteLine($"Added Show {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
-        public void AddMovieToFavorites(int movieId, string Name)
+        public async Task AddMovieToFavorites(int movieId, string Name)
         {
-            var movie = dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefault();
+            var movie = await dataContext.Movies.Where(m => m.MovieId == movieId).FirstOrDefaultAsync();
 
             if (movie == null) //movie doesnt exist in db
             {
-                var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                var apiMovie = await tmdbClient.GetMovieAsync(movieId);        //get from api
                 movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
                 dataContext.Movies.Add(movie); //add to db
             };
 
-            var targetPlaylist = dataContext.Playlists
+            var targetPlaylist = await dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(u => u.User.UserName == Name && u.PlaylistName == "favorites")
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
            
             if(targetPlaylist == null)
             {
@@ -120,11 +119,10 @@ namespace MovieManager.Services
                 targetPlaylist.Movies.Add(movie);
             }
 
-            dataContext.SaveChanges();
+            await dataContext.SaveChangesAsync();
 
             Console.WriteLine($"Added Movie {movieId} to user - {Name}'s favorites list");
         }
-
 
         //ACTORS
         public void AddActorToUserList(int ActorId, string Name)
@@ -171,10 +169,11 @@ namespace MovieManager.Services
         }
 
         //Reviews
-        public void AddReviewToUsersReviews(string reviewTitle, 
-            string reviewContent, decimal rating, string userName, int movieId, string movieTitle)
+        public async Task AddReviewToUsersReviews(string reviewTitle, 
+            string reviewContent, decimal rating, 
+            string userName, int movieId, string movieTitle)
         {
-            var user = dataContext.Users.Where(m => m.UserName == userName).FirstOrDefault();
+            var user = await dataContext.Users.Where(m => m.UserName == userName).FirstOrDefaultAsync();
 
             Review reviewData = new Review()
             {
@@ -187,17 +186,17 @@ namespace MovieManager.Services
                 UserId = user.Id,
             };
 
-            dataContext.Reviews.Add(reviewData);
+            await dataContext.Reviews.AddAsync(reviewData);
 
-            dataContext.SaveChanges();
+            await dataContext.SaveChangesAsync();
 
             Console.WriteLine($"Added review to user - {user.UserName}'s reviews");
         }
 
         //Create Playlist
-        public void CreateCustomPlaylist(string playlistTitle, string userId)
+        public async Task CreateCustomPlaylist(string playlistTitle, string userId)
         {
-            var user = dataContext.Users.Where(m => m.Id == userId).FirstOrDefault();
+            var user = await dataContext.Users.Where(m => m.Id == userId).FirstOrDefaultAsync();
 
             Playlist userPlaylist = new Playlist()
             {
@@ -211,19 +210,19 @@ namespace MovieManager.Services
             };
 
             user.Playlists.Add(userPlaylist);
-            dataContext.Playlists.Add(userPlaylist);
-            dataContext.SaveChanges();
+            await dataContext.Playlists.AddAsync(userPlaylist);
+            await dataContext.SaveChangesAsync();
 
             Console.WriteLine($"Added review to user - {user.UserName}'s list of saved actors");
         }
 
         //QrCode
-        public void GenerateQRCode(string playlistId)
+        public async Task GenerateQRCode(string playlistId)
         {
-            var playlist = dataContext.Playlists
+            var playlist = await dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(p => p.PlaylistId == playlistId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             StringBuilder playlistToText = new StringBuilder();
             foreach (var item in playlist.Movies)
@@ -246,8 +245,8 @@ namespace MovieManager.Services
             if (!dataContext.QRCodes.Any(q => q.PlaylistId == qrCodeObj.PlaylistId)) //skip adding if a qr code exists already
             {
                 playlist.QrCode = qrCodeObj;
-                dataContext.QRCodes.Add(qrCodeObj);
-                dataContext.SaveChanges();
+                await dataContext.QRCodes.AddAsync(qrCodeObj);
+                await dataContext.SaveChangesAsync();
             }
         }
     }

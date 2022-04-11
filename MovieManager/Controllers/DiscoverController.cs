@@ -26,7 +26,7 @@ namespace MovieManager.Controllers
         //Discover Pages
         public IActionResult Movies()
         {
-            var popularMovies = apiGetPopularService.GetPopularMovies(7); //load 7 popular movies/shows
+            var popularMovies = apiGetPopularService.GetPopularMovies(7).Result; //load 7 popular movies/shows
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular movies!";
 
@@ -40,7 +40,7 @@ namespace MovieManager.Controllers
 
         public IActionResult Shows()
         {
-            var popularShows = apiGetPopularService.GetPopularShows(7);
+            var popularShows = apiGetPopularService.GetPopularShows(7).Result;
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 7 most popular shows!";
 
@@ -53,7 +53,7 @@ namespace MovieManager.Controllers
 
         public IActionResult Releases()
         {
-            var releasesMovies = apiGetPopularService.GetMovieReleases(15);
+            var releasesMovies = apiGetPopularService.GetMovieReleases(15).Result;
             //var releasesShows = apiGetPopularService.GetPopularShows(15);
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 15 movie releases!";
@@ -68,7 +68,7 @@ namespace MovieManager.Controllers
 
         public IActionResult Trending()
         {
-            var TrendingMovies = apiGetPopularService.GetMovieTrending(15);
+            var TrendingMovies = apiGetPopularService.GetMovieTrending(15).Result;
             //var TrendingShows = apiGetPopularService.GetShowTrending(15);
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 15 trending movies!";
@@ -83,7 +83,7 @@ namespace MovieManager.Controllers
 
         public IActionResult TopRated()
         {
-            var TrendingMovies = apiGetPopularService.GetMovieTopRated(15);
+            var TrendingMovies = apiGetPopularService.GetMovieTopRated(15).Result;
             //var TrendingShows = apiGetPopularService.GetShowTrending(15);
 
             ViewData[MessageConstant.SuccessMessage] = $"These are the 15 top rated movies!";
@@ -102,8 +102,8 @@ namespace MovieManager.Controllers
         {
             var userName = this.User.Identity.Name;
 
-            var playlists = getFromDbService.GetAllPublicPlaylists();
-            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(playlists);
+            var playlists = getFromDbService.GetAllPublicPlaylists().Result;
+            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(playlists).Result;
 
             var model = new PlaylistsViewModel()
             {

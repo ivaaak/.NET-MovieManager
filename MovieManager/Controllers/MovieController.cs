@@ -32,9 +32,9 @@ namespace MovieManager.Controllers
         public IActionResult Main()
         {
             var userName = this.User.Identity.Name;
-            var watched = getFromDbService.GetUserMovieList(userName, "watched");
-            var current = getFromDbService.GetUserMovieList(userName, "current");
-            var future = getFromDbService.GetUserMovieList(userName, "future");
+            var watched = getFromDbService.GetUserMovieList(userName, "watched").Result;
+            var current = getFromDbService.GetUserMovieList(userName, "current").Result;
+            var future = getFromDbService.GetUserMovieList(userName, "future").Result;
 
             if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
@@ -65,8 +65,8 @@ namespace MovieManager.Controllers
         [HttpPost]
         public IActionResult Search(SearchResultViewModel model)
         {
-            var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm);
-            var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm);
+            var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm).Result;
+            var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm).Result;
             
             if(movieResults.Count != 0 && showResults.Count != 0)
             {
@@ -102,21 +102,21 @@ namespace MovieManager.Controllers
         [Route("Movie/MovieCard/{id}")]
         public IActionResult MovieCard(int id)
         {
-            var movieIdResult = searchMethods.SearchApiWithMovieID(id);
+            var movieIdResult = searchMethods.SearchApiWithMovieID(id).Result;
 
             return View(movieIdResult);
         }
         [Route("Movie/ShowCard/{id}")]
         public IActionResult ShowCard(int id)
         {
-            var showIdResult = searchMethods.SearchApiWithShowID(id);
+            var showIdResult = searchMethods.SearchApiWithShowID(id).Result;
 
             return View(showIdResult);
         }
         [Route("Movie/ActorCard/{id}")]
         public IActionResult ActorCard(int id)
         {
-            var model = searchMethods.GetActorWithID(id);
+            var model = searchMethods.GetActorWithID(id).Result;
             if(model == null)
             {
                 ViewData[MessageConstant.ErrorMessage] = $"No actor with an Id of {id} found!";
@@ -130,8 +130,8 @@ namespace MovieManager.Controllers
         [Route("Movie/Review/{id}")]
         public IActionResult Review(int id)
         {
-            var movie = searchMethods.SearchApiWithMovieID(id);
-            var reviews = searchMethods.GetReviewWithMovieID(id);
+            var movie = searchMethods.SearchApiWithMovieID(id).Result;
+            var reviews = searchMethods.GetReviewWithMovieID(id).Result;
 
             movie.Reviews = reviews;
 
@@ -140,8 +140,8 @@ namespace MovieManager.Controllers
         [Route("Movie/ShowReview/{id}")]
         public IActionResult ShowReview(int id)
         {
-            var movie = searchMethods.SearchApiWithShowID(id);
-            var reviews = searchMethods.GetReviewWithShowID(id);
+            var movie = searchMethods.SearchApiWithShowID(id).Result;
+            var reviews = searchMethods.GetReviewWithShowID(id).Result;
 
             movie.Reviews = reviews;
 
@@ -167,7 +167,7 @@ namespace MovieManager.Controllers
                 ViewData[MessageConstant.ErrorMessage] = Convert.ToString(TempData["Error"]);
             }
 
-            var movies = getFromDbService.GetUserMovieList(userName, playlistName);
+            var movies = getFromDbService.GetUserMovieList(userName, playlistName).Result;
 
             var model = new MovieListViewModel()
             {

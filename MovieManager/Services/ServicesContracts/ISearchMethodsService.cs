@@ -6,23 +6,23 @@ namespace MovieManager.Services.ServicesContracts
 {
     public interface ISearchMethodsService
     {
-        List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME);
+        Task<List<Data.DataModels.Movie>> SearchMovieTitleToList(string SEARCH_NAME);
 
-        List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME);
+        Task<List<Data.DataModels.Movie>> SearchShowTitleToList(string SEARCH_NAME);
 
-        MovieCardViewModel SearchApiWithMovieID(int id);
+        Task<MovieCardViewModel> SearchApiWithMovieID(int id);
 
-        ShowCardViewModel SearchApiWithShowID(int id);
+        Task<ShowCardViewModel> SearchApiWithShowID(int id);
 
-        ActorViewModel GetActorWithID(int id);
+        Task<ActorViewModel> GetActorWithID(int id);
 
-        List<ReviewBase> GetReviewWithMovieID(int id);
+        Task<List<ReviewBase>> GetReviewWithMovieID(int id);
 
-        List<ReviewBase> GetReviewWithShowID(int id);
+        Task<List<ReviewBase>> GetReviewWithShowID(int id);
 
 
         //Trailers
-        string GetMovieTrailer(int id);
-        string GetShowTrailer(int id);
+        Task<string> GetMovieTrailer(int id);
+        Task<string> GetShowTrailer(int id);
     }
 }

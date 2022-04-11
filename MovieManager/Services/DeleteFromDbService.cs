@@ -24,7 +24,6 @@ namespace MovieManager.Services
                 .Where(u => u.User.UserName == userName && u.PlaylistName == playlistName)
                 .FirstOrDefault();
 
-
             targetPlaylist.Movies.Remove(movie);
 
             dataContext.SaveChanges();
@@ -33,67 +32,63 @@ namespace MovieManager.Services
         }
 
 
-        public void DeleteActorFromUserList(int actorId, string userName)
+        public async Task DeleteActorFromUserList(int actorId, string userName)
         {
-            var actor = dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefault();
+            var actor = await dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefaultAsync();
 
-
-            var targetUser = dataContext.Users
+            var targetUser = await dataContext.Users
                 .Where(u => u.UserName == userName)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (targetUser.Actors.Contains(actor))
             {
                 targetUser.Actors.Remove(actor);
             }
 
-            dataContext.SaveChanges();
+            await dataContext.SaveChangesAsync();
 
             Console.WriteLine($"Removed Actor {actor.FullName} from user - {userName}'s favorite actors");
         }
 
 
-
-        public string DeleteFromDbUsingName(string movieTitle) //dont use due to cascade deletes in user lists
+        public async Task<string> DeleteFromDbUsingName(string movieTitle)
         {
-            if (dataContext.Movies.Any(i => i.Title == movieTitle))
+            if (await dataContext.Movies.AnyAsync(i => i.Title == movieTitle))
             {
                 Console.WriteLine($"Found movie: {movieTitle}. Deleting from Db.");
 
-                var movie = dataContext.Movies.Where(x => x.Title == movieTitle).FirstOrDefault();
+                var movie = await dataContext.Movies.Where(x => x.Title == movieTitle).FirstOrDefaultAsync();
 
                 if (movie != null) 
                 {
                     dataContext.Movies.Remove(movie);
-                    dataContext.SaveChanges();
+                    await dataContext.SaveChangesAsync();
                 }
+                return $"Deleted {movieTitle} from Movies DB.";
             }
             else
             {
-                Console.WriteLine($"{movieTitle} doesn't exist in the DB!");
+                return $"{movieTitle} doesn't exist in the DB!";
             }
-            dataContext.Dispose();
 
-            return $"Deleted {movieTitle} from Movies DB.";
         }
 
 
-        public string DeleteFromDbUsingId(int Id)
+        public async Task<string> DeleteFromDbUsingId(int Id)
         {
-            if (dataContext.Movies.Any(i => i.MovieId == Id))
+            if (await dataContext.Movies.AnyAsync(i => i.MovieId == Id))
             {
-				Movie movie = dataContext.Movies.Where(x => x.MovieId == Id).FirstOrDefault();
+				Movie movie = await dataContext.Movies.Where(x => x.MovieId == Id).FirstOrDefaultAsync();
 				Console.WriteLine($"Found movie with ID: {movie.MovieId} and Name: {movie.Title}. Deleting from Db.");
 
                 dataContext.Movies.Remove(movie);
-                dataContext.SaveChanges();
+                await dataContext.SaveChangesAsync();
+                return $"Deleted Movie with ID - {Id} from Movies DB.";
             }
             else
             {
-                Console.WriteLine($"{Id} doesn't exist in the DB!");
+                return $"{Id} doesn't exist in the DB!";
             }
-            dataContext.Dispose();
-            return $"Deleted Movie with ID - {Id} from Movies DB.";
         }
     }
 }

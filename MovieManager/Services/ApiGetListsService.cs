@@ -1,7 +1,6 @@
 ﻿using MovieManager.Data.DBConfig;
 using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
-using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
@@ -17,15 +16,15 @@ namespace MovieManager.Services
 
 
         // POPULAR GET
-        public List<SearchMovie> GetPopularMovies(int movieCount)
+        public async Task<List<SearchMovie>> GetPopularMovies(int movieCount)
         {
-            Task<SearchContainer<SearchMovie>> results = tmdbClient.GetMoviePopularListAsync(null, 1, null);
+            var results = await tmdbClient.GetMoviePopularListAsync(null, 1, null);
 
             var returnList = new List<SearchMovie>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var movie in results.Result.Results.Take(movieCount))
+            foreach (var movie in results.Results.Take(movieCount))
             {
                 if (movie != null)
                 {
@@ -33,19 +32,17 @@ namespace MovieManager.Services
                 }
                 Console.WriteLine($"Movie title - {movie.Title}");
             }
-            Console.WriteLine(Environment.NewLine);
-
             return returnList;
         }
-        public List<SearchTv> GetPopularShows(int showCount)
+        public async Task<List<SearchTv>> GetPopularShows(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowPopularAsync(1, null);
+            var results = await tmdbClient.GetTvShowPopularAsync(1, null);
 
             var returnList = new List<SearchTv>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var show in results.Result.Results
+            foreach (var show in results.Results
                 .Where(x => x.PosterPath != null)
                 .OrderByDescending(x => x.Popularity)
                 .Take(showCount))
@@ -54,22 +51,20 @@ namespace MovieManager.Services
 
                 Console.WriteLine($"Show name - {show.Name}");
             }
-
             return returnList;
         }
-
 
 
         // NEW RELEASES
-        public List<SearchMovie> GetMovieReleases(int movieCount)
+        public async Task<List<SearchMovie>> GetMovieReleases(int movieCount)
         {
-            var results = tmdbClient.GetMovieNowPlayingListAsync(null, 1);
+            var results = await tmdbClient.GetMovieNowPlayingListAsync(null, 1);
 
             var returnList = new List<SearchMovie>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var movie in results.Result.Results.Take(movieCount))
+            foreach (var movie in results.Results.Take(movieCount))
             {
                 if (movie != null)
                 {
@@ -77,19 +72,17 @@ namespace MovieManager.Services
                 }
                 Console.WriteLine($"Movie title - {movie.Title}");
             }
-            Console.WriteLine(Environment.NewLine);
-
             return returnList;
         }
-        public List<SearchTv> GetShowReleases(int showCount)
+        public async Task<List<SearchTv>> GetShowReleases(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.AiringToday, 1, null); //.OnTheAir??
+            var results = await tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.AiringToday, 1, null); //.OnTheAir??
 
             var returnList = new List<SearchTv>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var show in results.Result.Results
+            foreach (var show in results.Results
                 .Where(x => x.PosterPath != null)
                 .OrderByDescending(x => x.Popularity)
                 .Take(showCount))
@@ -98,22 +91,20 @@ namespace MovieManager.Services
 
                 Console.WriteLine($"Show name - {show.Name}");
             }
-
             return returnList;
         }
-
 
 
         // TRENDING
-        public List<SearchMovie> GetMovieTrending(int movieCount)
+        public async Task<List<SearchMovie>> GetMovieTrending(int movieCount)
         {
-            var results = tmdbClient.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week, 1);
+            var results = await tmdbClient.GetTrendingMoviesAsync(TMDbLib.Objects.Trending.TimeWindow.Week, 1);
 
             var returnList = new List<SearchMovie>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var movie in results.Result.Results.Take(movieCount))
+            foreach (var movie in results.Results.Take(movieCount))
             {
                 if (movie != null)
                 {
@@ -121,19 +112,17 @@ namespace MovieManager.Services
                 }
                 Console.WriteLine($"Movie title - {movie.Title}");
             }
-            Console.WriteLine(Environment.NewLine);
-
             return returnList;
         }
-        public List<SearchTv> GetShowTrending(int showCount)
+        public async Task<List<SearchTv>> GetShowTrending(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.OnTheAir, 1);
+            var results = await tmdbClient.GetTvShowListAsync(TMDbLib.Objects.TvShows.TvShowListType.OnTheAir, 1);
 
             var returnList = new List<SearchTv>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var show in results.Result.Results
+            foreach (var show in results.Results
                 .Where(x => x.PosterPath != null)
                 .OrderByDescending(x => x.Popularity)
                 .Take(showCount))
@@ -142,22 +131,20 @@ namespace MovieManager.Services
 
                 Console.WriteLine($"Show name - {show.Name}");
             }
-
             return returnList;
         }
-
 
 
         // TOP RATED
-        public List<SearchMovie> GetMovieTopRated(int movieCount)
+        public async Task<List<SearchMovie>> GetMovieTopRated(int movieCount)
         {
-            var results = tmdbClient.GetMovieTopRatedListAsync(null, 1, null);
+            var results = await tmdbClient.GetMovieTopRatedListAsync(null, 1, null);
 
             var returnList = new List<SearchMovie>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var movie in results.Result.Results.Take(movieCount))
+            foreach (var movie in results.Results.Take(movieCount))
             {
                 if (movie != null)
                 {
@@ -165,19 +152,17 @@ namespace MovieManager.Services
                 }
                 Console.WriteLine($"Movie title - {movie.Title}");
             }
-            Console.WriteLine(Environment.NewLine);
-
             return returnList;
         }
-        public List<SearchTv> GetShowTopRated(int showCount)
+        public async Task<List<SearchTv>> GetShowTopRated(int showCount)
         {
-            Task<SearchContainer<SearchTv>> results = tmdbClient.GetTvShowTopRatedAsync(1, null);
+            var results = await tmdbClient.GetTvShowTopRatedAsync(1, null);
 
             var returnList = new List<SearchTv>();
 
-            Console.WriteLine($"Got {results.Result.Results.Count.ToString():N0} of {results.Result.TotalResults.ToString():N0} results");
+            Console.WriteLine($"Got {results.Results.Count.ToString():N0} of {results.TotalResults.ToString():N0} results");
 
-            foreach (var show in results.Result.Results
+            foreach (var show in results.Results
                 .Where(x => x.PosterPath != null)
                 .OrderByDescending(x => x.Popularity)
                 .Take(showCount))
@@ -186,7 +171,6 @@ namespace MovieManager.Services
 
                 Console.WriteLine($"Show name - {show.Name}");
             }
-
             return returnList;
         }
     }

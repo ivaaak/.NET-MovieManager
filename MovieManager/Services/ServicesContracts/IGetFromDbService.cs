@@ -4,29 +4,27 @@ namespace MovieManager.Services.ServicesContracts
 {
     public interface IGetFromDbService
     {
-        List<Playlist> GetAllUserPlaylists(string UserName);
+        Task<List<Playlist>> GetAllUserPlaylists(string UserName);
 
-        List<Playlist> GetAllPublicPlaylists();
-
-
-        Movie GetMovieFromDBbyID(int MovieId);
-
-        Movie GetMovieFromDBbyTitle(string MovieTitle);
+        Task<List<Playlist>> GetAllPublicPlaylists();
 
 
-        List<Movie> GetMovieListFromDBbyTitle(string MovieTitle);
+        Task<Movie> GetMovieFromDBbyID(int MovieId);
 
-        List<Movie> GetUserMovieListObjects(string UserId, string ListType);
-        
-        List<Movie> GetUserMovieList(string UserName, string listName);
+        Task<Movie> GetMovieFromDBbyTitle(string MovieTitle);
 
-        List<Actor> GetUserActors(string UserName);
 
-        List<Review> GetAllUserReviews(string userId);
+        Task<List<Movie>> GetMovieListFromDBbyTitle(string MovieTitle);
 
-        string GetUserIdFromUserName(string userName);
+        Task<List<Movie>> GetUserMovieList(string UserName, string listName);
 
-        Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
+        Task<List<Actor>> GetUserActors(string UserName);
+
+        Task<List<Review>> GetAllUserReviews(string userId);
+
+        Task<string> GetUserIdFromUserName(string userName);
+
+        Task<Dictionary<string, QRCodeObject>> GetPlaylistsQRCodes(List<Playlist> playlists);
 
 
 

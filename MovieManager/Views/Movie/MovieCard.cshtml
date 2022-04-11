@@ -7,7 +7,7 @@
 	var movie = Model.Movie;
 	TrailerViewModel trailerModel = new TrailerViewModel();
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
-	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id);
+	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id).Result;
 	trailerModel.TrailerId = movie.Id;
 }
 @section scripts{

@@ -2,11 +2,9 @@
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
-using TMDbLib.Objects.General;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
 using TMDbLib.Objects.Reviews;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
@@ -22,9 +20,9 @@ namespace MovieManager.Services
         }
 
         //SearchResult
-        public List<Data.DataModels.Movie> SearchMovieTitleToList(string SEARCH_NAME)
+        public async Task<List<Data.DataModels.Movie>> SearchMovieTitleToList(string SEARCH_NAME)
         {
-            SearchContainer<SearchMovie> results = tmdbClient.SearchMovieAsync(SEARCH_NAME).Result;
+            var results = await tmdbClient.SearchMovieAsync(SEARCH_NAME);
 
             List<Data.DataModels.Movie> dbMovies = new List<Data.DataModels.Movie>();
 
@@ -43,9 +41,9 @@ namespace MovieManager.Services
             }
             return dbMovies;
         }
-        public List<Data.DataModels.Movie> SearchShowTitleToList(string SEARCH_NAME)
+        public async Task<List<Data.DataModels.Movie>> SearchShowTitleToList(string SEARCH_NAME)
         {
-            SearchContainer<SearchTv> results = tmdbClient.SearchTvShowAsync(SEARCH_NAME).Result;
+            var results = await tmdbClient.SearchTvShowAsync(SEARCH_NAME);
 
             List<Data.DataModels.Movie> dbShows = new List<Data.DataModels.Movie>();
 
@@ -62,11 +60,10 @@ namespace MovieManager.Services
         }
 
 
-
         //MovieCard in MovieController 
-        public MovieCardViewModel SearchApiWithMovieID(int id)
+        public async Task<MovieCardViewModel> SearchApiWithMovieID(int id)
         {
-            Movie movie = tmdbClient.GetMovieAsync(id, MovieMethods.Videos).Result;
+            var movie = await tmdbClient.GetMovieAsync(id, MovieMethods.Videos);
 
             if (movie == null)
             {
@@ -76,7 +73,7 @@ namespace MovieManager.Services
             Console.WriteLine($"Found: {movie.Title}");
 
             //Get Credits
-            var credits = tmdbClient.GetMovieCreditsAsync(id).Result;
+            var credits = await tmdbClient.GetMovieCreditsAsync(id);
             var people = new List<Cast>();
             foreach (var person in credits.Cast)
             {
@@ -94,17 +91,18 @@ namespace MovieManager.Services
             return movieModel;
         }
 
+
         //ShowCard
-        public ShowCardViewModel SearchApiWithShowID(int id)
+        public async Task<ShowCardViewModel> SearchApiWithShowID(int id)
         {
-            var show = tmdbClient.GetTvShowAsync(id, TMDbLib.Objects.TvShows.TvShowMethods.Videos).Result;
+            var show = await tmdbClient.GetTvShowAsync(id, TMDbLib.Objects.TvShows.TvShowMethods.Videos);
 
             if (show == null) 
             {
                 return null;
             }
             //Get Credits
-            var credits = tmdbClient.GetTvShowCreditsAsync(id).Result;
+            var credits = await tmdbClient.GetTvShowCreditsAsync(id);
             var people = new List<TMDbLib.Objects.TvShows.Cast>();
 
             foreach (var person in credits.Cast)
@@ -130,16 +128,15 @@ namespace MovieManager.Services
         }
 
 
-
         //Used for ActorCard  (MovieController)
-        public ActorViewModel GetActorWithID(int id)
+        public async Task<ActorViewModel> GetActorWithID(int id)
         {
             Person actor = new Person();
             MovieCredits credits = new MovieCredits();
             try
             {
-                actor = tmdbClient.GetPersonAsync(id).Result;
-                credits = tmdbClient.GetPersonMovieCreditsAsync(id).Result;
+                actor = await tmdbClient.GetPersonAsync(id);
+                credits = await tmdbClient.GetPersonMovieCreditsAsync(id);
             }
             catch (Exception e) { e.ToString(); };
 
@@ -149,7 +146,7 @@ namespace MovieManager.Services
                 var model = new ActorViewModel();
                 try
                 {
-                    creditsShow = tmdbClient.GetPersonTvCreditsAsync(id).Result;
+                    creditsShow = await tmdbClient.GetPersonTvCreditsAsync(id);
                     model = new ActorViewModel()
                     {
                         Person = actor,
@@ -181,41 +178,43 @@ namespace MovieManager.Services
 
 
         //Get Reviews
-        public List<ReviewBase> GetReviewWithMovieID(int id)
+        public async Task<List<ReviewBase>> GetReviewWithMovieID(int id)
         {
-             var reviews = tmdbClient.GetMovieReviewsAsync(id).Result.Results;
+             var reviews = await tmdbClient.GetMovieReviewsAsync(id);
 
-             return reviews;
+             return reviews.Results;
         }
-        public List<ReviewBase> GetReviewWithShowID(int id)
+        public async Task<List<ReviewBase>> GetReviewWithShowID(int id)
         {
-            var reviews = tmdbClient.GetTvShowReviewsAsync(id).Result.Results;
+            var reviews = await tmdbClient.GetTvShowReviewsAsync(id);
 
-            return reviews;
+            return reviews.Results;
         }
 
         //Get Trailers
-        public string GetMovieTrailer(int id)
+        public async Task<string> GetMovieTrailer(int id)
         {
-            var trailer = tmdbClient.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
+            var trailer = await tmdbClient.GetMovieVideosAsync(id);
+            var res = trailer.Results.FirstOrDefault();
             string ytLink = String.Empty;
 
-            if(trailer.Site == "YouTube")
+            if(res.Site == "YouTube")
             {
-                var ytKey = trailer.Key;
+                var ytKey = res.Key;
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
             return ytLink;
         }
-        public string GetShowTrailer(int id)
+        public async Task<string> GetShowTrailer(int id)
         {
-            var trailer = tmdbClient.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
+            var trailer = await tmdbClient.GetTvShowVideosAsync(id);
+            var res = trailer.Results.FirstOrDefault();
             string ytLink = String.Empty;
 
-            if (trailer.Site == "YouTube")
+            if (res.Site == "YouTube")
             {
-                var ytKey = trailer.Key;
+                var ytKey = res.Key;
                 var partial = "https://www.youtube.com/watch?v=";
                 ytLink = partial + ytKey;
             }
@@ -225,33 +224,34 @@ namespace MovieManager.Services
 
         //these 2 are also static to avoid circular reference in SaveMovieToDbObjectService service
         //this can be optimized
-        public static string GetMovieTrailerStatic(int id)
+        public static async Task<string> GetMovieTrailerStatic(int id)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
-            var trailer = client.GetMovieVideosAsync(id).Result.Results.FirstOrDefault();
-            var ytKey = trailer.Key;
-            if (trailer.Site == "YouTube")
+            var trailer = await client.GetMovieVideosAsync(id);
+            var res = trailer.Results.FirstOrDefault();
+            var ytKey = res.Key;
+            if (res.Site == "YouTube")
             {
                 return ytKey;                
             }
             return "notrailer";
         }
-        public static string GetShowTrailerStatic(int id)
+        public static async Task<string> GetShowTrailerStatic(int id)
         {
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
-            var trailer = client.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
-            if(trailer != null && trailer.Key != null)
+            var trailer = await client.GetTvShowVideosAsync(id);
+            var res = trailer.Results.FirstOrDefault();
+            if (trailer != null && res.Key != null)
             {
-                var ytKey = trailer.Key;
+                var ytKey = res.Key;
 
-                if (trailer.Site == "YouTube")
+                if (res.Site == "YouTube")
                 {
                     return ytKey;
                 }
             }
-           
             return "notrailer";
         }
     }

@@ -16,34 +16,34 @@ namespace MovieManager.Services
             this.dataContext = data;
         }
 
-        public List<Playlist> GetAllUserPlaylists(string UserName)
+        public async Task<List<Playlist>> GetAllUserPlaylists(string UserName)
         {
-            var playlists = dataContext.Users
+            var playlists = await dataContext.Users
                 .Include(u => u.Playlists)
                 .ThenInclude(p => p.Movies)
                 .Where(u => u.UserName == UserName)
                 .SelectMany(u => u.Playlists)
-                .ToList();
+                .ToListAsync();
 
             return playlists;
         }
-        public List<Playlist> GetAllPublicPlaylists()
+
+        public async Task<List<Playlist>> GetAllPublicPlaylists()
         {
-            var playlists = dataContext.Playlists
+            var playlists = await dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(p => p.IsPublic==true)
-                .ToList();
+                .ToListAsync();
 
             return playlists;
         }
 
-
-        public List<Movie> GetUserMovieList(string UserName, string listName)
+        public async Task<List<Movie>> GetUserMovieList(string UserName, string listName)
         {
-            var result = dataContext.Playlists
+            var result = await dataContext.Playlists
                 .Include(a => a.Movies)
                 .Where(u => u.User.UserName == UserName && u.PlaylistName == listName) 
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (result == null) { return null; }
 
@@ -52,70 +52,54 @@ namespace MovieManager.Services
             return result.Movies;
         }
 
-
-        public Movie GetMovieFromDBbyID(int MovieId)
+        public async Task<Movie> GetMovieFromDBbyID(int MovieId)
         {
-            Movie? result = dataContext.Movies
-                .Where(m => m.MovieId == MovieId).FirstOrDefault();
+            Movie? result = await dataContext.Movies
+                .Where(m => m.MovieId == MovieId)
+                .FirstOrDefaultAsync();
 
             return result;
         }
 
-        public Movie GetMovieFromDBbyTitle(string MovieTitle)
+        public async Task<Movie> GetMovieFromDBbyTitle(string MovieTitle)
         {
-            var result = dataContext.Movies
-                .Where(m => m.Title.Equals(MovieTitle)).FirstOrDefault(); 
+            var result = await dataContext.Movies
+                .Where(m => m.Title.Equals(MovieTitle))
+                .FirstOrDefaultAsync(); 
 
             return result;
         }
 
-        public List<Movie> GetMovieListFromDBbyTitle(string MovieTitle)
+        public async Task<List<Movie>> GetMovieListFromDBbyTitle(string MovieTitle)
         {
-            var result = dataContext.Movies
-                .Where(m => m.Title.Contains(MovieTitle)).ToList();
+            var result = await dataContext.Movies
+                .Where(m => m.Title.Contains(MovieTitle))
+                .ToListAsync();
 
             return result;
         }
-        public string GetUserIdFromUserName(string userName)
+
+        public async Task<string> GetUserIdFromUserName(string userName)
         {
-            var result = dataContext.Users
+            var result = await dataContext.Users
                 .Where(m => m.UserName==userName)
                 .Select(u=>u.Id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return result;
         }
 
-        public List<Movie> GetUserMovieListObjects(string UserId, string ListType)
-        {
-            List<Movie> userMovieObjectsList = new List<Movie>();
-
-            if (ListType.ToLower() == "watched")
-            {
-                var result = dataContext.Playlists.Where(u => u.User.Id == UserId);
-                foreach (var item in result)
-                {
-                    Movie m = new Movie()
-                    {
-                        //MovieId = item.MovieId,
-                    };
-
-                    userMovieObjectsList.Add(m);
-                }
-            }
-            return userMovieObjectsList;
-        }
-        public Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists)
+        public async Task<Dictionary<string, QRCodeObject>> GetPlaylistsQRCodes(List<Playlist> playlists)
         {
             var qrCodes = new Dictionary<string, QRCodeObject>();
 
             foreach (var playlist in playlists)
             {
-                var res = dataContext.Playlists
+                var res = await dataContext.Playlists
                     .Include(a => a.QrCode)
                     .Where(p => p.PlaylistId == playlist.PlaylistId)
                     .Select(p => p.QrCode)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
                 qrCodes.Add(playlist.PlaylistId, res);
             }
@@ -124,22 +108,22 @@ namespace MovieManager.Services
         }
 
         //Actors
-        public List<Actor> GetUserActors(string UserName)
+        public async Task<List<Actor>> GetUserActors(string UserName)
         {
-            var actors = dataContext.Users
+            var actors = await dataContext.Users
                 .Include(u => u.Actors)
                 .Where(u => u.UserName == UserName)
                 .SelectMany(u => u.Actors)
-                .ToList();
+                .ToListAsync();
 
             return actors;
         }
         //Reviews
-        public List<Review> GetAllUserReviews(string userId)
+        public async Task<List<Review>> GetAllUserReviews(string userId)
         {
-            var reviews = dataContext.Reviews
+            var reviews = await dataContext.Reviews
                 .Where(u => u.UserId == userId)
-                .ToList();
+                .ToListAsync();
 
             return reviews;
         }

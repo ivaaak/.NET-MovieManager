@@ -1,16 +1,14 @@
-﻿using TMDbLib.Objects.General;
-using TMDbLib.Objects.Search;
-
-namespace MovieManager.Services.ServicesContracts
+﻿namespace MovieManager.Services.ServicesContracts
 {
     public interface IDeleteFromDbService
     {
         void DeleteMovieFromUserPlaylist(int movieId, string playlistName, string userName);
 
-        string DeleteFromDbUsingName(string movieTitle);
+        Task DeleteActorFromUserList(int actorId, string userName);
 
-        string DeleteFromDbUsingId(int  movieId);
+        Task<string> DeleteFromDbUsingName(string movieTitle);
 
-        void DeleteActorFromUserList(int actorId, string userName);
+        Task<string> DeleteFromDbUsingId(int  movieId);
+
     }
 }

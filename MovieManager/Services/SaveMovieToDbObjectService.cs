@@ -54,7 +54,7 @@ namespace MovieManager.Services
             {
                 return null;
             }
-            string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id);
+            string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id).Result;
 
             Movie m = new Movie()
             {

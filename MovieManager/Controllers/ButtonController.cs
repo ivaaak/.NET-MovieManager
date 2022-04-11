@@ -161,11 +161,11 @@ namespace MovieManager.Controllers
             string trailerLink = String.Empty;
             if (MediaType == "movie")
             {
-                trailerLink = searchMethodsService.GetMovieTrailer(Id);
+                trailerLink = searchMethodsService.GetMovieTrailer(Id).Result;
             }
             else
             {
-                trailerLink = searchMethodsService.GetShowTrailer(Id);
+                trailerLink = searchMethodsService.GetShowTrailer(Id).Result;
             }
             return PartialView("_TrailerPartial");
         }
@@ -189,7 +189,7 @@ namespace MovieManager.Controllers
         {
             Console.WriteLine($"THE PLAYLIST NAME BOUND IS  {playlistTitle}");
             var userName = User.Identity.Name;
-            var userId = getFromDbService.GetUserIdFromUserName(userName);
+            var userId = getFromDbService.GetUserIdFromUserName(userName).Result;
             addToDbService.CreateCustomPlaylist(playlistTitle, userId);
             return RedirectToAction("Playlists", "Home");
         }
