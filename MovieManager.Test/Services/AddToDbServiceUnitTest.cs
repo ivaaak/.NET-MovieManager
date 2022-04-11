@@ -4,9 +4,7 @@ using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Test
 {
@@ -29,7 +27,7 @@ namespace MovieManager.Test
                 .BuildServiceProvider();
 
             //await SeedDbAsync(dbContext);
-            //identityto u rekata
+            //SQLite Error 1: 'no such table: User'.
             /*
             Microsoft.EntityFrameworkCore.DbUpdateException : 
             An error occurred while saving the entity changes.See the inner exception for details.
@@ -42,7 +40,7 @@ namespace MovieManager.Test
         public void AddActorToUserList_ValidCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddActorToUserList(TestConstants.actor.ActorId, "testUser"));
+            Assert.DoesNotThrow(() => service.AddActorToUserList(TestConstants.actor.ActorId, TestConstants.user.UserName));
         }
 
 
@@ -52,7 +50,7 @@ namespace MovieManager.Test
             int movieId = TestConstants.movie.MovieId;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, null));
+            Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, null));
         }
         [Test]
         public void AddMovieToFavorites_ValidCall()
@@ -61,7 +59,7 @@ namespace MovieManager.Test
             string userName = TestConstants.user.UserName;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, userName));
+            Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, userName));
         }
 
 
@@ -69,13 +67,13 @@ namespace MovieManager.Test
         public void AddMovieToUserPlaylist_NullCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
+            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
         }
         [Test]
         public void AddMovieToUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
+            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
         }
         
 
@@ -97,10 +95,10 @@ namespace MovieManager.Test
             user.Playlists.Add(playlist);
 
 
-            await dbContext.Users.AddAsync(user);
+            await dbContext.AspNetUsers.AddAsync(user);
             await dbContext.Movies.AddAsync(movie);
             await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
-            //System.InvalidOperationException : The entity type 'PlaylistMovie' requires a primary key to be defined.
+            await dbContext.Actors.AddAsync(actor);
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }

@@ -73,6 +73,7 @@ namespace MovieManager.Test.Data
         }
 
         public DbSet<User> Users { get; set; } //users hashset as the test context has no identity
+        public DbSet<User> AspNetUsers { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<Actor> Actors { get; set; }

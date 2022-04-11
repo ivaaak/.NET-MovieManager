@@ -1,10 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MovieManager.Services;
-using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test
@@ -26,6 +24,9 @@ namespace MovieManager.Test
                 .BuildServiceProvider();
 
             //await SeedDbAsync(dbContext);
+            //Microsoft.EntityFrameworkCore.DbUpdateException :
+            //An error occurred while saving the entity changes.See the inner exception for details.
+            //Microsoft.Data.Sqlite.SqliteException : SQLite Error 1: 'no such table: User'.
         }
 
 
@@ -45,7 +46,7 @@ namespace MovieManager.Test
         public void DeleteMovieFromUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
-            Assert.Throws<NullReferenceException>(() => service.DeleteMovieFromUserPlaylist(
+            Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
                 TestConstants.movie.MovieId, 
                 TestConstants.playlist.PlaylistName, 
                 TestConstants.user.UserName));
@@ -59,7 +60,20 @@ namespace MovieManager.Test
         }
         private async Task SeedDbAsync(InMemoryDbContext dbContext)
         {
-            await dbContext.Users.AddAsync(TestConstants.user);
+            var user = TestConstants.user;
+            var movie = TestConstants.movie;
+            var playlist = TestConstants.playlist;
+            var playlistMovie = TestConstants.playlistMovie;
+            var actor = TestConstants.actor;
+
+            playlist.Movies.Add(movie);
+            playlist.PlaylistMovies.Add(playlistMovie);
+            user.Playlists.Add(playlist);
+
+            await dbContext.AspNetUsers.AddAsync(user);
+            await dbContext.Movies.AddAsync(movie);
+            await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
+            await dbContext.Actors.AddAsync(actor);
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }

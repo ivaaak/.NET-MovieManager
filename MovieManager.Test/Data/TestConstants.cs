@@ -81,7 +81,9 @@ namespace MovieManager.Test.Data
         {
             ActorId = 111,
             FullName = "Test Actor",
-            Overview = "An actor."
+            Overview = "An actor.",
+            PhotoUrl =  "linkToThePhoto" 
+            
         };
 
         
