@@ -65,7 +65,6 @@ namespace MovieManager.Services
         {
             var result = dataContext.Movies
                 .Where(m => m.Title.Equals(MovieTitle)).FirstOrDefault(); 
-                //change equals to contains?
 
             return result;
         }
@@ -77,9 +76,16 @@ namespace MovieManager.Services
 
             return result;
         }
+        public string GetUserIdFromUserName(string userName)
+        {
+            var result = dataContext.Users
+                .Where(m => m.UserName==userName)
+                .Select(u=>u.Id)
+                .FirstOrDefault();
 
+            return result;
+        }
 
-        //WIP
         public List<Movie> GetUserMovieListObjects(string UserId, string ListType)
         {
             List<Movie> userMovieObjectsList = new List<Movie>();
@@ -127,6 +133,15 @@ namespace MovieManager.Services
                 .ToList();
 
             return actors;
+        }
+        //Reviews
+        public List<Review> GetAllUserReviews(string userId)
+        {
+            var reviews = dataContext.Reviews
+                .Where(u => u.UserId == userId)
+                .ToList();
+
+            return reviews;
         }
 
         //GET FOR API

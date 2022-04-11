@@ -173,17 +173,23 @@ namespace MovieManager.Controllers
 
         //Review
         [HttpPost]
-        public IActionResult AddReviewToUsersReviews(ReviewViewModel rvm, string userId, string movieId)
+        public IActionResult AddReviewToUsersReviews(string reviewTitle, 
+            string reviewContent, decimal rating, 
+            int movieId, string movieTitle)
         {
-            addToDbService.AddReviewToUsersReviews(rvm, userId, movieId);
+            var userName = User.Identity.Name;
+            addToDbService.AddReviewToUsersReviews(reviewTitle, reviewContent, rating, userName, movieId, movieTitle);
             return RedirectToAction("Reviews", "Home");
         }
 
 
         //QrCode
         [HttpPost]
-        public IActionResult CreateCustomPlaylist(string playlistTitle, string userId)
+        public IActionResult CreateCustomPlaylist(string playlistTitle)
         {
+            Console.WriteLine($"THE PLAYLIST NAME BOUND IS  {playlistTitle}");
+            var userName = User.Identity.Name;
+            var userId = getFromDbService.GetUserIdFromUserName(userName);
             addToDbService.CreateCustomPlaylist(playlistTitle, userId);
             return RedirectToAction("Playlists", "Home");
         }

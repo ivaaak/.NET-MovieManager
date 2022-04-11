@@ -31,10 +31,17 @@
         @foreach (var playlist in Model.Playlists)
         {
             int counterPlus = counter + 1;
-            
+            if(@playlist.PlaylistMovies != null){
             <label for="panel+@counter"> 
                 @counterPlus . @playlist.PlaylistName  -  @playlist.PlaylistMovies.Count movies.
             </label>
+            }
+            else
+            {
+            <label for="panel+@counter"> 
+                @counterPlus . @playlist.PlaylistName  -  no movies added.
+            </label> 
+            }
             <input id="panel+@counter" type="checkbox" />
             <div class="panel">
                 <div class="flex-container">
@@ -42,7 +49,7 @@
                         @using (Html.BeginForm("MovieList", "Movie",
                                   new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
                         {
-                            <button class="playlistButton"> Go to playlist </button>
+                            <button class="playlistButton" style="width:200px"> Go to playlist </button>
                         }
                         @foreach (var movie in playlist.Movies)
                         {
@@ -55,7 +62,7 @@
                         @using (Html.BeginForm("GenerateQRCodeButtonClick", "Button",
                                   new { playlistId = playlist.PlaylistId }, FormMethod.Post))
                         {
-                            <button class="playlistButton"> Generate QR code </button>
+                            <button class="playlistButton" style="width:300px"> Generate QR code </button>
                         }
                     </div>
                     <div class="flex-items">
@@ -73,7 +80,12 @@
 </div>
 
 
-<!--ADD form for adding a playlist: 
-    Playlist name
-    Public/Private
--->
+<h2>Create Playlist:</h2>
+@using (Html.BeginForm("CreateCustomPlaylist", "Button", new {  }, FormMethod.Post))
+{
+    <label>Playlist Title: </label><br>
+    <input name="playlistTitle" type="text"/><br>
+    <!--add isPublic dropdown?-->
+
+	 <input type="submit" value="Create Playlist"/>
+}

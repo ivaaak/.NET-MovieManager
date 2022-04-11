@@ -2,7 +2,6 @@
 using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
-using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using QRCoder;
 using System.Text;
@@ -172,25 +171,27 @@ namespace MovieManager.Services
         }
 
         //Reviews
-        public void AddReviewToUsersReviews(ReviewViewModel model, string userId, string movieId)
+        public void AddReviewToUsersReviews(string reviewTitle, 
+            string reviewContent, decimal rating, string userName, int movieId, string movieTitle)
         {
-            var user = dataContext.Users.Where(m => m.Id == userId).FirstOrDefault();
+            var user = dataContext.Users.Where(m => m.UserName == userName).FirstOrDefault();
 
             Review reviewData = new Review()
             {
                 ReviewId = Guid.NewGuid().ToString(),
-                ReviewTitle = model.ReviewTitle,
-                Rating = model.Rating,
-                ReviewContent = model.ReviewContent,
+                ReviewTitle = reviewTitle,
+                Rating = rating,
+                ReviewContent = reviewContent,
                 MovieId = movieId,
-                UserId = userId,
+                MovieTitle = movieTitle,
+                UserId = user.Id,
             };
 
             dataContext.Reviews.Add(reviewData);
 
             dataContext.SaveChanges();
 
-            Console.WriteLine($"Added review to user - {user.UserName}'s list of saved actors");
+            Console.WriteLine($"Added review to user - {user.UserName}'s reviews");
         }
 
         //Create Playlist
@@ -207,7 +208,6 @@ namespace MovieManager.Services
                 IsPublic = true,
                 Movies = new List<Movie>(),
                 PlaylistMovies = new List<PlaylistMovie>(),
-                QrCode = new QRCodeObject()
             };
 
             user.Playlists.Add(userPlaylist);

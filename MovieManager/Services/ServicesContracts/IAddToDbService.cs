@@ -12,7 +12,7 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddActorToUserList(int ActorId, string Name);
 
-        void AddReviewToUsersReviews(ReviewViewModel model, string userId, string movieId);
+        public void AddReviewToUsersReviews(string reviewTitle, string reviewContent, decimal rating, string userName, int movieId, string movieTitle);
 
         void GenerateQRCode(string playlistId);
 

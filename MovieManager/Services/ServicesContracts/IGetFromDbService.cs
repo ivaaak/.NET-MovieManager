@@ -20,11 +20,17 @@ namespace MovieManager.Services.ServicesContracts
         
         List<Movie> GetUserMovieList(string UserName, string listName);
 
+        List<Actor> GetUserActors(string UserName);
+
+        List<Review> GetAllUserReviews(string userId);
+
+        string GetUserIdFromUserName(string userName);
 
         Dictionary<string, QRCodeObject> GetPlaylistsQRCodes(List<Playlist> playlists);
 
-        List<Actor> GetUserActors(string UserName);
 
+
+        //api
         Task<string> GetAllUserPlaylistsAsync(string UserName);
     }
 }

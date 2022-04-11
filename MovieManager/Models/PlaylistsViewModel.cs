@@ -9,5 +9,8 @@ namespace MovieManager.Models
         public List<Playlist> Playlists { get; set; }
 
         public Dictionary<string, QRCodeObject> QRCodes { get; set; }
+
+        public string Title { get; set; }
+        public string IsPublic { get; set; }
     }
 }

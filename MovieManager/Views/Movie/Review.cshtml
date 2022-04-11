@@ -7,7 +7,6 @@
 	ViewData["Title"] = "Review";
 	var movieObj = Model.Movie;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movieObj.PosterPath;
-	ReviewViewModel rvm = new ReviewViewModel();
 }
 @section scripts{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -34,20 +33,19 @@
 				<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movieObj.VoteAverage/10 - Rating </p>
 				<p class="movieDesc"> @movieObj.ReleaseDate </p>
 
-				@using (Html.BeginForm("MovieList", "Movie", new { }, FormMethod.Post))
-					{
-					<div class="form-group">
-						<label asp-for="@rvm.ReviewTitle"></label>
-						<input asp-for="@rvm.ReviewTitle" class="form-control" placeholder="">
-						<span asp-validation-for="@rvm.ReviewTitle" class="small text-danger"></span>
-					</div>
-					<div class="form-group">
-						<label asp-for="@rvm.ReviewContent"></label>
-						<input asp-for="@rvm.ReviewContent" class="form-control" placeholder="">
-						<span asp-validation-for="@rvm.ReviewContent" class="small text-danger"></span>
-					</div>
+				@using (Html.BeginForm("AddReviewToUsersReviews", "Button", new {  }, FormMethod.Post))
+				{
+					<label>Review Title</label>
+					<input name="ReviewTitle" type="text"/><br>
+					<label>Review Content</label>
+					<input name="ReviewContent" type="text"/><br>
+					<label>Rating</label>
+					<input name="Rating" type="number" />
+					<br>
+					<input name="MovieId" value="@movieObj.Id" type="hidden"/>
+					<input name="MovieTitle" value="@movieObj.Title" type="hidden"/>
 
-					<input class="btn btn-primary mt-3" type="submit" value="Post Review" />
+					<input type="submit" value="Post Review at using"/>
 				}
 			</div>
 		}
@@ -69,17 +67,3 @@
 		<p class="ReviewContent">Review: @review.Content</p>
 	}
 </div>
-
-
-
-
-
-<!--
-<form method="get" asp-action="AddReviewToUsersReviews" asp-controller="Button">
-	Review Title: <input type="text" name="reviewTitle">
-	Review Content: <textarea name="reviewContent" cols="60" rows="15"></textarea>
-	Rating : <input type="number" name="rating">
-
-	<input type="submit" value="Submit">
-</form>
--->

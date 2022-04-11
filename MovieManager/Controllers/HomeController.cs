@@ -97,8 +97,9 @@ namespace MovieManager.Controllers
         public IActionResult Reviews()
         {
             var userName = this.User.Identity.Name;
+            var userId = getFromDbService.GetUserIdFromUserName(userName);
 
-            List<Review> reviews = null; //getFromDbService.GetReviews(userName);
+            List<Review> reviews = getFromDbService.GetAllUserReviews(userId);
 
             var model = new ReviewListViewModel()
             {
