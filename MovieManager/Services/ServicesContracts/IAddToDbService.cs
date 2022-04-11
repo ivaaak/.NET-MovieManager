@@ -1,6 +1,4 @@
-﻿using MovieManager.Data.DataModels;
-using TMDbLib.Objects.General;
-using TMDbLib.Objects.Search;
+﻿using MovieManager.Models;
 
 namespace MovieManager.Services.ServicesContracts
 {
@@ -14,8 +12,10 @@ namespace MovieManager.Services.ServicesContracts
 
         void AddActorToUserList(int ActorId, string Name);
 
-        void AddReviewToUsersReviews(Review review, string Name);
+        void AddReviewToUsersReviews(ReviewViewModel model, string userId, string movieId);
 
         void GenerateQRCode(string playlistId);
+
+        void CreateCustomPlaylist(string playlistTitle, string userId);
     }
 }

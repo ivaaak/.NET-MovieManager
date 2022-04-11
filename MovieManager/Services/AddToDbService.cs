@@ -2,13 +2,12 @@
 using MovieManager.Data;
 using MovieManager.Data.DataModels;
 using MovieManager.Data.DBConfig;
+using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using QRCoder;
 using System.Text;
 using TMDbLib.Client;
-using TMDbLib.Objects.General;
 using TMDbLib.Objects.People;
-using TMDbLib.Objects.Search;
 
 namespace MovieManager.Services
 {
@@ -173,24 +172,49 @@ namespace MovieManager.Services
         }
 
         //Reviews
-        public void AddReviewToUsersReviews(Review review, string Name)
+        public void AddReviewToUsersReviews(ReviewViewModel model, string userId, string movieId)
         {
-            var user = dataContext.Users.Where(m => m.UserName == Name).FirstOrDefault();
+            var user = dataContext.Users.Where(m => m.Id == userId).FirstOrDefault();
 
             Review reviewData = new Review()
             {
-                ReviewId = review.ReviewId,
-                ReviewTitle = review.ReviewTitle,
-                Rating = review.Rating,
-                ReviewContent = review.ReviewContent,
-                MovieId = review.MovieId,
-                UserId = user.Id,
+                ReviewId = Guid.NewGuid().ToString(),
+                ReviewTitle = model.ReviewTitle,
+                Rating = model.Rating,
+                ReviewContent = model.ReviewContent,
+                MovieId = movieId,
+                UserId = userId,
             };
-            //user.Reviews.Add(reviewData);
+
+            dataContext.Reviews.Add(reviewData);
 
             dataContext.SaveChanges();
 
-            Console.WriteLine($"Added review to user - {Name}'s list of saved actors");
+            Console.WriteLine($"Added review to user - {user.UserName}'s list of saved actors");
+        }
+
+        //Create Playlist
+        public void CreateCustomPlaylist(string playlistTitle, string userId)
+        {
+            var user = dataContext.Users.Where(m => m.Id == userId).FirstOrDefault();
+
+            Playlist userPlaylist = new Playlist()
+            {
+                PlaylistId = Guid.NewGuid().ToString(),
+                PlaylistName = playlistTitle,
+                CreatedOn = DateTime.Now,
+                User = user,
+                IsPublic = true,
+                Movies = new List<Movie>(),
+                PlaylistMovies = new List<PlaylistMovie>(),
+                QrCode = new QRCodeObject()
+            };
+
+            user.Playlists.Add(userPlaylist);
+            dataContext.Playlists.Add(userPlaylist);
+            dataContext.SaveChanges();
+
+            Console.WriteLine($"Added review to user - {user.UserName}'s list of saved actors");
         }
 
         //QrCode
