@@ -78,6 +78,7 @@
     padding-top: 20px;
     display: grid;
     grid-row-gap: 40px;
+    z-index: -1;
 }
 .resultsLeft > .horizontal {
     display: grid;

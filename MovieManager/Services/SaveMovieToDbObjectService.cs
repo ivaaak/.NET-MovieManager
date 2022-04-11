@@ -11,7 +11,7 @@ namespace MovieManager.Services
         {
             if (result.Title == null || result.PosterPath == null || result.Overview == null) 
             {
-                throw new ArgumentException("Movie data isnt valid");
+                return null;
             }
             Movie m = new Movie()
             {
@@ -31,7 +31,7 @@ namespace MovieManager.Services
         {
             if (result.Name == null || result.PosterPath == null || result.Overview == null)
             {
-                throw new ArgumentException("Show data isnt valid");
+                return null;
             }
             Movie m = new Movie()
             {
@@ -52,7 +52,7 @@ namespace MovieManager.Services
         {
             if (result.Title == null || result.PosterPath == null || result.Overview == null)
             {
-                throw new ArgumentException("Movie data isnt valid");
+                return null;
             }
             string trailerLink = SearchMethodsService.GetMovieTrailerStatic(result.Id);
 
@@ -75,9 +75,9 @@ namespace MovieManager.Services
         {
             if (result.Name == null || result.PosterPath == null || result.Overview == null)
             {
-                throw new ArgumentException("Show data isnt valid");
+                return null;
             }
-            string trailerLink = SearchMethodsService.GetShowTrailerStatic(result.Id);
+            string trailerLink = SearchMethodsService.GetShowTrailerStatic(result.Id).ToString();
 
             Movie m = new Movie()
             {
@@ -99,7 +99,7 @@ namespace MovieManager.Services
         {
             if (result.Name == null || result.Images==null)
             {
-                throw new ArgumentException("Actor data isnt valid");
+                return null;
             }
 
             Actor a = new Actor()

@@ -80,7 +80,7 @@ namespace MovieManager.Controllers
 
             TempData["Error"] = $"Removed movie from {playlistName}!";
 
-            return RedirectToAction("MovieList", "Movie"); //doesnt work, needs parameter of playlist name/id?
+            return RedirectToAction("Main", "Movie");
         }
         [HttpPost]//redirects to movieList
         public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
@@ -92,7 +92,7 @@ namespace MovieManager.Controllers
             TempData["Success"] = $"Successfully added movie to favorites!";
 
             //return RedirectToAction("MovieList", "Movie", new {playlistName = playlistName});
-            return RedirectToAction("MovieList", "Movie");
+            return RedirectToAction("Main", "Movie");
         }
 
         //in the search results view

@@ -24,7 +24,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
-  background: white;
+  background: black;
   color: #34495E;
 }
 .target-content #target-inner h2 {

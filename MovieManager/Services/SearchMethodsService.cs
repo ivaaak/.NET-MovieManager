@@ -32,7 +32,7 @@ namespace MovieManager.Services
             
             if(results.Results.Count() == 0)
             {
-                //throw new InvalidOperationException("No Movies Found"); - this shouldnt throw, but rather transfer a null so the view gives an error
+                return null;
             }
             foreach (var movie in results.Results)
             {
@@ -70,7 +70,7 @@ namespace MovieManager.Services
 
             if (movie == null)
             {
-                throw new InvalidOperationException($"Cant find a movie with ID = {id}");
+                return null;
             }
             if (movie.Title == null || movie.PosterPath == null || movie.Overview == null) { return null; }
             Console.WriteLine($"Found: {movie.Title}");
@@ -101,7 +101,7 @@ namespace MovieManager.Services
 
             if (show == null) 
             {
-                throw new InvalidOperationException($"Cant find a show with ID = {id}");
+                return null;
             }
             //Get Credits
             var credits = tmdbClient.GetTvShowCreditsAsync(id).Result;
@@ -242,12 +242,16 @@ namespace MovieManager.Services
             TMDbClient client = new TMDbClient(Configuration.APIKey);
 
             var trailer = client.GetTvShowVideosAsync(id).Result.Results.FirstOrDefault();
-            var ytKey = trailer.Key;
-
-            if (trailer.Site == "YouTube")
+            if(trailer != null && trailer.Key != null)
             {
-                return ytKey;
+                var ytKey = trailer.Key;
+
+                if (trailer.Site == "YouTube")
+                {
+                    return ytKey;
+                }
             }
+           
             return "notrailer";
         }
     }
