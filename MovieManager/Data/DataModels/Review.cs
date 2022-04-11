@@ -12,8 +12,11 @@ namespace MovieManager.Data.DataModels
         public string UserId { get; init; }
 
         [Required]
-        public string MovieId { get; set; }
-        
+        public int MovieId { get; set; }
+
+        [Required]
+        public string MovieTitle { get; set; }
+
         [Required]
         [StringLength(50)]
         public string ReviewTitle { get; set; }
