@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
@@ -24,7 +25,7 @@ namespace MovieManager.Controllers
         }
 
         //Button click functionality in the MAIN lists view
-        [HttpPost]
+        [HttpPost]//redirects to main
         public IActionResult AddMovieToPlaylistButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -35,7 +36,6 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("Main", "Movie");
         }
-
         [HttpPost]
         public IActionResult AddShowToPlaylistButtonClick(int movieId, string playlistName)
         {
@@ -47,7 +47,7 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("Main", "Movie");
         }
-
+        [HttpPost]
         public IActionResult RemoveMovieButtonClick(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -58,8 +58,6 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("Main", "Movie");
         }
-
-
         [HttpPost]
         public IActionResult FavoriteMovieButtonClick(int movieId)
         {
@@ -72,8 +70,8 @@ namespace MovieManager.Controllers
             return RedirectToAction("Main", "Movie");
         }
 
-
-        //in the playlist view - also needs to be turned into ajax
+        //in movieList
+        [HttpPost] //redirects to movieList
         public IActionResult RemoveMovieButtonClickList(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -84,7 +82,7 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("MovieList", "Movie"); //doesnt work, needs parameter of playlist name/id?
         }
-        [HttpPost]
+        [HttpPost]//redirects to movieList
         public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -98,8 +96,7 @@ namespace MovieManager.Controllers
         }
 
         //in the search results view
-        //change these to AJAX? so you can add multiple movies from the same results page
-        [HttpPost]
+        [HttpPost]//redirects to main
         public IActionResult AddMovieToPlaylistButtonClickSearch(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -144,21 +141,20 @@ namespace MovieManager.Controllers
 
             TempData["Error"] = $"Removed actor from favorites!";
 
-            return RedirectToAction("Main", "Movie");
+            return RedirectToAction("Actors", "Home");
         }
 
 
+        //QrCode
         [HttpPost]
         public IActionResult GenerateQRCodeButtonClick(string playlistId)
         {
-            //only transfers the playlistId for some reason
             addToDbService.GenerateQRCode(playlistId);
-
             return RedirectToAction("Playlists", "Home");
         }
 
-        //TODO Logic and calling services
-        //Make this a popup window/embed trailer from a yt link
+        
+        //Trailer
         [HttpGet]
         public IActionResult ShowTrailerButtonClick(int Id, string MediaType)
         {
@@ -172,6 +168,24 @@ namespace MovieManager.Controllers
                 trailerLink = searchMethodsService.GetShowTrailer(Id);
             }
             return PartialView("_TrailerPartial");
+        }
+
+
+        //Review
+        [HttpPost]
+        public IActionResult AddReviewToUsersReviews(ReviewViewModel rvm, string userId, string movieId)
+        {
+            addToDbService.AddReviewToUsersReviews(rvm, userId, movieId);
+            return RedirectToAction("Reviews", "Home");
+        }
+
+
+        //QrCode
+        [HttpPost]
+        public IActionResult CreateCustomPlaylist(string playlistTitle, string userId)
+        {
+            addToDbService.CreateCustomPlaylist(playlistTitle, userId);
+            return RedirectToAction("Playlists", "Home");
         }
     }
 }
