@@ -4,6 +4,7 @@ using Xunit;
 
 namespace MovieManager.Test.Routing
 {
+    //[TestClass]
     public class MovieControllerRouteTest
     {
         [Fact]

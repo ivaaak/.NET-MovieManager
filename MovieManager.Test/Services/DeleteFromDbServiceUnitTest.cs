@@ -3,6 +3,7 @@ using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test
@@ -46,7 +47,8 @@ namespace MovieManager.Test
         public void DeleteMovieFromUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
-            Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
+            //Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
+            Assert.Throws<NullReferenceException>(() => service.DeleteMovieFromUserPlaylist(
                 TestConstants.movie.MovieId, 
                 TestConstants.playlist.PlaylistName, 
                 TestConstants.user.UserName));

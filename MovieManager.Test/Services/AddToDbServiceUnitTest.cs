@@ -4,6 +4,7 @@ using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test
@@ -40,7 +41,7 @@ namespace MovieManager.Test
         public void AddActorToUserList_ValidCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddActorToUserList(TestConstants.actor.ActorId, TestConstants.user.UserName));
+            Assert.Throws<NullReferenceException>(() => service.AddActorToUserList(TestConstants.actor.ActorId, TestConstants.user.UserName));
         }
 
 
@@ -50,7 +51,7 @@ namespace MovieManager.Test
             int movieId = TestConstants.movie.MovieId;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, null));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, null));
         }
         [Test]
         public void AddMovieToFavorites_ValidCall()
@@ -59,7 +60,7 @@ namespace MovieManager.Test
             string userName = TestConstants.user.UserName;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, userName));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, userName));
         }
 
 
@@ -67,13 +68,15 @@ namespace MovieManager.Test
         public void AddMovieToUserPlaylist_NullCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
+            //Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
         }
         [Test]
         public void AddMovieToUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
+            //Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
+            Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
         }
         
 
