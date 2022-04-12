@@ -71,6 +71,11 @@ namespace MovieManager.Controllers
                 MoviesList = userPlaylists,
             };
 
+            if (TempData["Success"] != null && TempData.ContainsKey("Success"))
+            {
+                ViewData[MessageConstant.SuccessMessage] = "Successfully added movie to favorites!";
+            }
+
             return View(model);
         }
 

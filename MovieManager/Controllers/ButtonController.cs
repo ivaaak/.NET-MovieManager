@@ -65,13 +65,13 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToFavorites(movieId, UserName);
 
-            TempData["Success"] = $"Successfully added movie to favorites!";
+            ViewData["Success"] = $"Successfully added movie to favorites!";
 
-            return RedirectToAction("Main", "Movie");
+            return RedirectToAction("Favorites", "Home");
         }
 
         //in movieList
-        [HttpPost] //redirects to movieList
+        [HttpPost] 
         public IActionResult RemoveMovieButtonClickList(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;
@@ -82,7 +82,7 @@ namespace MovieManager.Controllers
 
             return RedirectToAction("Main", "Movie");
         }
-        [HttpPost]//redirects to movieList
+        [HttpPost]
         public IActionResult FavoriteMovieButtonClickList(int movieId, string playlistName)
         {
             string UserName = this.User.Identity.Name;

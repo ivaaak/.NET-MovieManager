@@ -177,7 +177,7 @@
 			<div class="buttonsList">
 
 				@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-							new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post))
+							new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post))
 				{
 					<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
 				}
