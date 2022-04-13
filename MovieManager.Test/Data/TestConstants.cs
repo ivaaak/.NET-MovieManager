@@ -26,7 +26,13 @@ namespace MovieManager.Test.Data
             Movies = new List<Movie>(),
             User = user,
             IsPublic = false,
-            QrCode = new QRCodeObject(),
+            QrCode = new QRCodeObject()
+            {
+                Id = "sdasdasfasfas",
+                QrCodeImage = "the image bytes",
+                TextContent = "movie - id"
+
+            },
         };
         //db movie
         public static Movie movie = new Movie()
@@ -60,7 +66,13 @@ namespace MovieManager.Test.Data
             Movies = new List<Movie>(),
             CreatedOn = DateTime.UtcNow,
             IsPublic = false,
-            QrCode = new QRCodeObject(),
+            QrCode = new QRCodeObject()
+            {
+                Id = "sdasdasfasfasaaa",
+                QrCodeImage = "the image bytes",
+                TextContent = "movie - id"
+                
+            },
             User = new User(),
         };
         public static List<Movie> movieList = new List<Movie>();

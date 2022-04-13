@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MovieManager.Data;
 using MovieManager.Services;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
@@ -27,7 +28,8 @@ namespace MovieManager.Test
                 .AddSingleton<ISaveMovieToDbObjectService, SaveMovieToDbObjectService> ()
                 .BuildServiceProvider();
 
-            //await SeedDbAsync(dbContext);
+            var testDbContext = serviceProvider.GetService<MovieContext>();
+            await SeedDbAsync(testDbContext);
             //SQLite Error 1: 'no such table: User'.
             /*
             Microsoft.EntityFrameworkCore.DbUpdateException : 
@@ -51,7 +53,7 @@ namespace MovieManager.Test
             int movieId = TestConstants.movie.MovieId;
 
             var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, null));
+            _ = Assert.Throws<NullReferenceException>(() => service.AddMovieToFavorites(movieId, null));
         }
         [Test]
         public void AddMovieToFavorites_ValidCall()
@@ -85,7 +87,7 @@ namespace MovieManager.Test
         {
             dbContext.Dispose();
         }
-        private async Task SeedDbAsync(InMemoryDbContext dbContext)
+        private async Task SeedDbAsync(MovieContext dbContext) //should be in memory/ repo?
         {
             var user = TestConstants.user;
             var movie = TestConstants.movie;
@@ -98,7 +100,7 @@ namespace MovieManager.Test
             user.Playlists.Add(playlist);
 
 
-            await dbContext.AspNetUsers.AddAsync(user);
+            await dbContext.Users.AddAsync(user);
             await dbContext.Movies.AddAsync(movie);
             await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
             await dbContext.Actors.AddAsync(actor);
