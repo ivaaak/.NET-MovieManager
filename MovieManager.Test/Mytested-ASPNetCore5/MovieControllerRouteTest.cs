@@ -2,7 +2,7 @@
 using MyTested.AspNetCore.Mvc;
 using Xunit;
 
-namespace MovieManager.Test.Routing
+namespace MovieManager.Test.MytestedASPNetCore5
 {
     //This isnt updated for ASP.NET Core 6 :()
     //System.InvalidOperationException :
@@ -15,7 +15,6 @@ namespace MovieManager.Test.Routing
                         .Configuration()
                         .ShouldMap("/")
                         .To<MovieController>(c => c.Main());
-        //Search
         //[Fact]
         public void SearchRouteShouldBeMapped()
                     => MyRouting
@@ -30,7 +29,6 @@ namespace MovieManager.Test.Routing
                         .ShouldMap("/Movie/SearchResult")
                         .To<MovieController>(c => c.SearchResult(new Models.SearchResultViewModel()));
         
-        //MovieCard
         //[Fact]
         public void MovieCardShouldBeMapped()
                     => MyRouting

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MovieManager.Data;
 using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
@@ -22,12 +23,11 @@ namespace MovieManager.Test
             serviceProvider = serviceCollection
                 .AddSingleton(sp => dbContext.CreateContext())
                 .AddSingleton<IDeleteFromDbService, DeleteFromDbService>()
+                .AddSingleton<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>()
                 .BuildServiceProvider();
 
-            //await SeedDbAsync(dbContext);
-            //Microsoft.EntityFrameworkCore.DbUpdateException :
-            //An error occurred while saving the entity changes.See the inner exception for details.
-            //Microsoft.Data.Sqlite.SqliteException : SQLite Error 1: 'no such table: User'.
+            var testDbContext = serviceProvider.GetService<MovieContext>();
+            await SeedDbAsync(testDbContext);
         }
 
 
@@ -47,8 +47,7 @@ namespace MovieManager.Test
         public void DeleteMovieFromUserPlaylist_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
-            //Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
-            Assert.Throws<NullReferenceException>(() => service.DeleteMovieFromUserPlaylist(
+            Assert.DoesNotThrow(() => service.DeleteMovieFromUserPlaylist(
                 TestConstants.movie.MovieId, 
                 TestConstants.playlist.PlaylistName, 
                 TestConstants.user.UserName));
@@ -60,7 +59,7 @@ namespace MovieManager.Test
         {
             dbContext.Dispose();
         }
-        private async Task SeedDbAsync(InMemoryDbContext dbContext)
+        private async Task SeedDbAsync(MovieContext dbContext) 
         {
             var user = TestConstants.user;
             var movie = TestConstants.movie;
@@ -72,7 +71,8 @@ namespace MovieManager.Test
             playlist.PlaylistMovies.Add(playlistMovie);
             user.Playlists.Add(playlist);
 
-            await dbContext.AspNetUsers.AddAsync(user);
+
+            await dbContext.Users.AddAsync(user);
             await dbContext.Movies.AddAsync(movie);
             await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
             await dbContext.Actors.AddAsync(actor);

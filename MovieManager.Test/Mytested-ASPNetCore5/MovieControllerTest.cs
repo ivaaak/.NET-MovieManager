@@ -1,10 +1,8 @@
 ﻿using MovieManager.Controllers;
 using MyTested.AspNetCore.Mvc;
-using Xunit;
 
-namespace MovieManager.Test.Controllers
+namespace MovieManager.Test.MytestedASPNetCore5
 {
-
     //This isnt updated for ASP.NET Core 6 :()
     //System.InvalidOperationException :
     //This version of MyTested.AspNetCore.Mvc only supports ASP.NET Core 5.0 applications but the 6.0.1 web framework was referenced.
