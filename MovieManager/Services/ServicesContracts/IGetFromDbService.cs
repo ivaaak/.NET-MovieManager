@@ -8,14 +8,6 @@ namespace MovieManager.Services.ServicesContracts
 
         Task<List<Playlist>> GetAllPublicPlaylists();
 
-
-        Task<Movie> GetMovieFromDBbyID(int MovieId);
-
-        Task<Movie> GetMovieFromDBbyTitle(string MovieTitle);
-
-
-        Task<List<Movie>> GetMovieListFromDBbyTitle(string MovieTitle);
-
         Task<List<Movie>> GetUserMovieList(string UserName, string listName);
 
         Task<List<Actor>> GetUserActors(string UserName);
@@ -25,10 +17,5 @@ namespace MovieManager.Services.ServicesContracts
         Task<string> GetUserIdFromUserName(string userName);
 
         Task<Dictionary<string, QRCodeObject>> GetPlaylistsQRCodes(List<Playlist> playlists);
-
-
-
-        //api
-        Task<string> GetAllUserPlaylistsAsync(string UserName);
     }
 }

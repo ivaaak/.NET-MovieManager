@@ -4,7 +4,7 @@
     {
         void DeleteMovieFromUserPlaylist(int movieId, string playlistName, string userName);
 
-        Task DeleteActorFromUserList(int actorId, string userName);
+        void DeleteActorFromUserList(int actorId, string userName);
 
         Task<string> DeleteFromDbUsingName(string movieTitle);
 

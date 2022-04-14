@@ -97,18 +97,18 @@ namespace MovieManager.Controllers
         }
 
 
-        //TODO
+        //TODO new view to showcase publis playlists
         public IActionResult PublicPlaylists()
         {
             var userName = this.User.Identity.Name;
 
             var playlists = getFromDbService.GetAllPublicPlaylists().Result;
-            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(playlists).Result;
+            //var userQrCodes = getFromDbService.GetPlaylistsQRCodes(playlists).Result;
 
             var model = new PlaylistsViewModel()
             {
                 Playlists = playlists,
-                QRCodes = userQrCodes,
+                //QRCodes = userQrCodes,
             };
             return View(model);
         }

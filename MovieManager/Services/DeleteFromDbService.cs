@@ -32,21 +32,18 @@ namespace MovieManager.Services
         }
 
 
-        public async Task DeleteActorFromUserList(int actorId, string userName)
+        public void DeleteActorFromUserList(int actorId, string userName)
         {
-            var actor = await dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefaultAsync();
+            var actor = dataContext.Actors.Where(m => m.ActorId == actorId).FirstOrDefault();
 
-            var targetUser = await dataContext.Users
+            var targetUser = dataContext.Users
                 .Where(u => u.UserName == userName)
-                .FirstOrDefaultAsync();
-
-            if (targetUser.Actors.Contains(actor))
+                .FirstOrDefault();
+            if (actor != null)
             {
                 targetUser.Actors.Remove(actor);
             }
-
-            await dataContext.SaveChangesAsync();
-
+            dataContext.SaveChanges();
             Console.WriteLine($"Removed Actor {actor.FullName} from user - {userName}'s favorite actors");
         }
 

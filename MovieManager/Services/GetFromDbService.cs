@@ -52,33 +52,6 @@ namespace MovieManager.Services
             return result.Movies;
         }
 
-        public async Task<Movie> GetMovieFromDBbyID(int MovieId)
-        {
-            Movie? result = await dataContext.Movies
-                .Where(m => m.MovieId == MovieId)
-                .FirstOrDefaultAsync();
-
-            return result;
-        }
-
-        public async Task<Movie> GetMovieFromDBbyTitle(string MovieTitle)
-        {
-            var result = await dataContext.Movies
-                .Where(m => m.Title.Equals(MovieTitle))
-                .FirstOrDefaultAsync(); 
-
-            return result;
-        }
-
-        public async Task<List<Movie>> GetMovieListFromDBbyTitle(string MovieTitle)
-        {
-            var result = await dataContext.Movies
-                .Where(m => m.Title.Contains(MovieTitle))
-                .ToListAsync();
-
-            return result;
-        }
-
         public async Task<string> GetUserIdFromUserName(string userName)
         {
             var result = await dataContext.Users
@@ -126,30 +99,6 @@ namespace MovieManager.Services
                 .ToListAsync();
 
             return reviews;
-        }
-
-        //GET FOR API
-        public async Task<string> GetAllUserPlaylistsAsync(string UserName)
-        {
-            string result = String.Empty;
-            try
-            {
-                var playlists = await dataContext.Users
-                   .Include(u => u.Playlists)
-                   .ThenInclude(p => p.Movies)
-                   .Where(u => u.UserName == UserName)
-                   .SelectMany(u => u.Playlists)
-                   .ToListAsync();
-
-                result = playlists.ToString();
-            } 
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-           
-
-            return result;
         }
     }
 }
