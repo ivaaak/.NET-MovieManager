@@ -1,6 +1,9 @@
 ﻿@model MovieCardViewModel
 @using MovieManager.Services
 @using MovieManager.Models
+@using System.Linq
+@using System
+@using System.Globalization;
 @{
 	ViewData["Title"] = @Model.Movie.Title;
 
@@ -9,6 +12,7 @@
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
 	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id).Result;
 	trailerModel.TrailerId = movie.Id;
+	var year = movie.ReleaseDate.Value.Year;
 }
 @section scripts{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -29,10 +33,9 @@
 			</a>
 		</div>
 		<div class="flex-items">
-		<h2 class="movieTitle">	@movie.Title </h2>
+		<h2 class="movieTitle">	@movie.Title (@year)</h2>
 
 		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.VoteAverage/10 - Rating</p>
-		<p class="movieDate">  @movie.ReleaseDate</p>
 		<p class="movieDesc"> @movie.Overview </p>
 
 		<ul class="genreContainer genreItem">

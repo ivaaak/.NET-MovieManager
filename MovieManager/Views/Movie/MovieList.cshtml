@@ -1,4 +1,7 @@
-﻿@model MovieListViewModel //change to playlist later?
+﻿@model MovieListViewModel
+@using System.Linq
+@using System
+@using System.Globalization;
 @{
 	ViewData["Title"] = "Playlist";
 	var movieList = Model.MoviesList;
@@ -37,6 +40,7 @@
 <div class="row">
 	@foreach (var movie in movieList)
 	{
+		var year = movie.ReleaseDate.Value.Year;
 		trailerModel.TrailerKey = movie.TrailerLink;
 		trailerModel.TrailerId = movie.MovieId;
 	<div class="col-12 col-md-6 col-lg-4">
@@ -61,12 +65,14 @@
 					}
 				</div>
 				<div class="flex-itemsRight">
-					<h2 class="movieTitle"> @movie.Title </h2>
-					<p class="movieRating"> Rating - @movie.Rating/10</p>
+					<h2 class="movieTitle"> @movie.Title (@year)</h2>
+					<p class="movieRating" style="height:30px;"> Rating - @movie.Rating/10</p>
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
 						@await Html.PartialAsync("_TrailerPartial", trailerModel)
-						<input class="TrailerButton" id="TrailerButton" type="button" value=" This is stupid " href="/Movie/MovieCard/@movie.MovieId">
+						<a href="/Movie/Review/@movie.MovieId">
+							<button class="TrailerButton">Rate & Review</button>
+						</a>
 					</div>
 				</div>
 			</div>

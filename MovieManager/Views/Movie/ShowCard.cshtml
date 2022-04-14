@@ -1,6 +1,9 @@
 ﻿@model ShowCardViewModel
 @using MovieManager.Services
 @using MovieManager.Models
+@using System.Linq
+@using System
+@using System.Globalization;
 @{
 	ViewData["Title"] = @Model.Show.Name;
 	TrailerViewModel trailerModel = new TrailerViewModel();
@@ -8,6 +11,7 @@
 	trailerModel.TrailerKey = SearchMethodsService.GetShowTrailerStatic(show.Id).Result;
 	trailerModel.TrailerId = show.Id;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+show.PosterPath;	
+	var year = show.FirstAirDate.Value.Year;
 }
 @section styles{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -28,10 +32,9 @@
 			</a>
 		</div>
 		<div class="flex-items">
-		<h2 class="movieTitle">	@show.Name </h2>
+		<h2 class="movieTitle">	@show.Name (@year)</h2>
 
 		<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @show.VoteAverage/10 - Rating</p>
-		<p class="movieDate">  @show.FirstAirDate </p>
 		<p class="movieDesc"> @show.Overview </p>
 
 		<ul class="genreContainer genreItem">

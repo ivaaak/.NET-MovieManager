@@ -2,10 +2,13 @@
 @using MovieManager.Services
 @using MovieManager.Models
 @using System.Linq
+@using System
+@using System.Globalization;
 @{
 	ViewData["Title"] = "Show Review";
 	var showObj = Model.Show;
 	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+showObj.PosterPath;	
+	var year = showObj.FirstAirDate.Value.Year;
 }
 @section scripts{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -28,15 +31,27 @@
 		@if (User.Identity.IsAuthenticated)
 		{
 			<div class="flex-items">
-			<h2 class="movieTitle">	Write a review of: @showObj.Name </h2>
-			<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @showObj.VoteAverage/10 - Rating <p class="movieDesc"> @showObj.FirstAirDate </p></p>
-		
-			<textarea name="Text1" cols="60" rows="15"></textarea>
+				<h2 class="movieTitle">	Write a review of: </h2>
+				<h2 class="movieTitle">	@showObj.Name  (@year)</h2>
+				<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @showObj.VoteAverage/10 - Rating</p>
 
-			<div class="buttonsList">
-				<input class="TrailerButton" id="TrailerButton" type="button" value="★ Rate ★" onclick=""><br/>
-				<input class="TrailerButton" id="TrailerButton" type="button" value="Post Review" onclick=""><br/>
-			</div>
+				@using (Html.BeginForm("AddReviewToUsersReviews", "Button", new {  }, FormMethod.Post))
+				{
+					<h2 class="movieDesc" style="margin:0; padding:0">Review Title</h2>
+					<input name="ReviewTitle" type="text" style="margin: 0 auto; padding:0" class="center-block"/>
+
+					<h2 class="movieDesc" style="margin:0; padding:0">Review Content</h2>
+					<textarea name="ReviewContent" type="text" rows="10" cols="50" style="margin: 0 auto; padding:0" class="center-block"> </textarea>
+
+					<h2 class="movieDesc" style="margin:0; padding:0"> <img class="IMDBStar" src="~/img/star.png"> Rating <img class="IMDBStar" src="~/img/star.png"></h2>
+					<input name="Rating" type="number" style="margin: 0 auto; padding:0" class="center-block"/>
+
+					<!--Hidden binding for Movie Data-->
+					<input name="MovieId" value="@showObj.Id" type="hidden"/>
+					<input name="MovieTitle" value="@showObj.Name" type="hidden"/>
+
+					<input class="TrailerButton" type="submit" value="Post Review" style="margin-top: 20px;"/>
+				}
 			</div>
 		}
 		else
