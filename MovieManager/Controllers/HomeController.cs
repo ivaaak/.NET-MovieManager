@@ -25,34 +25,41 @@ namespace MovieManager.Controllers
             this.getFromDbService = getFromDbService;
         }
 
-
+        
         public IActionResult Index()
         {
-            var popularMovies = apiGetPopularService.GetPopularMovies(15).Result; //load 15 popular movies/shows
-            var popularShows = apiGetPopularService.GetPopularShows(15).Result;
-
-            var model = new IndexViewModel()
+            var model = new IndexViewModel();
+            try
             {
-                DiscoverMovies = popularMovies,
-                DiscoverShows = popularShows,
-            };
-
+                var popularMovies = apiGetPopularService.GetPopularMovies(15).Result; //load 15 popular movies/shows
+                var popularShows = apiGetPopularService.GetPopularShows(15).Result;
+                model = new IndexViewModel()
+                {
+                    DiscoverMovies = popularMovies,
+                    DiscoverShows = popularShows,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
             return View(model);
         }
 
         [Authorize]
         public IActionResult Playlists()
         {
+            var model = new PlaylistsViewModel();
             var userName = this.User.Identity.Name;
-
-            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
-            var userQrCodes = getFromDbService.GetPlaylistsQRCodes(userPlaylists).Result;
-
-            var model = new PlaylistsViewModel()
+            try
             {
-                Playlists = userPlaylists,
-                QRCodes = userQrCodes,
-            };
+                var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
+                var userQrCodes = getFromDbService.GetPlaylistsQRCodes(userPlaylists).Result;
+
+                model = new PlaylistsViewModel()
+                {
+                    Playlists = userPlaylists,
+                    QRCodes = userQrCodes,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
 
             if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
@@ -70,13 +77,16 @@ namespace MovieManager.Controllers
         public IActionResult Favorites()
         {
             var userName = this.User.Identity.Name;
-
-            var userPlaylists = getFromDbService.GetUserMovieList(userName, "favorites").Result;
-
-            var model = new MovieListViewModel()
+            var model = new MovieListViewModel();
+            try
             {
-                MoviesList = userPlaylists,
-            };
+                var userPlaylists = getFromDbService.GetUserMovieList(userName, "favorites").Result;
+                model = new MovieListViewModel()
+                {
+                    MoviesList = userPlaylists,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
 
             if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
@@ -90,13 +100,17 @@ namespace MovieManager.Controllers
         public IActionResult Actors()
         {
             var userName = this.User.Identity.Name;
-
-            List<Actor> actors = getFromDbService.GetUserActors(userName).Result;
-
-            var model = new ActorListViewModel()
+            var model = new ActorListViewModel();
+            try
             {
-                Actors = actors,
-            };
+                List<Actor> actors = getFromDbService.GetUserActors(userName).Result;
+                model = new ActorListViewModel()
+                {
+                    Actors = actors,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
             if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
                 ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
@@ -109,32 +123,38 @@ namespace MovieManager.Controllers
         public IActionResult Reviews()
         {
             var userName = this.User.Identity.Name;
-            var userId = getFromDbService.GetUserIdFromUserName(userName).Result;
-
-            List<Review> reviews = getFromDbService.GetAllUserReviews(userId).Result;
-
-            var model = new ReviewListViewModel()
+            var model = new ReviewListViewModel();
+            try
             {
-                Reviews = reviews,
-            };
+                var userId = getFromDbService.GetUserIdFromUserName(userName).Result;
+                List<Review> reviews = getFromDbService.GetAllUserReviews(userId).Result;
+                model = new ReviewListViewModel()
+                {
+                    Reviews = reviews,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
 
             return View(model);
         }
 
+        [Authorize]
         public IActionResult Profile()
         {
             var userName = this.User.Identity.Name;
-
-            var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
-
-            var model = new PlaylistsViewModel()
+            var model = new PlaylistsViewModel();
+            try
             {
-                Playlists = userPlaylists,
-            };
+                var userPlaylists = getFromDbService.GetAllUserPlaylists(userName).Result;
+                model = new PlaylistsViewModel()
+                {
+                    Playlists = userPlaylists,
+                };
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
 
             return View(model);
         }
         public IActionResult Error() => View();
-
     }
 }

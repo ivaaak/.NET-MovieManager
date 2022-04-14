@@ -33,13 +33,13 @@ namespace MovieManager.Services
 
             if(movie == null) //movie doesnt exist in db
             {
-                var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
-                if(apiMovie == null)
+                try
                 {
-                    throw new ArgumentNullException("Api result movie invalid");
+                    var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                    movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
+                    dataContext.Movies.Add(movie); //add to db
                 }
-                movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
-                dataContext.Movies.Add(movie); //add to db
+                catch (Exception ex) { ex.ToString(); }
             };
 
             var targetPlaylist = dataContext.Playlists
@@ -51,9 +51,7 @@ namespace MovieManager.Services
             {
                 targetPlaylist.Movies.Add(movie);
             }
-
             dataContext.SaveChanges();
-
             Console.WriteLine($"Added Movie {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
@@ -63,12 +61,15 @@ namespace MovieManager.Services
 
             if (movie == null) //movie doesnt exist in db
             {
-                var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;
-                movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);  //turn to db object
-                dataContext.Movies.Add(movie); //add to db
+                try
+                {
+                    var apiMovie = tmdbClient.GetTvShowAsync(movieId).Result;
+                    movie = saveMovieFromApiToDbObject.ShowApiToObject(apiMovie);  //turn to db object
+                    dataContext.Movies.Add(movie); //add to db
+                }
+                catch (Exception ex) { ex.ToString(); }
             };
             
-
             var targetPlaylist = dataContext.Playlists
                 .Include(p => p.Movies)
                 .Where(u => u.User.UserName == Name && u.PlaylistName == PlaylistName)
@@ -78,9 +79,7 @@ namespace MovieManager.Services
             {
                 targetPlaylist.Movies.Add(movie);
             }
-
             dataContext.SaveChanges();
-
             Console.WriteLine($"Added Show {movieId} to user - {Name}'s list: {PlaylistName}");
         }
 
@@ -90,9 +89,13 @@ namespace MovieManager.Services
 
             if (movie == null) //movie doesnt exist in db
             {
-                var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
-                movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
-                dataContext.Movies.Add(movie); //add to db
+                try
+                {
+                    var apiMovie = tmdbClient.GetMovieAsync(movieId).Result;        //get from api
+                    movie = saveMovieFromApiToDbObject.MovieApiToObject(apiMovie);  //turn to db object
+                    dataContext.Movies.Add(movie);                                  //add to db
+                }
+                catch (Exception ex) { ex.ToString(); }
             };
 
             var targetPlaylist = dataContext.Playlists
@@ -118,9 +121,7 @@ namespace MovieManager.Services
             {
                 targetPlaylist.Movies.Add(movie);
             }
-
             dataContext.SaveChanges();
-
             Console.WriteLine($"Added Movie {movieId} to user - {Name}'s favorites list");
         }
 
@@ -162,9 +163,7 @@ namespace MovieManager.Services
             {
                 targetUser.Actors.Add(actor);
             }
-
             dataContext.SaveChanges();
-
             Console.WriteLine($"Added {actor.FullName} to user - {Name}'s list of saved actors");
         }
 
@@ -187,9 +186,7 @@ namespace MovieManager.Services
             };
 
             dataContext.Reviews.Add(reviewData);
-
-            dataContext.SaveChangesAsync();
-
+            dataContext.SaveChanges();
             Console.WriteLine($"Added review to user - {user.UserName}'s reviews");
         }
 
@@ -211,8 +208,7 @@ namespace MovieManager.Services
 
             user.Playlists.Add(userPlaylist);
             dataContext.Playlists.Add(userPlaylist);
-            dataContext.SaveChangesAsync();
-
+            dataContext.SaveChanges();
             Console.WriteLine($"Added review to user - {user.UserName}'s list of saved actors");
         }
 
@@ -246,7 +242,7 @@ namespace MovieManager.Services
             {
                 playlist.QrCode = qrCodeObj;
                 dataContext.QRCodes.Add(qrCodeObj);
-                dataContext.SaveChangesAsync();
+                dataContext.SaveChanges();
             }
         }
     }
