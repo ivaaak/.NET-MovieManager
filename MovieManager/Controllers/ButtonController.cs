@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
@@ -10,7 +9,6 @@ namespace MovieManager.Controllers
         private readonly IGetFromDbService getFromDbService;
         private readonly IDeleteFromDbService deleteFromDbService;
         private readonly ISearchMethodsService searchMethodsService;
-
 
         public ButtonController(
             IGetFromDbService getFromDbService,
@@ -65,7 +63,7 @@ namespace MovieManager.Controllers
 
             addToDbService.AddMovieToFavorites(movieId, UserName);
 
-            ViewData["Success"] = $"Successfully added movie to favorites!";
+            TempData["Success"] = $"Successfully added movie to favorites!";
 
             return RedirectToAction("Favorites", "Home");
         }

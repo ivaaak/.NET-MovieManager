@@ -11,9 +11,7 @@ namespace MovieManager.Controllers
     public class HomeController : Controller
     {
         private readonly IApiGetListsService apiGetPopularService;
-
         private readonly IMemoryCache cache;
-
         private readonly IGetFromDbService getFromDbService;
 
 
@@ -56,6 +54,15 @@ namespace MovieManager.Controllers
                 QRCodes = userQrCodes,
             };
 
+            if (TempData["Success"] != null && TempData.ContainsKey("Success"))
+            {
+                ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
+            }
+            else if (TempData["Error"] != null && TempData.ContainsKey("Error"))
+            {
+                ViewData[MessageConstant.ErrorMessage] = Convert.ToString(TempData["Error"]);
+            }
+
             return View(model);
         }
 
@@ -73,7 +80,7 @@ namespace MovieManager.Controllers
 
             if (TempData["Success"] != null && TempData.ContainsKey("Success"))
             {
-                ViewData[MessageConstant.SuccessMessage] = "Successfully added movie to favorites!";
+                ViewData[MessageConstant.SuccessMessage] = Convert.ToString(TempData["Success"]);
             }
 
             return View(model);

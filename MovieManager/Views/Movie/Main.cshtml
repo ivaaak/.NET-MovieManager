@@ -160,7 +160,7 @@
 				<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
 			</a>
 			@using (Html.BeginForm("FavoriteMovieButtonClick", "Button",
-				new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
+				new { movieId = @movie.MovieId },   FormMethod.Post)) 
 			{
 				<button class="FavButton" type="submit"> ❤  </button>
 			}
