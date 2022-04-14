@@ -1,9 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
+using MovieManager.Data;
+using MovieManager.Data.DataModels;
 using MovieManager.Services;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test
@@ -12,6 +15,7 @@ namespace MovieManager.Test
     {
         private ServiceProvider serviceProvider;
         private InMemoryDbContext dbContext;
+        private List<Playlist> playlistList = new List<Playlist>();
 
         [SetUp]
         public async Task Setup()
@@ -22,24 +26,62 @@ namespace MovieManager.Test
             serviceProvider = serviceCollection
                 .AddSingleton(sp => dbContext.CreateContext())
                 .AddSingleton<IApplicationDbRepository, ApplicationDbRepository>()
-                .AddSingleton<IAddToDbService, AddToDbService>()
-                .AddSingleton<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>()
+                .AddSingleton<IGetFromDbService, GetFromDbService>()
                 .BuildServiceProvider();
 
-            //await SeedDbAsync(dbContext);
-            //SQLite Error 1: 'no such table: User'.
-            /*
-            Microsoft.EntityFrameworkCore.DbUpdateException : 
-            An error occurred while saving the entity changes.See the inner exception for details.
-            Microsoft.Data.Sqlite.SqliteException : SQLite Error 1: 'no such table: Users'.
-            */
+            var testDbContext = serviceProvider.GetService<MovieContext>();
+            await SeedDbAsync(testDbContext);
         }
 
         [Test]
-        public void Test1()
+        public void GetAllUserPlaylists_ValidCall()
         {
-            Assert.Pass();
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetAllUserPlaylists(TestConstants.user.UserName));
         }
+
+        [Test]
+        public void GetAllPublicPlaylists_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetAllPublicPlaylists());
+        }
+
+        [Test]
+        public void GetUserMovieList_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetUserMovieList(TestConstants.user.UserName, TestConstants.playlist.PlaylistName));
+        }
+
+        [Test]
+        public void GetUserActors_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetUserActors(TestConstants.user.UserName));
+        }
+
+        [Test]
+        public void GetAllUserReviews_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetAllUserReviews(TestConstants.user.UserName));
+        }
+
+        [Test]
+        public void GetUserIdFromUserName_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetUserIdFromUserName(TestConstants.user.UserName));
+        }
+
+        [Test]
+        public void GetPlaylistsQRCodes_ValidCall()
+        {
+            var service = serviceProvider.GetService<IGetFromDbService>();
+            Assert.DoesNotThrow(() => service.GetPlaylistsQRCodes(playlistList));
+        }
+
 
 
         [TearDown]
@@ -47,22 +89,25 @@ namespace MovieManager.Test
         {
             dbContext.Dispose();
         }
-        private async Task SeedDbAsync(InMemoryDbContext dbContext)
+        private async Task SeedDbAsync(MovieContext dbContext) //should be in memory/ repo?
         {
             var user = TestConstants.user;
             var movie = TestConstants.movie;
             var playlist = TestConstants.playlist;
             var playlistMovie = TestConstants.playlistMovie;
             var actor = TestConstants.actor;
+            var userPlaylist = TestConstants.userPlaylist;
 
             playlist.Movies.Add(movie);
             playlist.PlaylistMovies.Add(playlistMovie);
+            user.Playlists.Add(userPlaylist);
             user.Playlists.Add(playlist);
+            user.Actors.Add(actor);
 
-
-            await dbContext.AspNetUsers.AddAsync(user);
+            await dbContext.Users.AddAsync(user);
             await dbContext.Movies.AddAsync(movie);
             await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
+            await dbContext.Playlists.AddAsync(TestConstants.playlist);
             await dbContext.Actors.AddAsync(actor);
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }

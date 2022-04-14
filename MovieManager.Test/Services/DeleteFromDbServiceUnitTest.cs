@@ -4,7 +4,6 @@ using MovieManager.Services;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test
@@ -37,12 +36,14 @@ namespace MovieManager.Test
             var service = serviceProvider.GetService<IDeleteFromDbService>();
             Assert.DoesNotThrow(() => service.DeleteFromDbUsingId(TestConstants.movie.MovieId)); 
         }
+        
         [Test]
         public void DeleteFromDbUsingName_ValidCall()
         {
             var service = serviceProvider.GetService<IDeleteFromDbService>();
             Assert.DoesNotThrow(() => service.DeleteFromDbUsingName(TestConstants.movie.Title));
         }
+        
         [Test]
         public void DeleteMovieFromUserPlaylist_ValidCall()
         {
@@ -52,7 +53,13 @@ namespace MovieManager.Test
                 TestConstants.playlist.PlaylistName, 
                 TestConstants.user.UserName));
         }
-
+        
+        [Test]
+        public void DeleteActorFromUserList_ValidCall()
+        {
+            var service = serviceProvider.GetService<IDeleteFromDbService>();
+            Assert.DoesNotThrow(() => service.DeleteActorFromUserList(TestConstants.actor.ActorId, TestConstants.user.UserName));
+        }
 
         [TearDown]
         public void TearDown()
@@ -67,15 +74,14 @@ namespace MovieManager.Test
             var playlistMovie = TestConstants.playlistMovie;
             var actor = TestConstants.actor;
 
+            await dbContext.Users.AddAsync(user);
+            await dbContext.Movies.AddAsync(movie);
+            await dbContext.Playlists.AddAsync(playlist);
+            await dbContext.Actors.AddAsync(actor);
             playlist.Movies.Add(movie);
             playlist.PlaylistMovies.Add(playlistMovie);
             user.Playlists.Add(playlist);
-
-
-            await dbContext.Users.AddAsync(user);
-            await dbContext.Movies.AddAsync(movie);
-            await dbContext.Playlists.AddAsync(TestConstants.userPlaylist);
-            await dbContext.Actors.AddAsync(actor);
+            user.Actors.Add(actor);
             await dbContext.SaveChangesAsync(); //inherited from DbContext
         }
     }

@@ -46,15 +46,6 @@ namespace MovieManager.Test
             Assert.DoesNotThrow(() => service.AddActorToUserList(TestConstants.actor.ActorId, TestConstants.user.UserName));
         }
 
-
-        [Test]
-        public void AddMovieToFavorites_NullCall()
-        {
-            int movieId = TestConstants.movie.MovieId;
-
-            var service = serviceProvider.GetService<IAddToDbService>();
-           Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, null));
-        }
         [Test]
         public void AddMovieToFavorites_ValidCall()
         {
@@ -65,14 +56,6 @@ namespace MovieManager.Test
             Assert.DoesNotThrow(() => service.AddMovieToFavorites(movieId, userName));
         }
 
-
-        [Test]
-        public void AddMovieToUserPlaylist_NullCall()
-        {
-            var service = serviceProvider.GetService<IAddToDbService>();
-            Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
-            //Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, null));
-        }
         [Test]
         public void AddMovieToUserPlaylist_ValidCall()
         {
@@ -80,7 +63,34 @@ namespace MovieManager.Test
             Assert.DoesNotThrow(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
             //Assert.Throws<NullReferenceException>(() => service.AddMovieToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
         }
-        
+
+        [Test]
+        public void AddShowToUserList_ValidCall()
+        {
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.DoesNotThrow(() => service.AddShowToUserPlaylist(TestConstants.movie.MovieId, TestConstants.playlist.PlaylistName, TestConstants.user.UserName));
+        }
+
+        [Test]
+        public void AddReview_ValidCall()
+        {
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.DoesNotThrow(() => service.AddReviewToUsersReviews("review", "content", 6, TestConstants.user.UserName, 550, "movie title"));
+        }
+
+        [Test]
+        public void GenerateQrCode_ValidCall()
+        {
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.DoesNotThrow(() => service.GenerateQRCode(TestConstants.playlist.PlaylistId));
+        }
+
+        [Test]
+        public void CreateCustomPlaylist_ValidCall()
+        {
+            var service = serviceProvider.GetService<IAddToDbService>();
+            Assert.DoesNotThrow(() => service.CreateCustomPlaylist("list title", TestConstants.user.Id));
+        }
 
         [TearDown]
         public void TearDown()
@@ -98,7 +108,6 @@ namespace MovieManager.Test
             playlist.Movies.Add(movie);
             playlist.PlaylistMovies.Add(playlistMovie);
             user.Playlists.Add(playlist);
-
 
             await dbContext.Users.AddAsync(user);
             await dbContext.Movies.AddAsync(movie);

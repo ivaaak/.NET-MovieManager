@@ -21,9 +21,6 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param name="userName">The user's username</param>
         /// <returns></returns>
-        /// 
-
-
         [HttpPost]
         [Route("userPlaylists")]
         [ProducesResponseType(200)]
@@ -32,31 +29,17 @@ namespace MovieManager.Api.Controllers
         {
             try
             {
-                await getFromDbService.GetAllUserPlaylistsAsync(userName); //this needs to be async
+                await getFromDbService.GetAllUserPlaylists(userName);
+                return Ok();
             }
             catch (ArgumentException ae)
             {
                 return BadRequest(ae.Message);
             }
-
-            return Ok();
         }
 
         //get user stats
 
         //get movie stats
-
-        /* - not async
-        [HttpPost]
-        [Route("userPlaylists")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public string? GetUserPlaylists(string userName)
-        {
-            var playlists = getFromDbService.GetAllUserPlaylists(userName);
-
-            return playlists.ToString();
-        }
-        */
     }
 }

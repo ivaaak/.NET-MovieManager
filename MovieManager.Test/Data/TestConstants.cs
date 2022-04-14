@@ -25,7 +25,7 @@ namespace MovieManager.Test.Data
             CreatedOn = DateTime.UtcNow,
             Movies = new List<Movie>(),
             User = user,
-            IsPublic = false,
+            IsPublic = true,
             QrCode = new QRCodeObject()
             {
                 Id = "sdasdasfasfas",
@@ -65,7 +65,7 @@ namespace MovieManager.Test.Data
             PlaylistMovies = new List<PlaylistMovie>(),
             Movies = new List<Movie>(),
             CreatedOn = DateTime.UtcNow,
-            IsPublic = false,
+            IsPublic = true,
             QrCode = new QRCodeObject()
             {
                 Id = "sdasdasfasfasaaa",
