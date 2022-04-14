@@ -50,20 +50,22 @@
 					<p class="movieRating"> Rating - @movie.VoteAverage/10</p>
 					<p class="movieDesc"> @movie.Overview </p>
 					<div class="buttonsList">
-					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-						new { movieId = @movie.Id, playlistName = "watched" },   FormMethod.Post)) //this is a db movie
-					{
-						<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
-					}
-					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-						new { movieId = @movie.Id, playlistName = "current" },   FormMethod.Post)) //this is a db movie
-					{
-						<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
-					}
-					@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
-						new { movieId = @movie.Id, playlistName = "future" },   FormMethod.Post)) //this is a db movie
-					{
-						<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+					@if(User.Identity.IsAuthenticated){
+						@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+							new { movieId = @movie.Id, playlistName = "watched" },   FormMethod.Post)) //this is a db movie
+						{
+							<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
+						}
+						@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+							new { movieId = @movie.Id, playlistName = "current" },   FormMethod.Post)) //this is a db movie
+						{
+							<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
+						}
+						@using (Html.BeginForm("AddMovieToPlaylistButtonClick", "Button",
+							new { movieId = @movie.Id, playlistName = "future" },   FormMethod.Post)) //this is a db movie
+						{
+							<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+						}
 					}
 					</div>
 				</div>
