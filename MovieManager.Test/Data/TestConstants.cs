@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMDbLib.Objects.Search;
+using TMDbLib.Objects.TvShows;
 
 namespace MovieManager.Test.Data
 {
@@ -49,7 +50,7 @@ namespace MovieManager.Test.Data
             Playlists = new List<Playlist>(),
             PlaylistMovies = new List<PlaylistMovie>(),
         };
-        
+
         public static PlaylistMovie playlistMovie = new PlaylistMovie()
         {
             Movie = movie,
@@ -71,12 +72,12 @@ namespace MovieManager.Test.Data
                 Id = "sdasdasfasfasaaa",
                 QrCodeImage = "the image bytes",
                 TextContent = "movie - id"
-                
+
             },
             User = new User(),
         };
         public static List<Movie> movieList = new List<Movie>();
-        
+
         //api results
         public static SearchMovie searchMovie = new SearchMovie()
         {
@@ -89,29 +90,13 @@ namespace MovieManager.Test.Data
             OriginalLanguage = "hu",
         };
 
-        public static Actor actor = new Actor() 
+        public static Actor actor = new Actor()
         {
             ActorId = 111,
             FullName = "Test Actor",
             Overview = "An actor.",
-            PhotoUrl =  "linkToThePhoto" 
-            
+            PhotoUrl = "linkToThePhoto"
+
         };
-
-        
-
-
-        //unused atm
-        public static IEnumerable<Movie> moviesCollection
-            => Enumerable.Range(0, 100).Select(i => new Movie
-            {
-                MediaType = "movie"
-            });
-
-        public static IEnumerable<Movie> showsCollection
-            => Enumerable.Range(0, 100).Select(i => new Movie
-            {
-                MediaType = "show"
-            });
     }
 }
