@@ -1,4 +1,6 @@
-﻿using TMDbLib.Objects.Movies;
+﻿using MovieManager.Data;
+using System.ComponentModel.DataAnnotations;
+using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.Reviews;
 
 namespace MovieManager.Models
@@ -13,13 +15,22 @@ namespace MovieManager.Models
 
         public List<ReviewBase> Reviews { get; set; }
 
-        //for review post
+        //Only used if there is a review form posted from the Review view
+        [MaxLength(DataConstants.Review.TitleMaxLength)]
+        [MinLength(DataConstants.Review.TitleMinLength)]
         public string ReviewTitle { get; set; }
 
+        [MaxLength(DataConstants.Review.ContentMaxLength)]
+        [MinLength(DataConstants.Review.ContentMinLength)]
         public string ReviewContent { get; set; }
 
+        [Range(0,10)]
         public decimal Rating { get; set; }
-        public int MovieId { get; set; }
+
+        [MaxLength(DataConstants.Movie.TitleMaxLength)]
+        [MinLength(DataConstants.Movie.TitleMinLength)]
         public string MovieTitle { get; set; }
+        public int MovieId { get; set; }
+
     }
 }

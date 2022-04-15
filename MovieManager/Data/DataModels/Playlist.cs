@@ -14,6 +14,8 @@ namespace MovieManager.Data.DataModels
         public string PlaylistId { get; set; } = Guid.NewGuid().ToString();
         
         [Required]
+        [MinLength(DataConstants.Playlist.TitleMinLength)]
+        [MaxLength(DataConstants.Playlist.TitleMaxLength)]
         public string PlaylistName { get; set; }
 
         public bool? IsPublic { get; set; } = false; 
@@ -22,6 +24,8 @@ namespace MovieManager.Data.DataModels
         [Required]
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
+        
+        //lists
         public List<Movie> Movies { get; init; }
 
         public List<PlaylistMovie> PlaylistMovies { get; set; }

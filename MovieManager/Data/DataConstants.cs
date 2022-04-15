@@ -18,7 +18,7 @@
         public class Movie
         {
             public const int TitleMinLength = 2;
-            public const int TitleMaxLength = 20;
+            public const int TitleMaxLength = 50;
             public const int OverviewMinLength = 10;
             public const int OverviewMaxLength = 3000;
             public const int YearMinValue = 1890;
@@ -27,15 +27,31 @@
 
         public class Genre
         {
+            public const int NameMinLength = 2;
             public const int NameMaxLength = 50;
         }
 
         public class Review
         {
             public const int TitleMinLength = 2;
-            public const int TitleMaxLength = 25;
+            public const int TitleMaxLength = 150;
             public const int ContentMinLength = 20;
             public const int ContentMaxLength = 3000;
+        }
+        public class Playlist
+        {
+            public const int TitleMinLength = 2;
+            public const int TitleMaxLength = 150;
+
+        }
+        public class Actor
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 150;
+            public const int OverviewMinLength = 10;
+            public const int OverviewMaxLength = 3000;
+            public const int YearMinValue = 1800;
+            public const int YearMaxValue = 2100;
         }
     }
 }

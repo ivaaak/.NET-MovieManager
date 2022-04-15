@@ -18,14 +18,17 @@ namespace MovieManager.Data.DataModels
         public string MovieTitle { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MinLength(DataConstants.Review.TitleMinLength)]
+        [MaxLength(DataConstants.Review.TitleMaxLength)]
         public string ReviewTitle { get; set; }
         
         [Required]
-        [StringLength(50)]
+        [MinLength(DataConstants.Review.ContentMinLength)]
+        [MaxLength(DataConstants.Review.ContentMaxLength)]
         public string ReviewContent { get; set; }
         
         [Required]
+        [Range(0,10)]
         public decimal Rating { get; set; }
     }
 }

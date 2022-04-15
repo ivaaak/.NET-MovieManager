@@ -8,8 +8,8 @@ namespace MovieManager.Data.DataModels
         public int GenreId { get; init; }
         
         [Required]
-        [StringLength(50)]
+        [MaxLength(DataConstants.Genre.NameMaxLength)]
+        [MinLength(DataConstants.Genre.NameMinLength)]
         public string GenreName { get; set; }
-        
     }
 }

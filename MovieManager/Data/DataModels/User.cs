@@ -23,7 +23,7 @@ namespace MovieManager.Data.DataModels
             //generate the 3 default playlists when creating an user
 
             Actors = new List<Actor>();
-            //saved actors
+            //saved actors list init
         }
 
 
@@ -31,9 +31,8 @@ namespace MovieManager.Data.DataModels
         
         public List<Actor> Actors { get; init; }
 
-
+        //not used atm
         public string? CountryCode { get; set; }
-
         public string? Language { get; set; }
     }
 }

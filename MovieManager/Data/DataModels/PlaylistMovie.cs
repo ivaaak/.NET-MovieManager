@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MovieManager.Data.DataModels
+﻿namespace MovieManager.Data.DataModels
 {
     public class PlaylistMovie
     {
-        public PlaylistMovie(){}
+        public PlaylistMovie(){}   //many to many
 
         public string PlaylistId { get; set; }
         public Playlist Playlist { get; set; }

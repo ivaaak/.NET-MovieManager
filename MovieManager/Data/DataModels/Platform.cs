@@ -8,9 +8,11 @@ namespace MovieManager.Data.DataModels
         public int PlatformId { get; init; }
         
         [Required]
-        [StringLength(50)]
+        [MinLength(2)]
+        [MaxLength(50)]
         public string PlatformName { get; set; }
 
+        [Range(0,100)]
         public decimal Price { get; set; }
     }
 }

@@ -4,6 +4,6 @@ namespace MovieManager.Models
 {
     public class ReviewListViewModel
     {
-        public List<Review> Reviews { get; set; } //person?
+        public List<Review> Reviews { get; set; }
     }
 }

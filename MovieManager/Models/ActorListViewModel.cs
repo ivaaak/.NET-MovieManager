@@ -1,10 +1,11 @@
 using MovieManager.Data.DataModels;
-using TMDbLib.Objects.People;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieManager.Models
 {
     public class ActorListViewModel
     {
-        public List<Actor> Actors { get; set; } //person?
+        [Required]
+        public List<Actor> Actors { get; set; }
     }
 }

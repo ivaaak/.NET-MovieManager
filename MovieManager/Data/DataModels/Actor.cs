@@ -8,13 +8,16 @@ namespace MovieManager.Data.DataModels
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        //this uses the tmdb api id as an id so Auto-ID is turned off
+        //This uses the Tmdb Api Actor id as its id so Auto-ID is turned off
         public int ActorId { get; init; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(DataConstants.Actor.NameMaxLength)]
+        [MinLength(DataConstants.Actor.NameMinLength)]
         public string FullName { get; set; }
 
+        [MaxLength(DataConstants.Actor.OverviewMaxLength)]
+        [MinLength(DataConstants.Actor.OverviewMinLength)]
         public string Overview { get; set; }
 
         public string PhotoUrl { get; set; }

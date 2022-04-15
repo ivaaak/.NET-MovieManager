@@ -1,4 +1,6 @@
+using MovieManager.Data;
 using MovieManager.Data.DataModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieManager.Models
 {
@@ -10,6 +12,8 @@ namespace MovieManager.Models
 
         public Dictionary<string, QRCodeObject> QRCodes { get; set; }
 
+        [MaxLength(DataConstants.Playlist.TitleMaxLength)]
+        [MinLength(DataConstants.Playlist.TitleMinLength)]
         public string Title { get; set; }
         public string IsPublic { get; set; }
     }

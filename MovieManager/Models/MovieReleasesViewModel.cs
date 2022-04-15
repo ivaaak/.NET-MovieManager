@@ -1,5 +1,4 @@
 ﻿using MovieManager.Data.DataModels;
-using TMDbLib.Objects.Movies;
 
 namespace MovieManager.Models
 {

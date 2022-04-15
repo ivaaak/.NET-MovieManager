@@ -4,9 +4,7 @@
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        public string QrCodeImage { get; set; } //string which can be converted to img
-
-        //public QRCodeData QrCodeData { get; set; }
+        public string QrCodeImage { get; set; } //string of the base64 image
 
         public string TextContent { get; set; }
         
