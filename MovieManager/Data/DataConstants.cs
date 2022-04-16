@@ -17,7 +17,7 @@
 
         public class Movie
         {
-            public const int TitleMinLength = 2;
+            public const int TitleMinLength = 1;
             public const int TitleMaxLength = 50;
             public const int OverviewMinLength = 10;
             public const int OverviewMaxLength = 3000;

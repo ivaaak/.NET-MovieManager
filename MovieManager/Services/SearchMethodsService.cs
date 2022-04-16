@@ -226,33 +226,35 @@ namespace MovieManager.Services
         //this can be optimized
         public static async Task<string> GetMovieTrailerStatic(int id)
         {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
-
-            var trailer = await client.GetMovieVideosAsync(id);
-            var res = trailer.Results.FirstOrDefault();
-            var ytKey = res.Key;
-            if (res.Site == "YouTube")
+            try
             {
-                return ytKey;                
+                TMDbClient client = new TMDbClient(Configuration.APIKey);
+                var trailer = await client.GetMovieVideosAsync(id);
+                var res = trailer.Results.FirstOrDefault();
+                if (res != null && res.Site == "YouTube")
+                {
+                    var ytKey = res.Key;
+                    return ytKey;
+                }
+                return "notrailer";
             }
-            return "notrailer";
+            catch (Exception ex) { return ex.ToString(); } 
         }
         public static async Task<string> GetShowTrailerStatic(int id)
         {
-            TMDbClient client = new TMDbClient(Configuration.APIKey);
-
-            var trailer = await client.GetTvShowVideosAsync(id);
-            var res = trailer.Results.FirstOrDefault();
-            if (trailer != null && res.Key != null)
+            try
             {
-                var ytKey = res.Key;
-
-                if (res.Site == "YouTube")
+                TMDbClient client = new TMDbClient(Configuration.APIKey);
+                var trailer = await client.GetTvShowVideosAsync(id);
+                var res = trailer.Results.FirstOrDefault();
+                if (res != null && res.Site == "YouTube")
                 {
+                    var ytKey = res.Key;
                     return ytKey;
                 }
+                return "notrailer";
             }
-            return "notrailer";
+            catch (Exception ex) { return ex.ToString(); }
         }
     }
 }
