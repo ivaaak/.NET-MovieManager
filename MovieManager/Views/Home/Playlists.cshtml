@@ -80,12 +80,11 @@
 </div>
 
 
-<h2>Create Playlist:</h2>
+<h2 class="movieTitleText" style="font-size: 42px; text-transform: uppercase">Create Playlist</h2>
 @using (Html.BeginForm("CreateCustomPlaylist", "Button", new {  }, FormMethod.Post))
 {
-    <label>Playlist Title: </label><br>
-    <input name="playlistTitle" type="text"/><br>
+    <h2 class="movieTitleText">Playlist Title: </h2>
+    <input name="playlistTitle" type="text" style="width: 34%; margin-left: 33%;"/><br>
     <!--add isPublic dropdown?-->
-
-	 <input type="submit" value="Create Playlist"/>
+	 <input class="playlistButton" type="submit" value="Create Playlist" style="margin-left: 30%;margin-top:6px; align-items:center"/>
 }
