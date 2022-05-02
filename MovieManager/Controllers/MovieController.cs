@@ -103,14 +103,24 @@ namespace MovieManager.Controllers
         public IActionResult MovieCard(int id)
         {
             var movieIdResult = searchMethods.SearchApiWithMovieID(id).Result;
-
+            if (movieIdResult.Movie.Title == null)
+            {
+                return Error(); //add 404 page
+            }
             return View(movieIdResult);
         }
         [Route("Movie/ShowCard/{id}")]
         public IActionResult ShowCard(int id)
         {
-            var showIdResult = searchMethods.SearchApiWithShowID(id).Result;
-
+            var showIdResult = new ShowCardViewModel();
+            try
+            {
+                showIdResult = searchMethods.SearchApiWithShowID(id).Result;
+            } catch (Exception ex) { ex.ToString(); }
+            if (showIdResult.Show.Name == null)
+            {
+                return Error(); //add 404 page
+            }
             return View(showIdResult);
         }
         [Route("Movie/ActorCard/{id}")]

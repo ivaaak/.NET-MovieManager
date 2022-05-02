@@ -4,14 +4,21 @@
 @using System.Linq
 @using System
 @{
-	ViewData["Title"] = @Model.Movie.Title;
 
-	var movie = Model.Movie;
+	TMDbLib.Objects.Movies.Movie movie = null;
 	TrailerViewModel trailerModel = new TrailerViewModel();
-	string posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
-	trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id).Result;
-	trailerModel.TrailerId = movie.Id;
-	var year = movie.ReleaseDate.Value.Year;
+	string posterMovieUrl = "";
+	int year = 0;
+	if(Model != null)
+	{
+		ViewData["Title"] = @Model.Movie.Title;
+		movie = Model.Movie;
+		trailerModel = new TrailerViewModel();
+		posterMovieUrl = "https://image.tmdb.org/t/p/w500"+@movie.PosterPath;	
+		trailerModel.TrailerKey = SearchMethodsService.GetMovieTrailerStatic(movie.Id).Result;
+		trailerModel.TrailerId = movie.Id;
+		year = movie.ReleaseDate.Value.Year;
+	}
 }
 @section scripts{
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -23,8 +30,13 @@
 </head>
 
 
-
-<div class="MovieCard" >
+@if (Model == null)
+{
+	<br><br><br><br><br><br><h2 class="movieTitle">	Movie not found! </h2>
+}
+else
+{
+	<div class="MovieCard" >
 	<div class="flex-container">
 	   <div class="flex-items">	
 		    <a href="https://www.themoviedb.org/movie/@movie.Id">
@@ -106,3 +118,4 @@
 		}
 	}
 </main>
+}
