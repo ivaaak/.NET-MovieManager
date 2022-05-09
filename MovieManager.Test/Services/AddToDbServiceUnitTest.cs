@@ -5,7 +5,6 @@ using MovieManager.Services.Repositories;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Test.Data;
 using NUnit.Framework;
-using System;
 using System.Threading.Tasks;
 
 namespace MovieManager.Test

@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Moq;
 using MovieManager.Controllers;
 using MovieManager.Data;
-using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace MovieManager.Test.Routing

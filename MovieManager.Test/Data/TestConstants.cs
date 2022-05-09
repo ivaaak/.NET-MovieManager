@@ -1,9 +1,7 @@
 ﻿using MovieManager.Data.DataModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMDbLib.Objects.Search;
-using TMDbLib.Objects.TvShows;
 
 namespace MovieManager.Test.Data
 {
@@ -32,7 +30,6 @@ namespace MovieManager.Test.Data
                 Id = "sdasdasfasfas",
                 QrCodeImage = "the image bytes",
                 TextContent = "movie - id"
-
             },
         };
         //db movie
@@ -72,7 +69,6 @@ namespace MovieManager.Test.Data
                 Id = "sdasdasfasfasaaa",
                 QrCodeImage = "the image bytes",
                 TextContent = "movie - id"
-
             },
             User = new User(),
         };
@@ -96,7 +92,6 @@ namespace MovieManager.Test.Data
             FullName = "Test Actor",
             Overview = "An actor.",
             PhotoUrl = "linkToThePhoto"
-
         };
     }
 }
