@@ -32,7 +32,7 @@ namespace MovieManager.Services
         {
             var playlists = await dataContext.Playlists
                 .Include(p => p.Movies)
-                .Where(p => p.IsPublic==true)
+                .Where(p => p.IsPublic == true)
                 .ToListAsync();
 
             return playlists;

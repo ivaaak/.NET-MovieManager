@@ -155,6 +155,21 @@ namespace MovieManager.Controllers
 
             return View(model);
         }
+
+        //All public playlists 
+        public IActionResult PublicPlaylists()
+        {
+            var model = new PlaylistsViewModel();
+            try
+            {
+                var allPlaylists = getFromDbService.GetAllPublicPlaylists().Result;
+                model.Playlists.AddRange(allPlaylists);
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+
+            return View(model);
+        }
+
         public IActionResult Error() => View();
     }
 }
