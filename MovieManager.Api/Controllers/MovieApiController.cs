@@ -38,8 +38,51 @@ namespace MovieManager.Api.Controllers
             }
         }
 
-        //get user stats
+        /// <summary>
+        /// Get all public playlists
+        /// </summary>
+        /// <param name="userName">The </param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("publicPlaylists")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetPublicLists()
+        {
+            try
+            {
+                await getFromDbService.GetAllPublicPlaylists();
+                return Ok();
+            }
+            catch (ArgumentException ae)
+            {
+                return BadRequest(ae.Message);
+            }
+        }
 
-        //get movie stats
+        /// <summary>
+        /// Get user's reviews/ratings
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("movies")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetUserReviews(string username)
+        {
+            try
+            {
+                string id = await getFromDbService.GetUserIdFromUserName(username);
+                await getFromDbService.GetAllUserReviews(username);
+                return Ok();
+            }
+            catch (ArgumentException ae)
+            {
+                return BadRequest(ae.Message);
+            }
+        }
+
+        //get movie stats?
     }
 }
