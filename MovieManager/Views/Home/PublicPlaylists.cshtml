@@ -1,0 +1,68 @@
+﻿@model PlaylistsViewModel
+
+@using MovieManager.Services
+@using MovieManager.Data.DataModels
+@{
+    ViewData["Title"] = "All Public Playlists";
+    int counter = 0;
+    string movieOrShowCard = "MovieCard";
+}
+@section scripts{
+    <script src="~/js/scripts.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link href="~/css/stylePlaylists.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+
+
+
+<h1 class="playlistTitle"> Public Playlists:</h1>
+
+<div class="accordeon check">
+    @if (Model.Playlists != null)
+    {
+        @foreach (var playlist in Model.Playlists)
+        {
+            int counterPlus = counter + 1;
+            if(@playlist.PlaylistMovies != null){
+            <label for="panel+@counter"> 
+                @counterPlus . - @playlist.User.UserName's playlist:  @playlist.PlaylistName  -  @playlist.PlaylistMovies.Count movies.
+            </label>
+            }
+            else
+            {
+            <label for="panel+@counter"> 
+                @counterPlus . @playlist.PlaylistName  -  no movies added.
+            </label> 
+            }
+            <input id="panel+@counter" type="checkbox" />
+            <div class="panel">
+                <div class="flex-container">
+                    <div class="flex-items">
+                        @using (Html.BeginForm("MovieList", "Movie",
+                                  new { playlistName = @playlist.PlaylistName }, FormMethod.Post))
+                        {
+                            <button class="playlistButton" style="width:200px"> Go to playlist </button>
+                        }
+                        @foreach (var movie in playlist.Movies)
+                        {
+                            @if (movie.MediaType == "show") { movieOrShowCard = "ShowCard"; }
+                            else { movieOrShowCard = "MovieCard"; }
+                            <a style="text-decoration: none" href="/Movie/@movieOrShowCard/@movie.MovieId">	
+                                <h2 class="movieTitleText"> Title: @movie.Title - Id: @movie.MovieId  </h2>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+            counter++;
+        }
+    }
+</div>
