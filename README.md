@@ -45,6 +45,7 @@ Movie/Show page:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20movieCard.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20show-movieCard.png" width="30%"></img> 
+
 Search:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20search.png" width="30%"></img> 
