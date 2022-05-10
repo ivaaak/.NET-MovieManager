@@ -20,6 +20,7 @@ Discover:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20discover.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/discoverStart.png" width="30%"></img> 
+
 Playlist (grid/list):
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20movieList%20-%20grid.png" width="30%"></img> 
