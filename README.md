@@ -16,6 +16,12 @@ Login / Register / Logout:
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/2.%20logout.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/2.%20register.png" width="30%"></img> 
 
+Profile page:
+
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/profilePageNew.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/profilePageNew2.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/trailerModal.png" width="30%"></img> 
+
 Discover:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20discover.png" width="30%"></img> 
@@ -23,33 +29,31 @@ Discover:
 
 Playlist (grid/list):
 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20movieList%20-%20grid.png" width="30%"></img> 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20movieList%20-%20list.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/playlistGrid.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/playlistList.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/trailerModal2.png" width="30%"></img> 
 
 Playlists with QR Codes:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/playlists.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/playlistsQrCode.png" width="30%"></img> 
 
-Profile page:
+Movie/Show page:
 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/3.%20profile%20page.png" width="30%"></img> 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/profile.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/movieCard.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/movieCard2.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/showCard.png" width="30%"></img> 
 
 Actors page:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/actors.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/actorsDetail.png" width="30%"></img> 
 
-Movie/Show page:
-
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20movieCard.png" width="30%"></img> 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20show-movieCard.png" width="30%"></img> 
-
 Search:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20search.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/4.%20searchResults.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/reviewPage.png" width="30%"></img> 
 
 Admin Area:
 
