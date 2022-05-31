@@ -92,17 +92,25 @@ Admin Area:
 - ASP.NET Core 6
 - Entity Framework Core 6.0.9
 - Microsoft SQL Server Express
-- TMDB Api and a TMDB Api Wrapper
+- Docker
+- TMDB API
 - ASP.NET Identity System
 - MVC Areas (Admin / User-Guest)
 - Razor Pages + Partial Views
 - Customized Log in and Register pages (scaffolded)
 - Dependency Injection and IoC
 - Data Validation, both Client-side, and Server-side
-- Responsive Design (custom css, bootstrap and js)
-- Bootstrap
+- Responsive Design (Custom CSS, Bootstrap and JS animations/transitions/DOM)
+- Bootstrap 5
+(Libraries)
+- TMDB Api Wrapper
 - Toastr
 - QRCoder 
 - jQuery
+- Swagger/Swashbuckle
+(Testing)
 - MyTested.AspNetCore.Mvc 
-- xunit
+- Moq (incl inMemory DB)
+- xunit and NUnit
+- coverlet
+- CodeCov
