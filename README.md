@@ -102,12 +102,14 @@ Admin Area:
 - Data Validation, both Client-side, and Server-side
 - Responsive Design (Custom CSS, Bootstrap and JS animations/transitions/DOM)
 - Bootstrap 5
+
 (Libraries)
 - TMDB Api Wrapper
 - Toastr
 - QRCoder 
 - jQuery
 - Swagger/Swashbuckle
+
 (Testing)
 - MyTested.AspNetCore.Mvc 
 - Moq (incl inMemory DB)
