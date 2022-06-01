@@ -2,21 +2,24 @@
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MovieManager.Controllers
 {
     public class DiscoverController : Controller
     {
-        private readonly ISearchMethodsService searchMethods;
         private readonly IApiGetListsService apiGetPopularService;
+
         private readonly IGetFromDbService getFromDbService;
 
+        private readonly IDistributedCache cache;
+
         public DiscoverController(
-            ISearchMethodsService searchMethods,
+            IDistributedCache _cache,
             IApiGetListsService apiGetPopularService,
             IGetFromDbService getFromDbService)
         {
-            this.searchMethods = searchMethods;
+            this.cache = _cache;
             this.apiGetPopularService = apiGetPopularService;
             this.getFromDbService = getFromDbService;
         }

@@ -1,29 +1,31 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
 using MovieManager.Services.ServicesContracts;
 using System.Diagnostics;
 
+
 namespace MovieManager.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly ILogger<MovieController> _logger;
         private readonly ISearchMethodsService searchMethods;
-        private readonly IApiGetListsService apiGetPopularService;
+
         private readonly IGetFromDbService getFromDbService;
 
+        private readonly IDistributedCache cache;
+
+
         public MovieController(
-            ILogger<MovieController> logger,
             ISearchMethodsService searchMethods,
-            IApiGetListsService apiGetPopularService,
-            IGetFromDbService getFromDbService)
+            IGetFromDbService getFromDbService,
+            IDistributedCache _cache)
         {
-            _logger = logger;
             this.searchMethods = searchMethods;
-            this.apiGetPopularService = apiGetPopularService;
             this.getFromDbService = getFromDbService;
+            this.cache = _cache;
         }
 
 

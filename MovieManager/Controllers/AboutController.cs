@@ -1,29 +1,64 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieManager.Models;
-using System.Diagnostics;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MovieManager.Controllers
 {
     public class AboutController : Controller
     {
-        private readonly ILogger<AboutController> _logger;
+        private readonly ILogger<AboutController> logger;
 
-        public AboutController(ILogger<AboutController> logger)
+        private readonly IDistributedCache cache;
+
+
+        public AboutController(
+            ILogger<AboutController> _logger, 
+            IDistributedCache _cache)
         {
-            _logger = logger;
+            this.logger = _logger;
+            this.cache = _cache;
         }
 
 
-        public IActionResult About() 
+        public async Task<IActionResult> About() 
         {
-            Console.WriteLine("Controller hit: About, view hit: About");
-            return View();
+            DateTime dateTime = DateTime.Now;
+            var cachedData = await cache.GetStringAsync("cachedTime");
+
+            if (cachedData == null)
+            {
+                cachedData = dateTime.ToString();
+                DistributedCacheEntryOptions cacheOptions = new DistributedCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromSeconds(20),
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(60)
+                };
+
+                await cache.SetStringAsync("cachedTime", cachedData, cacheOptions);
+                //await cache.SetAsync()
+            }
+
+            return View(nameof(Index), cachedData);
         } 
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            Console.WriteLine("Controller hit: About, view hit: Privacy");
-            return View();
+            DateTime dateTime = DateTime.Now;
+            var cachedData = await cache.GetStringAsync("cachedTime");
+
+            if (cachedData == null)
+            {
+                cachedData = dateTime.ToString();
+                DistributedCacheEntryOptions cacheOptions = new DistributedCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromSeconds(20),
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(60)
+                };
+
+                await cache.SetStringAsync("cachedTime", cachedData, cacheOptions);
+                //await cache.SetAsync();
+            }
+
+            return View(nameof(Index), cachedData);
         }
     }
 }

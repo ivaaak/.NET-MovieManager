@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
 using MovieManager.Data.DataModels;
 using MovieManager.Infrastructure.Constants;
 using MovieManager.Models;
@@ -11,16 +11,17 @@ namespace MovieManager.Controllers
     public class HomeController : Controller
     {
         private readonly IApiGetListsService apiGetPopularService;
-        private readonly IMemoryCache cache;
+
         private readonly IGetFromDbService getFromDbService;
 
+        private readonly IDistributedCache cache;
 
         public HomeController(
-            IMemoryCache cache,
+            IDistributedCache _cache,
             IApiGetListsService apiGetPopularService,
             IGetFromDbService getFromDbService)
         {
-            this.cache = cache;
+            this.cache = _cache;
             this.apiGetPopularService = apiGetPopularService;
             this.getFromDbService = getFromDbService;
         }
