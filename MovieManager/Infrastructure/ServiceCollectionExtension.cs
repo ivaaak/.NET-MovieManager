@@ -59,6 +59,16 @@ namespace MovieManager.Infrastructure
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<MovieContext>();
             
+            return services;
+        }
+
+
+        public static IServiceCollection AddRedisCache(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            });
 
             return services;
         }

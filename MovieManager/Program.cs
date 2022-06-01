@@ -6,6 +6,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 //Add DbContext
 builder.Services.AddApplicationDbContexts();
+builder.Services.AddRedisCache(builder);
+
 
 //Add DB and Identity Services
 builder.Services.AddIdentityContext();

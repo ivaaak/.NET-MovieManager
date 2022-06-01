@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Caching.Distributed;
 using Moq;
 using MovieManager.Controllers;
 using MovieManager.Data;
@@ -17,11 +17,10 @@ namespace MovieManager.Test.Routing
         {
             // Arrange
             var mockContext = new Mock<MovieContext>();
-            var logger = new Mock<ILogger<MovieController>>();
             var search = new Mock<ISearchMethodsService>();
-            var apiGet = new Mock<IApiGetListsService>();
+            var cache = new Mock<IDistributedCache>();
             var getFromDb = new Mock<IGetFromDbService>();
-            var controller = new MovieController(logger.Object, search.Object, apiGet.Object, getFromDb.Object);
+            var controller = new MovieController(search.Object, getFromDb.Object, cache.Object);
 
 
             Assert.Throws<NullReferenceException>(() => controller.Main());
