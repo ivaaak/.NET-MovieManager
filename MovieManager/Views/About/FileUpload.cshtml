@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "File Upload";
+}
+@section styles{
+	<script src="~/js/scripts.js"></script>
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+	<link href="~/css/styleAbout.css" rel="stylesheet">
+}
+
+
+<form asp-action="FileUpload" enctype="multipart/form-data" method="post">
+    <input name="file" type="file" />
+    <input type="submit" value="Upload"/>
+</form>

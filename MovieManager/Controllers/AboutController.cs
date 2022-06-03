@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using MovieManager.Data.DataModels;
+using MovieManager.Infrastructure.Constants;
+using MovieManager.Services.ServicesContracts;
 
 namespace MovieManager.Controllers
 {
@@ -9,13 +12,17 @@ namespace MovieManager.Controllers
 
         private readonly IDistributedCache cache;
 
+        private readonly IFileUploadService fileService;
+
 
         public AboutController(
             ILogger<AboutController> _logger, 
-            IDistributedCache _cache)
+            IDistributedCache _cache,
+            IFileUploadService _fileService)
         {
             this.logger = _logger;
             this.cache = _cache;
+            this.fileService = _fileService;
         }
 
 
@@ -34,11 +41,10 @@ namespace MovieManager.Controllers
                 };
 
                 await cache.SetStringAsync("cachedTime", cachedData, cacheOptions);
-                //await cache.SetAsync()
             }
-
             return View(nameof(Index), cachedData);
         } 
+
 
         public async Task<IActionResult> Privacy()
         {
@@ -55,10 +61,53 @@ namespace MovieManager.Controllers
                 };
 
                 await cache.SetStringAsync("cachedTime", cachedData, cacheOptions);
-                //await cache.SetAsync();
             }
-
             return View(nameof(Index), cachedData);
         }
+
+
+
+        [HttpGet]
+        public IActionResult FileUpload()
+        {
+            TempData[MessageConstant.SuccessMessage] = "File Upload Demo View";
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> FileUpload(IFormFile file)
+        {
+            try
+            {
+                if (file != null && file.Length > 0)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        await file.CopyToAsync(stream);
+
+                        var fileToSave = new ApplicationFile()
+                        {
+                            FileName = file.FileName,
+                            Content = stream.ToArray()
+                        };
+
+                        await fileService.SaveFileAsync(fileToSave);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "AboutController/FileUpload");
+
+                TempData[MessageConstant.ErrorMessage] = "File Upload Failed";
+            }
+
+            TempData[MessageConstant.SuccessMessage] = "Successfully uploaded the file.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

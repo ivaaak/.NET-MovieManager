@@ -23,8 +23,11 @@ namespace MovieManager.Infrastructure
             services.AddScoped<ISaveMovieToDbObjectService, SaveMovieToDbObjectService>();
             services.AddScoped<IDeleteFromDbService, DeleteFromDbService>();
             services.AddScoped<IApiGetListsService, ApiGetListsService>();
+            services.AddScoped<IFileUploadService, FileUploadService>();
+
 
             services.AddScoped<IUserService, UserService>(); //for admin user edit/view
+
 
             services.AddControllersWithViews();
 
