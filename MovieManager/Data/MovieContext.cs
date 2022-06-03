@@ -26,6 +26,9 @@ namespace MovieManager.Data
 
         public DbSet<QRCodeObject> QRCodes { get; set; }
 
+        public DbSet<ApplicationFile> Files { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
