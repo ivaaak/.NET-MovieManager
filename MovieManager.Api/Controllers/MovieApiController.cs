@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using MovieManager.Services.ServicesContracts;
 using MovieManager.Data.DataModels;
+using System.Text.Json;
 
 namespace MovieManager.Api.Controllers
 {
@@ -19,18 +20,21 @@ namespace MovieManager.Api.Controllers
         /// <summary>
         /// Get user playlists
         /// </summary>
-        /// <param name="userName">The user's username</param>
+        /// <param name="userName">The username!</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("userPlaylists")]
+        [Route("userPlaylists/{userName}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetPlaylists(string userName)
         {
             try
             {
-                await getFromDbService.GetAllUserPlaylists(userName);
-                return Ok();
+                var resultUserPlaylists =  await getFromDbService.GetAllUserPlaylists(userName);
+                
+                string jsonResult = JsonSerializer.Serialize(resultUserPlaylists);
+
+                return Ok(jsonResult);
             }
             catch (ArgumentException ae)
             {
@@ -41,7 +45,6 @@ namespace MovieManager.Api.Controllers
         /// <summary>
         /// Get all public playlists
         /// </summary>
-        /// <param name="userName">The </param>
         /// <returns></returns>
         [HttpPost]
         [Route("publicPlaylists")]
@@ -51,8 +54,11 @@ namespace MovieManager.Api.Controllers
         {
             try
             {
-                await getFromDbService.GetAllPublicPlaylists();
-                return Ok();
+                var resultPublicPlaylists = await getFromDbService.GetAllPublicPlaylists();
+
+                string jsonResult = JsonSerializer.Serialize(resultPublicPlaylists);
+
+                return Ok(jsonResult);
             }
             catch (ArgumentException ae)
             {
@@ -66,7 +72,7 @@ namespace MovieManager.Api.Controllers
         /// <param name="username">The username</param>
         /// <returns></returns>
         [HttpPost]
-        [Route("movies")]
+        [Route("userReviews/{username}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetUserReviews(string username)
@@ -74,8 +80,11 @@ namespace MovieManager.Api.Controllers
             try
             {
                 string id = await getFromDbService.GetUserIdFromUserName(username);
-                await getFromDbService.GetAllUserReviews(username);
-                return Ok();
+                var resultUserReviews = await getFromDbService.GetAllUserReviews(username);
+
+                string jsonResult = JsonSerializer.Serialize(resultUserReviews);
+
+                return Ok(jsonResult);
             }
             catch (ArgumentException ae)
             {
@@ -83,6 +92,56 @@ namespace MovieManager.Api.Controllers
             }
         }
 
-        //get movie stats?
+
+        /// <summary>
+        /// Get movie data from id
+        /// </summary>
+        /// <param id="movieId">The movie's id used by the TMDB Api</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("movieId/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetMovieDataFromId(int id)
+        {
+            try
+            {
+                var resultMovie = await getFromDbService.GetMovieDataFromId(id);
+
+                string jsonResult = JsonSerializer.Serialize(resultMovie);
+
+                return Ok(jsonResult);
+            }
+            catch (ArgumentException ae)
+            {
+                return BadRequest(ae.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Get movie data from name
+        /// </summary>
+        /// <param id="title">The movie's id used by the TMDB Api</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("movieId/{title}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetMovieDataFromTitle(string title)
+        {
+            try
+            {
+                var resultMovie = await getFromDbService.GetMovieDataFromName(title);
+
+                string jsonResult = JsonSerializer.Serialize(resultMovie);
+
+                return Ok(jsonResult);
+            }
+            catch (ArgumentException ae)
+            {
+                return BadRequest(ae.Message);
+            }
+        }
     }
 }
