@@ -100,5 +100,26 @@ namespace MovieManager.Services
 
             return reviews;
         }
+        
+
+
+        // Movie Get methods for API
+        public async Task<Movie> GetMovieDataFromId(int id)
+        {
+            var movie = await dataContext.Movies
+                .Where(u => u.MovieId == id)
+                .FirstOrDefaultAsync();
+
+            return movie;
+        }
+
+        public async Task<List<Movie>> GetMovieDataFromName(string movieName)
+        {
+            var movieList = await dataContext.Movies
+                .Where(u => u.Title.Contains(movieName))
+                .ToListAsync();
+
+            return movieList;
+        }
     }
 }

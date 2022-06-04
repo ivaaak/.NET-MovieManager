@@ -17,5 +17,10 @@ namespace MovieManager.Services.ServicesContracts
         Task<string> GetUserIdFromUserName(string userName);
 
         Task<Dictionary<string, QRCodeObject>> GetPlaylistsQRCodes(List<Playlist> playlists);
+
+
+        Task<Movie> GetMovieDataFromId(int id);
+
+        Task<List<Movie>> GetMovieDataFromName(string movieName);
     }
 }
