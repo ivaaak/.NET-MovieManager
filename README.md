@@ -102,6 +102,7 @@ Admin Area:
 - Data Validation, both Client-side, and Server-side
 - Responsive Design (Custom CSS, Bootstrap and JS animations/transitions/DOM)
 - Bootstrap 5
+- Redis Caching
 
 (Libraries)
 - TMDB Api Wrapper
