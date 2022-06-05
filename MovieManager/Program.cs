@@ -3,21 +3,19 @@ using MovieManager.Infrastructure;
 //Builder
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-
 //Add DbContext
 builder.Services.AddApplicationDbContexts();
-builder.Services.AddRedisCache(builder);
 
-
-//Add DB and Identity Services
+//Add Identity Service
 builder.Services.AddIdentityContext();
 
-//Custom Services
-builder.Services.AddApplicationServices();
+//Add Custom Services
+builder.Services.AddApplicationServices(); 
+builder.Services.AddRedisCache(builder);
+builder.Services.AddFluentValidationWithReflection();
 
 //Build
 WebApplication app = builder.Build();
-
 
 
 //Http request pipeline

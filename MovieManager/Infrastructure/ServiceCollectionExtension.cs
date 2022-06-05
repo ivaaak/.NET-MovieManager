@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieManager.Data;
 using MovieManager.Data.DataModels;
@@ -7,6 +8,7 @@ using MovieManager.Services;
 using MovieManager.Services.Repositories;
 using MovieManager.Services.ServiceContracts;
 using MovieManager.Services.ServicesContracts;
+using System.Reflection;
 
 namespace MovieManager.Infrastructure
 {
@@ -16,6 +18,7 @@ namespace MovieManager.Infrastructure
         {
             //repo
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+            
             //services
             services.AddScoped<ISearchMethodsService, SearchMethodsService>();
             services.AddScoped<IAddToDbService, AddToDbService>();
@@ -25,9 +28,7 @@ namespace MovieManager.Infrastructure
             services.AddScoped<IApiGetListsService, ApiGetListsService>();
             services.AddScoped<IFileUploadService, FileUploadService>();
 
-
             services.AddScoped<IUserService, UserService>(); //for admin user edit/view
-
 
             services.AddControllersWithViews();
 
@@ -71,6 +72,17 @@ namespace MovieManager.Infrastructure
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = builder.Configuration.GetConnectionString("Redis");
+            });
+
+            return services;
+        }
+
+
+        public static IServiceCollection AddFluentValidationWithReflection(this IServiceCollection services)
+        {
+            services.AddFluentValidation(v =>
+            {
+                v.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             });
 
             return services;
