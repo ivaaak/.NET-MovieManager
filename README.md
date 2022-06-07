@@ -103,6 +103,7 @@ Admin Area:
 - Responsive Design (Custom CSS, Bootstrap and JS animations/transitions/DOM)
 - Bootstrap 5
 - Redis Caching
+- Fluent Validation
 
 (Libraries)
 - TMDB Api Wrapper
