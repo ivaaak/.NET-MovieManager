@@ -118,3 +118,5 @@ Admin Area:
 - xunit and NUnit
 - coverlet
 - CodeCov
+
+🏅 SoftUni Web Advanced/ASP.NET - 104/105 pts (6.00)
