@@ -1,18 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using MovieManager.Api.Controllers;
-using MovieManager.Data;
-using MovieManager.Data.DBConfig;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<MovieApiController>();
-builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(Configuration.ConnectionString));
+builder.Services.AddApiDbContexts(builder.Configuration);
+builder.Services.AddApiServices();
 builder.Services.AddControllers();
-
-// Swagger/OpenAPI - https://aka.ms/aspnetcore/swashbuckle
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.IncludeXmlComments(@"bin\Debug\net6.0\MovieManager.Api.xml");
+});
 
 var app = builder.Build();
 
@@ -24,7 +21,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

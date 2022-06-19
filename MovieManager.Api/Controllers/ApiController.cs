@@ -1,18 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using MovieManager.Services.ServicesContracts;
-using MovieManager.Data.DataModels;
 using System.Text.Json;
 
 namespace MovieManager.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class MovieApiController : ControllerBase
+    [Route("api/[controller]")]
+    public class ApiController : ControllerBase
     {
         private readonly IGetFromDbService getFromDbService;
 
-        public MovieApiController(IGetFromDbService getFromDbService)
+        public ApiController(IGetFromDbService getFromDbService)
         {
             this.getFromDbService = getFromDbService;
         }
@@ -22,16 +20,13 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param name="userName">The username!</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("userPlaylists/{userName}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [HttpGet("userPlaylists/{userName}")]
         public async Task<IActionResult> GetPlaylists(string userName)
         {
             try
             {
-                var resultUserPlaylists =  await getFromDbService.GetAllUserPlaylists(userName);
-                
+                var resultUserPlaylists = await getFromDbService.GetAllUserPlaylists(userName);
+
                 string jsonResult = JsonSerializer.Serialize(resultUserPlaylists);
 
                 return Ok(jsonResult);
@@ -46,10 +41,7 @@ namespace MovieManager.Api.Controllers
         /// Get all public playlists
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
-        [Route("publicPlaylists")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [HttpGet("publicPlaylists")]
         public async Task<IActionResult> GetPublicLists()
         {
             try
@@ -71,10 +63,7 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param name="username">The username</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("userReviews/{username}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [HttpGet("userReviews/{username}")]
         public async Task<IActionResult> GetUserReviews(string username)
         {
             try
@@ -98,10 +87,7 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param id="movieId">The movie's id used by the TMDB Api</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("movieId/{id}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [HttpGet("movieId/{id}")]
         public async Task<IActionResult> GetMovieDataFromId(int id)
         {
             try
@@ -124,10 +110,7 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param id="title">The movie's id used by the TMDB Api</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("movieId/{title}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [HttpGet("movieId/{title}")]
         public async Task<IActionResult> GetMovieDataFromTitle(string title)
         {
             try
