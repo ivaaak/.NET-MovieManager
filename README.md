@@ -118,6 +118,8 @@ Admin Area:
 - xunit and NUnit
 - coverlet
 - CodeCov
+
+
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/testing2.png" width="60%"></img> 
 
 
