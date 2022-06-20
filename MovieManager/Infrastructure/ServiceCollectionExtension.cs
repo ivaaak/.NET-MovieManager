@@ -87,5 +87,19 @@ namespace MovieManager.Infrastructure
 
             return services;
         }
+
+
+        public static IServiceCollection AddCookieConsentPolicy(this IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // Determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // Microsoft.AspNetCore.Http is used here
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            return services;
+        }
     }
 }

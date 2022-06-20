@@ -3,18 +3,19 @@ using MovieManager.Infrastructure;
 //Builder
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-//Add DbContext
+// DbContext
 builder.Services.AddApplicationDbContexts();
 
-//Add Identity Service
+// Identity Service
 builder.Services.AddIdentityContext();
 
-//Add Custom Services
+// Custom Services (Services, Redis, FluentValidation, Cookies)
 builder.Services.AddApplicationServices(); 
 builder.Services.AddRedisCache(builder);
 builder.Services.AddFluentValidationWithReflection();
+builder.Services.AddCookieConsentPolicy();
 
-//Build
+// Build
 WebApplication app = builder.Build();
 
 
@@ -27,10 +28,10 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection().UseStaticFiles().UseRouting();
 app.UseAuthentication().UseAuthorization();
+app.UseCookiePolicy();
 
 app.MapControllerRoute(name: "Area", pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}");
-
 
 app.MapRazorPages(); //for Login/Register views
 
