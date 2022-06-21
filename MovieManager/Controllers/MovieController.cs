@@ -70,6 +70,11 @@ namespace MovieManager.Controllers
             var movieResults = searchMethods.SearchMovieTitleToList(model.SearchTerm).Result;
             var showResults = searchMethods.SearchShowTitleToList(model.SearchTerm).Result;
             
+            if(movieResults == null && showResults == null)
+            {
+                ViewData[MessageConstant.ErrorMessage] = $"No results :(";
+                return View("SearchResult");
+            }
             if(movieResults.Count != 0 && showResults.Count != 0)
             {
                 ViewData[MessageConstant.SuccessMessage] = $"Found {movieResults.Count} movies and {showResults.Count} shows!";
@@ -78,7 +83,7 @@ namespace MovieManager.Controllers
             {
                 ViewData[MessageConstant.ErrorMessage] = $"No movies found for {model.SearchTerm}";
             }
-            else // 0 shows
+            else if (showResults.Count == 0)// 0 shows
             {
                 ViewData[MessageConstant.ErrorMessage] = $"No shows found for {model.SearchTerm}";
             }
