@@ -61,6 +61,10 @@ Admin Area:
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/adminMovies.png" width="30%"></img> 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/adminPlaylists.png" width="30%"></img> 
 
+ToastR notifications:
+
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/toastCombined.png" width="30%"></img> 
+
 ## Features:
 
 **Guests**
