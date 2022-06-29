@@ -6,9 +6,9 @@ The Application can be used for browsing and logging movies and tv shows.
 
 Main page:
 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenu.png" width="30%"></img> 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenuBottom.png" width="30%"></img> 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenuNavbar.png" width="30%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenu.png" width="60%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenuBottom.png" width="45%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/mainMenuNavbar.png" width="45%"></img> 
 
 Login / Register / Logout:
 
@@ -28,7 +28,7 @@ Discover:
 
 Profile Statistics:
 
-<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/profile.png" width="50%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/profile.png" width="60%"></img> 
 
 Playlist (grid/list):
 
