@@ -73,30 +73,33 @@ namespace MovieManager.Controllers
             if(movieResults == null && showResults == null)
             {
                 ViewData[MessageConstant.ErrorMessage] = $"No results :(";
-                return View("SearchResult");
+                return View("Main");
             }
-            if(movieResults.Count != 0 && showResults.Count != 0)
+            else
             {
-                ViewData[MessageConstant.SuccessMessage] = $"Found {movieResults.Count} movies and {showResults.Count} shows!";
-            }
-            else if(movieResults.Count == 0)
-            {
-                ViewData[MessageConstant.ErrorMessage] = $"No movies found for {model.SearchTerm}";
-            }
-            else if (showResults.Count == 0)// 0 shows
-            {
-                ViewData[MessageConstant.ErrorMessage] = $"No shows found for {model.SearchTerm}";
-            }
+                if (movieResults != null && showResults != null)
+                {
+                    ViewData[MessageConstant.SuccessMessage] = $"Found {movieResults.Count} movies and {showResults.Count} shows!";
+                }
+                else if (movieResults == null)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = $"No movies found for {model.SearchTerm}";
+                }
+                else if (showResults == null)// 0 shows
+                {
+                    ViewData[MessageConstant.ErrorMessage] = $"No shows found for {model.SearchTerm}";
+                }
 
-            var results = new SearchResultViewModel()
-            {
-                ResultMovieList = movieResults,
-                ResultShowList = showResults,
-                SearchTerm = model.SearchTerm
-            };
-            Console.WriteLine($"Searching for {model.SearchTerm}");
+                var results = new SearchResultViewModel()
+                {
+                    ResultMovieList = movieResults,
+                    ResultShowList = showResults,
+                    SearchTerm = model.SearchTerm
+                };
+                Console.WriteLine($"Searching for {model.SearchTerm}");
 
-            return View("SearchResult", results);
+                return View("SearchResult", results);
+            }
         }
         //Search Results Page - SearchResultViewModel 
         public IActionResult SearchResult(SearchResultViewModel results)

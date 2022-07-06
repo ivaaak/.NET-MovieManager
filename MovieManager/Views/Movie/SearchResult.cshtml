@@ -26,41 +26,44 @@
 		<img src="~/img/watched icon2 dark.png" width="60" height="40">Movies
 		<div class="hidden-infoLeft">Results</div>
 	</h1>
-	@foreach (var movie in Model.ResultMovieList)
+	@if(Model.ResultMovieList != null)
 	{
-		if (movie != null)
+		@foreach (var movie in Model.ResultMovieList)
 		{
-			<div class="movieContainer">
-				<div class="flex-container">
-					<div class="flex-items">	
-						<a href="/Movie/MovieCard/@movie.MovieId">
-							<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
-						</a>
-					</div>
-					<div class="flex-items">
-						<h2 class="movieTitle"> @movie.Title </h2>
-						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-						<p class="movieDescSearchRes"> @movie.Overview </p>
-						<div class="buttonsList">
-							@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId,searchTerm = @Model.SearchTerm, playlistName = "watched" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
-							}
-							@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
-							}
-							@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
-							}
+			if (movie != null)
+			{
+				<div class="movieContainer">
+					<div class="flex-container">
+						<div class="flex-items">	
+							<a href="/Movie/MovieCard/@movie.MovieId">
+								<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 
+							</a>
+						</div>
+						<div class="flex-items">
+							<h2 class="movieTitle"> @movie.Title </h2>
+							<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+							<p class="movieDescSearchRes"> @movie.Overview </p>
+							<div class="buttonsList">
+								@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId,searchTerm = @Model.SearchTerm, playlistName = "watched" },   FormMethod.Post)) 
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
+								}
+								@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
+								}
+								@using (Html.BeginForm("AddMovieToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+								}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			}
 		}
 	}
 </main>
@@ -71,41 +74,44 @@
 		<img src="~/img/watchlist1 dark.png" width="40" height="40">Shows
 		<div class="hidden-infoRight">Results</div>
 	</h1>	
-	@foreach (var movie in Model.ResultShowList)
-	{ 
-		if (movie != null)
+	@if (Model.ResultShowList != null)
+	{
+		@foreach (var movie in Model.ResultShowList)
 		{
-			<div class="movieContainer">
-				<div class="flex-container">
-					<div class="flex-items">
-						<a href="/Movie/ShowCard/@movie.MovieId">
-							<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
-						</a>
-					</div>
-					<div class="flex-items">
-						<h2 class="movieTitle"> @movie.Title </h2>
-						<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
-						<p class="movieDescSearchRes"> @movie.Overview </p>
-						<div class="buttonsList">
-							@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId, playlistName = "watched" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
-							}
-							@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId, playlistName = "current" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
-							}
-							@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
-										new { movieId = @movie.MovieId, playlistName = "future" },   FormMethod.Post)) 
-							{
-								<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
-							}
+			if (movie != null)
+			{
+				<div class="movieContainer">
+					<div class="flex-container">
+						<div class="flex-items">
+							<a href="/Movie/ShowCard/@movie.MovieId">
+								<img class="moviePoster" alt="Image" src="@movie.PosterUrl"> 	
+							</a>
+						</div>
+						<div class="flex-items">
+							<h2 class="movieTitle"> @movie.Title </h2>
+							<p class="movieRating"> <img class="IMDBStar" src="~/img/star.png"> @movie.Rating/10 - Rating</p>
+							<p class="movieDescSearchRes"> @movie.Overview </p>
+							<div class="buttonsList">
+								@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId, playlistName = "watched" }, FormMethod.Post))
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Watched</button>
+								}
+								@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId, playlistName = "current" }, FormMethod.Post))
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Current</button>
+								}
+								@using (Html.BeginForm("AddShowToPlaylistButtonClickSearch", "Button",
+											new { movieId = @movie.MovieId, playlistName = "future" }, FormMethod.Post))
+								{
+									<button class="TrailerButton" type="submit" name="addToButton"> Add To Future</button>
+								}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			}
 		}
 	}
 </main>
