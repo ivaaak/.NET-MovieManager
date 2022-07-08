@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieManager.Services.ServicesContracts;
+using MovieManager.Api.ApiServices;
 using System.Text.Json;
 
 namespace MovieManager.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ApiController : ControllerBase
     {
         private readonly IGetFromDbService getFromDbService;
@@ -87,7 +87,7 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param id="movieId">The movie's id used by the TMDB Api</param>
         /// <returns></returns>
-        [HttpGet("movieId/{id}")]
+        [HttpGet("movieIdInt/{id}")]
         public async Task<IActionResult> GetMovieDataFromId(int id)
         {
             try
@@ -110,7 +110,7 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param id="title">The movie's id used by the TMDB Api</param>
         /// <returns></returns>
-        [HttpGet("movieId/{title}")]
+        [HttpGet("movieIdString/{title}")]
         public async Task<IActionResult> GetMovieDataFromTitle(string title)
         {
             try

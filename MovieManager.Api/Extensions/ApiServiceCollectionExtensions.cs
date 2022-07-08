@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieManager.Data;
-using MovieManager.Services;
-using MovieManager.Services.Repositories;
-using MovieManager.Services.ServicesContracts;
+using MovieManager.Api.ApiServices;
+using MovieManager.Api.ApiServices.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -10,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services)
         {
-            services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+            //services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
             services.AddScoped<IGetFromDbService, GetFromDbService>();
 
             return services;
