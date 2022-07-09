@@ -81,6 +81,45 @@ h1:nth-child(2) {
         background-position: center 100%;
     }
 }
+
+.header2 {
+    margin: 0;
+    font-family: "Anton", sans-serif !important;
+    font-size: 44vh;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: absolute;
+    z-index: -1;
+    top: 15vh;
+    padding-left: 1%;
+    padding-top: 10%;
+    left: 50%;
+    height: 42vh;
+    transform: translateX(-50%);
+    color: white;
+    background-color: var(--dark-peach);
+    background-size: auto 400%;
+    background-clip: text;
+    background-repeat: repeat;
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 30s linear infinite;
+}
+h1:nth-child(2) {
+    top: 50vh;
+}
+@keyframes shine {
+    from {
+        background-position: center 0;
+    }
+
+    to {
+        background-position: center 100%;
+    }
+}
+
 .movieManager {
     position: absolute;
     z-index: 10;
