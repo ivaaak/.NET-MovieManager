@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MovieManager.Api.ApiServices.Models;
+using MovieManager.Infrastructure.Data.Context;
+using MovieManager.Infrastructure.Data.Models;
 
 namespace MovieManager.Api.ApiServices
 {

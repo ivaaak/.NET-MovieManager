@@ -7,10 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Constants\" />
     <Folder Include="Contracts\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TMDbLib" Version="1.9.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MovieManager.Infrastructure\MovieManager.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

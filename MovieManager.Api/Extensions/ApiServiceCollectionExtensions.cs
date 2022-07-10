@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieManager.Api.ApiServices;
-using MovieManager.Api.ApiServices.Models;
+using MovieManager.Infrastructure.Data.Context;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
