@@ -81,6 +81,14 @@ ToastR notifications:
 
 <img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/toastCombined.png" width="40%"></img> 
 
+API - Endpoints and Results:
+
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/ApiAllEndpoints.png" width="45%"></img> 
+<img src="https://raw.githubusercontent.com/ivaaak/ASP.NET-MovieManager/master/design/ApiAllPlaylistsResponse.png" width="45%"></img> 
+
+<img src="https://github.com/ivaaak/ASP.NET-MovieManager/blob/master/design/ApiMovieResult.png" width="45%"></img> 
+<img src="https://github.com/ivaaak/ASP.NET-MovieManager/blob/master/design/ApiMovieResult2.png" width="45%"></img> 
+
 ## Features:
 
 **Guests**
