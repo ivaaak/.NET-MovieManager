@@ -1,4 +1,4 @@
-﻿namespace MovieManager.Services.ServicesContracts
+﻿namespace MovieManager.Core.Contracts
 {
     public interface IAddToDbService
     {
