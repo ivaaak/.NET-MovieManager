@@ -2,7 +2,7 @@
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.TvShows;
 
-namespace MovieManager.Services.ServicesContracts
+namespace MovieManager.Core.Contracts
 {
     public interface ISaveMovieToDbObjectService
     {

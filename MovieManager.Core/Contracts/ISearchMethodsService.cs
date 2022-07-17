@@ -2,7 +2,7 @@
 using MovieManager.Infrastructure.Data.Models;
 using TMDbLib.Objects.Reviews;
 
-namespace MovieManager.Services.ServicesContracts
+namespace MovieManager.Core.Contracts
 {
     public interface ISearchMethodsService
     {

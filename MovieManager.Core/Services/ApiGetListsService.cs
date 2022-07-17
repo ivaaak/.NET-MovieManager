@@ -3,7 +3,7 @@ using MovieManager.Infrastructure.Data.Config;
 using TMDbLib.Client;
 using TMDbLib.Objects.Search;
 
-namespace MovieManager.Services
+namespace MovieManager.Core.Services
 {
     public class ApiGetListsService : IApiGetListsService
     {

@@ -1,9 +1,9 @@
-﻿using MovieManager.Infrastructure.Data.Models;
-using MovieManager.Services.ServicesContracts;
+﻿using MovieManager.Core.Contracts;
+using MovieManager.Infrastructure.Data.Models;
 using TMDbLib.Objects.Search;
 using TMDbLib.Objects.TvShows;
 
-namespace MovieManager.Services
+namespace MovieManager.Core.Services
 {
     public class SaveMovieToDbObjectService : ISaveMovieToDbObjectService
     {

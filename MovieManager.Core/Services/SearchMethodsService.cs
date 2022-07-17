@@ -1,12 +1,12 @@
-﻿using MovieManager.Core.ViewModels;
+﻿using MovieManager.Core.Contracts;
+using MovieManager.Core.ViewModels;
 using MovieManager.Infrastructure.Data.Config;
-using MovieManager.Services.ServicesContracts;
 using TMDbLib.Client;
 using TMDbLib.Objects.Movies;
 using TMDbLib.Objects.People;
 using TMDbLib.Objects.Reviews;
 
-namespace MovieManager.Services
+namespace MovieManager.Core.Services
 {
     public class SearchMethodsService : ISearchMethodsService
     {

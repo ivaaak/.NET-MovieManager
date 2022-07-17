@@ -3,7 +3,7 @@ using MovieManager.Core.Contracts;
 using MovieManager.Infrastructure.Data.Context;
 using MovieManager.Infrastructure.Data.Models;
 
-namespace MovieManager.Services
+namespace MovieManager.Core.Services
 {
     public class DeleteFromDbService : IDeleteFromDbService
     {

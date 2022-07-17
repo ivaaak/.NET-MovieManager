@@ -2,7 +2,7 @@
 using MovieManager.Infrastructure.Data.Models;
 using MovieManager.Infrastructure.Repositories;
 
-namespace MovieManager.Services
+namespace MovieManager.Core.Services
 {
     public class FileUploadService : IFileUploadService
     {

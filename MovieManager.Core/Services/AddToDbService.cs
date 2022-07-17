@@ -3,8 +3,6 @@ using MovieManager.Core.Contracts;
 using MovieManager.Infrastructure.Data.Config;
 using MovieManager.Infrastructure.Data.Context;
 using MovieManager.Infrastructure.Data.Models;
-using MovieManager.Services;
-using MovieManager.Services.ServicesContracts;
 using QRCoder;
 using System.Text;
 using TMDbLib.Client;
