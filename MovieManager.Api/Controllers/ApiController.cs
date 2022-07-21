@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MovieManager.Api.ApiServices;
+using MovieManager.Core.Contracts;
 using System.Text.Json;
 
 namespace MovieManager.Api.Controllers
