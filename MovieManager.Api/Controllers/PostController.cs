@@ -19,14 +19,14 @@ namespace MovieManager.Api.Controllers
         /// </summary>
         /// <param name="userId">The user's ID!</param>
         /// <returns></returns>
-        [HttpGet("userPlaylists/{userName}")]
-        public IActionResult GetPlaylists(string playlistTitle, string userId)
+        [HttpPost]
+        public IActionResult CreatePlaylist(string playlistTitle, string userId)
         {
             try
             {
                 addToDbService.CreateCustomPlaylist(playlistTitle, userId);
 
-                return Ok($"Added {playlistTitle} to user {userId}'s playlists");
+                return Ok($"Created the playlist {playlistTitle} for user {userId}");
             }
             catch (ArgumentException ae)
             {
