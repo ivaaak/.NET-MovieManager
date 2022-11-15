@@ -1,4 +1,4 @@
-# ASP.NET- Verus MovieManager
+# .NET- Movie Manager
 A full stack web project built with ASP.NET, EF Core and the TMDB API. 
 The Application can be used for browsing and logging movies and tv shows. 
 
